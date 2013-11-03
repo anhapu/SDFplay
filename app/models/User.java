@@ -2,6 +2,8 @@ package models;
 
 
 import java.util.*;
+
+import javax.management.relation.Role;
 import javax.persistence.*;
 
 import play.db.ebean.*;
@@ -26,7 +28,8 @@ public class User extends Model
     @Formats.NonEmpty
     public String postcode;
     
-    
+    @Enumerated(EnumType.ORDINAL)
+    public Role role;
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
     
