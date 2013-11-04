@@ -1,7 +1,5 @@
 package controllers;
 
-
-
 import play.mvc.*;
 import play.mvc.Http.*;
 
@@ -24,8 +22,6 @@ public class Secured extends Security.Authenticator
         //return redirect(routes.Application.login());
     }
     
-    
-
     
     //Access Right methods here!!!
 }

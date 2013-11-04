@@ -1,0 +1,11 @@
+@(form: Form[UserController.Login])
+
+@helper.form(routes.UserController.login) {
+   <h3>Login</h3>
+   @if(form.hasGlobalErrors) {
+    <p class="error">@form.globalError.message</p>
+	}
+   <p><input type="email" name="email" placeholder="Email" value="@form("email").value"></p>
+   <p><input type="password" name="password" placeholder="Password"></p>
+   <p><button type="submit">Login</button></p>
+}

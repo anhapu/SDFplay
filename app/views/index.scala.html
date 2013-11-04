@@ -1,7 +1,15 @@
-@(message: String)
+@(form: Form[UserController.Login])
 
-@main("Welcome to Play") {
+@main("Bücherbörse") {
 
-    @play20.welcome(message, style = "Java")
+	<h1>Bücherbörse</h1>   
 
+	@if(Common.currentUser) {
+		Logged in as: @Common.currentUser<br />
+		<a href="@routes.UserController.logout">Logout</a>
+	} else {
+		@snippets.loginForm(form)
+	}
+
+	
 }
