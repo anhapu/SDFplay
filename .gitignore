@@ -13,3 +13,9 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+.metadata
+.settings
+.target
+.classpath
+.project
+conf/application.conf
