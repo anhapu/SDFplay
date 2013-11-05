@@ -4,8 +4,10 @@
 
 
 # User
-POST	/user/login		controllers.UserController.login()
-GET		/user/logout	controllers.UserController.logout()
+POST	/user/login					controllers.UserController.login()
+GET		/user/logout				controllers.UserController.logout()
+GET		/user/editProfile		controllers.UserController.editProfile()
+POST	/user/editProfile		controllers.UserController.saveProfile()
 
 # Home page
 GET     /                           controllers.Application.index()
