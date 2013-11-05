@@ -4,6 +4,7 @@
 
 
 # User
+GET		/user								controllers.UserController.showProfile()
 POST	/user/login					controllers.UserController.login()
 GET		/user/logout				controllers.UserController.logout()
 GET		/user/editProfile		controllers.UserController.editProfile()

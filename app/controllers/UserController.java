@@ -7,6 +7,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 import views.html.profileForm;
+import views.html.userProfile;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 
@@ -42,6 +43,15 @@ public class UserController extends Controller {
 
 	public static Result saveProfile() {
 		return redirect(routes.Application.index());
+	}
+
+	public static Result showProfile() {
+		if (!"".equals(common.currentUser())) {
+			return ok(userProfile.render(User.findByEmail(common.currentUser())));
+		} else {
+			//ToDo redirect to register page
+			return redirect(routes.Application.index());
+		}
 	}
 
 	public static class Login {
