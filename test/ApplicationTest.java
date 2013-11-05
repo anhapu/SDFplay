@@ -33,12 +33,5 @@ public class ApplicationTest {
         assertThat(a).isEqualTo(2);
     }
 
-    @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
-        assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
-    }
-
 
 }

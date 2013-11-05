@@ -18,6 +18,7 @@ public class UserController extends Controller {
 	public static Result login() {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		if(loginForm.hasErrors()) {
+			Common.addToContext(Common.ContextIdent.loginForm, loginForm);
 			return badRequest(index.render(loginForm));
 		} else {
 			session().clear();
