@@ -6,7 +6,7 @@ import play.mvc.Http.Context;
 public class Common {
 	
 	public static String currentUser() {
-		return Context.current().session().get("email");
+		return (Context.current().session().get("email") == null) ? "" : Context.current().session().get("email");
 	}
 	
 }
