@@ -5,15 +5,15 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import views.html.index;
 import views.html.profileForm;
 import views.html.userProfile;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 
+@With(Common.class)
 public class UserController extends Controller {
-	
-	private static Common common = new Common();
 
 	public static Result login() {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
@@ -34,8 +34,8 @@ public class UserController extends Controller {
 
 	public static Result editProfile() {
 		final Form<User> form = form(User.class);
-		if (!"".equals(common.currentUser())) {
-			return ok(profileForm.render(form.fill(User.findByEmail(common.currentUser()))));
+		if (!"".equals(Common.currentUser())) {
+			return ok(profileForm.render(form.fill(User.findByEmail(Common.currentUser()))));
 		} else {
 			//ToDo redirect to register page
 			return redirect(routes.Application.index());
@@ -47,8 +47,8 @@ public class UserController extends Controller {
 	}
 
 	public static Result showProfile() {
-		if (!"".equals(common.currentUser())) {
-			return ok(userProfile.render(User.findByEmail(common.currentUser())));
+		if (!"".equals(Common.currentUser())) {
+			return ok(userProfile.render(User.findByEmail(Common.currentUser())));
 		} else {
 			//ToDo redirect to register page
 			return redirect(routes.Application.index());

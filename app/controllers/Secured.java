@@ -16,12 +16,13 @@ public class Secured extends Security.Authenticator
     
     @Override
     public Result onUnauthorized(Context ctx) {
-        
-        //TODO Add a login view and rout so this methode is working!!!
-        return null;
-        //return redirect(routes.Application.login());
+        return redirect(routes.Application.index());
     }
     
+    //Access Right methods
+    public static boolean editBook(User user){
+    	return true;
+    }
     
-    //Access Right methods here!!!
+   
 }
