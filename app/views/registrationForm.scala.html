@@ -1,0 +1,57 @@
+@(registrationForm: Form[Registration])
+
+@import helper._
+
+@title = {
+	Registration <a href="@routes.UserController.login"> oder Login </a>
+}
+
+	@helper.form(action = routes.Registration.submit) {
+
+		@inputText(
+			registrationForm("username"),
+			'_label -> "Nutzername",
+			'_error -> registrationForm.globalError
+		)
+
+		@inputText(
+			registrationForm("firstName"),
+			'_label -> "Vorname",
+			'_error -> registrationForm.globalError
+		)
+
+		@inputText(
+			registrationForm("lastName"),
+			'_label -> "Nachname",
+			'_error -> registrationForm.globalError
+		)
+
+		@inputText(
+			registrationForm("email"),
+			'_label -> "E-Mail",
+			'_error -> registrationForm.globalError
+		)			
+
+		@inputText(
+			registrationForm("password"),
+			'_label -> "Passwort",
+			'_error -> registrationForm.globalError
+		)
+
+		@inputText(
+			registrationForm("repeatPassword"),
+			'_label -> "Passwort wiederholen",
+			'_error -> registrationForm.globalError
+		)		
+
+		@checkbox(
+			registrationForm("Akzeptieren"),
+			'_label -> None, '_text -> "AGB gelesen und akzeptiert",
+			'_showContraints -> false
+		)
+
+	<div>
+		<input type="submit" class="btn_primary" value="Registrieren">
+		<a href="@routes.Application.index" class="btn">Abbruch</a>
+	</div>
+}
