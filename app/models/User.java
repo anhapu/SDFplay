@@ -46,6 +46,9 @@ public class User extends Model
     @Formats.NonEmpty
     public String password;
     
+    @OneToMany(mappedBy = "user")
+    public List<UserBook> booksOfUser;
+    
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
     
