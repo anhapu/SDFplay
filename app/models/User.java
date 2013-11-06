@@ -12,6 +12,8 @@ import org.jboss.logging.FormatWith;
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
 
 @Entity
 @Table(name="account")
@@ -21,6 +23,7 @@ public class User extends Model
     @Id
     @Constraints.Required
     @Formats.NonEmpty
+    @Email
     public String email;
     
     @Constraints.Required
@@ -37,6 +40,12 @@ public class User extends Model
     
     @Enumerated(EnumType.ORDINAL)
     public Role role;
+    
+    
+    @Constraints.Required
+    @Formats.NonEmpty
+    public String password;
+    
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
     

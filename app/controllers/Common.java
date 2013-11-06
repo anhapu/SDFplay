@@ -13,42 +13,37 @@ import views.html.snippets.*;
 import controllers.UserController.Login;
 
 public class Common extends Action.Simple {
-	
-	@Override
-	public Promise<SimpleResult> call(Context ctx) throws Throwable {
-		Logger.info("Common call called");
-		return delegate.call(ctx);
-	}
-	
-	public static class ContextIdent {
-		public static String loginForm = "loginForm";
-	}
-	
-	public static void addToContext(String ident, Object object) {
-		Context.current().args.put(ident, object);
-	}
-	
-	public static Object getFromContext(String ident) {
-		return Context.current().args.get(ident);
-	}
-	
-	/**
-	 * Just temporally !!!
-	 * Should return a real User object 
-	 * 
-	 * @return
-	 */
-	public static String currentUser() {
-		return (Context.current().session().get("email") == null) ? "" : Context.current().session().get("email");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static Html getLoginForm() {
-		Form<Login> form = form(UserController.Login.class);
-		if(Common.getFromContext(ContextIdent.loginForm) != null) {
-			form = (Form<Login>)Common.getFromContext("loginForm");
-		}
-		return loginForm.render(form);
-	}
-	
+    
+    @Override
+    public Promise<SimpleResult> call(Context ctx) throws Throwable {
+        Logger.info("Common call called");
+        return delegate.call(ctx);
+    }
+    
+    public static class ContextIdent {
+        public static String loginForm = "loginForm";
+    }
+    
+    public static void addToContext(String ident, Object object) {
+        Context.current().args.put(ident, object);
+    }
+    
+    public static Object getFromContext(String ident) {
+        return Context.current().args.get(ident);
+    }
+    
+    
+    public static String currentUser() {
+        return (Context.current().session().get("email") == null) ? "" : Context.current().session().get("email");
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static Html getLoginForm() {
+        Form<Login> form = form(UserController.Login.class);
+        if(Common.getFromContext(ContextIdent.loginForm) != null) {
+            form = (Form<Login>)Common.getFromContext("loginForm");
+        }
+        return loginForm.render(form);
+    }
+    
 }
