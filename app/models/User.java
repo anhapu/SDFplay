@@ -5,6 +5,9 @@ import java.util.*;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
+import javax.validation.Constraint;
+
+import org.jboss.logging.FormatWith;
 
 import play.db.ebean.*;
 import play.data.format.*;
@@ -26,7 +29,11 @@ public class User extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
-    public String postcode;
+    public String firstname;
+    
+    @Constraints.Required
+    @Formats.NonEmpty
+    public String lastname;
     
     @Enumerated(EnumType.ORDINAL)
     public Role role;
