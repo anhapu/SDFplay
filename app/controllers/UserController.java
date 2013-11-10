@@ -47,10 +47,11 @@ public class UserController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	//@Security.Authenticated(Secured.class)
+	@Security.Authenticated(Secured.class)
 	public static Result showProfile(Long id) {
 		User searchedUser = User.findById(id);
 		if (searchedUser != null) {
+			Secured.showUserProfile(searchedUser);
 			return ok(userProfile.render(searchedUser));
 		}
 		else {
