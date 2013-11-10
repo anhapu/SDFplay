@@ -1,1 +1,29 @@
-@(profileForm: Form[User])  
+@(profileForm: Form[User], user: User)
+
+<!DOCTYPE html>
+
+@import helper._
+
+
+<html>
+    <head>
+			<title>Editiere Profil</title>
+    </head>
+    <body>
+
+	@helper.form(action = UserController.saveProfile(user.id))
+) {
+
+		@inputText(
+			profileForm("username"),
+			'_label -> "Nutzername",
+			'_error -> profileForm.globalError
+		)
+
+	<div>
+		<input type="submit" class="btn_primary" value="Speichern">
+		<a href="@routes.Application.index" class="btn">Abbruch</a>
+	</div>
+}
+    </body>
+</html>
