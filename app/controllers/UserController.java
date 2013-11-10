@@ -11,7 +11,7 @@ import views.html.profileForm;
 import views.html.userProfile;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
-import play.mvc.Security.*;
+import play.mvc.Security;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -34,16 +34,17 @@ public class UserController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	public static Result editProfile() {
+	public static Result editProfile(Long id) {
 		final Form<User> form = form(User.class);
-		if (!"".equals(Common.currentUser())) {
-			return ok(profileForm.render(form.fill(Common.currentUser())));
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			return ok(profileForm.render(form.fill(searchedUser)));
 		} else {
 			return redirect(routes.Registration.index());
 		}
 	}
 
-	public static Result saveProfile() {
+	public static Result saveProfile(Long id) {
 		return redirect(routes.Application.index());
 	}
 
