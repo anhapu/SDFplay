@@ -16,7 +16,6 @@ public class Common extends Action.Simple {
     
     @Override
     public Promise<SimpleResult> call(Context ctx) throws Throwable {
-        Logger.info("Common call called");
         return delegate.call(ctx);
     }
     
