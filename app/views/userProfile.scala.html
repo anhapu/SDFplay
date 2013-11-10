@@ -1,1 +1,19 @@
-@(userProfile: User)  
+@(userProfile: User) 
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+			<title>@userProfile.username</title>
+    </head>
+    <body>
+		Username: @userProfile.username</br>
+		Vorname: @userProfile.firstname</br>
+		Nachname: @userProfile.lastname</br>
+		Passwort Hash: @userProfile.password</br>
+		Email: @userProfile.email</br>
+		Rolle: @userProfile.role</br>
+		ID: @userProfile.id
+    </body>
+</html>
+ 

@@ -11,6 +11,7 @@ import views.html.profileForm;
 import views.html.userProfile;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
+import play.mvc.Security.*;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -38,8 +39,7 @@ public class UserController extends Controller {
 		if (!"".equals(Common.currentUser())) {
 			return ok(profileForm.render(form.fill(Common.currentUser())));
 		} else {
-			//ToDo redirect to register page
-			return redirect(routes.Application.index());
+			return redirect(routes.Registration.index());
 		}
 	}
 
@@ -47,14 +47,18 @@ public class UserController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	public static Result showProfile() {
-		if (!"".equals(Common.currentUser())) {
-			return ok(userProfile.render(Common.currentUser()));
-		} else {
-			//ToDo redirect to register page
+	//@Security.Authenticated(Secured.class)
+	public static Result showProfile(Long id) {
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			return ok(userProfile.render(searchedUser));
+		}
+		else {
+			//ToDo redirect to something useful
 			return redirect(routes.Application.index());
 		}
 	}
+
 
 	public static class Login {
 		

@@ -4,6 +4,7 @@
 
 	@if(Common.currentUser != null) {
 		Logged in as: @Common.currentUser.username<br />
+		<a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a>
 		<a href="@routes.UserController.logout">Logout</a>
 	} else {
 		@Common.getLoginForm
