@@ -5,6 +5,7 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.mvc.With;
 import views.html.index;
 import views.html.profileForm;
@@ -47,6 +48,7 @@ public class UserController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
+	@Security.Authenticated(Secured.class)
 	public static Result showProfile() {
 		if (!"".equals(Common.currentUser())) {
 			return ok(userProfile.render(Common.currentUser()));

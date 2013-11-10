@@ -10,6 +10,8 @@ import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.Constraint;
 
+import models.enums.Roles;
+
 import org.jboss.logging.FormatWith;
 
 import play.db.ebean.*;
@@ -43,7 +45,7 @@ public class User extends Model
     public String lastname;
     
     @Enumerated(EnumType.ORDINAL)
-    public Role role;
+    public Roles role;
     
     
     @Constraints.Required
