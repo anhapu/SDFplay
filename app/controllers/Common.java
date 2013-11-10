@@ -16,6 +16,19 @@ public class Common extends Action.Simple {
     
     @Override
     public Promise<SimpleResult> call(Context ctx) throws Throwable {
+    	String userId = ctx.session().get("id");
+    	
+    	if(userId != null) {
+    		User user = User.findById(Long.parseLong(userId));
+    		if(user == null) {
+    			ctx.session().clear();
+    			return Promise.pure(redirect(routes.Application.index()));
+    		} else {
+    			Common.addToContext("user", user);
+    		}	
+    	} else {
+    		Common.addToContext("user", null);
+    	}
         return delegate.call(ctx);
     }
     
@@ -32,8 +45,8 @@ public class Common extends Action.Simple {
     }
     
     
-    public static String currentUser() {
-        return (Context.current().session().get("email") == null) ? "" : Context.current().session().get("email");
+    public static User currentUser() {
+    	return (User)Common.getFromContext("user");
     }
     
     @SuppressWarnings("unchecked")

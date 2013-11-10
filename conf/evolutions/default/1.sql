@@ -4,12 +4,13 @@
 # --- !Ups
 
 create table account (
-  email                     varchar(255) not null,
+  id                        bigint not null,
+  email                     varchar(255),
   username                  varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
   password                  varchar(255),
-  constraint pk_account primary key (email))
+  constraint pk_account primary key (id))
 ;
 
 create sequence account_seq;

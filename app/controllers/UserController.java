@@ -19,10 +19,11 @@ public class UserController extends Controller {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		if(loginForm.hasErrors()) {
 			Common.addToContext(Common.ContextIdent.loginForm, loginForm);
-			return badRequest(index.render(loginForm));
+			return badRequest(index.render());
 		} else {
 			session().clear();
-			session("email", loginForm.get().email);
+			User user = User.findByEmail(loginForm.get().email);
+			session("id", user.id.toString());
 			return redirect(routes.Application.index());
 		}
 	}
@@ -35,7 +36,7 @@ public class UserController extends Controller {
 	public static Result editProfile() {
 		final Form<User> form = form(User.class);
 		if (!"".equals(Common.currentUser())) {
-			return ok(profileForm.render(form.fill(User.findByEmail(Common.currentUser()))));
+			return ok(profileForm.render(form.fill(Common.currentUser())));
 		} else {
 			//ToDo redirect to register page
 			return redirect(routes.Application.index());
@@ -48,7 +49,7 @@ public class UserController extends Controller {
 
 	public static Result showProfile() {
 		if (!"".equals(Common.currentUser())) {
-			return ok(userProfile.render(User.findByEmail(Common.currentUser())));
+			return ok(userProfile.render(Common.currentUser()));
 		} else {
 			//ToDo redirect to register page
 			return redirect(routes.Application.index());
@@ -61,7 +62,7 @@ public class UserController extends Controller {
 		public String password;
 		
 		public String validate() {
-			if(email.isEmpty() || password.isEmpty()) {
+			if(User.authenticate(email, password) == null) {
 				return "Falscher Nutzername oder Passwort";
 			} 
 			return null;
