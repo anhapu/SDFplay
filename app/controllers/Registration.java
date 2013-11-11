@@ -5,12 +5,13 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
 import views.html.registrationForm;
+import play.api.templates.Html;
 
 
 public class Registration extends Controller {
 
 	public static Result index() {
-		return ok(registrationForm.render(Form.form(Registration.class)));
+		return ok(registrationForm.render(/*Form.form(Registration.class)*/));
 	}
 
 	public static Result validate() {
