@@ -88,13 +88,12 @@ public class User extends Model
             .findUnique();
     }
     
-    
     /**
      * Overrides the to string methode.
      */
     @Override
     public String toString() {
-        return "User(" + email + ")";
+        return "User(id:" + id + " " + email + ")";
     }
 
     /**
