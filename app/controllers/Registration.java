@@ -1,5 +1,6 @@
 package controllers;
 
+import models.enums.Roles;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -35,6 +36,7 @@ public class Registration extends Controller {
 			if (validateNewUser(newUser, pwRepeat, agbOK)) {
 				System.out.println("valide");
 				newUser.password = Common.md5(newUser.password);
+				newUser.role = Roles.USER;
 				newUser.save();
 				sendRegConfirmationMail(newUser);
 			}
