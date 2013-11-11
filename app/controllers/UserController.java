@@ -10,8 +10,13 @@ import play.mvc.With;
 import views.html.index;
 import views.html.profileForm;
 import views.html.userProfile;
+import views.html.userBookshelf;
+import views.html.passwordForm;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
+import play.mvc.Security;
+import play.api.mvc.Call;
+import play.db.ebean.*;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -34,29 +39,77 @@ public class UserController extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	public static Result editProfile() {
-		final Form<User> form = form(User.class);
-		if (!"".equals(Common.currentUser())) {
-			return ok(profileForm.render(form.fill(Common.currentUser())));
+	@Security.Authenticated(Secured.class)
+	public static Result editProfile(Long id) {
+		final Form<User> form = form(User.class).bindFromRequest();
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.editUserProfile(searchedUser);
+			return ok(profileForm.render(form.fill(searchedUser)));
 		} else {
-			//ToDo redirect to register page
-			return redirect(routes.Application.index());
+			return redirect(routes.Registration.index());
 		}
 	}
 
-	public static Result saveProfile() {
+	@Transactional
+	public static Result saveProfile(Long id) {
+		User created = form(User.class).bindFromRequest().get();
+		created.update();
 		return redirect(routes.Application.index());
+	}
+	
+	@Security.Authenticated(Secured.class)
+	public static Result editPassword(Long id) {
+		final Form form = form().bindFromRequest();
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.editUserProfile(searchedUser);
+			return ok(passwordForm.render(searchedUser));
+		} else {
+			return redirect(routes.Registration.index());
+		}
+	}
+
+	@Transactional
+	public static Result savePassword(Long id) {
+		User user = User.findById(id);
+		if(form().bindFromRequest().get("password").equals(form().bindFromRequest().get("repeatPassword"))) {
+			user.password = Common.md5(form().bindFromRequest().get("password"));
+			user.update();
+			return redirect(routes.Application.index());
+		}
+		else {
+			;
+		}
+		return redirect(routes.UserController.editPassword(user.id));
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result showProfile() {
-		if (!"".equals(Common.currentUser())) {
-			return ok(userProfile.render(Common.currentUser()));
-		} else {
-			//ToDo redirect to register page
+	public static Result showProfile(Long id) {
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.showUserProfile(searchedUser);
+			return ok(userProfile.render(searchedUser));
+		}
+		else {
+			//ToDo redirect to something useful
 			return redirect(routes.Application.index());
 		}
 	}
+	
+	@Security.Authenticated(Secured.class)
+	public static Result showBookshelf(Long id) {
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.showUserProfile(searchedUser);
+			return ok(userBookshelf.render());
+		}
+		else {
+			//ToDo redirect to something useful
+			return redirect(routes.Application.index());
+		}
+	}
+
 
 	public static class Login {
 		

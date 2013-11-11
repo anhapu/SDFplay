@@ -1,0 +1,118 @@
+@main("Bücherbörse") {
+
+	<!-- Container -->
+	<div class="container">
+		<div class="masthead">
+			<h3 class="text-muted">Bücherbörse</h3>
+			@if(Common.currentUser != null) {
+				Logged in as: @Common.currentUser.username<br /><br />
+			<ul class="nav nav-justified">
+				<li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
+				<li class="active"><a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+				<li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
+				<li><a href="@routes.UserController.logout">Logout</a></li>
+			</ul>
+		</div>
+
+		<!-- Jumbotron -->
+		<div class="jumbotron">
+			<h2>Mein B&uuml;cherschrank</h2>
+		</div> <!-- /Jumbotron -->
+		
+		<!-- Content -->
+		<div class="row">
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks3.books.google.de/books?id=5z5ZLwySVxAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks9.books.google.de/books?id=lNo1V7zK4scC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 01" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die Herren von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 02" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Das Erbe von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 08" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die dunkle K&ouml;nigin&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks4.books.google.de/books?id=AE_Jl6RT1dcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 05" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Sturm der Schwerter&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks4.books.google.de/books?id=3r_PgcYX7jYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 10" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Ein Tanz mit Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks1.books.google.de/books?id=FvR_N779-JAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 06" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die K&ouml;nigin der Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks8.books.google.de/books?id=dCbTOLpSmGwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 09" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Der Sohn des Greifen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
+      				</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-2 col-xs-6">
+				<div class="thumbnail">
+					<img src="http://bks8.books.google.de/books?id=VrkM4xnKI2QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 07" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Zeit der Kr&auml;hen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
+					<div class="caption">
+        				<p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
+      				</div>
+				</div>
+			</div>
+		</div> <!-- /Content -->
+
+		<!-- Site footer -->
+		<div class="footer">
+			<p>&copy; Company 2013</p>
+		</div> <!-- /Site footer -->
+
+	</div> <!-- /Container -->
+	} else {
+		@Common.getLoginForm
+	}
+
+	<script src="@routes.Assets.at("javascripts/application.js")" type="text/javascript"></script>
+}
+
