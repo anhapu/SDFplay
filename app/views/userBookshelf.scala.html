@@ -1,5 +1,4 @@
-@main("Bücherbörse") { 
-	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/justified-nav.css")">
+@main("Bücherbörse") {
 
 	<!-- Container -->
 	<div class="container">
@@ -10,6 +9,7 @@
 			<ul class="nav nav-justified">
 				<li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
 				<li class="active"><a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+				<li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
 				<li><a href="@routes.UserController.logout">Logout</a></li>
 			</ul>
 		</div>

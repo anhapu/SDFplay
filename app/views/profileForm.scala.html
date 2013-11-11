@@ -1,8 +1,72 @@
 @(profileForm: Form[User])
-
-<!DOCTYPE html>
-
 @import helper._
+
+@main("Bücherbörse") {
+
+	<div class="container">
+		<div class="masthead">
+			<h3 class="text-muted">Bücherbörse</h3>
+			@if(Common.currentUser != null) {
+				Logged in as: @Common.currentUser.username<br /><br />
+			<ul class="nav nav-justified">
+				<li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
+				<li><a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+				<li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
+				<li><a href="@routes.UserController.logout">Logout</a></li>
+			</ul>
+		</div>
+		@helper.form(action = routes.UserController.saveProfile(Integer.parseInt(profileForm("id").value))){
+
+			<input type="hidden" id="id" name="id" value="@profileForm("id").value">
+	
+			@inputText(
+				profileForm("username"),
+				'_label -> "Nutzername",
+				'_error -> profileForm.globalError
+			)
+		
+			@inputText(
+				profileForm("firstname"),
+				'_label -> "Vorname",
+				'_error -> profileForm.globalError
+			)
+
+			@inputText(
+				profileForm("lastname"),
+				'_label -> "Nachname",
+				'_error -> profileForm.globalError
+			)
+
+			@inputText(
+				profileForm("email"),
+				'_label -> "E-Mail",
+				'_error -> profileForm.globalError
+			)			
+
+			@inputText(
+				profileForm("password"),
+				'_label -> "Passwort",
+				'_error -> profileForm.globalError
+			)
+
+			@inputText(
+				profileForm("repeatPassword"),
+				'_label -> "Passwort wiederholen",
+				'_error -> profileForm.globalError
+			)		
+
+		<div>
+			<input type="submit" class="btn_primary" value="Speichern">
+			<a href="@routes.Application.index" class="btn">Abbruch</a>
+		</div>
+	}
+	</div>
+	} else {
+		@Common.getLoginForm
+	}
+
+}
+
 
 
 <html>
@@ -11,50 +75,6 @@
     </head>
     <body>
 
-	@helper.form(action = routes.UserController.saveProfile(Integer.parseInt(profileForm("id").value))){
-
-	<input type="hidden" id="id" name="id" value="@profileForm("id").value">
 	
-		@inputText(
-			profileForm("username"),
-			'_label -> "Nutzername",
-			'_error -> profileForm.globalError
-		)
-		
-		@inputText(
-			profileForm("firstname"),
-			'_label -> "Vorname",
-			'_error -> profileForm.globalError
-		)
-
-		@inputText(
-			profileForm("lastname"),
-			'_label -> "Nachname",
-			'_error -> profileForm.globalError
-		)
-
-		@inputText(
-			profileForm("email"),
-			'_label -> "E-Mail",
-			'_error -> profileForm.globalError
-		)			
-
-		@inputText(
-			profileForm("password"),
-			'_label -> "Passwort",
-			'_error -> profileForm.globalError
-		)
-
-		@inputText(
-			profileForm("repeatPassword"),
-			'_label -> "Passwort wiederholen",
-			'_error -> profileForm.globalError
-		)		
-
-	<div>
-		<input type="submit" class="btn_primary" value="Speichern">
-		<a href="@routes.Application.index" class="btn">Abbruch</a>
-	</div>
-}
     </body>
 </html>

@@ -1,12 +1,19 @@
 @(userProfile: User) 
 
-<!DOCTYPE html>
+@main("Bücherbörse") {
 
-<html>
-    <head>
-			<title>@userProfile.username</title>
-    </head>
-    <body>
+    <div class="container">
+		<div class="masthead">
+			<h3 class="text-muted">Bücherbörse</h3>
+			@if(Common.currentUser != null) {
+				Logged in as: @Common.currentUser.username<br /><br />
+			<ul class="nav nav-justified">
+				<li class="active"><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
+				<li><a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+				<li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
+				<li><a href="@routes.UserController.logout">Logout</a></li>
+			</ul>
+		</div>
 		Username: @userProfile.username</br>
 		Vorname: @userProfile.firstname</br>
 		Nachname: @userProfile.lastname</br>
@@ -14,6 +21,9 @@
 		Email: @userProfile.email</br>
 		Rolle: @userProfile.role</br>
 		ID: @userProfile.id
-    </body>
-</html>
+	</div>
+	} else {
+		@Common.getLoginForm
+	}
+}
  

@@ -1,13 +1,18 @@
 @main("Bücherbörse") {
 
-	<h1>Bücherbörse</h1>   
-
-	@if(Common.currentUser != null) {
-		Logged in as: @Common.currentUser.username<br />
-		<a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></br>
-		<a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></br>
-		<a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></br>
-		<a href="@routes.UserController.logout">Logout</a>
+	<div class="container">
+		<div class="masthead">
+			<h3 class="text-muted">Bücherbörse</h3>
+			@if(Common.currentUser != null) {
+				Logged in as: @Common.currentUser.username<br /><br />
+			<ul class="nav nav-justified">
+				<li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
+				<li><a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+				<li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
+				<li><a href="@routes.UserController.logout">Logout</a></li>
+			</ul>
+		</div>
+	</div>
 	} else {
 		@Common.getLoginForm
 	}
