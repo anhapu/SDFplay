@@ -42,23 +42,8 @@
 				'_label -> "E-Mail",
 				'_error -> profileForm.globalError
 			)			
-
-			@inputText(
-				profileForm("password"),
-				'_label -> "Passwort",
-				'_error -> profileForm.globalError
-			)
-
-			@inputText(
-				profileForm("repeatPassword"),
-				'_label -> "Passwort wiederholen",
-				'_error -> profileForm.globalError
-			)		
-
-		<div>
-			<input type="submit" class="btn_primary" value="Speichern">
-			<a href="@routes.Application.index" class="btn">Abbruch</a>
-		</div>
+		
+			@snippets.submitFormSnippet.render()
 	}
 	</div>
 	} else {

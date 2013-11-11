@@ -10,6 +10,7 @@ import views.html.index;
 import views.html.profileForm;
 import views.html.userProfile;
 import views.html.userBookshelf;
+import views.html.passwordForm;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -54,6 +55,32 @@ public class UserController extends Controller {
 		User created = form(User.class).bindFromRequest().get();
 		created.update();
 		return redirect(routes.Application.index());
+	}
+	
+	@Security.Authenticated(Secured.class)
+	public static Result editPassword(Long id) {
+		final Form form = form().bindFromRequest();
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.editUserProfile(searchedUser);
+			return ok(passwordForm.render(searchedUser));
+		} else {
+			return redirect(routes.Registration.index());
+		}
+	}
+
+	@Transactional
+	public static Result savePassword(Long id) {
+		User user = User.findById(id);
+		if(form().bindFromRequest().get("password").equals(form().bindFromRequest().get("repeatPassword"))) {
+			user.password = Common.md5(form().bindFromRequest().get("password"));
+			user.update();
+			return redirect(routes.Application.index());
+		}
+		else {
+			;
+		}
+		return redirect(routes.UserController.editPassword(user.id));
 	}
 
 	@Security.Authenticated(Secured.class)
