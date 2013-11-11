@@ -19,6 +19,7 @@ import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
 import models.enums.Roles;
+
 @Entity
 @Table(name="account")
 public class User extends Model
@@ -70,7 +71,7 @@ public class User extends Model
     }
     
     /**
-     * Retrieve a User from email.
+     * Retrieve a User from id.
      */
     public static User findById(Long id) {
         return find.byId(id.toString());
