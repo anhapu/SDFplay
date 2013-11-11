@@ -7,6 +7,7 @@
 POST  /user/login         controllers.UserController.login()
 GET   /user/logout        controllers.UserController.logout()
 GET   /user/:id           controllers.UserController.showProfile(id: Long)
+GET   /user/:id/bookshelf controllers.UserController.showBookshelf(id: Long)
 GET   /user/editProfile/:id   controllers.UserController.editProfile(id: Long)
 POST  /user/editProfile/:id   controllers.UserController.saveProfile(id: Long)
 #POST /user/register      controllers.UserController.register()

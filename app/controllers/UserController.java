@@ -9,6 +9,7 @@ import play.mvc.With;
 import views.html.index;
 import views.html.profileForm;
 import views.html.userProfile;
+import views.html.userBookshelf;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -61,6 +62,19 @@ public class UserController extends Controller {
 		if (searchedUser != null) {
 			Secured.showUserProfile(searchedUser);
 			return ok(userProfile.render(searchedUser));
+		}
+		else {
+			//ToDo redirect to something useful
+			return redirect(routes.Application.index());
+		}
+	}
+	
+	@Security.Authenticated(Secured.class)
+	public static Result showBookshelf(Long id) {
+		User searchedUser = User.findById(id);
+		if (searchedUser != null) {
+			Secured.showUserProfile(searchedUser);
+			return ok(userBookshelf.render());
 		}
 		else {
 			//ToDo redirect to something useful

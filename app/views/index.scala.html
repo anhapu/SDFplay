@@ -5,6 +5,7 @@
 	@if(Common.currentUser != null) {
 		Logged in as: @Common.currentUser.username<br />
 		<a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></br>
+		<a href="@routes.UserController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></br>
 		<a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></br>
 		<a href="@routes.UserController.logout">Logout</a>
 	} else {
