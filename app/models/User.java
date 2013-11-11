@@ -1,9 +1,6 @@
 package models;
 
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import javax.management.relation.Role;
@@ -19,6 +16,8 @@ import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
 import models.enums.Roles;
+
+import controllers.Common;
 
 @Entity
 @Table(name="account")
@@ -84,7 +83,7 @@ public class User extends Model
     public static User authenticate(String email, String password) {
         return find.where()
             .eq("email", email)
-            .eq("password", User.md5(password))
+            .eq("password", Common.md5(password))
             .findUnique();
     }
     

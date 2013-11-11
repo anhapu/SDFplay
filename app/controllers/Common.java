@@ -11,6 +11,10 @@ import play.mvc.Http.Context;
 import play.mvc.SimpleResult;
 import views.html.snippets.*;
 import controllers.UserController.Login;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class Common extends Action.Simple {
     
