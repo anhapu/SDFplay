@@ -1,4 +1,4 @@
-@(profileForm: Form[User], user: User)
+@(profileForm: Form[User])
 
 <!DOCTYPE html>
 
@@ -11,14 +11,45 @@
     </head>
     <body>
 
-	@helper.form(action = UserController.saveProfile(user.id))
-) {
+	@helper.form(action = routes.UserController.saveProfile(Integer.parseInt(profileForm("id").value))){
 
+	<input type="hidden" id="id" name="id" value="@profileForm("id").value">
+	
 		@inputText(
 			profileForm("username"),
 			'_label -> "Nutzername",
 			'_error -> profileForm.globalError
 		)
+		
+		@inputText(
+			profileForm("firstname"),
+			'_label -> "Vorname",
+			'_error -> profileForm.globalError
+		)
+
+		@inputText(
+			profileForm("lastname"),
+			'_label -> "Nachname",
+			'_error -> profileForm.globalError
+		)
+
+		@inputText(
+			profileForm("email"),
+			'_label -> "E-Mail",
+			'_error -> profileForm.globalError
+		)			
+
+		@inputText(
+			profileForm("password"),
+			'_label -> "Passwort",
+			'_error -> profileForm.globalError
+		)
+
+		@inputText(
+			profileForm("repeatPassword"),
+			'_label -> "Passwort wiederholen",
+			'_error -> profileForm.globalError
+		)		
 
 	<div>
 		<input type="submit" class="btn_primary" value="Speichern">

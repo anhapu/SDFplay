@@ -18,6 +18,7 @@ import play.data.validation.*;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
+import models.enums.Roles;
 @Entity
 @Table(name="account")
 public class User extends Model
@@ -43,7 +44,7 @@ public class User extends Model
     public String lastname;
     
     @Enumerated(EnumType.ORDINAL)
-    public Role role;
+    public Roles role;
     
     
     @Constraints.Required
@@ -86,13 +87,12 @@ public class User extends Model
             .findUnique();
     }
     
-    
     /**
      * Overrides the to string methode.
      */
     @Override
     public String toString() {
-        return "User(" + email + ")";
+        return "User(id:" + id + " " + email + ")";
     }
 
     /**

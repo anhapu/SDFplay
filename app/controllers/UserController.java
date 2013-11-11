@@ -13,6 +13,7 @@ import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
 import play.api.mvc.Call;
+import play.db.ebean.*;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -37,17 +38,20 @@ public class UserController extends Controller {
 
 	@Security.Authenticated(Secured.class)
 	public static Result editProfile(Long id) {
-		final Form<User> form = form(User.class).bindFromRequest().bindFromRequest();
+		final Form<User> form = form(User.class).bindFromRequest();
 		User searchedUser = User.findById(id);
 		if (searchedUser != null) {
 			Secured.editUserProfile(searchedUser);
-			return ok(profileForm.render(form.fill(searchedUser), searchedUser));
+			return ok(profileForm.render(form.fill(searchedUser)));
 		} else {
 			return redirect(routes.Registration.index());
 		}
 	}
 
+	@Transactional
 	public static Result saveProfile(Long id) {
+		User created = form(User.class).bindFromRequest().get();
+		created.update();
 		return redirect(routes.Application.index());
 	}
 
