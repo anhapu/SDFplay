@@ -40,8 +40,8 @@ public class EmailSender {
 		    msg.setRecipients(Message.RecipientType.TO, address);
 		    msg.setSubject(subject);
 		    msg.setSentDate(new Date());
-		    msg.setContent( message, "text/html; charset=utf-8" );
-		    //msg.setText(message);		    
+		    //( message, "text/html; charset=utf-8" );
+		    msg.setText(message);		    
 		    Transport.send(msg);
 		} catch (MessagingException mex) {
 		    mex.printStackTrace();
