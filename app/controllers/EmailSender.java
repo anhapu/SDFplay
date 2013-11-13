@@ -1,11 +1,12 @@
 package controllers;
 
+import java.util.Date;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -17,116 +18,88 @@ import controllers.SMTPAuthenticator;
  */
 public class EmailSender {
 	
-	/** Der Name des SMTP Servers */
-	private String smtpServer;
-	/** Die Port des SMTP Servers */ 
-	private String port;
-	/** Benutzername des E-Mail-Accounts */
-	private String user;
-	/** Passwort des E-Mail-Accounts */
-	private String password;
-	/** Flag, welches mittels true oder false angibt, ob eine Authetifizierung notwendig ist. */
-	private String auth;
-	/** E-Mail-Adresse des Absenders */
-	private String from;
-	
-	/** Initialisiert das EmailSender-Objekt mit allen passenden Daten zur EmailAdresse buecher.boerse@gmx.de.
+	/** privater Constructor.
 	 */
-	public EmailSender() {
-		this.smtpServer = "mail.gmx.net";
-		this.port = "465";
-		this.user = "buecher.boerse@gmx.de";
-		this.password = "#123#abc#";
-		this.auth = "true";
-		this.from = "buecher.boerse@gmx.de";
+	private EmailSender() {
 	}
-	
-	/** Initialisiert ein EmailSender-Objekt mit der Adresse eines SMTP-Server, Portnummer, Nutzernamen,
-	 * 	Passwort, Absenderadresse und einem Flag, welches mittels true oder false angibt, ob eine Authentifizierung
-	 * 	notwendig ist. 
-	 * @param smtpServer	Adresse des SMTP Servers 
-	 * @param port			Port des SMTP Servers
-	 * @param user			Benutzername des E-Mail-Accounts
-	 * @param password		Passwort des E-Mail-Accounts
-	 * @param auth			Authentifizierung notwendig? true / false
-	 * @param from			E-Mail-Adresse des Absenders
-	 */
-	public EmailSender (String smtpServer, String port, String user, String password, String auth, String from) {
-		this.smtpServer = smtpServer;
-		this.port = port;
-		this.user = user;
-		this.password = password;
-		this.auth = auth;
-		this.from = from;
-	}
-
-	/** Versendet eine E-Mail mit dem angegebenen Betreff und Inhalt an alle im Array enthaltenen E-Mail-Adressen. 
+		
+	/** Versendet eine E-Mail mit dem angegebenen Betreff und Inhalt an die gewuenschte Ziel-E-Mail-Adresse.
+	 *  Der Absender ist buecher.boerse@gmx.de. 
 	 * 
 	 * @param subject		Betreff der E-Mail
-	 * @param HtmlMessage	Inhalt der E-Mail
-	 * @param to			Array aus E-Mail-Adressen, welche diese E-Mail erhalten sollen.
+	 * @param message		Inhalt der E-Mail
+	 * @param to			Ziel-E-Mail-Adresse
 	 */
-	public void sendEmail(String subject,String HtmlMessage,String[] to)
-    {
-        Transport transport = null;
-        try {
-            Properties props = prepareProperties();
-            Session mailSession = Session.getDefaultInstance(props, new SMTPAuthenticator(from, password, true));
-            transport =  mailSession.getTransport("smtp"); // SSL false 
-            //transport =  mailSession.getTransport("smtps"); // SSL true
-            MimeMessage message = prepareMessage(mailSession, "ISO-8859-2", from, subject, HtmlMessage, to);
-            transport.connect();
-            Transport.send(message);
-        } catch (Exception ex) {    
-        }
-        finally{
-            try {
-                transport.close();
-            } catch (MessagingException ex) {
-                Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+	public static void send(String subject, String message, String to) {
+		Properties props = prepareProperties();
+	    Session mailSession = Session.getDefaultInstance(props, new SMTPAuthenticator(props.getProperty("mail.smtp.user"), props.getProperty("mail.smtp.password"), true));
+	    try {
+		    Message msg = new MimeMessage(mailSession);
+		    msg.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
+		    InternetAddress[] address = {new InternetAddress(to)};
+		    msg.setRecipients(Message.RecipientType.TO, address);
+		    msg.setSubject(subject);
+		    msg.setSentDate(new Date());
+		    msg.setContent( message, "text/html; charset=utf-8" );
+		    //msg.setText(message);		    
+		    Transport.send(msg);
+		} catch (MessagingException mex) {
+		    mex.printStackTrace();
+		    System.out.println();
+		    Exception ex = mex;
+		    do {
+			if (ex instanceof SendFailedException) {
+			    SendFailedException sfex = (SendFailedException)ex;
+			    Address[] invalid = sfex.getInvalidAddresses();
+			    if (invalid != null) {
+				System.out.println("    ** Invalid Addresses");
+				if (invalid != null) {
+				    for (int i = 0; i < invalid.length; i++) 
+					System.out.println("         " + invalid[i]);
+				}
+			    }
+			    Address[] validUnsent = sfex.getValidUnsentAddresses();
+			    if (validUnsent != null) {
+				System.out.println("    ** ValidUnsent Addresses");
+				if (validUnsent != null) {
+				    for (int i = 0; i < validUnsent.length; i++) 
+					System.out.println("         "+validUnsent[i]);
+				}
+			    }
+			    Address[] validSent = sfex.getValidSentAddresses();
+			    if (validSent != null) {
+				System.out.println("    ** ValidSent Addresses");
+				if (validSent != null) {
+				    for (int i = 0; i < validSent.length; i++) 
+					System.out.println("         "+validSent[i]);
+				}
+			    }
+			}
+			System.out.println();
+			if (ex instanceof MessagingException)
+			    ex = ((MessagingException)ex).getNextException();
+			else
+			    ex = null;
+		    } while (ex != null);
+		}
+	}
 
-	/** Liefert Objekt vom Typ Properties, welches mit den Nutzerdaten initialisiert wurde.
+
+	/** Liefert Objekt vom Typ Properties, welches mit den Nutzerdaten der E-Mail-Adresse von buecher.boerse@gmx.de 
+	 * 	initialisiert wurde.
 	 * 
 	 * @return	Initialisiertes Objekt vom Properties
 	 */
-	private Properties prepareProperties()
+	private static Properties prepareProperties()
 	{
-	   Properties props = new Properties();
-       props.setProperty("mail.smtp.host", smtpServer);
-       props.setProperty("mail.smtp.port", port);
-       props.setProperty("mail.smtp.user", user);
-       props.setProperty("mail.smtp.password", password);
-       props.setProperty("mail.smtp.auth", auth);
-       props.setProperty("mail.debug", "true");
-       props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		Properties props = new Properties();
+	    props.setProperty("mail.smtp.host", "mail.gmx.net");
+	    props.setProperty("mail.smtp.port", "465");
+	    props.setProperty("mail.smtp.user", "buecher.boerse@gmx.de");
+	    props.setProperty("mail.smtp.password", "#123#abc#");
+	    props.setProperty("mail.smtp.auth", "true");
+	    props.setProperty("mail.debug", "true");
+	    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
        return props;
-	}
-	
-	/** Liefert ein MIME-Objekt.
-	 * 
-	 * @param mailSession	Ein aktive Session
-	 * @param charset		Zeichensatz
-	 * @param from			E-Mail-Adresse des Absenders
-	 * @param subject		Betreff der E-Mail
-	 * @param HtmlMessage	Inhalt der E-Mail
-	 * @param recipient		Array aus E-Mail-Adressen, welche diese E-Mail erhalten sollen.
-	 * @return				Ein mit den o.g. Daten initialisierten MIME-Objekt.
-	 */
-	private MimeMessage prepareMessage(Session mailSession,String charset, String from, String subject, String HtmlMessage,String[] recipient) {
-		MimeMessage message = null;
-		try {
-			message = new MimeMessage(mailSession);
-			message.setFrom(new InternetAddress(from));
-			message.setSubject(subject);
-			for (int i=0;i<recipient.length;i++)
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient[i]));
-				message.setContent(HtmlMessage, "text/html; charset=\""+charset+"\"");
-		} catch (Exception ex) {
-			Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return message;
 	}	
 }
