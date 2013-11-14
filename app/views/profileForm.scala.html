@@ -42,7 +42,9 @@
 				'_label -> "E-Mail",
 				'_error -> profileForm.globalError
 			)			
-		
+			
+			<input type="hidden" id="password" name="password" value="@profileForm("password").value">
+
 			@snippets.submitFormSnippet.render()
 	}
 	</div>
