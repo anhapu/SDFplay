@@ -43,6 +43,8 @@ public class Book extends Model
     @Formats.NonEmpty
     public int year;
     
+    public boolean swabable;
+    
     public String comment;
     
     public User owner;
@@ -76,8 +78,12 @@ public class Book extends Model
         return find.where().like( "author", nameOfAuthor ).findList();
     }
     
-    public static List<Book> findByUser(final User user)
+    /**
+     * Returns a list of all swapable books.
+     * @return
+     */
+    public static List<Book> findAllSwapableBooks()
     {
-        return find.where().eq( "user.id", user.id );
+        return find.where().eq("swapable", true).findList();
     }
 }
