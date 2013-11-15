@@ -86,6 +86,25 @@ public class Book extends Model
     }
     
     /**
+     * Returns all books of a given User.
+     * @param user
+     * @return List of books.
+     */
+    public static List<Book> findByUser(final User user)
+    {
+        return find.where().eq( "owner.id", user.id ).findList();
+    }
+    
+    /**
+     * Returns a list of swapable books by a given user.
+     * @param user
+     * @return List of books
+     */
+    public static List<Book> findSwapableBooksByUser(final User user)
+    {
+        return find.where().eq( "swapable", true ).eq( "owner.id", user.id ).findList();
+    }
+    /**
      * Returns a book by a given id.
      * @param id Id of the book.
      * @return Book object.
@@ -95,10 +114,29 @@ public class Book extends Model
         return find.where().eq( "id", id ).findUnique();
     }
     
+    /**
+     * Creates a book in the database. Default of swabable is false.
+     * @param book
+     * @return Returns the saved book object.
+     */
     public static Book create( Book book)
     {
+        book.swabable = false;
         book.owner = Common.currentUser();
         book.save();
+        return book;
+    }
+    
+    /**
+     * Marks a book as swapable.
+     * @param book
+     * @return Returns the updated book.
+     */
+    public static Book markAsSwapable(Book book)
+    {
+        book.swabable = true;
+        book.owner = Common.currentUser();
+        book.update();
         return book;
     }
 }
