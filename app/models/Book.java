@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import views.html.userProfile;
 
 @Entity
 @Table(name="books")
@@ -42,11 +43,9 @@ public class Book extends Model
     @Formats.NonEmpty
     public int year;
     
-    @OneToMany
-    public List<Comment> comments;
+    public String comment;
     
-    @OneToMany(mappedBy = "book")
-    public List<User> users;
+    public User owner;
     
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
     
@@ -62,7 +61,8 @@ public class Book extends Model
      * @param booktitle The title of the book.
      * @return List of books can be empty.
      */
-    public static List<Book> findByTitle(final String booktitle){
+    public static List<Book> findByTitle(final String booktitle)
+    {
         return find.where().like( "title", booktitle ).findList();
     }
     
@@ -71,7 +71,13 @@ public class Book extends Model
      * @param nameOfAuthor The name of the author.
      * @return List of books can be empty.
      */
-    public static List<Book> findByAuthor(final String nameOfAuthor){
+    public static List<Book> findByAuthor(final String nameOfAuthor)
+    {
         return find.where().like( "author", nameOfAuthor ).findList();
+    }
+    
+    public static List<Book> findByUser(final User user)
+    {
+        return find.where().eq( "user.id", user.id );
     }
 }
