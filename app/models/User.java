@@ -49,9 +49,7 @@ public class User extends Model
     @Constraints.Required
     @Formats.NonEmpty
     public String password;
-    
-    @OneToMany
-    public List<Book> books;
+  
     
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);

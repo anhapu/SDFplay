@@ -4,23 +4,20 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import views.html.userProfile;
+import controllers.Common;
 
 @Entity
 @Table(name="books")
 public class Book extends Model
 {
-    
-    /**
-     * Default
-     */
-    private static final long serialVersionUID = 1L;
+    @Id
+    public Long id;
 
     @Constraints.Required
     @Formats.NonEmpty
@@ -47,6 +44,7 @@ public class Book extends Model
     
     public String comment;
     
+    @ManyToOne
     public User owner;
     
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
@@ -85,5 +83,22 @@ public class Book extends Model
     public static List<Book> findAllSwapableBooks()
     {
         return find.where().eq("swapable", true).findList();
+    }
+    
+    /**
+     * Returns a book by a given id.
+     * @param id Id of the book.
+     * @return Book object.
+     */
+    public static Book findById(Long id)
+    {
+        return find.where().eq( "id", id ).findUnique();
+    }
+    
+    public static Book create( Book book)
+    {
+        book.owner = Common.currentUser();
+        book.save();
+        return book;
     }
 }
