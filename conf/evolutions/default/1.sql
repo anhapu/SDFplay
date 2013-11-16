@@ -3,7 +3,7 @@
 
 # --- !Ups
 
-create table books (
+create table book (
   id                        bigint not null,
   isbn                      varchar(255) not null,
   author                    varchar(255),
@@ -25,22 +25,22 @@ create table account (
   constraint pk_account primary key (id))
 ;
 
-create sequence books_seq;
+create sequence book_seq;
 
 create sequence account_seq;
 
-alter table books add constraint fk_books_owner_1 foreign key (owner_id) references account (id);
-create index ix_books_owner_1 on books (owner_id);
+alter table book add constraint fk_book_owner_1 foreign key (owner_id) references account (id);
+create index ix_book_owner_1 on book (owner_id);
 
 
 
 # --- !Downs
 
-drop table if exists books cascade;
+drop table if exists book cascade;
 
 drop table if exists account cascade;
 
-drop sequence if exists books_seq;
+drop sequence if exists book_seq;
 
 drop sequence if exists account_seq;
 
