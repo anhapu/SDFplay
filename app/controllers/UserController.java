@@ -73,13 +73,15 @@ public class UserController extends Controller {
 	@Transactional
 	public static Result savePassword(Long id) {
 		User user = User.findById(id);
-		if(form().bindFromRequest().get("password").equals(form().bindFromRequest().get("repeatPassword"))) {
-			user.password = Common.md5(form().bindFromRequest().get("password"));
-			user.update();
-			return redirect(routes.Application.index());
-		}
-		else {
-			;
+		if(Common.md5(form().bindFromRequest().get("oldPassword")).equals(user.password)) {
+			if(form().bindFromRequest().get("password").equals(form().bindFromRequest().get("repeatPassword"))) {
+				user.password = Common.md5(form().bindFromRequest().get("password"));
+				user.update();
+				return redirect(routes.Application.index());
+			}
+			else {
+				;
+			}
 		}
 		return redirect(routes.UserController.editPassword(user.id));
 	}
