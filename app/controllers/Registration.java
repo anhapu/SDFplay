@@ -6,7 +6,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
 import static play.data.Form.*;
-import views.html.registrationForm;
+import views.html.user.registrationForm;
 import play.api.templates.Html;
 
 

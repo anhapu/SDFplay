@@ -8,10 +8,10 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import views.html.index;
-import views.html.profileForm;
-import views.html.userProfile;
-import views.html.userBookshelf;
-import views.html.passwordForm;
+import views.html.user.profileForm;
+import views.html.user.userProfile;
+import views.html.book.bookshelf;
+import views.html.user.passwordForm;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -102,7 +102,7 @@ public class UserController extends Controller {
 		User searchedUser = User.findById(id);
 		if (searchedUser != null) {
 			Secured.showUserProfile(searchedUser);
-			return ok(userBookshelf.render());
+			return ok(bookshelf.render());
 		}
 		else {
 			//ToDo redirect to something useful
