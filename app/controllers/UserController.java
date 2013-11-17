@@ -64,7 +64,7 @@ public class UserController extends Controller {
 		User searchedUser = User.findById(id);
 		if (searchedUser != null) {
 			Secured.editUserProfile(searchedUser);
-			return ok(passwordForm.render(searchedUser));
+			return ok(passwordForm.render(searchedUser, form));
 		} else {
 			return redirect(routes.Registration.index());
 		}
@@ -72,18 +72,16 @@ public class UserController extends Controller {
 
 	@Transactional
 	public static Result savePassword(Long id) {
-		User user = User.findById(id);
-		if(Common.md5(form().bindFromRequest().get("oldPassword")).equals(user.password)) {
-			if(form().bindFromRequest().get("password").equals(form().bindFromRequest().get("repeatPassword"))) {
-				user.password = Common.md5(form().bindFromRequest().get("password"));
-				user.update();
-				return redirect(routes.Application.index());
-			}
-			else {
-				;
-			}
+		Form<changePassword> pForm = form(changePassword.class).bindFromRequest();
+		if (pForm.hasErrors()) {
+			return badRequest(views.html.user.passwordForm.render(User.findById(id), pForm));
 		}
-		return redirect(routes.UserController.editPassword(user.id));
+		else {
+			User user = User.findById(id);
+			user.password = Common.md5(form().bindFromRequest().get("password"));
+			user.update();
+			return redirect(routes.Application.index());
+		}
 	}
 
 	@Security.Authenticated(Secured.class)
@@ -126,4 +124,28 @@ public class UserController extends Controller {
 		}
 	}
 
+	public static class changePassword {
+	
+		public Long id;
+		public String oldPassword;
+		public String password;
+		public String repeatPassword;
+		
+		public String validate() {
+			User user = User.findById(id);
+			if(user == null) {
+				return "Du existierst nicht!";
+			}
+			if(!user.password.equals(Common.md5(oldPassword))) {
+				return "Altes Passwort nicht korrekt";
+			}
+			if(password.length() < 3) {
+				return "Neues Passwort zu kurz, min. 3 chars.";
+			}
+			if(!password.equals(repeatPassword)) {
+				return "Passwörter nicht gleich";
+			}
+			return null;
+		}
+	}
 }
