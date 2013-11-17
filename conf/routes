@@ -4,14 +4,20 @@
 
 
 # User
-GET		/user								controllers.UserController.showProfile()
-POST	/user/login					controllers.UserController.login()
-GET		/user/logout				controllers.UserController.logout()
+GET		/user					controllers.UserController.showProfile()
+POST	/user/login			    controllers.UserController.login()
+GET		/user/logout			controllers.UserController.logout()
 GET		/user/editProfile		controllers.UserController.editProfile()
 POST	/user/editProfile		controllers.UserController.saveProfile()
 #POST	/user/register			controllers.UserController.register()
 GET		/registration			controllers.Registration.index()
 POST	/registration 			controllers.Registration.submit()
+
+#Book
+GET     /book                   controllers.BookController.all()
+POST    /addBook                controllers.BookController.addBook()
+POST    /editBook/:bookId       controllers.BookController.editBook(bookId: Long)
+DELETE  /delBook/:bookId        controllers.BookController.deleteBook(bookId: Long)
 
 # Home page
 GET     /                           controllers.Application.index()

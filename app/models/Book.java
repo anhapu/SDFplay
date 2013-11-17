@@ -82,7 +82,7 @@ public class Book extends Model
      */
     public static List<Book> findAllSwapableBooks()
     {
-        return find.where().eq("swapable", true).findList();
+        return find.where().eq("exchangeable", true).findList();
     }
     
     /**
@@ -115,7 +115,8 @@ public class Book extends Model
     }
     
     /**
-     * Creates a book in the database. Default of swabable is false.
+     * Creates a book in the database. Default of exchangeable is false.
+     * Sets the current user as owner.
      * @param book
      * @return Returns the saved book object.
      */
@@ -123,6 +124,20 @@ public class Book extends Model
     {
         book.exchangeable = false;
         book.owner = Common.currentUser();
+        book.save();
+        return book;
+    }
+    
+    /**
+     * Creates a book in the database with the given user as owner of the book. Default of exchangeable is false.
+     * @param book
+     * @param owner
+     * @return Returns the saved book object.
+     */
+    public static Book create(Book book, User owner)
+    {
+        book.exchangeable = false;
+        book.owner = owner;
         book.save();
         return book;
     }

@@ -20,13 +20,15 @@ public class Secured extends Security.Authenticator
         return redirect(routes.Application.index());
     }
     
-    //Access Right methods
+  
+    
     /**
      * Checks if the current user is the owner of the given book.
-     * @param book Book which should be edit
-     * @return returns true or false.
+     * @param book Book object that we want to check.
+     * @return Returns true if the current user is the owner of the book otherwise false.
      */
-    public static boolean isAllowedToEditBook(final Book book){
+    public static boolean isOwnerOfBook(final Book book)
+    {
         final User user = Common.currentUser();
         if(user != null && user.id.equals( book.owner.id ))
         {
@@ -37,10 +39,9 @@ public class Secured extends Security.Authenticator
             return false;
         }
     }
-    
     /**
-     * Checks if we have a current user.
-     * @return
+     * Checks if we have a current user. Users are allowed to add books to the system.
+     * @return Returns true if there is an user in the session otherwise false.
      */
     public static boolean isAllowedToAddBook()
     {
