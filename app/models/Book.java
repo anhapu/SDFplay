@@ -40,7 +40,7 @@ public class Book extends Model
     @Formats.NonEmpty
     public int year;
     
-    public boolean swabable;
+    public boolean exchangeable;
     
     public String comment;
     
@@ -121,7 +121,7 @@ public class Book extends Model
      */
     public static Book create( Book book)
     {
-        book.swabable = false;
+        book.exchangeable = false;
         book.owner = Common.currentUser();
         book.save();
         return book;
@@ -134,7 +134,7 @@ public class Book extends Model
      */
     public static Book markAsSwapable(Book book)
     {
-        book.swabable = true;
+        book.exchangeable = true;
         book.owner = Common.currentUser();
         book.update();
         return book;

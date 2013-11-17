@@ -5,14 +5,15 @@
 
 create table book (
   id                        bigint not null,
-  isbn                      varchar(255) not null,
   author                    varchar(255),
   title                     varchar(255),
+  isbn                      varchar(255),
   cover_url                 varchar(255),
   year                      integer,
   swabable                  boolean,
   comment                   varchar(255),
-  owner_id                  bigint)
+  owner_id                  bigint,
+  constraint pk_book primary key (id))
 ;
 
 create table account (
