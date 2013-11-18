@@ -1,6 +1,13 @@
 @(form: Form[UserController.SimpleProfile])
 @main("Registrierung") {
-
+	@if(form.hasGlobalErrors) {
+    	<p class="error">
+    		@for(e <- form.globalErrors) {
+          		@e.message
+          		<br>
+     		}
+    	</p>
+	}
 	@helper.form(action = routes.Registration.submit) {
 		@snippets.profile(form)
 		@snippets.password()

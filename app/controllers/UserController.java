@@ -157,17 +157,14 @@ public class UserController extends Controller {
 	}
 
 	public static class SimpleProfile {
-		public String email;
 		public String username;
-		public String lastname;
 		public String firstname;
+		public String lastname;
+		public String email;
 
 		public String validate() {
 			if (email.length() == 0) {
 				return "Email darf nicht leer sein!";
-			}
-			if (User.findByUsername(username) != null) {
-				return "Username bereits vergeben!";
 			}
 			return null;
 		}
