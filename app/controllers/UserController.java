@@ -41,11 +41,11 @@ public class UserController extends Controller {
 
 	@Security.Authenticated(Secured.class)
 	public static Result editProfile(Long id) {
-		final Form<User> form = form(User.class).bindFromRequest();
+		Form<SimpleProfile> form = form(SimpleProfile.class);
 		User searchedUser = User.findById(id);
 		if (searchedUser != null) {
 			Secured.editUserProfile(searchedUser);
-			return ok(profileForm.render(form.fill(searchedUser)));
+			return ok("Here be lions");
 		} else {
 			return redirect(routes.Registration.index());
 		}
@@ -53,9 +53,16 @@ public class UserController extends Controller {
 
 	@Transactional
 	public static Result saveProfile(Long id) {
+		Form<SimpleProfile> pForm  = form(SimpleProfile.class).bindFromRequest();
 		User created = form(User.class).bindFromRequest().get();
-		created.update();
-		return redirect(routes.Application.index());
+		if (pForm.hasErrors()) {
+			Common.addToContext(Common.ContextIdent.loginForm, pForm);
+			return badRequest(index.render());
+		}
+		else {
+			created.update();
+			return redirect(routes.Application.index());
+		}
 	}
 	
 	@Security.Authenticated(Secured.class)
@@ -144,6 +151,23 @@ public class UserController extends Controller {
 			}
 			if(!password.equals(repeatPassword)) {
 				return "Passwörter nicht gleich";
+			}
+			return null;
+		}
+	}
+
+	public static class SimpleProfile {
+		public String email;
+		public String username;
+		public String lastname;
+		public String firstname;
+
+		public String validate() {
+			if (email.length() == 0) {
+				return "Email darf nicht leer sein!";
+			}
+			if (User.findByUsername(username) != null) {
+				return "Username bereits vergeben!";
 			}
 			return null;
 		}

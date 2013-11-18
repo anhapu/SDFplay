@@ -13,7 +13,7 @@ import play.api.templates.Html;
 public class Registration extends Controller {
 
 	public static Result index() {
-		return ok(registrationForm.render());
+		return ok(registrationForm.render(form(UserController.SimpleProfile.class)));
 	}
 
 	private static boolean validateNewUser(User newUser, String pwRepeat, String agbOK) {
@@ -41,10 +41,10 @@ public class Registration extends Controller {
 				sendRegConfirmationMail(newUser);
 			}
 			else {
-				result = badRequest(registrationForm.render());
+				result = badRequest(registrationForm.render(form(UserController.SimpleProfile.class)));
 			}
 		} else {
-			result = badRequest(registrationForm.render());
+			result = badRequest(registrationForm.render(form(UserController.SimpleProfile.class)));
 		}
 		return result;
 	}
