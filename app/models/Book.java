@@ -115,32 +115,16 @@ public class Book extends Model
     }
     
     /**
-     * Creates a book in the database. Default of exchangeable is false.
-     * Sets the current user as owner.
+     * Persists the given book in the database.
      * @param book
-     * @return Returns the saved book object.
+     * @return Returns the persisted book object.
      */
     public static Book create( Book book)
     {
-        book.exchangeable = false;
-        book.owner = Common.currentUser();
         book.save();
         return book;
     }
     
-    /**
-     * Creates a book in the database with the given user as owner of the book. Default of exchangeable is false.
-     * @param book
-     * @param owner
-     * @return Returns the saved book object.
-     */
-    public static Book create(Book book, User owner)
-    {
-        book.exchangeable = false;
-        book.owner = owner;
-        book.save();
-        return book;
-    }
     
     /**
      * Marks a book as swapable.

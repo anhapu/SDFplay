@@ -26,7 +26,10 @@ public final class BookController extends Controller
         return null;
     }
     
-    
+    /**
+     * Persists a book in the database.
+     * @return
+     */
     @Transactional
     public static Result addBook()
     {
@@ -38,6 +41,10 @@ public final class BookController extends Controller
                 return badRequest();
             }
             Book book = filledForm.get();
+            
+            book.owner = Common.currentUser();
+            book.exchangeable = false;
+            book.comment = "";
             Book.create( book );
             return ok();
         }
