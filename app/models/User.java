@@ -67,7 +67,7 @@ public class User extends Model
      * Retrieve a User from email.
      */
     public static User findByEmail(String email) {
-        return find.where().eq("email", email).findUnique();
+        return find.where().ieq("email", email).findUnique();
     }
 
     /**
@@ -90,7 +90,7 @@ public class User extends Model
      */
     public static User authenticate(String email, String password) {
         return find.where()
-            .eq("email", email)
+            .ieq("email", email.toLowerCase())
             .eq("password", Common.md5(password))
             .findUnique();
     }
