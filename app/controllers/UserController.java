@@ -110,19 +110,6 @@ public class UserController extends Controller {
                         return redirect(routes.Application.index());
                 }
         }
-        
-        @Security.Authenticated(Secured.class)
-        public static Result showBookshelf(Long id) {
-                User searchedUser = User.findById(id);
-                if (searchedUser != null) {
-                        Secured.showUserProfile(searchedUser);
-                        return ok(bookshelf.render(null));
-                }
-                else {
-                        //ToDo redirect to something useful
-                        return redirect(routes.Application.index());
-                }
-        }
 
 
         public static class Login {
