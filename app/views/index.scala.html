@@ -1,0 +1,12 @@
+@main("Bücherbörse") {
+
+	<h1>Bücherbörse</h1>   
+
+	@if(Common.currentUser != null) {
+		Logged in as: @Common.currentUser.username<br />
+		<a href="@routes.UserController.logout">Logout</a>
+	} else {
+		@Common.getLoginForm
+	}
+
+}

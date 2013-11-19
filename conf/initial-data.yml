@@ -1,0 +1,19 @@
+# Users
+users:
+
+    - !!models.User
+        email: test@example.com
+        username: Max Mustermann
+        firstname: Max
+        lastname: Mustermann
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+#Books
+	- !!models.Book
+		author: Hans Wurst
+		title: Title of a testbook
+		isbn: 1234-5678-9
+		coverUrl: http://localhost:9000/fasdf.gif
+		year: 2013
+		exchangeable: false
+		comment: Test comment
+		owner:
