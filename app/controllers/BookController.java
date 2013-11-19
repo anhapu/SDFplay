@@ -90,8 +90,8 @@ public final class BookController extends Controller
     /**
      * Delete a book.
      */
-    public static Result delete(final Long bookid) {
-        Book book = Book.findById( bookid );
+    public static Result deleteBook(final Long bookId) {
+        Book book = Book.findById( bookId );
         if(Secured.isOwnerOfBook( book )) {
             book.delete();
             return ok();

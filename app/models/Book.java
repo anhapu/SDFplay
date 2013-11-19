@@ -102,7 +102,7 @@ public class Book extends Model
      */
     public static List<Book> findSwapableBooksByUser(final User user)
     {
-        return find.where().eq( "swapable", true ).eq( "owner.id", user.id ).findList();
+        return find.where().eq( "exchangeable", true ).eq( "owner.id", user.id ).findList();
     }
     /**
      * Returns a book by a given id.
@@ -134,7 +134,6 @@ public class Book extends Model
     public static Book markAsSwapable(Book book)
     {
         book.exchangeable = true;
-        book.owner = Common.currentUser();
         book.update();
         return book;
     }

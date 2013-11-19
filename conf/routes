@@ -14,7 +14,7 @@ GET		/registration			controllers.Registration.index()
 POST	/registration 			controllers.Registration.submit()
 
 #Book
-GET     /book                   controllers.BookController.all()
+GET     /book                   controllers.BookController.index()
 POST    /addBook                controllers.BookController.addBook()
 POST    /editBook/:bookId       controllers.BookController.editBook(bookId: Long)
 DELETE  /delBook/:bookId        controllers.BookController.deleteBook(bookId: Long)
