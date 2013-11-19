@@ -1,0 +1,43 @@
+@(profileForm: Form[UserController.SimpleProfile], id: Long)
+@import helper._
+
+@main("Editiere Profil") {
+
+		@helper.form(action = routes.UserController.saveProfile(id)){
+			@if(profileForm.hasGlobalErrors) {
+    			<p class="error">@profileForm.globalError.message</p>
+			}
+
+			<input type="hidden" id="id" name="id" value="@id">
+	
+			@inputText(
+				profileForm("username"),
+				'_label -> "Nutzername",
+				'_error -> profileForm.globalError
+			)
+		
+			@inputText(
+				profileForm("firstname"),
+				'_label -> "Vorname",
+				'_error -> profileForm.globalError
+			)
+
+			@inputText(
+				profileForm("lastname"),
+				'_label -> "Nachname",
+				'_error -> profileForm.globalError
+			)
+
+			@inputText(
+				profileForm("email"),
+				'_label -> "E-Mail",
+				'_error -> profileForm.globalError
+			)			
+			
+			@snippets.submitForm()
+	}
+
+}
+
+
+

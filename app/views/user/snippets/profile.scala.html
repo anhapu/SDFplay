@@ -1,0 +1,5 @@
+@(form: Form[UserController.SimpleProfile])
+<div><label for="username">Nutzername</label><div></div><input type="text" id="username" name="username" value="@form("username").value"></div>
+<div><label for="firstname">Vorname</label><div></div><input type="text" id="firstname" name="firstname" value="@form("firstname").value"></div>
+<div><label for="lastname">Nachname</label><div></div><input type="text" id="lastname" name="lastname" value="@form("lastname").value"></div>
+<div><label for="email">E-Mail</label><div></div><input type="email" id="email" name="email" value="@form("email").value"></div>

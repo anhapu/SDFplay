@@ -2,16 +2,25 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-
 # User
-GET		/user					controllers.UserController.showProfile()
-POST	/user/login			    controllers.UserController.login()
-GET		/user/logout			controllers.UserController.logout()
-GET		/user/editProfile		controllers.UserController.editProfile()
-POST	/user/editProfile		controllers.UserController.saveProfile()
-#POST	/user/register			controllers.UserController.register()
-GET		/registration			controllers.Registration.index()
-POST	/registration 			controllers.Registration.submit()
+POST  /user/login             controllers.UserController.login()
+GET   /user/logout            controllers.UserController.logout()
+GET   /user/:id               controllers.UserController.showProfile(id: Long)
+GET   /user/:id/bookshelf     controllers.UserController.showBookshelf(id: Long)
+GET   /user/editProfile/:id   controllers.UserController.editProfile(id: Long)
+POST  /user/editProfile/:id   controllers.UserController.saveProfile(id: Long)
+GET   /user/editPassword/:id  controllers.UserController.editPassword(id: Long)
+POST  /user/editPassword/:id  controllers.UserController.savePassword(id: Long)
+
+#POST /user/register      controllers.UserController.register()
+GET   /registration       controllers.Registration.index()
+POST  /registration       controllers.Registration.submit()
+
+# Home page
+GET   /                   controllers.Application.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET   /assets/*file       controllers.Assets.at(path="/public", file)
 
 #Book
 GET     /book                   controllers.BookController.index()
@@ -19,8 +28,3 @@ POST    /addBook                controllers.BookController.addBook()
 POST    /editBook/:bookId       controllers.BookController.editBook(bookId: Long)
 DELETE  /delBook/:bookId        controllers.BookController.deleteBook(bookId: Long)
 
-# Home page
-GET     /                           controllers.Application.index()
-
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)

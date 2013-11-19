@@ -2,8 +2,55 @@
 users:
 
     - !!models.User
+        id: 1
         email: test@example.com
         username: Max Mustermann
         firstname: Max
         lastname: Mustermann
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+
+books:
+
+    - !!models.Book 
+        author: Test author
+        title: Test title
+        isbn: 1234567890
+        coverUrl: http://testurl.de
+        year: 2013
+        exchangeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 1
+
+    - !!models.Book 
+        author: Joanne K. Rowling
+        title: Harry Potter und der Stein der Weisen
+        isbn: 3551551677
+        coverUrl: http://testurl.de
+        year: 1998
+        exchangeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 1
+
+    - !!models.Book 
+        author: Joanne K. Rowling
+        title: Harry Potter und die Kammer des Schreckens
+        isbn: 3551551685
+        coverUrl: http://testurl.de
+        year: 1999
+        exchangeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 1
+
+    - !!models.Book 
+        author: Joanne K. Rowling
+        title: Harry Potter und der Gefangene von Askaban
+        isbn: 3551551693
+        coverUrl: http://testurl.de
+        year: 1999
+        exchangeable: true
+        comment: Test comment
+        owner: !!models.User
+                     id: 1

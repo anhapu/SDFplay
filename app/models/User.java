@@ -4,19 +4,20 @@ package models;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.List;
 
-import javax.management.relation.Role;
-import javax.persistence.*;
-import javax.validation.Constraint;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.jboss.logging.FormatWith;
-
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
+import models.enums.Roles;
+import play.data.format.Formats;
+import play.data.validation.Constraints;
 import play.data.validation.Constraints.Email;
-import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
+import controllers.Common;
 
 @Entity
 @Table(name="account")
@@ -43,7 +44,7 @@ public class User extends Model
     public String lastname;
     
     @Enumerated(EnumType.ORDINAL)
-    public Role role;
+    public Roles role;
     
     
     @Constraints.Required
@@ -68,9 +69,16 @@ public class User extends Model
     public static User findByEmail(String email) {
         return find.where().eq("email", email).findUnique();
     }
+
+    /**
+     * Retrieve a User from username.
+     */
+    public static User findByUsername(String username) {
+        return find.where().eq("username", username).findUnique();
+    }
     
     /**
-     * Retrieve a User from email.
+     * Retrieve a User from id.
      */
     public static User findById(Long id) {
         return find.byId(id.toString());
@@ -83,10 +91,9 @@ public class User extends Model
     public static User authenticate(String email, String password) {
         return find.where()
             .eq("email", email)
-            .eq("password", User.md5(password))
+            .eq("password", Common.md5(password))
             .findUnique();
     }
-    
     
     /**
      * Overrides the to string methode.
