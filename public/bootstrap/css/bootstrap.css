@@ -4962,7 +4962,7 @@ a.list-group-item.active > .badge,
   margin-bottom: 20px;
   line-height: 1.428571429;
   background-color: #ffffff;
-  border: 1px solid #dddddd;
+  border: 2px solid #666666;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
@@ -4978,7 +4978,7 @@ a.list-group-item.active > .badge,
 
 a.thumbnail:hover,
 a.thumbnail:focus {
-  border-color: #428bca;
+  border-color: #f00;
 }
 
 .thumbnail > img {
