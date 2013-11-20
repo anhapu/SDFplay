@@ -5,8 +5,8 @@
     <head>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/navbar-static-top.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/justified-nav.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/caroussel.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
@@ -70,8 +70,8 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="@routes.Registration.index()">Login</a></li>
+    <ul class="nav navbar-nav">
+      <li><a href="@routes.Registration.index()">Registrieren</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
             }
