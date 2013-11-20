@@ -151,4 +151,40 @@ public final class BookController extends Controller
         }
     }
     
+    /**
+     * Marks a book tradeable.
+     * @param id ID of the book which should be marked as tradeable.
+     */
+    public static Result markAsTradeable(final Long id)
+    {
+        Book book = Book.findById( id );
+        if(Secured.isOwnerOfBook( book ))
+        {
+            Book.markAsTradeable( book );
+            Logger.info( "Marked book as tradeable" );
+            return ok();
+        }
+        else
+        {
+            Logger.error( "User is not allowed to mark book as tradeable" );
+            return forbidden();
+        }
+    }
+    
+    public static Result unmarkAsTradeable(final Long bookId)
+    {
+        Book book = Book.findById( bookId );
+        if(Secured.isOwnerOfBook( book ))
+        {
+            Book.unmarkAsTradeable(book);
+            return ok();
+            
+        }
+        else
+        {
+            
+            Logger.error("User is not allowed to unmark book as tradeable");
+            return forbidden();
+        }
+    }
 }

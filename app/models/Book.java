@@ -130,13 +130,24 @@ public class Book extends Model
     
     
     /**
-     * Marks a book as swapable.
+     * Marks a book as tradeable. So it is visible in the showcase.
      * @param book
      * @return Returns the updated book.
      */
-    public static Book markAsSwapable(Book book)
+    public static Book markAsTradeable(Book book)
     {
         book.tradeable = true;
+        book.update();
+        return book;
+    }
+
+    /**
+     * Unmark a book as tradeable. So it is not visible in the showcase.
+     * @param book
+     */
+    public static Book unmarkAsTradeable( Book book )
+    {
+        book.tradeable = false;
         book.update();
         return book;
     }
