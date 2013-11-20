@@ -28,6 +28,9 @@ public class Book extends Model
     @Formats.NonEmpty
     public String title;
     
+    
+    public String subtitle;
+    
     @Constraints.Required
     @Formats.NonEmpty
     public String isbn;

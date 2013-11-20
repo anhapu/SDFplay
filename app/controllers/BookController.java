@@ -110,7 +110,7 @@ public final class BookController extends Controller
         }
     }
 
-    @Security.Authenticated( Secured.class )
+    
     public static Result showBookshelf( Long id )
     {
         User searchedUser = User.findById( id );
@@ -127,4 +127,13 @@ public final class BookController extends Controller
             return redirect( routes.Application.index() );
         }
     }
+    
+    /**
+     * Returns the showcase of a specific user
+     * @param id UserId
+     * @return
+     */
+    public static Result getShowcase(Long id)
+    
+    
 }
