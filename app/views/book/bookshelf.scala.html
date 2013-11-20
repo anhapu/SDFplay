@@ -1,191 +1,25 @@
 @(books: List[Book])
 @main("Mein Bücherregal") {
 
-            <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="@routes.Assets.at("images/background.png")" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <div class="row"> <!-- Content -->
-                  @for(book <- books) {
-                      <div class="col-sm-6 col-md-3">
+        <!-- Content -->
+        <div class="row">
+         @for(book <- books) {
+             <div class="col-sm-4 col-md-2 col-xs-6">
                         <a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
                             <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
                         </a>
-                    </div>
-                  }
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 08" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die dunkle K&ouml;nigin&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 05" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Sturm der Schwerter&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks4.books.google.de/books?id=AE_Jl6RT1dcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 10" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Ein Tanz mit Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks4.books.google.de/books?id=3r_PgcYX7jYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 06" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die K&ouml;nigin der Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks1.books.google.de/books?id=FvR_N779-JAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                </div> <!-- /Content -->
+                    @if(book.tradeable){
+                         <div class="caption">
+                            <p><a href="@routes.BookController.unmarkAsTradeable(book.id)" class="btn btn-success btn-xs" role="button">Vom Showcase entfernen</a></p>
+                        </div>
+                    }else{
+                        <div class="caption">
+                            <p><a href="@routes.BookController.markAsTradeable(book.id)" class="btn btn-success btn-xs" role="button">Zum Showcase hinzufuegen</a></p>
+                        </div>
+                    }
             </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="@routes.Assets.at("images/background2.png")" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <div class="row"> <!-- Content -->
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks3.books.google.de/books?id=5z5ZLwySVxAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks9.books.google.de/books?id=lNo1V7zK4scC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 01" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die Herren von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 02" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Das Erbe von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 08" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die dunkle K&ouml;nigin&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 05" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Sturm der Schwerter&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks4.books.google.de/books?id=AE_Jl6RT1dcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 10" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Ein Tanz mit Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks4.books.google.de/books?id=3r_PgcYX7jYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="thumbnail" data-toggle="popover" title="Das Lied von Eis und Feuer 06" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die K&ouml;nigin der Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                            <img src="http://bks1.books.google.de/books?id=FvR_N779-JAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                        </a>
-                    </div>
-                </div> <!-- /Content -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-</br>
-</br>
-</br>
-</br>
-</br>
-            <!-- Content -->
-        <div class="row">
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks3.books.google.de/books?id=5z5ZLwySVxAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks9.books.google.de/books?id=lNo1V7zK4scC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="C++ für Dummies" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt;" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 01" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die Herren von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks9.books.google.de/books?id=ddAnF3LGmn0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 02" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Das Erbe von Winterfell&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 08" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die dunkle K&ouml;nigin&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks4.books.google.de/books?id=AE_Jl6RT1dcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 05" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Sturm der Schwerter&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-success btn-xs" role="button">Zum Tausch anbieten</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks4.books.google.de/books?id=3r_PgcYX7jYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 10" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Ein Tanz mit Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks1.books.google.de/books?id=FvR_N779-JAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 06" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Die K&ouml;nigin der Drachen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks8.books.google.de/books?id=dCbTOLpSmGwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 09" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Der Sohn des Greifen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
-                      </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <div class="thumbnail">
-                    <img src="http://bks8.books.google.de/books?id=VrkM4xnKI2QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" data-toggle="popover" title="Das Lied von Eis und Feuer 07" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; Zeit der Kr&auml;hen&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; George R. R. Martin" data-trigger="hover" data-html="true" data-placement="top">
-                    <div class="caption">
-                        <p><a href="#" class="btn btn-warning btn-xs" role="button">Vom Tausch zurückziehen</a></p>
-                      </div>
-                </div>
-            </div>
-        </div> <!-- /Content -->
+         }
+         </div>
+         <!-- /Content -->
 }
 

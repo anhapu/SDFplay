@@ -163,7 +163,7 @@ public final class BookController extends Controller
         {
             Book.markAsTradeable( book );
             Logger.info( "Marked book as tradeable" );
-            return ok();
+            return showBookshelf( book.owner.id );
         }
         else
         {
@@ -178,7 +178,7 @@ public final class BookController extends Controller
         if(Secured.isOwnerOfBook( book ))
         {
             Book.unmarkAsTradeable(book);
-            return ok();
+            return showBookshelf( book.owner.id );
             
         }
         else
