@@ -12,6 +12,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import views.html.book.bookshelf;
+import views.html.book.detailview;
 
 @With( Common.class )
 @Security.Authenticated( Secured.class )
@@ -185,6 +186,21 @@ public final class BookController extends Controller
             
             Logger.error("User is not allowed to unmark book as tradeable");
             return forbidden();
+        }
+    }
+    
+    public static Result getBook(final Long bookId)
+    {
+        Book book = Book.findById( bookId );
+        if(book != null)
+        {
+            Logger.info( "Got book with id " + book.id );
+            return ok(detailview.render(book));
+        }
+        else
+        {
+            Logger.error( "No results for request!" );
+            return badRequest();
         }
     }
 }

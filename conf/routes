@@ -22,6 +22,7 @@ GET   /                   controllers.Application.index()
 GET   /assets/*file       controllers.Assets.at(path="/public", file)
 
 #Book
+GET     /book/details/:id       controllers.BookController.getBook(id: Long)
 GET     /book/:id/bookshelf     controllers.BookController.showBookshelf(id: Long)
 GET     /book/:id/showcase      controllers.BookController.getShowcase(id: Long)
 GET     /book/:id/tradeable     controllers.BookController.markAsTradeable(id: Long)
