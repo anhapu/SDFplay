@@ -13,29 +13,77 @@
     <body>
     
        <div class="container">
-               <div class="pull-right">
-                @if(Common.currentUser != null) {
-                    Logged in as: @Common.currentUser.username<br /><br />
-            </div>
-        <div class="masthead">
-            <h3 class="text-muted">Bücherbörse</h3>
-            
-            <ul class="nav nav-justified">
-                <li><a href="@routes.Application.index()">Home</a></li>
-                <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Mein Profil</a></li>
-                <li><a href="@routes.BookController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
-                <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Editiere mein Profil</a></li>
-                <li><a href="@routes.UserController.editPassword(Common.currentUser.id)">Passwort ändern</a></li>
-                <li><a href="@routes.UserController.logout">Logout</a></li>
-            </ul>
-            } else {
+@if(Common.currentUser != null) {
+      <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="@routes.Application.index()">Bücherbörse</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li class="dropdown active">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mein Profil<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Ansehen</a></li>
+          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Bearbeiten</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="@routes.BookController.showBookshelf(Common.currentUser.id)">Mein Bücherregal</a></li>
+          <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Buch hinzufügen</a></li>
+        </ul>
+      </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Buchtitel">
+      </div>
+      <button type="submit" class="btn btn-default">Suchen</button>
+    </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li>Logged in as: @Common.currentUser.username</li>
+      <li><a href="@routes.UserController.logout">Logout</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+   } else {
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="@routes.Application.index()">Bücherbörse</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="@routes.Registration.index()">Login</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
             Not logged in. <br /><br />
             <ul class="nav nav-justified">
                 <li><a href="@routes.Application.index()">Login</a></li>
                 <li><a href="@routes.Registration.index()">Registrieren</a></li>
             </ul>
             }
-        </div>
+            
+            
+            
+    
+       <div class="container">
+            
          @content
         
     <!-- Site footer -->
