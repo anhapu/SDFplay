@@ -101,31 +101,12 @@ public class User extends Model
     @Override
     public String toString() {
         return "User(" + email + ")";
-    }
+    }  
 
-    /**
-     * Generates an md5 hash of a String.
-     * @param input String value
-     * @return Hashvalue of the String.
-     */
-    public static String md5(String input) {
-        
-        String md5 = null;
-        if(null == input) return null;
-        
-            try {
-            //Create MessageDigest object for MD5
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            //Update input string in message digest
-            digest.update(input.getBytes(), 0, input.length());
-            //Converts message digest value in base 16 (hex)
-            md5 = new BigInteger(1, digest.digest()).toString(16);
-    
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            
-        return md5;
+    public String validate() {
+        if (password.length() < 3) {
+            return "Passwort zu kurz, min. 3 chars.";
+        }
+        return null;
     }
-    
 }

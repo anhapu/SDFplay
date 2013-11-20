@@ -3,6 +3,7 @@ package controllers;
 import controllers.Common;
 import models.User;
 import play.data.Form;
+import play.data.validation.Constraints.EmailValidator;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -17,8 +18,6 @@ import play.mvc.Http.Context;
 import play.mvc.Security;
 import play.api.mvc.Call;
 import play.db.ebean.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -156,11 +155,6 @@ public class UserController extends Controller {
                 public String lastname;
                 public String email;
 
-                //Needed for Email validation
-                private Pattern pattern;
-                private Matcher matcher;
-                private static final String EMAIL_PATTERN =        "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
                 public SimpleProfile() {
                 }
 
@@ -173,17 +167,15 @@ public class UserController extends Controller {
 
                 public String validate() {
                         if (email.length() == 0 || username.length() == 0 || lastname.length() == 0 || firstname.length() == 0) {
-                                return "Felder dürfen nicht leer sein!";
+                                return "Bitte alle Felder ausfüllen!";
                         }
-                        if (username.length() < 6) {
-                                return "Benutzername muss min. 6 Zeichen lang sein!";
+                        if (username.length() <= 3) {
+                                return "Nutzername muss min. 4 Zeichen lang sein!";
                         }
                         
-                        //E-Mail validation
-                        pattern = Pattern.compile(EMAIL_PATTERN);
-                        matcher = pattern.matcher(email);
-                        if (!matcher.matches()) {
-                                return "Invalide Emailaddresse!";
+                        EmailValidator validator = new EmailValidator();
+                        if (!validator.isValid(email)) {
+                            return "Bitte eine gültige E-Mail Adresse eingeben!";
                         }
                         return null;
                 }
