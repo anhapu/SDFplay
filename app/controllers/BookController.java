@@ -1,6 +1,11 @@
 package controllers;
 
+import static play.data.Form.form;
+
+import java.io.IOException;
 import java.util.List;
+
+import controllers.UserController.SimpleProfile;
 
 import models.Book;
 import models.User;
@@ -40,22 +45,37 @@ public final class BookController extends Controller
     {
         if ( Secured.isAllowedToAddBook() )
         {
-            Form< Book > filledForm = bookForm.bindFromRequest();
-            if ( filledForm.hasErrors() )
-            {
-                return badRequest();
-            }
-            Book book = filledForm.get();
-
-            book.owner = Common.currentUser();
-            book.tradeable = false;
-            book.comment = "";
-            Book.create( book );
-            return ok();
+            return ok( views.html.book.addBook.render( form( SimpleProfile.class ) ) );
         }
         else
         {
             return forbidden();
+        }
+    }
+
+    public static Result createBook()
+    {
+        Form< SimpleProfile > pForm = form( SimpleProfile.class ).bindFromRequest();
+        if ( pForm.hasErrors() )
+        {
+            Logger.error( "Error in form" );
+            // TODO redirect to something useful
+            return badRequest();
+        }
+        else
+        {
+
+            try
+            {
+                Common.getGoogleBooksContent( pForm.get().isbn );
+            }
+            catch ( IOException e )
+            {
+                Logger.error( e.getMessage() );
+                return badRequest();
+            }
+
+            return ok();
         }
     }
 
@@ -122,7 +142,7 @@ public final class BookController extends Controller
         }
         else
         {
-            // ToDo redirect to something useful
+            // TODO redirect to something useful
             Logger.error( "Did not find any user for id: " + id );
             return redirect( routes.Application.index() );
         }
@@ -144,7 +164,7 @@ public final class BookController extends Controller
             Logger.info( "Found " + showcase.size() + " books in showcase for user "
                     + searchedUser.username );
             // TODO Redirect to something useful
-            return ok(views.html.book.showcase.render( showcase ));
+            return ok( views.html.book.showcase.render( showcase ) );
         }
         else
         {
@@ -213,6 +233,21 @@ public final class BookController extends Controller
         {
             Logger.error( "No results for request!" );
             return badRequest();
+        }
+    }
+
+    public static class SimpleProfile
+    {
+        public String isbn;
+
+        public SimpleProfile()
+        {
+        }
+
+        public SimpleProfile( String isbn )
+        {
+            this.isbn = isbn;
+
         }
     }
 }

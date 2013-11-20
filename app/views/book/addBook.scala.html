@@ -1,0 +1,22 @@
+@(addBookForm: Form[BookController.SimpleProfile])
+@import helper._
+@main("Buch hinzufuegen"){
+
+    @helper.form(action = routes.BookController.createBook()){
+        @if(addBookForm.hasGlobalErrors) {
+                <p class="error">@addBookForm.globalError.message</p>
+        }
+        
+        
+        @inputText(
+                addBookForm("isbn"),
+                '_label -> "ISBN",
+                '_error -> addBookForm.globalError
+        )
+        
+        <input type="submit" class="btn_primary" value="Absenden">
+    }
+
+
+
+}
