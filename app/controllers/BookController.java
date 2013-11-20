@@ -103,7 +103,7 @@ public final class BookController extends Controller
         if ( Secured.isOwnerOfBook( book ) )
         {
             book.delete();
-            return ok();
+            return redirect( routes.BookController.showBookshelf( book.owner.id ) );
         }
         else
         {
