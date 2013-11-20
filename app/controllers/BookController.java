@@ -12,6 +12,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import views.html.book.bookshelf;
+import views.html.book.detailview;
 
 @With( Common.class )
 @Security.Authenticated( Secured.class )
@@ -47,7 +48,7 @@ public final class BookController extends Controller
             Book book = filledForm.get();
 
             book.owner = Common.currentUser();
-            book.exchangeable = false;
+            book.tradeable = false;
             book.comment = "";
             Book.create( book );
             return ok();
@@ -110,7 +111,7 @@ public final class BookController extends Controller
         }
     }
 
-    @Security.Authenticated( Secured.class )
+    
     public static Result showBookshelf( Long id )
     {
         User searchedUser = User.findById( id );
@@ -125,6 +126,81 @@ public final class BookController extends Controller
             // ToDo redirect to something useful
             Logger.error( "Did not find any user for id: " + id );
             return redirect( routes.Application.index() );
+        }
+    }
+    
+    /**
+     * Returns the showcase of a specific user
+     * @param id UserId
+     * @return
+     */
+    public static Result getShowcase(final Long id)
+    {
+        final User searchedUser = User.findById( id );
+        if(searchedUser != null)
+        {
+            List<Book> showcase = Book.getShowcaseForUser( searchedUser );
+            Logger.info( "Found " + showcase.size() + " books in showcase for user " + searchedUser.username );
+            //TODO Redirect to something useful
+            return ok();
+        }
+        else
+        {
+            //TODO Return to something useful
+            Logger.error( "Did not find any user for id: " + id );
+            return redirect(routes.Application.index());
+        }
+    }
+    
+    /**
+     * Marks a book tradeable.
+     * @param id ID of the book which should be marked as tradeable.
+     */
+    public static Result markAsTradeable(final Long id)
+    {
+        Book book = Book.findById( id );
+        if(Secured.isOwnerOfBook( book ))
+        {
+            Book.markAsTradeable( book );
+            Logger.info( "Marked book as tradeable" );
+            return ok();
+        }
+        else
+        {
+            Logger.error( "User is not allowed to mark book as tradeable" );
+            return forbidden();
+        }
+    }
+    
+    public static Result unmarkAsTradeable(final Long bookId)
+    {
+        Book book = Book.findById( bookId );
+        if(Secured.isOwnerOfBook( book ))
+        {
+            Book.unmarkAsTradeable(book);
+            return ok();
+            
+        }
+        else
+        {
+            
+            Logger.error("User is not allowed to unmark book as tradeable");
+            return forbidden();
+        }
+    }
+    
+    public static Result getBook(final Long bookId)
+    {
+        Book book = Book.findById( bookId );
+        if(book != null)
+        {
+            Logger.info( "Got book with id " + book.id );
+            return ok(detailview.render(book));
+        }
+        else
+        {
+            Logger.error( "No results for request!" );
+            return badRequest();
         }
     }
 }

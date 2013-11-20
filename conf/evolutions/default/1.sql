@@ -7,10 +7,11 @@ create table book (
   id                        bigint not null,
   author                    varchar(255),
   title                     varchar(255),
+  subtitle                  varchar(255),
   isbn                      varchar(255),
   cover_url                 varchar(255),
   year                      integer,
-  exchangeable              boolean,
+  tradeable                 boolean,
   comment                   varchar(255),
   owner_id                  bigint,
   constraint pk_book primary key (id))

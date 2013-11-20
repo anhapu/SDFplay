@@ -2,7 +2,7 @@
 users:
 
     - !!models.User
-        id: 0
+        id: 1
         email: test@example.com
         username: Max Mustermann
         firstname: Max
@@ -17,10 +17,10 @@ books:
         isbn: 1234567890
         coverUrl: http://testurl.de
         year: 2013
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -28,10 +28,10 @@ books:
         isbn: 3551551677
         coverUrl: http://testurl.de
         year: 1998
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -39,10 +39,10 @@ books:
         isbn: 3551551685
         coverUrl: http://testurl.de
         year: 1999
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -50,7 +50,7 @@ books:
         isbn: 3551551693
         coverUrl: http://testurl.de
         year: 1999
-        exchangeable: true
+        tradeable: true
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
