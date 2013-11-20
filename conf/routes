@@ -23,6 +23,7 @@ GET   /assets/*file       controllers.Assets.at(path="/public", file)
 
 #Book
 GET     /book/:id/bookshelf     controllers.BookController.showBookshelf(id: Long)
+GET     /book/:id/showcase      controllers.BookControoler.getShowcase(id: Long)
 GET     /book                   controllers.BookController.index()
 POST    /addBook                controllers.BookController.addBook()
 POST    /editBook/:bookId       controllers.BookController.editBook(bookId: Long)
