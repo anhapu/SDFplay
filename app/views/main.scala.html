@@ -57,6 +57,7 @@
     </ul>
   </div><!-- /.navbar-collapse -->
    } else {
+   
    <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -68,23 +69,14 @@
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
       <li><a href="@routes.Registration.index()">Login</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
-            Not logged in. <br /><br />
-            <ul class="nav nav-justified">
-                <li><a href="@routes.Application.index()">Login</a></li>
-                <li><a href="@routes.Registration.index()">Registrieren</a></li>
-            </ul>
             }
             
-            
-            
-    
-       <div class="container">
-            
-         @content
+    @content
         
     <!-- Site footer -->
     <div class="footer">
