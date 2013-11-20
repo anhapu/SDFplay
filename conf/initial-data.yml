@@ -2,7 +2,7 @@
 users:
 
     - !!models.User
-        id: 0
+        id: 1
         email: test@example.com
         username: Max Mustermann
         firstname: Max
@@ -20,7 +20,7 @@ books:
         exchangeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -31,7 +31,7 @@ books:
         exchangeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -42,7 +42,7 @@ books:
         exchangeable: false
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
 
     - !!models.Book 
         author: Joanne K. Rowling
@@ -53,4 +53,4 @@ books:
         exchangeable: true
         comment: Test comment
         owner: !!models.User
-                     id: 0
+                     id: 1
