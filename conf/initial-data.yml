@@ -17,7 +17,7 @@ books:
         isbn: 1234567890
         coverUrl: http://testurl.de
         year: 2013
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
                      id: 1
@@ -28,7 +28,7 @@ books:
         isbn: 3551551677
         coverUrl: http://testurl.de
         year: 1998
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
                      id: 1
@@ -39,7 +39,7 @@ books:
         isbn: 3551551685
         coverUrl: http://testurl.de
         year: 1999
-        exchangeable: false
+        tradeable: false
         comment: Test comment
         owner: !!models.User
                      id: 1
@@ -50,7 +50,7 @@ books:
         isbn: 3551551693
         coverUrl: http://testurl.de
         year: 1999
-        exchangeable: true
+        tradeable: true
         comment: Test comment
         owner: !!models.User
                      id: 1
