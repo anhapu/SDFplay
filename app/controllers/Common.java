@@ -3,6 +3,8 @@ package controllers;
 import static play.data.Form.form;
 import models.User;
 import play.Logger;
+import play.api.libs.json.JsValue;
+import play.api.libs.json.Json;
 import play.api.templates.Html;
 import play.data.Form;
 import play.libs.F.Promise;
@@ -11,7 +13,14 @@ import play.mvc.Http.Context;
 import play.mvc.SimpleResult;
 import views.html.snippets.*;
 import controllers.UserController.Login;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -86,6 +95,36 @@ public class Common extends Action.Simple {
 		}
 
 		return md5;
+	}
+	
+	/**
+	 * Reads the content of an url connection.
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getGoogleBooksContent(final String isbn) throws IOException
+	{
+		final String urlString = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=AIzaSyBg5QemrpNGcpr3irrWDAuffakuI3DjD3I";
+		  try {
+			  	final URL url = new URL(urlString);
+				InputStream ioStream =  url.openConnection().getInputStream();
+				final StringBuilder sb = new StringBuilder();
+				final BufferedReader reader = new BufferedReader(new InputStreamReader(ioStream));
+				String line;
+				while(( line = reader.readLine()) != null)
+				{
+					sb.append(line);
+				}
+				JsValue jsValue = Json.parse(sb.toString());
+				return sb.toString();
+	        } catch (MalformedURLException e) {
+				Logger.error(e.getMessage());
+				throw new MalformedURLException();
+			} catch (IOException e) {
+				Logger.error(e.getMessage());
+				throw new IOException();
+			}
 	}
 
 }
