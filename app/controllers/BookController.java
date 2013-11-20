@@ -134,6 +134,8 @@ public final class BookController extends Controller
      * @return
      */
     public static Result getShowcase(Long id)
-    
+    {
+        return null;
+    }
     
 }
