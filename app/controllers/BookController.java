@@ -111,7 +111,6 @@ public final class BookController extends Controller
         }
     }
 
-    
     public static Result showBookshelf( Long id )
     {
         User searchedUser = User.findById( id );
@@ -128,42 +127,48 @@ public final class BookController extends Controller
             return redirect( routes.Application.index() );
         }
     }
-    
+
     /**
      * Returns the showcase of a specific user
-     * @param id UserId
+     *
+     * @param id
+     *            UserId
      * @return
      */
-    public static Result getShowcase(final Long id)
+    public static Result getShowcase( final Long id )
     {
         final User searchedUser = User.findById( id );
-        if(searchedUser != null)
+        if ( searchedUser != null )
         {
-            List<Book> showcase = Book.getShowcaseForUser( searchedUser );
-            Logger.info( "Found " + showcase.size() + " books in showcase for user " + searchedUser.username );
-            //TODO Redirect to something useful
+            List< Book > showcase = Book.getShowcaseForUser( searchedUser );
+            Logger.info( "Found " + showcase.size() + " books in showcase for user "
+                    + searchedUser.username );
+            // TODO Redirect to something useful
             return ok();
         }
         else
         {
-            //TODO Return to something useful
+            // TODO Return to something useful
             Logger.error( "Did not find any user for id: " + id );
-            return redirect(routes.Application.index());
+            return redirect( routes.Application.index() );
         }
     }
-    
+
     /**
-     * Marks a book tradeable.
-     * @param id ID of the book which should be marked as tradeable.
+     * Marks a book tradeable. If it was successful there will be a redirect to
+     * the bookshelf of the current user
+     *
+     * @param id
+     *            ID of the book which should be marked as tradeable.
      */
-    public static Result markAsTradeable(final Long id)
+    public static Result markAsTradeable( final Long id )
     {
         Book book = Book.findById( id );
-        if(Secured.isOwnerOfBook( book ))
+        if ( Secured.isOwnerOfBook( book ) )
         {
             Book.markAsTradeable( book );
             Logger.info( "Marked book as tradeable" );
-            return showBookshelf( book.owner.id );
+            return redirect( routes.BookController.showBookshelf( book.owner.id ) );
         }
         else
         {
@@ -171,31 +176,38 @@ public final class BookController extends Controller
             return forbidden();
         }
     }
-    
-    public static Result unmarkAsTradeable(final Long bookId)
+
+    /**
+     * Removes a book from the showcase. If it was successful there will be a
+     * redirect to the bookshelf of the user.
+     *
+     * @param bookId
+     * @return
+     */
+    public static Result unmarkAsTradeable( final Long bookId )
     {
         Book book = Book.findById( bookId );
-        if(Secured.isOwnerOfBook( book ))
+        if ( Secured.isOwnerOfBook( book ) )
         {
-            Book.unmarkAsTradeable(book);
-            return showBookshelf( book.owner.id );
-            
+            Book.unmarkAsTradeable( book );
+            return redirect( routes.BookController.showBookshelf( book.owner.id ) );
+
         }
         else
         {
-            
-            Logger.error("User is not allowed to unmark book as tradeable");
+
+            Logger.error( "User is not allowed to unmark book as tradeable" );
             return forbidden();
         }
     }
-    
-    public static Result getBook(final Long bookId)
+
+    public static Result getBook( final Long bookId )
     {
         Book book = Book.findById( bookId );
-        if(book != null)
+        if ( book != null )
         {
             Logger.info( "Got book with id " + book.id );
-            return ok(detailview.render(book));
+            return ok( detailview.render( book ) );
         }
         else
         {

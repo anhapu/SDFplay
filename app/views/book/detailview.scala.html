@@ -1,7 +1,7 @@
 @(book: Book)
 @main("Buch Details") {
-    @book.title </br>
-    @book.author
-    @book.isbn
-    @book.comment
+    Title: @book.title </br>
+    Author:  @book.author </br>
+    ISBN: @book.isbn </br>
+    Comment of @book.owner.username : @book.comment</br>
 }
