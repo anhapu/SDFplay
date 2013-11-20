@@ -47,7 +47,7 @@ public final class BookController extends Controller
             Book book = filledForm.get();
 
             book.owner = Common.currentUser();
-            book.exchangeable = false;
+            book.tradeable = false;
             book.comment = "";
             Book.create( book );
             return ok();
@@ -133,9 +133,22 @@ public final class BookController extends Controller
      * @param id UserId
      * @return
      */
-    public static Result getShowcase(Long id)
+    public static Result getShowcase(final Long id)
     {
-        return null;
+        final User searchedUser = User.findById( id );
+        if(searchedUser != null)
+        {
+            List<Book> showcase = Book.getShowcaseForUser( searchedUser );
+            Logger.info( "Found " + showcase.size() + " books in showcase for user " + searchedUser.username );
+            //TODO Redirect to something useful
+            return ok();
+        }
+        else
+        {
+            //TODO Return to something useful
+            Logger.error( "Did not find any user for id: " + id );
+            return redirect(routes.Application.index());
+        }
     }
     
 }

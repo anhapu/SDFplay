@@ -43,7 +43,7 @@ public class Book extends Model
     @Formats.NonEmpty
     public int year;
     
-    public boolean exchangeable;
+    public boolean tradeable;
     
     public String comment;
     
@@ -83,9 +83,9 @@ public class Book extends Model
      * Returns a list of all swapable books.
      * @return
      */
-    public static List<Book> findAllSwapableBooks()
+    public static List<Book> findAllTradeableBooks()
     {
-        return find.where().eq("exchangeable", true).findList();
+        return find.where().eq("tradeable", true).findList();
     }
     
     /**
@@ -99,11 +99,11 @@ public class Book extends Model
     }
     
     /**
-     * Returns a list of swapable books by a given user.
+     * Returns the showcase for a specific user. In the showcase are only the tradeable books of a user.
      * @param user
      * @return List of books
      */
-    public static List<Book> findSwapableBooksByUser(final User user)
+    public static List<Book> getShowcaseForUser(final User user)
     {
         return find.where().eq( "exchangeable", true ).eq( "owner.id", user.id ).findList();
     }
@@ -136,7 +136,7 @@ public class Book extends Model
      */
     public static Book markAsSwapable(Book book)
     {
-        book.exchangeable = true;
+        book.tradeable = true;
         book.update();
         return book;
     }
