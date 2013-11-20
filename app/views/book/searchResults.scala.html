@@ -1,5 +1,5 @@
 @(books : List[Book])
-@main(Suchergebnisse){
+@main("Suchergebnisse"){
     @for(book <- books){
         @if(book.tradeable){
             <div class="col-sm-4 col-md-2 col-xs-6">

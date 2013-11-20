@@ -144,7 +144,7 @@ public final class BookController extends Controller
             Logger.info( "Found " + showcase.size() + " books in showcase for user "
                     + searchedUser.username );
             // TODO Redirect to something useful
-            return ok();
+            return ok(views.html.book.showcase.render( showcase ));
         }
         else
         {
