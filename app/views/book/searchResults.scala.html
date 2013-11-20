@@ -1,0 +1,13 @@
+@(books : List[Book])
+@main(Suchergebnisse){
+    @for(book <- books){
+        @if(book.tradeable){
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
+                    <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+                </a>
+            </div>
+        }
+    }
+
+}

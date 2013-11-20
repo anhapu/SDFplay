@@ -105,7 +105,7 @@ public class Book extends Model
      */
     public static List<Book> getShowcaseForUser(final User user)
     {
-        return find.where().eq( "exchangeable", true ).eq( "owner.id", user.id ).findList();
+        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).findList();
     }
     /**
      * Returns a book by a given id.
