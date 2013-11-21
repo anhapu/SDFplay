@@ -42,16 +42,20 @@ public class UserController extends Controller {
 
         @Security.Authenticated(Secured.class)
         public static Result editProfile(Long id) {
-                Form<SimpleProfile> form = form(SimpleProfile.class);
-                User searchedUser = User.findById(id);
-                if (searchedUser != null) {
-                        Secured.editUserProfile(searchedUser);
-                    return ok(profileForm.render(
-                                                form.fill(new SimpleProfile(searchedUser.email, searchedUser.username, searchedUser.lastname, searchedUser.firstname)),
-                                                searchedUser.id));
-                } else {
-                        return redirect(routes.Registration.index());
-                }
+						Form<SimpleProfile> form = form(SimpleProfile.class);
+            User searchedUser = User.findById(id);
+            if (Secured.editUserProfile(searchedUser)) {
+                 if (searchedUser != null) {
+                      return ok(profileForm.render(form.fill(new SimpleProfile(searchedUser.email,
+                                               searchedUser.username, searchedUser.lastname, searchedUser.firstname)), searchedUser.id));
+                 }
+                 else {
+                      return redirect(routes.Registration.index());
+                 }
+            }
+            else {
+                 return redirect(routes.Registration.index());
+            }
         }
 
         @Transactional
@@ -117,6 +121,10 @@ public class UserController extends Controller {
                 public String password;
                 
                 public String validate() {
+                        User user = User.findByEmail(email);
+                        if(!user.isActive()) {
+                             return "Benutzer nicht aktiv!";
+                        }
                         if(User.authenticate(email, password) == null) {
                                 return "Falscher Nutzername oder Passwort";
                         }
