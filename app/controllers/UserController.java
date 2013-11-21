@@ -14,6 +14,7 @@ import views.html.user.userProfile;
 import views.html.book.bookshelf;
 import views.html.user.passwordForm;
 import views.html.snippets.passwordRecoveryMailForm;
+import views.html.snippets.passwordRecoveryMailSuccess;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -61,7 +62,7 @@ public class UserController extends Controller {
                return badRequest(index.render());
           }
           EmailSender.send("pw reset request", "pwreset", emailForm.get().email);
-          return redirect(routes.Application.index());
+          return ok(passwordRecoveryMailSuccess.render());
         }
 
         @Security.Authenticated(Secured.class)
@@ -107,7 +108,7 @@ public class UserController extends Controller {
                         Secured.editUserProfile(searchedUser);
                         return ok(passwordForm.render(searchedUser, form));
                 } else {
-                        return redirect(routes.Registration.index());
+                     return redirect(routes.Registration.index());
                 }
         }
 
