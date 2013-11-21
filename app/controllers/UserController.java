@@ -13,6 +13,7 @@ import views.html.user.profileForm;
 import views.html.user.userProfile;
 import views.html.book.bookshelf;
 import views.html.user.passwordForm;
+import views.html.snippets.passwordRecoveryMailForm;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -23,16 +24,30 @@ import play.db.ebean.*;
 public class UserController extends Controller {
 
         public static Result login() {
-                Form<Login> loginForm = form(Login.class).bindFromRequest();
-                if(loginForm.hasErrors()) {
-                        Common.addToContext(Common.ContextIdent.loginForm, loginForm);
-                        return badRequest(index.render());
-                } else {
-                        session().clear();
-                        User user = User.findByEmail(loginForm.get().email);
-                        session("id", user.id.toString());
-                        return redirect(routes.Application.index());
-                }
+             Result result;
+             String[] postAction = request().body().asFormUrlEncoded().get("action");
+             String action = postAction[0];
+             if (action.equals("login")) {
+                  Form<Login> loginForm = form(Login.class).bindFromRequest();
+                  if(loginForm.hasErrors()) {
+                       Common.addToContext(Common.ContextIdent.loginForm, loginForm);
+                       result = badRequest(index.render());
+                  }
+                  else {
+                       session().clear();
+                       User user = User.findByEmail(loginForm.get().email);
+                       session("id", user.id.toString());
+                       result = redirect(routes.Application.index());
+                  }
+             }
+             else if (action.equals("passwordRecovery")) {
+                  Form<Email> emailForm = form(Email.class);
+                  result = ok(passwordRecoveryMailForm.render(emailForm.fill(new Email())));
+             }
+             else {
+                  result = badRequest("Invalide Aktion!");
+             }
+             return result;
         }
         
         public static Result logout() {
@@ -40,9 +55,18 @@ public class UserController extends Controller {
                 return redirect(routes.Application.index());
         }
 
+        public static Result sendRecoveryMail() {
+          Form<Email> emailForm = form(Email.class).bindFromRequest();
+          if(emailForm.hasErrors()) {
+               return badRequest(index.render());
+          }
+          EmailSender.send("pw reset request", "pwreset", emailForm.get().email);
+          return redirect(routes.Application.index());
+        }
+
         @Security.Authenticated(Secured.class)
         public static Result editProfile(Long id) {
-						Form<SimpleProfile> form = form(SimpleProfile.class);
+             Form<SimpleProfile> form = form(SimpleProfile.class);
             User searchedUser = User.findById(id);
             if (Secured.editUserProfile(searchedUser)) {
                  if (searchedUser != null) {
@@ -187,5 +211,17 @@ public class UserController extends Controller {
                         }
                         return null;
                 }
+        }
+
+        public static class Email {
+          public String email;
+
+          public String validate() {
+               EmailValidator validator = new EmailValidator();
+               if (!validator.isValid(email)) {
+                    return "Bitte eine gültige E-Mail Adresse eingeben!";
+               }
+               return null;
+          }
         }
 }
