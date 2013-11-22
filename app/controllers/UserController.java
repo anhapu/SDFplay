@@ -184,6 +184,9 @@ public class UserController extends Controller {
                 
                 public String validate() {
                         User user = User.findByEmail(email);
+                        if(user == null)  {
+                        	return "Der Nutzer existiert nicht";
+                        }
                         if(!user.isActive()) {
                              return "Benutzer nicht aktiv!";
                         }

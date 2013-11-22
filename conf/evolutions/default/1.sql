@@ -25,6 +25,8 @@ create table account (
   lastname                  varchar(255),
   role                      varchar(1),
   password                  varchar(255),
+  token                     varchar(255),
+  token_created_at          timestamp,
   constraint ck_account_role check (role in ('0','1')),
   constraint pk_account primary key (id))
 ;
