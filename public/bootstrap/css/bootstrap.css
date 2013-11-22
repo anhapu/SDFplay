@@ -4962,7 +4962,7 @@ a.list-group-item.active > .badge,
   margin-bottom: 20px;
   line-height: 1.428571429;
   background-color: #ffffff;
-  border: 2px solid #666666;
+  border: 2px solid #f0ad4e;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
@@ -4978,7 +4978,7 @@ a.list-group-item.active > .badge,
 
 a.thumbnail:hover,
 a.thumbnail:focus {
-  border-color: #f00;
+  border-color: #9f3500;
 }
 
 .thumbnail > img {
@@ -5997,6 +5997,7 @@ body.modal-open,
 
 .carousel {
   position: relative;
+  margin-bottom: 50px;
 }
 
 .carousel-inner {
