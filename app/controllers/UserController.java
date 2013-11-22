@@ -20,6 +20,9 @@ import play.mvc.Http.Context;
 import play.mvc.Security;
 import play.api.mvc.Call;
 import play.db.ebean.*;
+import java.util.Date;
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -56,15 +59,49 @@ public class UserController extends Controller {
                 return redirect(routes.Application.index());
         }
 
+        
+        @Transactional
         public static Result sendRecoveryMail() {
           Form<Email> emailForm = form(Email.class).bindFromRequest();
           if(emailForm.hasErrors()) {
                return badRequest(index.render());
           }
-          EmailSender.send("pw reset request", "pwreset", emailForm.get().email);
-          return ok(passwordRecoveryMailSuccess.render());
+          SecureRandom random = new SecureRandom();
+          String token = new BigInteger(130, random).toString(32);
+          User user = User.findByEmail(emailForm.get().email);
+          if (user != null) {
+               user.token = token;
+               user.tokenCreatedAt = new Date();
+               user.update();
+               // TODO change the URL
+               EmailSender.send("pw reset request", "Klick hier http://localhost:9000/passwordRecovery/" + token + " " + "Here be lions", emailForm.get().email);
+               return ok(passwordRecoveryMailSuccess.render());
+          }
+          else {
+               return badRequest("Interner Fehler");
+          }
         }
 
+
+        public static Result checkPasswordRecoveryToken(String token) {
+             Result result = redirect(routes.Application.index());
+             User user = User.findByToken(token);
+             if (user != null) {
+                  Date currentDate = new Date();
+                  long elapsedTime = ((currentDate.getTime()/60000) - (user.tokenCreatedAt.getTime()/60000));
+                  if (elapsedTime > 5) {
+                       result = badRequest("Zu langsam :D");
+                  }
+                  else {
+                    // forward to change PW page ...
+                  }
+             }
+             else {
+               result = badRequest("Dieser Token ist invalid.");
+             }
+             return result;
+        }
+     
         @Security.Authenticated(Secured.class)
         public static Result editProfile(Long id) {
              Form<SimpleProfile> form = form(SimpleProfile.class);

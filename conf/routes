@@ -15,6 +15,7 @@ POST  /user/editPassword/:id  controllers.UserController.savePassword(id: Long)
 GET   /registration       controllers.Registration.index()
 POST  /registration       controllers.Registration.submit()
 POST	/forgotPassword     controllers.UserController.sendRecoveryMail()
+GET /passwordRecovery/:token controllers.UserController.checkPasswordRecoveryToken(token: String)
 
 # Home page
 GET   /                   controllers.Application.index()
