@@ -1,11 +1,14 @@
 @(books: List[Book])
 @main("Showcase"){
+
+    <div class="page-header">
+          <h2>Mein Showcase</h2>
+    </div>
    <!-- Carousel================================================== -->
     <div id="myCarousel" class="carousel slide">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
       </ol>
       <div class="carousel-inner">
         <div class="item active">
@@ -69,13 +72,5 @@
                             <img src="http://bks1.books.google.de/books?id=FvR_N779-JAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
                         </a>
                     </div>
-                </div> <!-- /Content -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
       </div><!-- /.carousel -->
 }
-    
