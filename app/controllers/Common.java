@@ -8,8 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 
+import models.Book;
 import models.User;
 import play.Logger;
 import play.api.templates.Html;
@@ -20,6 +20,7 @@ import play.mvc.Http.Context;
 import play.mvc.SimpleResult;
 import views.html.snippets.loginForm;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import controllers.UserController.Login;
@@ -109,6 +110,7 @@ public class Common extends Action.Simple {
         final String urlString =
                 "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn
                         + "&key=AIzaSyBg5QemrpNGcpr3irrWDAuffakuI3DjD3I";
+        Logger.info( "Search for book on " + urlString);
         try
         {
             final URL url = new URL( urlString );
@@ -122,7 +124,10 @@ public class Common extends Action.Simple {
             }
             */
             ObjectMapper mapper = new ObjectMapper();
-            
+            //Ignore unknown fields
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            Book book = mapper.readValue( url.openConnection().getInputStream(), Book.class );
+            Logger.debug( "Title: " +book.title );
             return "";
         }
         catch ( MalformedURLException e )

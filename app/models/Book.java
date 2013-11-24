@@ -28,6 +28,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
+    @JsonProperty("title")
     public String title;
     
     
@@ -39,6 +40,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
+    @JsonProperty("thumbnail")
     public String coverUrl;
     
     @Constraints.Required
