@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -50,8 +51,16 @@ public class User extends Model
     @Constraints.Required
     @Formats.NonEmpty
     public String password;
-  
     
+    /**
+     * This token is used for a password reset, if it's null the object will be inactive.
+     */
+    public String token;
+    
+    /**
+     * This date is used to check if the token is valid or already expired.
+	*/
+    public Date tokenCreatedAt;
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
     
@@ -76,7 +85,13 @@ public class User extends Model
     public static User findByUsername(String username) {
         return find.where().eq("username", username).findUnique();
     }
-    
+    /**
+     * Retrieve a User from token.
+     */
+    public static User findByToken(String token) {
+        return find.where().eq("token", token).findUnique();
+    }
+
     /**
      * Retrieve a User from id.
      */
@@ -93,6 +108,17 @@ public class User extends Model
             .ieq("email", email.toLowerCase())
             .eq("password", Common.md5(password))
             .findUnique();
+    }
+    
+    /**
+     * Check if the user is ative or not.
+	*/
+    public Boolean isActive() {
+         boolean active = true;
+         if (token != null) {
+              active = false;
+         }
+         return active;
     }
     
     /**

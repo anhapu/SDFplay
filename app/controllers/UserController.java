@@ -13,26 +13,45 @@ import views.html.user.profileForm;
 import views.html.user.userProfile;
 import views.html.book.bookshelf;
 import views.html.user.passwordForm;
+import views.html.snippets.passwordRecoveryMailForm;
+import views.html.snippets.passwordRecoveryMailSuccess;
 import static play.data.Form.*;
 import play.mvc.Http.Context;
 import play.mvc.Security;
 import play.api.mvc.Call;
 import play.db.ebean.*;
+import java.util.Date;
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
 @With(Common.class)
 public class UserController extends Controller {
 
         public static Result login() {
-                Form<Login> loginForm = form(Login.class).bindFromRequest();
-                if(loginForm.hasErrors()) {
-                        Common.addToContext(Common.ContextIdent.loginForm, loginForm);
-                        return badRequest(index.render());
-                } else {
-                        session().clear();
-                        User user = User.findByEmail(loginForm.get().email);
-                        session("id", user.id.toString());
-                        return redirect(routes.Application.index());
-                }
+             Result result;
+             String[] postAction = request().body().asFormUrlEncoded().get("action");
+             String action = postAction[0];
+             if (action.equals("login")) {
+                  Form<Login> loginForm = form(Login.class).bindFromRequest();
+                  if(loginForm.hasErrors()) {
+                       Common.addToContext(Common.ContextIdent.loginForm, loginForm);
+                       result = badRequest(index.render());
+                  }
+                  else {
+                       session().clear();
+                       User user = User.findByEmail(loginForm.get().email);
+                       session("id", user.id.toString());
+                       result = redirect(routes.Application.index());
+                  }
+             }
+             else if (action.equals("passwordRecovery")) {
+                  Form<Email> emailForm = form(Email.class);
+                  result = ok(passwordRecoveryMailForm.render(emailForm.fill(new Email())));
+             }
+             else {
+                  result = badRequest("Invalide Aktion!");
+             }
+             return result;
         }
         
         public static Result logout() {
@@ -40,18 +59,65 @@ public class UserController extends Controller {
                 return redirect(routes.Application.index());
         }
 
+        
+        @Transactional
+        public static Result sendRecoveryMail() {
+          Form<Email> emailForm = form(Email.class).bindFromRequest();
+          if(emailForm.hasErrors()) {
+               return badRequest(index.render());
+          }
+          SecureRandom random = new SecureRandom();
+          String token = new BigInteger(130, random).toString(32);
+          User user = User.findByEmail(emailForm.get().email);
+          if (user != null) {
+               user.token = token;
+               user.tokenCreatedAt = new Date();
+               user.update();
+               // TODO change the URL
+               EmailSender.send("pw reset request", "Klick hier http://localhost:9000/passwordRecovery/" + token + " " + "Here be lions", emailForm.get().email);
+               return ok(passwordRecoveryMailSuccess.render());
+          }
+          else {
+               return badRequest("Interner Fehler");
+          }
+        }
+
+
+        public static Result checkPasswordRecoveryToken(String token) {
+             Result result = redirect(routes.Application.index());
+             User user = User.findByToken(token);
+             if (user != null) {
+                  Date currentDate = new Date();
+                  long elapsedTime = ((currentDate.getTime()/60000) - (user.tokenCreatedAt.getTime()/60000));
+                  if (elapsedTime > 5) {
+                       result = badRequest("Zu langsam :D");
+                  }
+                  else {
+                    // forward to change PW page ...
+                  }
+             }
+             else {
+               result = badRequest("Dieser Token ist invalid.");
+             }
+             return result;
+        }
+     
         @Security.Authenticated(Secured.class)
         public static Result editProfile(Long id) {
-                Form<SimpleProfile> form = form(SimpleProfile.class);
-                User searchedUser = User.findById(id);
-                if (searchedUser != null) {
-                        Secured.editUserProfile(searchedUser);
-                    return ok(profileForm.render(
-                                                form.fill(new SimpleProfile(searchedUser.email, searchedUser.username, searchedUser.lastname, searchedUser.firstname)),
-                                                searchedUser.id));
-                } else {
-                        return redirect(routes.Registration.index());
-                }
+             Form<SimpleProfile> form = form(SimpleProfile.class);
+            User searchedUser = User.findById(id);
+            if (Secured.editUserProfile(searchedUser)) {
+                 if (searchedUser != null) {
+                      return ok(profileForm.render(form.fill(new SimpleProfile(searchedUser.email,
+                                               searchedUser.username, searchedUser.lastname, searchedUser.firstname)), searchedUser.id));
+                 }
+                 else {
+                      return redirect(routes.Registration.index());
+                 }
+            }
+            else {
+                 return redirect(routes.Registration.index());
+            }
         }
 
         @Transactional
@@ -79,7 +145,7 @@ public class UserController extends Controller {
                         Secured.editUserProfile(searchedUser);
                         return ok(passwordForm.render(searchedUser, form));
                 } else {
-                        return redirect(routes.Registration.index());
+                     return redirect(routes.Registration.index());
                 }
         }
 
@@ -117,6 +183,13 @@ public class UserController extends Controller {
                 public String password;
                 
                 public String validate() {
+                        User user = User.findByEmail(email);
+                        if(user == null)  {
+                        	return "Der Nutzer existiert nicht";
+                        }
+                        if(!user.isActive()) {
+                             return "Benutzer nicht aktiv!";
+                        }
                         if(User.authenticate(email, password) == null) {
                                 return "Falscher Nutzername oder Passwort";
                         }
@@ -179,5 +252,17 @@ public class UserController extends Controller {
                         }
                         return null;
                 }
+        }
+
+        public static class Email {
+          public String email;
+
+          public String validate() {
+               EmailValidator validator = new EmailValidator();
+               if (!validator.isValid(email)) {
+                    return "Bitte eine gültige E-Mail Adresse eingeben!";
+               }
+               return null;
+          }
         }
 }
