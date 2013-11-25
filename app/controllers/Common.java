@@ -2,12 +2,20 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.logging.Log;
 
 import models.Book;
 import models.User;
@@ -114,7 +122,7 @@ public class Common extends Action.Simple {
         try
         {
             final URL url = new URL( urlString );
-            /*InputStream ioStream = url.openConnection().getInputStream();
+            InputStream ioStream = url.openConnection().getInputStream();
             final StringBuilder sb = new StringBuilder();
             final BufferedReader reader = new BufferedReader( new InputStreamReader( ioStream ) );
             String line;
@@ -122,13 +130,28 @@ public class Common extends Action.Simple {
             {
                 sb.append( line );
             }
-            */
+            
             ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> m = mapper.readValue(sb.toString(), Map.class);
+            
+            Map<String, Object> theBook = (Map<String, Object>)((List)m.get("items")).get(0);
+            Map<String, Object> volume = (Map<String, Object>)theBook.get("volumeInfo");
+            
+         
+            Logger.info(volume.get("title").toString());
+            Logger.info(volume.get("authors").toString());
+            Logger.info(volume.get("publisher").toString());
+            
+            for (Entry<String, Object> entry : m.entrySet()) {
+				String key = entry.getKey();
+				Logger.info(key);
+			}
+            
             //Ignore unknown fields
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            Book book = mapper.readValue( url.openConnection().getInputStream(), Book.class );
-            Logger.debug( "Title: " +book.title );
-            return "";
+//            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//            Book book = mapper.readValue( url.openConnection().getInputStream(), Book.class );
+//            Logger.debug( "Title: " +book.title );
+            return sb.toString();
         }
         catch ( MalformedURLException e )
         {

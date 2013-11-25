@@ -67,7 +67,7 @@ public final class BookController extends Controller
 
             try
             {
-                Common.getGoogleBooksContent( pForm.get().isbn );
+                return ok(Common.getGoogleBooksContent( pForm.get().isbn ));
             }
             catch ( IOException e )
             {
@@ -75,7 +75,7 @@ public final class BookController extends Controller
                 return badRequest();
             }
 
-            return ok();
+         
         }
     }
 
