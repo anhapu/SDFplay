@@ -23,6 +23,7 @@ import play.db.ebean.*;
 import java.util.Date;
 import java.security.SecureRandom;
 import java.math.BigInteger;
+import org.apache.commons.codec.binary.Base64;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -74,7 +75,7 @@ public class UserController extends Controller {
                user.tokenCreatedAt = new Date();
                user.update();
                // TODO change the URL
-               EmailSender.send("pw reset request", "Klick hier http://localhost:9000/passwordRecovery/" + token + " " + "Here be lions", emailForm.get().email);
+               EmailSender.send("Bücherbörse: Password Recovery", "Klick auf diesen Link http://localhost:9000/passwordRecovery/" + token + " " + "um ein neues Passwort zu vergeben.", emailForm.get().email);
                return ok(passwordRecoveryMailSuccess.render());
           }
           else {
@@ -84,22 +85,22 @@ public class UserController extends Controller {
 
 
         public static Result checkPasswordRecoveryToken(String token) {
-             Result result = redirect(routes.Application.index());
              User user = User.findByToken(token);
              if (user != null) {
                   Date currentDate = new Date();
                   long elapsedTime = ((currentDate.getTime()/60000) - (user.tokenCreatedAt.getTime()/60000));
                   if (elapsedTime > 5) {
-                       result = badRequest("Zu langsam :D");
+                       return badRequest("Die Zeit von 5 Minuten ist abgelaufen!");
                   }
                   else {
                     // forward to change PW page ...
+                    String mystery = createMystery(user.id);
+                    return redirect(routes.UserController.editPassword(mystery));
                   }
              }
              else {
-               result = badRequest("Dieser Token ist invalid.");
+               return badRequest("Dieser Token ist invalid.");
              }
-             return result;
         }
      
         @Security.Authenticated(Secured.class)
@@ -137,27 +138,62 @@ public class UserController extends Controller {
                 }
         }
         
-        @Security.Authenticated(Secured.class)
-        public static Result editPassword(Long id) {
+        private static String createMystery(Long id) {
+               User user = User.findById(id);
+               String email = user.email;
+               String trash = "";
+               for(int i = 0; i < 12; i++) {
+                    if (i == 7) {
+                         trash += "#";
+                    }
+                    else if (i == 8) {
+                         trash += email;
+                    }
+                    else if (i == 9) {
+                         trash += "#";
+                    }
+                    else {
+                         SecureRandom random = new SecureRandom();
+                         String data = new BigInteger(130, random).toString(1);
+                         trash += data;
+                    }
+               }
+               byte[] mystery = Base64.encodeBase64(trash.getBytes());
+               return new String(mystery);
+        }
+        
+        private static User solveMystery(String mystery) {
+             byte[] solvedMystery = Base64.decodeBase64(mystery.getBytes());
+             String foob = new String(solvedMystery);
+             String[] data = foob.split("#");
+             User user = User.findByEmail(data[1]);
+             return user;
+        }
+
+        public static Result editPassword(String mystery) {
                 final Form form = form().bindFromRequest();
-                User searchedUser = User.findById(id);
+                User searchedUser = solveMystery(mystery);
                 if (searchedUser != null) {
-                        Secured.editUserProfile(searchedUser);
-                        return ok(passwordForm.render(searchedUser, form));
+                     return ok(passwordForm.render(mystery, form));
                 } else {
                      return redirect(routes.Registration.index());
                 }
         }
 
         @Transactional
-        public static Result savePassword(Long id) {
-                Form<changePassword> pForm = form(changePassword.class).bindFromRequest();
+        public static Result savePassword(String mystery) {
+                Form<ChangePassword> pForm = form(ChangePassword.class).bindFromRequest();
                 if (pForm.hasErrors()) {
-                        return badRequest(views.html.user.passwordForm.render(User.findById(id), pForm));
+                        return badRequest(views.html.user.passwordForm.render(mystery, pForm));
                 }
                 else {
-                        User user = User.findById(id);
+                        User user = solveMystery(mystery);
                         user.password = Common.md5(form().bindFromRequest().get("password"));
+
+                        //activate user
+                        user.token = null;
+                        user.tokenCreatedAt = null;
+
                         user.update();
                         return redirect(routes.Application.index());
                 }
@@ -197,21 +233,12 @@ public class UserController extends Controller {
                 }
         }
 
-        public static class changePassword {
+        public static class ChangePassword {
         
-                public Long id;
-                public String oldPassword;
                 public String password;
                 public String repeatPassword;
                 
                 public String validate() {
-                        User user = User.findById(id);
-                        if(user == null) {
-                                return "Du existierst nicht!";
-                        }
-                        if(!user.password.equals(Common.md5(oldPassword))) {
-                                return "Altes Passwort nicht korrekt";
-                        }
                         if(password.length() < 3) {
                                 return "Neues Passwort zu kurz, min. 3 chars.";
                         }

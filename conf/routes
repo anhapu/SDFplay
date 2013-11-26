@@ -8,14 +8,14 @@ GET   /user/logout            controllers.UserController.logout()
 GET   /user/:id               controllers.UserController.showProfile(id: Long)
 GET   /user/editProfile/:id   controllers.UserController.editProfile(id: Long)
 POST  /user/editProfile/:id   controllers.UserController.saveProfile(id: Long)
-GET   /user/editPassword/:id  controllers.UserController.editPassword(id: Long)
-POST  /user/editPassword/:id  controllers.UserController.savePassword(id: Long)
+GET   /user/editPassword/:mystery  controllers.UserController.editPassword(mystery: String)
+POST  /user/editPassword/:mystery  controllers.UserController.savePassword(mystery: String)
 
 #POST /user/register      controllers.UserController.register()
 GET   /registration       controllers.Registration.index()
 POST  /registration       controllers.Registration.submit()
 POST	/forgotPassword     controllers.UserController.sendRecoveryMail()
-GET /passwordRecovery/:token controllers.UserController.checkPasswordRecoveryToken(token: String)
+GET  /passwordRecovery/:token controllers.UserController.checkPasswordRecoveryToken(token: String)
 
 # Home page
 GET   /                   controllers.Application.index()
