@@ -16,7 +16,7 @@ public class TradeBooks extends Model{
     public Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "transId")
 	public TradeTransaction tradeTransaction;
 	
 	@ManyToOne

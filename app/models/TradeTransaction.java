@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,21 +23,20 @@ import play.db.ebean.Model;
 public class TradeTransaction extends Model{
 
 	@Id
-    public Long id;
+    public Long transId;
 	
 	@OneToOne(targetEntity = models.User.class)
 	@Required
 	public User owner;
 	
-	@OneToOne
+	@OneToOne(targetEntity = models.User.class)
 	@Required
 	public User recipient;
 
 	@Enumerated(EnumType.STRING)  //If you have EnumType.ORDINAL set, you would run into problems when updating your enum.
 	public States state;
-	
 
-	@OneToMany(targetEntity = models.TradeBooks.class, mappedBy="tradeTransaction")
+	@OneToMany(targetEntity = models.TradeBooks.class, cascade=CascadeType.ALL, mappedBy="tradeTransaction")
 	public List<TradeBooks> tradeBooks = new ArrayList<TradeBooks>();
 	
 	public String commentOwner;
@@ -61,7 +61,7 @@ public class TradeTransaction extends Model{
      * @return an object, whose type is 'TradeTransaction'
      */
     public static TradeTransaction findById(Long id) {
-        return find.where().eq( "id", id ).findUnique();
+        return find.where().eq( "transId", id ).findUnique();
     }
     
     /** Returns a list of trade transactions, where a given user is the owner
