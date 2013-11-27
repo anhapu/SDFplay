@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,7 +24,7 @@ public class TradeTransaction extends Model{
     public Long id;
 	
 	@OneToOne
-	public User ower;
+	public User owner;
 	
 	@OneToOne
 	public User recipient;
@@ -31,9 +32,10 @@ public class TradeTransaction extends Model{
 	@Enumerated(EnumType.STRING)  //If you have EnumType.ORDINAL set, you would run into problems when updating your enum.
 	public States state;
 
-	@OneToMany(mappedBy = "tradetransaction")
+	/*
+	@OneToMany(mappedBy = "id")
 	public List<Book> books = new ArrayList<Book>();
-	
+	*/
 	public String commentOwner;
 	
 	public String commentRecipient;
@@ -41,7 +43,7 @@ public class TradeTransaction extends Model{
 	public Date initTime;
 	
 	public static Model.Finder<String,TradeTransaction> find = new Model.Finder<String,TradeTransaction>(String.class, TradeTransaction.class);
-
+	
     /**	Retrieve all trade transactions.
      * 
      * @return a list of all trade transactions
