@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import models.enums.States;
+import models.TradeBooks;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -21,7 +22,7 @@ import play.db.ebean.Model;
 public class TradeTransaction extends Model{
 
 	@Id
-    public Long id;
+    public Long transId;
 	
 	@OneToOne
 	@Required
@@ -59,10 +60,10 @@ public class TradeTransaction extends Model{
      * @return an object, whose type is 'TradeTransaction'
      */
     public static TradeTransaction findById(Long id) {
-        return find.where().eq( "id", id ).findUnique();
+        return find.where().eq( "transId", id ).findUnique();
     }
     
-    /** Returns a list of trade transactions, where a given user is owner
+    /** Returns a list of trade transactions, where a given user is the owner
      * 	of these trade transactions.
      * 
      * @param owner user
@@ -72,11 +73,11 @@ public class TradeTransaction extends Model{
         return find.where().eq("owner", owner).findList();
     }
     
-    /** Returns a list of trade transactions, where a given user is recipient
+    /** Returns a list of trade transactions, where a given user is the recipient
      * 	of these trade transactions.
      * 
-     * @param booktitle The title of the book.
-     * @return List of books can be empty.
+     * @param  recipient user
+     * @return List of trade transactions (can be empty).
      */
     public static List<TradeTransaction> findByRecipient(final User recipient) {
         return find.where().eq("recipient", recipient).findList();
