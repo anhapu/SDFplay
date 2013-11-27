@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import models.enums.States;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -24,18 +24,19 @@ public class TradeTransaction extends Model{
     public Long id;
 	
 	@OneToOne
+	@Required
 	public User owner;
 	
 	@OneToOne
+	@Required
 	public User recipient;
 
 	@Enumerated(EnumType.STRING)  //If you have EnumType.ORDINAL set, you would run into problems when updating your enum.
 	public States state;
-
-	/*
-	@OneToMany(mappedBy = "id")
-	public List<Book> books = new ArrayList<Book>();
-	*/
+	
+	@OneToMany
+	public List<TradeBooks> books = new ArrayList<TradeBooks>();
+	
 	public String commentOwner;
 	
 	public String commentRecipient;
@@ -53,11 +54,11 @@ public class TradeTransaction extends Model{
     }
 	
     /** Returns a trade transaction for a given id.
+     * 
      * @param id Id of the trade transaction.
      * @return an object, whose type is 'TradeTransaction'
      */
-    public static TradeTransaction findById(Long id)
-    {
+    public static TradeTransaction findById(Long id) {
         return find.where().eq( "id", id ).findUnique();
     }
 
@@ -68,8 +69,7 @@ public class TradeTransaction extends Model{
      * @param owner user
      * @return List of trade transactions (can be empty).
      */
-    public static List<TradeTransaction> findByOwner(final User owner)
-    {
+    public static List<TradeTransaction> findByOwner(final User owner) {
         return find.where().eq("owner", owner).findList();
     }
     
@@ -79,19 +79,7 @@ public class TradeTransaction extends Model{
      * @param booktitle The title of the book.
      * @return List of books can be empty.
      */
-    public static List<TradeTransaction> findByRecipient(final User recipient)
-    {
+    public static List<TradeTransaction> findByRecipient(final User recipient) {
         return find.where().eq("owner", recipient).findList();
-    } 
-	    
-    
-    /** Persists the given book in the database.
-     * @param book
-     * @return Returns the persisted book object.
-     */
-    public static TradeTransaction create(TradeTransaction tradetransaction)
-    {
-    	tradetransaction.save();
-        return tradetransaction;
-    }	    
+    } 	    
 }
