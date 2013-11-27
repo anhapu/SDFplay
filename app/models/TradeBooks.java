@@ -2,7 +2,6 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,10 +15,8 @@ public class TradeBooks extends Model{
     public Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "transId")
 	public TradeTransaction tradeTransaction;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
 	public Book book;
 }

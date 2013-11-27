@@ -37,7 +37,7 @@ public class TradeTransaction extends Model{
 	public States state;
 
 	@OneToMany(targetEntity = models.TradeBooks.class, cascade=CascadeType.ALL, mappedBy="tradeTransaction")
-	public List<TradeBooks> tradeBooks = new ArrayList<TradeBooks>();
+	public List<TradeBooks> tradeBooks;
 	
 	public String commentOwner;
 	
