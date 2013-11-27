@@ -1,7 +1,6 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +15,11 @@ public class TradeBooks extends Model{
 	@Id
     public Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "transId")
+	@ManyToOne
+	@JoinColumn(name = "id")
 	public TradeTransaction tradeTransaction;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Id")
+	@ManyToOne
+	@JoinColumn(name = "id")
 	public Book book;
 }

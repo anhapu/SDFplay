@@ -22,9 +22,9 @@ import play.db.ebean.Model;
 public class TradeTransaction extends Model{
 
 	@Id
-    public Long transId;
+    public Long id;
 	
-	@OneToOne
+	@OneToOne(targetEntity = models.User.class)
 	@Required
 	public User owner;
 	
@@ -35,8 +35,9 @@ public class TradeTransaction extends Model{
 	@Enumerated(EnumType.STRING)  //If you have EnumType.ORDINAL set, you would run into problems when updating your enum.
 	public States state;
 	
-	@OneToMany
-	public List<TradeBooks> books = new ArrayList<TradeBooks>();
+
+	@OneToMany(targetEntity = models.TradeBooks.class, mappedBy="tradeTransaction")
+	public List<TradeBooks> tradeBooks = new ArrayList<TradeBooks>();
 	
 	public String commentOwner;
 	
@@ -60,7 +61,7 @@ public class TradeTransaction extends Model{
      * @return an object, whose type is 'TradeTransaction'
      */
     public static TradeTransaction findById(Long id) {
-        return find.where().eq( "transId", id ).findUnique();
+        return find.where().eq( "id", id ).findUnique();
     }
     
     /** Returns a list of trade transactions, where a given user is the owner
