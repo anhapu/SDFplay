@@ -61,7 +61,6 @@ public class TradeTransaction extends Model{
     public static TradeTransaction findById(Long id) {
         return find.where().eq( "id", id ).findUnique();
     }
-
     
     /** Returns a list of trade transactions, where a given user is owner
      * 	of these trade transactions.
@@ -80,6 +79,6 @@ public class TradeTransaction extends Model{
      * @return List of books can be empty.
      */
     public static List<TradeTransaction> findByRecipient(final User recipient) {
-        return find.where().eq("owner", recipient).findList();
+        return find.where().eq("recipient", recipient).findList();
     } 	    
 }
