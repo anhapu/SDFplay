@@ -9,7 +9,17 @@ users:
         lastname: Mustermann
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
 
+    - !!models.User
+        id: 2
+        email: test2@example.com
+        username: Martina Musterfrau
+        firstname: Martina
+        lastname: Musterfrau
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+
 books:
+
+# For User 1
 
     - !!models.Book 
         author: Test author
@@ -54,3 +64,49 @@ books:
         comment: Test comment
         owner: !!models.User
                      id: 1
+
+# For User 2                 
+
+    - !!models.Book 
+        author: George R. R. Martin
+        title: A Game of Thrones
+        isbn: 1234567890
+        coverUrl: http://testurl.de
+        year: 2013
+        tradeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 2
+
+    - !!models.Book 
+        author: George R. R. Martin
+        title: A Clash of Kings
+        isbn: 3551551677
+        coverUrl: http://testurl.de
+        year: 1998
+        tradeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 2
+
+    - !!models.Book 
+        author: George R. R. Martin
+        title: A Storm of Swords
+        isbn: 3551551685
+        coverUrl: http://testurl.de
+        year: 1999
+        tradeable: false
+        comment: Test comment
+        owner: !!models.User
+                     id: 2
+
+    - !!models.Book 
+        author: George R. R. Martin
+        title: A Feast for Crows
+        isbn: 3551551693
+        coverUrl: http://testurl.de
+        year: 1999
+        tradeable: true
+        comment: Test comment
+        owner: !!models.User
+                     id: 2

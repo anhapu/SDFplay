@@ -17,6 +17,25 @@ create table book (
   constraint pk_book primary key (id))
 ;
 
+create table tradebooks (
+  id                        bigint not null,
+  trade_transaction_trans_id bigint,
+  book_id                   bigint,
+  constraint pk_tradebooks primary key (id))
+;
+
+create table tradetransaction (
+  trans_id                  bigint not null,
+  owner_id                  bigint,
+  recipient_id              bigint,
+  state                     varchar(12),
+  comment_owner             varchar(255),
+  comment_recipient         varchar(255),
+  init_time                 timestamp,
+  constraint ck_tradetransaction_state check (state in ('INIT','REFUSE','RESPONSE','FINAL_REFUSE','APPROVE','INVALID')),
+  constraint pk_tradetransaction primary key (trans_id))
+;
+
 create table account (
   id                        bigint not null,
   email                     varchar(255),
@@ -33,10 +52,22 @@ create table account (
 
 create sequence book_seq;
 
+create sequence tradebooks_seq;
+
+create sequence tradetransaction_seq;
+
 create sequence account_seq;
 
 alter table book add constraint fk_book_owner_1 foreign key (owner_id) references account (id);
 create index ix_book_owner_1 on book (owner_id);
+alter table tradebooks add constraint fk_tradebooks_tradeTransaction_2 foreign key (trade_transaction_trans_id) references tradetransaction (trans_id);
+create index ix_tradebooks_tradeTransaction_2 on tradebooks (trade_transaction_trans_id);
+alter table tradebooks add constraint fk_tradebooks_book_3 foreign key (book_id) references book (id);
+create index ix_tradebooks_book_3 on tradebooks (book_id);
+alter table tradetransaction add constraint fk_tradetransaction_owner_4 foreign key (owner_id) references account (id);
+create index ix_tradetransaction_owner_4 on tradetransaction (owner_id);
+alter table tradetransaction add constraint fk_tradetransaction_recipient_5 foreign key (recipient_id) references account (id);
+create index ix_tradetransaction_recipient_5 on tradetransaction (recipient_id);
 
 
 
@@ -44,9 +75,17 @@ create index ix_book_owner_1 on book (owner_id);
 
 drop table if exists book cascade;
 
+drop table if exists tradebooks cascade;
+
+drop table if exists tradetransaction cascade;
+
 drop table if exists account cascade;
 
 drop sequence if exists book_seq;
+
+drop sequence if exists tradebooks_seq;
+
+drop sequence if exists tradetransaction_seq;
 
 drop sequence if exists account_seq;
 
