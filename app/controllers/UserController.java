@@ -37,7 +37,7 @@ public class UserController extends Controller {
                   Form<Login> loginForm = form(Login.class).bindFromRequest();
                   if(loginForm.hasErrors()) {
                        Common.addToContext(Common.ContextIdent.loginForm, loginForm);
-                       result = badRequest(index.render());
+                       result = redirect(routes.Application.index());
                   }
                   else {
                        session().clear();
@@ -66,7 +66,7 @@ public class UserController extends Controller {
         public static Result sendRecoveryMail() {
           Form<Email> emailForm = form(Email.class).bindFromRequest();
           if(emailForm.hasErrors()) {
-               return badRequest(index.render());
+        	  return redirect(routes.Application.index());
           }
           SecureRandom random = new SecureRandom();
           String token = new BigInteger(130, random).toString(32);

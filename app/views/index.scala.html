@@ -1,8 +1,17 @@
+@(users:List[User])
+
 @main("Home") {
 
 	@if(Common.currentUser != null) {
- 		
- 		
+ 
+ 	<h2>Alle User:</h2>
+ 	<ul>
+ 	@for(user <- users) {
+ 		<li>@user.username (<a href="@routes.BookController.showBookshelf(user.id)">Zum Bücherregal</a>)</li>
+ 	}
+ 	</ul>
+ 
+ 
 	<div class="page-header">
   		<h2>Das tauschen andere User:</h2>
 	</div>

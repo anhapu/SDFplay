@@ -26,6 +26,7 @@ GET   /assets/*file       controllers.Assets.at(path="/public", file)
 #Book
 GET     /book/details/:id       controllers.BookController.getBook(id: Long)
 GET     /book/:id/bookshelf     controllers.BookController.showBookshelf(id: Long)
+GET     /book/mybookshelf     controllers.BookController.myBookshelf()
 GET     /book/:id/showcase      controllers.BookController.getShowcase(id: Long)
 GET     /book/:id/tradeable     controllers.BookController.markAsTradeable(id: Long)
 GET     /book/:id/nottradeable  controllers.BookController.unmarkAsTradeable(id: Long)
@@ -35,3 +36,6 @@ POST    /book/edit/:bookId       controllers.BookController.editBook(bookId: Lon
 POST    /book/addBook/       controllers.BookController.createBook()
 GET     /book/delete/:bookId    controllers.BookController.deleteBook(bookId: Long)
 
+
+#Trade
+POST	/trade/create/:recipientId	controllers.TradeController.init(recipientId: Long)

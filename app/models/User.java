@@ -71,6 +71,9 @@ public class User extends Model
         return find.all();
     }
     
+    public static List<User> findAllBut(User user) {
+    	return find.where().ne("id", user.id).findList();
+    }
     
     /**
      * Retrieve a User from email.
