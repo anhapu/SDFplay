@@ -24,6 +24,7 @@ import java.util.Date;
 import java.security.SecureRandom;
 import java.math.BigInteger;
 import org.apache.commons.codec.binary.Base64;
+import com.typesafe.config.ConfigFactory;
 
 @With(Common.class)
 public class UserController extends Controller {
@@ -74,8 +75,9 @@ public class UserController extends Controller {
                user.token = token;
                user.tokenCreatedAt = new Date();
                user.update();
-               // TODO change the URL
-               EmailSender.send("Bücherbörse: Password Recovery", "Klick auf diesen Link http://localhost:9000/passwordRecovery/" + token + " " + "um ein neues Passwort zu vergeben.", emailForm.get().email);
+			   String url = ConfigFactory.load().getString("application.URL");
+				   //Play.application().configuration().get("langs");
+               EmailSender.send("Bücherbörse: Password Recovery", "Klick auf diesen Link " + url + "/passwordRecovery/" + token + " " + "um ein neues Passwort zu vergeben.", emailForm.get().email);
                return ok(passwordRecoveryMailSuccess.render());
           }
           else {
