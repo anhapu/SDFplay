@@ -41,9 +41,9 @@ public class Common extends Action.Simple
     private static final String AWS_ENDPOINT   = "ecs.amazonaws.com";
     
     //TODO Replace this with your AWS_KEY
-    private static final String AWS_ACCESS_KEY = Play.application().configuration().getString("your.key");
+    private static final String AWS_ACCESS_KEY = Play.application().configuration().getString("aws.key");
     //TODO Replace this with your AWS_SECRET
-    private static final String AWS_SECRET_KEY = Play.application().configuration().getString("your.key");
+    private static final String AWS_SECRET_KEY = Play.application().configuration().getString("aws.secret");
 
 
     @Override
