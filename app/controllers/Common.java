@@ -2,23 +2,28 @@ package controllers;
 
 import static play.data.Form.form;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import models.Book;
 import models.User;
+
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
 import play.Logger;
 import play.api.templates.Html;
 import play.data.Form;
@@ -27,55 +32,73 @@ import play.mvc.Action;
 import play.mvc.Http.Context;
 import play.mvc.SimpleResult;
 import views.html.snippets.loginForm;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import controllers.UserController.Login;
 
-public class Common extends Action.Simple {
+public class Common extends Action.Simple
+{
+
+    private static final String AWS_ENDPOINT   = "ecs.amazonaws.com";
+    
+    //TODO Replace this with your AWS_KEY
+    private static final String AWS_ACCESS_KEY = "";
+    //TODO Replace this with your AWS_SECRET
+    private static final String AWS_SECRET_KEY = "";
+
 
     @Override
-    public Promise<SimpleResult> call(Context ctx) throws Throwable {
-        String userId = ctx.session().get("id");
+    public Promise< SimpleResult > call( Context ctx ) throws Throwable
+    {
+        String userId = ctx.session().get( "id" );
 
-        if (userId != null) {
-            User user = User.findById(Long.parseLong(userId));
-            if (user == null) {
+        if ( userId != null )
+        {
+            User user = User.findById( Long.parseLong( userId ) );
+            if ( user == null )
+            {
                 ctx.session().clear();
-                return Promise.pure(redirect(routes.Application.index()));
-            } else {
-                Common.addToContext("user", user);
+                return Promise.pure( redirect( routes.Application.index() ) );
             }
-        } else {
-            Common.addToContext("user", null);
+            else
+            {
+                Common.addToContext( "user", user );
+            }
         }
-        return delegate.call(ctx);
+        else
+        {
+            Common.addToContext( "user", null );
+        }
+        return delegate.call( ctx );
     }
 
-    public static class ContextIdent {
+    public static class ContextIdent
+    {
         public static String loginForm = "loginForm";
     }
 
-    public static void addToContext(String ident, Object object) {
-        Context.current().args.put(ident, object);
+    public static void addToContext( String ident, Object object )
+    {
+        Context.current().args.put( ident, object );
     }
 
-    public static Object getFromContext(String ident) {
-        return Context.current().args.get(ident);
+    public static Object getFromContext( String ident )
+    {
+        return Context.current().args.get( ident );
     }
 
-    public static User currentUser() {
-        return (User) Common.getFromContext("user");
+    public static User currentUser()
+    {
+        return ( User ) Common.getFromContext( "user" );
     }
 
-    @SuppressWarnings("unchecked")
-    public static Html getLoginForm() {
-        Form<Login> form = form(UserController.Login.class);
-        if (Common.getFromContext(ContextIdent.loginForm) != null) {
-            form = (Form<Login>) Common.getFromContext("loginForm");
+    @SuppressWarnings( "unchecked" )
+    public static Html getLoginForm()
+    {
+        Form< Login > form = form( UserController.Login.class );
+        if ( Common.getFromContext( ContextIdent.loginForm ) != null )
+        {
+            form = ( Form< Login > ) Common.getFromContext( "loginForm" );
         }
-        return loginForm.render(form);
+        return loginForm.render( form );
     }
 
     /**
@@ -85,84 +108,132 @@ public class Common extends Action.Simple {
      *            String value
      * @return Hashvalue of the String.
      */
-    public static String md5(String input) {
+    public static String md5( String input )
+    {
 
         String md5 = null;
-        if (null == input)
+        if ( null == input )
             return null;
 
-        try {
+        try
+        {
             // Create MessageDigest object for MD5
-            MessageDigest digest = MessageDigest.getInstance("MD5");
+            MessageDigest digest = MessageDigest.getInstance( "MD5" );
             // Update input string in message digest
-            digest.update(input.getBytes(), 0, input.length());
+            digest.update( input.getBytes(), 0, input.length() );
             // Converts message digest value in base 16 (hex)
-            md5 = new BigInteger(1, digest.digest()).toString(16);
+            md5 = new BigInteger( 1, digest.digest() ).toString( 16 );
 
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch ( NoSuchAlgorithmException e )
+        {
             e.printStackTrace();
         }
 
         return md5;
     }
-    
+
     /**
-     * Reads the content of an url connection.
-     * @param url
-     * @return
+     * Tries to get informations for a book via aws.
+     *
+     * @param isbn The isbn of a book.
+     * @return Returns an persisted book with the current user as owner or null.
      * @throws IOException
      */
-    public static String getGoogleBooksContent( final String isbn ) throws IOException
+    public static Book getGoogleBooksContent( final String isbn ) throws IOException
     {
-        Logger.info( "Try to get book informations from google books api with isbn: " + isbn );
-        final String urlString =
-                "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn
-                        + "&key=AIzaSyBg5QemrpNGcpr3irrWDAuffakuI3DjD3I";
-        Logger.info( "Search for book on " + urlString);
+        Logger.info( "Try to get book informations from aws with isbn: " + isbn );
+
+        SignedRequestsHelper helper;
+        Book book = null;
         try
         {
-            final URL url = new URL( urlString );
-            InputStream ioStream = url.openConnection().getInputStream();
-            final StringBuilder sb = new StringBuilder();
-            final BufferedReader reader = new BufferedReader( new InputStreamReader( ioStream ) );
-            String line;
-            while ( ( line = reader.readLine() ) != null )
-            {
-                sb.append( line );
-            }
-            
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> m = mapper.readValue(sb.toString(), Map.class);
-            
-            Map<String, Object> theBook = (Map<String, Object>)((List)m.get("items")).get(0);
-            Map<String, Object> volume = (Map<String, Object>)theBook.get("volumeInfo");
-            
-         
-            Logger.info(volume.get("title").toString());
-            Logger.info(volume.get("authors").toString());
-            Logger.info(volume.get("publisher").toString());
-            
-            for (Entry<String, Object> entry : m.entrySet()) {
-				String key = entry.getKey();
-				Logger.info(key);
-			}
-            
-            //Ignore unknown fields
-//            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//            Book book = mapper.readValue( url.openConnection().getInputStream(), Book.class );
-//            Logger.debug( "Title: " +book.title );
-            return sb.toString();
+            helper =
+                    SignedRequestsHelper.getInstance( AWS_ENDPOINT, AWS_ACCESS_KEY, AWS_SECRET_KEY );
+            String requestUrl = null;
+            Logger.debug( "Map form example:" );
+            Map< String, String > params = new HashMap< String, String >();
+            params.put( "Service", "AWSECommerceService" );
+            params.put( "Version", "2009-03-31" );
+            params.put( "Operation", "ItemLookup" );
+            params.put( "SearchIndex", "Books" );
+            params.put( "IdType", "ISBN" );
+            params.put( "AssociateTag", isbn); // This stuff is only if you wanna earn money with it.
+            params.put( "ItemId", isbn );
+            params.put( "ResponseGroup", "Large" );
+
+            requestUrl = helper.sign( params );
+            Logger.debug( "Signed Request is \"" + requestUrl + "\"" );
+
+            book = fetchBook( requestUrl );
+
         }
-        catch ( MalformedURLException e )
+        catch ( IllegalArgumentException e )
         {
             Logger.error( e.getMessage() );
-            throw new MalformedURLException();
+        }
+        catch ( InvalidKeyException e )
+        {
+            Logger.error( e.getMessage() );
+        }
+        catch ( NoSuchAlgorithmException e )
+        {
+            Logger.error( e.getMessage() );
+        }
+
+        return book;
+    }
+
+    /*
+     * Utility function to fetch the response from the service and extract the
+     * title, author, isbn, imageurl and pubdate from the XML.
+     */
+    private static Book fetchBook( String requestUrl )
+    {
+        Book book = null;
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+        try
+        {
+            book = new Book();
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse( requestUrl );
+            Node titleNode = doc.getElementsByTagName( "Title" ).item( 0 );
+            Node authorNode = doc.getElementsByTagName( "Author" ).item( 0 );
+            Node mediumImageUrl = doc.getElementsByTagName( "MediumImage" ).item( 0 );
+            book.title = titleNode.getTextContent();
+            book.author = authorNode.getTextContent();
+            book.coverUrl = mediumImageUrl.getFirstChild().getTextContent();
+            book.owner = currentUser();
+            book.isbn = doc.getElementsByTagName( "ISBN" ).item( 0 ).getTextContent();
+            book.year =
+                    formatter.parse(
+                            doc.getElementsByTagName( "PublicationDate" ).item( 0 )
+                                    .getTextContent() ).getTime();
+            book.tradeable = false;
+            book.save();
+        }
+        catch ( DOMException e )
+        {
+            Logger.error( e.getMessage() );
+            throw new RuntimeException( e );
+        }
+        catch ( ParserConfigurationException e )
+        {
+            Logger.error( e.getMessage() );
+        }
+        catch ( SAXException e )
+        {
+            Logger.error( e.getMessage() );
         }
         catch ( IOException e )
         {
             Logger.error( e.getMessage() );
-            throw new IOException();
         }
+        catch ( ParseException e )
+        {
+            Logger.error( e.getMessage() );
+        }
+        return book;
     }
-
 }

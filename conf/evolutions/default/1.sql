@@ -10,7 +10,7 @@ create table book (
   subtitle                  varchar(255),
   isbn                      varchar(255),
   cover_url                 varchar(255),
-  year                      integer,
+  year                      bigint,
   tradeable                 boolean,
   comment                   varchar(255),
   owner_id                  bigint,

@@ -1,0 +1,6 @@
+@(filledForm: Form[Book], book: Book)
+@import helper._
+@main("Buch hinzufuegen"){
+    @book.title
+    <img src="@book.coverUrl" alt="Boris"><br>
+}
