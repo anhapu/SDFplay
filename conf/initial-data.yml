@@ -8,6 +8,7 @@ users:
         firstname: Max
         lastname: Mustermann
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: ADMIN
 
     - !!models.User
         id: 2
@@ -16,6 +17,7 @@ users:
         firstname: Martina
         lastname: Musterfrau
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
 
 books:
 

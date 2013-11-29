@@ -138,4 +138,13 @@ public class User extends Model
         }
         return null;
     }
+
+    public static boolean isAdmin(Long id) {
+         User user = findById(id);
+         boolean isAdmin = false;
+         if(user.role == Roles.ADMIN) {
+              isAdmin = true;
+         }
+         return isAdmin;
+    }
 }

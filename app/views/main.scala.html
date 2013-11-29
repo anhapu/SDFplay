@@ -44,6 +44,9 @@
           <li><a href="@routes.BookController.addBook()">Buch hinzufügen</a></li>
         </ul>
       </li>
+      @if(User.isAdmin(Common.currentUser.id)) {
+        <li><a href="@routes.UserController.logout">Userverwaltung</a></li>
+      }
     </ul>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
