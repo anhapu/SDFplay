@@ -45,7 +45,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
-    public int year;
+    public long year;
     
     public boolean tradeable;
     
