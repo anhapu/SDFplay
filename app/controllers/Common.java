@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import play.Logger;
+import play.Play;
 import play.api.templates.Html;
 import play.data.Form;
 import play.libs.F.Promise;
@@ -40,9 +41,9 @@ public class Common extends Action.Simple
     private static final String AWS_ENDPOINT   = "ecs.amazonaws.com";
     
     //TODO Replace this with your AWS_KEY
-    private static final String AWS_ACCESS_KEY = "";
+    private static final String AWS_ACCESS_KEY = Play.application().configuration().getString("your.key");
     //TODO Replace this with your AWS_SECRET
-    private static final String AWS_SECRET_KEY = "";
+    private static final String AWS_SECRET_KEY = Play.application().configuration().getString("your.key");
 
 
     @Override
