@@ -1,0 +1,21 @@
+@(users:List[User])
+
+@import helper._
+
+@main("Userverwaltung") {
+ 	<ul>
+ 	@for(user <- users) {
+          <li><a href="@routes.UserController.showProfile(user.id)">@user.username</a>
+               @if(user.isActive) {
+               <button type="button" onclick="@User.toogleActive(user.id)">Deaktivieren</button>
+               } else {
+               <button type="button" onclick="@User.toogleActive(user.id)">Aktivieren</button>
+               }
+               <input type="button" onclick="@routes.Application.index" value="Löschen">
+          </li>
+ 	}
+ 	</ul>
+}
+
+
+

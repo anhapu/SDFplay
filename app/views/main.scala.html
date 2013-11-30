@@ -45,7 +45,8 @@
         </ul>
       </li>
       @if(User.isAdmin(Common.currentUser.id)) {
-        <li><a href="@routes.UserController.logout">Userverwaltung</a></li>
+        <li><a href="@routes.UserAdministrationController.index()
+">Userverwaltung</a></li>
       }
     </ul>
     <form class="navbar-form navbar-left" role="search">

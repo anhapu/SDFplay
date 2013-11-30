@@ -114,7 +114,7 @@ public class User extends Model
     }
     
     /**
-     * Check if the user is ative or not.
+     * Check if the user is active or not.
 	*/
     public Boolean isActive() {
          boolean active = true;
@@ -146,5 +146,24 @@ public class User extends Model
               isAdmin = true;
          }
          return isAdmin;
+    }
+
+    /**
+     * Activate and deactive a user, this is possible by changing the value of token to null or
+     * something else.
+     */
+    public static void toogleActive(Long id) {
+         System.out.println("here");
+         User user = findById(id);
+         // deactivate
+         if (user.isActive()) {
+              user.token = "123";
+              user.save();
+         }
+         // activate
+         else {
+              user.token = null;
+              user.save();
+         }
     }
 }
