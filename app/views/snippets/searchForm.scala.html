@@ -1,0 +1,8 @@
+@main("Suchmaske") {
+    <form class="navbar-form navbar-left" action="@routes.BookController.searchBook("title", "Harry")" method="GET">
+      <div class="form-group">
+        <input type="search" class="form-control" placeholder="Buchtitel" name="f" value="term">
+      </div>
+      <input type="submit" value="Suchen" class="btn primary">
+    </form>
+}

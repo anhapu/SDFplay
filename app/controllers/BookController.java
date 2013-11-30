@@ -207,6 +207,20 @@ public final class BookController extends Controller {
             return badRequest();
         }
     }
+    
+    /*
+     * @param field
+     * @param term
+     */
+    public static Result searchBook(final String field, final String term) {
+        Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term + "' in field " + field);
+        List<Book> books = Book.findByTitle(term);
+        if (books != null) {
+            Logger.info("[BOOK-SEARCH] Found " + books.size() + " matching entries");
+            return ok(views.html.book.searchResults.render(books));
+        }
+        return redirect(routes.Application.index());
+    }
 
     public static class SimpleProfile {
         public String isbn;

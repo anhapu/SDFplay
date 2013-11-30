@@ -70,7 +70,7 @@ public class Book extends Model
      */
     public static List<Book> findByTitle(final String booktitle)
     {
-        return find.where().like( "title", booktitle ).findList();
+        return find.where().ilike( "title", "%" + booktitle + "%" ).findList();
     }
     
     /**
