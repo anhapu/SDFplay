@@ -37,7 +37,8 @@ public class UserController extends Controller {
                   Form<Login> loginForm = form(Login.class).bindFromRequest();
                   if(loginForm.hasErrors()) {
                        Common.addToContext(Common.ContextIdent.loginForm, loginForm);
-                       result = redirect(routes.Application.index());
+                       flash("error", loginForm.globalError().message());
+                       result = Application.index();
                   }
                   else {
                        session().clear();
