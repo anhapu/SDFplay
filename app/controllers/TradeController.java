@@ -30,6 +30,9 @@ public class TradeController extends Controller {
     	User owner = Common.currentUser();
     	User recipient = User.findById(recipientId);
     	
+    	//Check if transaction already exists.
+    	Logger.info("A TradeTransaction for (owner = " + owner.username + " ,recipient = " + recipient.username + ") already exists? " + TradeTransaction.exists(owner, recipient).toString().toUpperCase());
+    	
     	// Create the transaction
     	TradeTransaction trade = new TradeTransaction();
     	trade.owner = owner;
