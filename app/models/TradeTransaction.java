@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +12,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.CreatedTimestamp;
 
 import models.enums.States;
 import models.TradeBooks;
+import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -23,7 +31,7 @@ import play.db.ebean.Model;
 public class TradeTransaction extends Model{
 
 	@Id
-    public Long transId;
+    public Long id;
 	
 	@OneToOne(targetEntity = models.User.class)
 	@Required
@@ -43,7 +51,8 @@ public class TradeTransaction extends Model{
 	
 	public String commentRecipient;
 	
-	public Date initTime;
+	@CreatedTimestamp
+	public Timestamp initTime;
 	
 	public static Model.Finder<String,TradeTransaction> find = new Model.Finder<String,TradeTransaction>(String.class, TradeTransaction.class);
 	
@@ -54,14 +63,14 @@ public class TradeTransaction extends Model{
     public static List<TradeTransaction> findAll() {    	
         return find.all();        
     }
-	
+        
     /** Returns a trade transaction for a given id.
      * 
      * @param id Id of the trade transaction.
      * @return an object, whose type is 'TradeTransaction'
      */
     public static TradeTransaction findById(Long id) {
-        return find.where().eq( "transId", id ).findUnique();
+        return find.where().eq( "id", id ).findUnique();
     }
     
     /** Returns a list of trade transactions, where a given user is the owner
