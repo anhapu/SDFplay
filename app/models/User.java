@@ -148,22 +148,4 @@ public class User extends Model
          return isAdmin;
     }
 
-    /**
-     * Activate and deactive a user, this is possible by changing the value of token to null or
-     * something else.
-     */
-    public static void toogleActive(Long id) {
-         System.out.println("here");
-         User user = findById(id);
-         // deactivate
-         if (user.isActive()) {
-              user.token = "123";
-              user.save();
-         }
-         // activate
-         else {
-              user.token = null;
-              user.save();
-         }
-    }
 }
