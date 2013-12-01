@@ -15,9 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
 import com.avaje.ebean.annotation.CreatedTimestamp;
 
 import models.enums.States;
@@ -26,8 +28,12 @@ import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
+/** An entity, which takes care of the list of wishes, which one user shows to another one.
+ * 	If both users agree, they will be able to exchange books. If one user does not agree with
+ * 	the deal, he or she will be able to send an alternative offer or refue the deal.
+ */
 @Entity
-@Table(name="tradetransaction")
+@Table(name="tradetransaction", uniqueConstraints=@UniqueConstraint(columnNames={"owner_id", "recipient_id"}))
 public class TradeTransaction extends Model{
 
 	@Id
@@ -71,6 +77,19 @@ public class TradeTransaction extends Model{
      */
     public static TradeTransaction findById(Long id) {
         return find.where().eq( "id", id ).findUnique();
+    }
+    
+    /** Returns true, if a TradeTransaction with this owner and this recipient 
+     * 	already exists. Otherwise it returns false.
+     * 
+     * @param owner		user, who owns this TradeTransaction
+     * @param recipient	user, who is recipient in this TradeTransaction
+     * @return			Returns true, if a TradeTransaction with this owner and this recipient 
+     * 					already exists. Otherwise it returns false.
+     */
+    public static Boolean exists(final User owner, final User recipient) {
+    	Boolean exists = (find.where(Expr.and(Expr.eq("owner", owner), Expr.eq("recipient", recipient))).findRowCount() >= 1) ? true : false;
+    	return exists;
     }
     
     /** Returns a list of trade transactions, where a given user is the owner
