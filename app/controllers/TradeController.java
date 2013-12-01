@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Date;
 import java.util.Map;
 
 import models.Book;
@@ -34,6 +35,8 @@ public class TradeController extends Controller {
     	trade.owner = owner;
     	trade.recipient = recipient;
     	trade.state = States.INIT;
+    	trade.commentOwner = "bin owner";
+    	trade.commentRecipient = "ich recipient";
     	trade.save();
     	
     	// Getting the selection
@@ -52,7 +55,7 @@ public class TradeController extends Controller {
     		tradeBook.book = book;
     		tradeBook.tradeTransaction = trade;
     		tradeBook.save();
-			Logger.info("Added Book " + book.id.toString() + " to Transaction " + trade.transId.toString());
+			Logger.info("Added Book " + book.id.toString() + " to Transaction " + trade.id.toString());
 		}
     	
  		flash("success", "Wunschzettel angelegt");
