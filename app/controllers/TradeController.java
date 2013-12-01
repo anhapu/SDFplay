@@ -35,8 +35,8 @@ public class TradeController extends Controller {
     	trade.owner = owner;
     	trade.recipient = recipient;
     	trade.state = States.INIT;
-    	trade.commentOwner = "bin owner";
-    	trade.commentRecipient = "ich recipient";
+    	trade.commentOwner = "Hallo! Wie waere es mit einem Buchtausch?";
+    	trade.commentRecipient = "Ok. Geht klar.";
     	trade.save();
     	
     	// Getting the selection
