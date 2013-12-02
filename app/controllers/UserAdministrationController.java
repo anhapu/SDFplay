@@ -49,10 +49,6 @@ public class UserAdministrationController extends Controller {
 		User user = User.findById(id);
 		if(user != Common.currentUser()) {
 			String userName = user.username;
-			List<Book> books = Book.findByUser(user);
-			for (int i = 0; i < books.size(); i++) {
-				books.get(i).delete();
-			}
 			user.delete();
 			flash("success", "Benutzer " + userName + " gelöscht!");
 		} else {
