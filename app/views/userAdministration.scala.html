@@ -11,7 +11,7 @@
                } else {
                <a href="@routes.UserAdministrationController.toogleActive(user.id)">Aktivieren</a>
                }
-               <a href="@routes.UserAdministrationController.deleteUser(user.id)">Löschen</a>
+               <a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger" onclick="return confirm('Bist du dir ganz sicher?');">Löschen</a>
           </li>
  	}
  	</ul>
