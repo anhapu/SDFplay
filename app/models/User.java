@@ -7,10 +7,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import models.enums.Roles;
@@ -51,6 +53,10 @@ public class User extends Model
     @Constraints.Required
     @Formats.NonEmpty
     public String password;
+
+	@OneToMany(targetEntity = models.Book.class, cascade=CascadeType.ALL, mappedBy="owner")
+	public List<Book> books;
+
     
     /**
      * This token is used for a password reset, if it's null the object will be inactive.
