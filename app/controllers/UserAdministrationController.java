@@ -46,14 +46,18 @@ public class UserAdministrationController extends Controller {
      * Deletes the user and all of it's books.
      */
     public static Result deleteUser(Long id) {
-          User user = User.findById(id);
-          String userName = user.username;
-          List<Book> books = Book.findByUser(user);
-          for (int i = 0; i < books.size(); i++) {
-               books.get(i).delete();
-          }
-          user.delete();
-          flash("success", "Benutzer " + userName + " gelöscht!");
-          return redirect(routes.UserAdministrationController.index());
-    }
+		User user = User.findById(id);
+		if(user != Common.currentUser()) {
+			String userName = user.username;
+			List<Book> books = Book.findByUser(user);
+			for (int i = 0; i < books.size(); i++) {
+				books.get(i).delete();
+			}
+			user.delete();
+			flash("success", "Benutzer " + userName + " gelöscht!");
+		} else {
+			flash("error", "Man kann sich nicht selbst löschen!");
+		}
+		return redirect(routes.UserAdministrationController.index());
+	}
 }
