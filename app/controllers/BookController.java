@@ -5,8 +5,6 @@ import static play.data.Form.form;
 import java.io.IOException;
 import java.util.List;
 
-import controllers.UserController.SimpleProfile;
-
 import models.Book;
 import models.User;
 import play.Logger;
@@ -16,9 +14,10 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
-import views.html.book.mybookshelf;
+import utils.Utils;
 import views.html.book.bookshelf;
 import views.html.book.detailview;
+import views.html.book.mybookshelf;
 
 @With(Common.class)
 @Security.Authenticated(Secured.class)
@@ -57,7 +56,7 @@ public final class BookController extends Controller {
         } else {
 
             try {
-                Book book = Common.getGoogleBooksContent(pForm.get().isbn);
+                Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
                 return ok(views.html.book.editBook.render(bookForm,book));
             } catch (IOException e) {
                 Logger.error(e.getMessage());

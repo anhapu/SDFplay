@@ -18,6 +18,7 @@ import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Email;
 import play.db.ebean.Model;
+import utils.Utils;
 import controllers.Common;
 
 @Entity
@@ -59,7 +60,7 @@ public class User extends Model
     
     /**
      * This date is used to check if the token is valid or already expired.
-	*/
+    */
     public Date tokenCreatedAt;
     
     public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
@@ -72,7 +73,7 @@ public class User extends Model
     }
     
     public static List<User> findAllBut(User user) {
-    	return find.where().ne("id", user.id).findList();
+        return find.where().ne("id", user.id).findList();
     }
     
     /**
@@ -109,13 +110,13 @@ public class User extends Model
     public static User authenticate(String email, String password) {
         return find.where()
             .ieq("email", email.toLowerCase())
-            .eq("password", Common.md5(password))
+            .eq("password", Utils.md5(password))
             .findUnique();
     }
     
     /**
      * Check if the user is active or not.
-	*/
+    */
     public Boolean isActive() {
          boolean active = true;
          if (token != null) {
@@ -130,7 +131,7 @@ public class User extends Model
     @Override
     public String toString() {
         return "User(" + email + ")";
-    }  
+    }
 
     public String validate() {
         if (password.length() < 3) {
