@@ -27,6 +27,7 @@ import models.TradeBooks;
 import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.mvc.With;
 
 /** An entity, which takes care of the list of wishes, which one user shows to another one.
  * 	If both users agree, they will be able to exchange books. If one user does not agree with
@@ -88,8 +89,7 @@ public class TradeTransaction extends Model{
      * 					already exists. Otherwise it returns false.
      */
     public static Boolean exists(final User owner, final User recipient) {
-    	Boolean exists = (find.where(Expr.and(Expr.eq("owner", owner), Expr.eq("recipient", recipient))).findRowCount() >= 1) ? true : false;
-    	return exists;
+    	return (find.where(Expr.and(Expr.eq("owner", owner), Expr.eq("recipient", recipient))).findRowCount() >= 1);
     }
     
     /** Returns a list of trade transactions, where a given user is the owner
