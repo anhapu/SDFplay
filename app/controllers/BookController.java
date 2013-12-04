@@ -54,15 +54,8 @@ public final class BookController extends Controller {
             // TODO redirect to something useful
             return badRequest();
         } else {
-
-            try {
                 Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
                 return ok(views.html.book.editBook.render(bookForm,book));
-            } catch (IOException e) {
-                Logger.error(e.getMessage());
-                return badRequest();
-            }
-
         }
     }
 
