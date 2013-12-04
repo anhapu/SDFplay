@@ -61,7 +61,9 @@ public class Registration extends Controller {
         return badRequest(registrationForm.render(regForm));
     }
 
+
     private static void sendRegistrationConfirmMail(User newUser) {
-        EmailSender.send("Ihre Registrierung bei Bücherbörse", "Sie haben sich bei der besten Bücherbörse der Welt registriert!", newUser.email);
+        //EmailSender.send("Ihre Registrierung bei Bücherbörse", "Sie haben sich bei der besten Bücherbörse der Welt registriert!", newUser.email);
+        EmailSender.sendRegistration(newUser);
     }
 }

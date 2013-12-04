@@ -7,10 +7,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import models.enums.Roles;
@@ -52,6 +54,10 @@ public class User extends Model
     @Constraints.Required
     @Formats.NonEmpty
     public String password;
+
+	@OneToMany(targetEntity = models.Book.class, cascade=CascadeType.ALL, mappedBy="owner")
+	public List<Book> books;
+
     
     /**
      * This token is used for a password reset, if it's null the object will be inactive.
@@ -149,22 +155,4 @@ public class User extends Model
          return isAdmin;
     }
 
-    /**
-     * Activate and deactive a user, this is possible by changing the value of token to null or
-     * something else.
-     */
-    public static void toogleActive(Long id) {
-         System.out.println("here");
-         User user = findById(id);
-         // deactivate
-         if (user.isActive()) {
-              user.token = "123";
-              user.save();
-         }
-         // activate
-         else {
-              user.token = null;
-              user.save();
-         }
-    }
 }

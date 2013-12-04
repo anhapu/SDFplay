@@ -1,1 +1,8 @@
-<div>Sie haben sich erfolgreich registriert!<br><a href="@routes.Application.index()">Zur Startseite</a>
+@main("Registrierung erfolgreich") {
+	<meta http-equiv="refresh" content="5; URL=@routes.Application.index()">
+	<div>
+		Sie haben sich erfolgreich bei der besten Bücherbörse der Welt registriert!<br>
+		Sie werden automatisch weitergeleitet.<br><br>
+		Falls die automatische Weiterleitung nicht funktioniert, klicken sie <a href="@routes.Application.index()">hier</a>.
+	</div>
+}

@@ -7,11 +7,11 @@
  	@for(user <- users) {
           <li><a href="@routes.UserController.showProfile(user.id)">@user.username</a>
                @if(user.isActive) {
-               <button type="button" onclick="@User.toogleActive(user.id)">Deaktivieren</button>
+               <a href="@routes.UserAdministrationController.toogleActive(user.id)">Deaktivieren</a>
                } else {
-               <button type="button" onclick="@User.toogleActive(user.id)">Aktivieren</button>
+               <a href="@routes.UserAdministrationController.toogleActive(user.id)">Aktivieren</a>
                }
-               <input type="button" onclick="@routes.Application.index" value="Löschen">
+               <a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger" onclick="return confirm('Bist du dir ganz sicher?');">Löschen</a>
           </li>
  	}
  	</ul>
