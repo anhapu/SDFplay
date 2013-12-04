@@ -7,20 +7,22 @@
   		<h2>@{user.username}'s Bücherregal</h2>
 	</div>
 	<div class="row"><!-- Content -->
-	@helper.form(action = routes.TradeController.init(user.id)){
-	
-		@for(book <- books) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-				</a>
-				<div class="caption">
-					<input type="checkbox" name="book_selection" value="@book.id" />
+		<div id="showcase">
+			@for(book <- books) {
+				<div id="@book.id" class="col-sm-4 col-md-2 col-xs-6 book">
+					<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
+						<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+					</a>
+					<input type="hidden" name="book_selection" value="@book.id" />
 				</div>
-			</div>
+			}
+		</div>
+	</div>
+	<div class="row">
+		@helper.form(action = routes.TradeController.init(user.id)){
+			<div id="wishlist"></div>
+			<input type="submit" class="btn" value="Wunschzettel erstellen">
 		}
-	<input type="submit" class="btn" value="Wunschzettel erstellen">
-	}
 	</div><!-- /Content -->
 }
 
