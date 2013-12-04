@@ -1,29 +1,29 @@
 package controllers;
 
-import controllers.Common;
+import static play.data.Form.form;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Date;
+
 import models.User;
+
+import org.apache.commons.codec.binary.Base64;
+
 import play.data.Form;
 import play.data.validation.Constraints.EmailValidator;
+import play.db.ebean.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
-import views.html.index;
-import views.html.user.profileForm;
-import views.html.user.userProfile;
-import views.html.book.bookshelf;
-import views.html.user.passwordForm;
+import utils.Utils;
 import views.html.snippets.passwordRecoveryMailForm;
 import views.html.snippets.passwordRecoveryMailSuccess;
-import static play.data.Form.*;
-import play.mvc.Http.Context;
-import play.mvc.Security;
-import play.api.mvc.Call;
-import play.db.ebean.*;
-import java.util.Date;
-import java.security.SecureRandom;
-import java.math.BigInteger;
-import org.apache.commons.codec.binary.Base64;
+import views.html.user.passwordForm;
+import views.html.user.profileForm;
+import views.html.user.userProfile;
+
 import com.typesafe.config.ConfigFactory;
 
 @With(Common.class)
@@ -67,7 +67,7 @@ public class UserController extends Controller {
         public static Result sendRecoveryMail() {
           Form<Email> emailForm = form(Email.class).bindFromRequest();
           if(emailForm.hasErrors()) {
-        	  return redirect(routes.Application.index());
+              return redirect(routes.Application.index());
           }
           SecureRandom random = new SecureRandom();
           String token = new BigInteger(130, random).toString(32);
@@ -76,8 +76,8 @@ public class UserController extends Controller {
                user.token = token;
                user.tokenCreatedAt = new Date();
                user.update();
-			   String url = ConfigFactory.load().getString("application.URL");
-				   //Play.application().configuration().get("langs");
+               String url = ConfigFactory.load().getString("application.URL");
+                   //Play.application().configuration().get("langs");
                EmailSender.send("Bücherbörse: Password Recovery", "Klick auf diesen Link " + url + "/passwordRecovery/" + token + " " + "um ein neues Passwort zu vergeben.", emailForm.get().email);
                return ok(passwordRecoveryMailSuccess.render());
           }
@@ -191,7 +191,7 @@ public class UserController extends Controller {
                 }
                 else {
                         User user = solveMystery(mystery);
-                        user.password = Common.md5(form().bindFromRequest().get("password"));
+                        user.password = Utils.md5(form().bindFromRequest().get("password"));
 
                         //activate user
                         user.token = null;
@@ -224,7 +224,7 @@ public class UserController extends Controller {
                 public String validate() {
                         User user = User.findByEmail(email);
                         if(user == null)  {
-                        	return "Der Nutzer existiert nicht";
+                            return "Der Nutzer existiert nicht";
                         }
                         if(!user.isActive()) {
                              return "Benutzer nicht aktiv!";

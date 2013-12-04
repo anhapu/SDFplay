@@ -19,21 +19,21 @@ create table book (
 
 create table tradebooks (
   id                        bigint not null,
-  trade_transaction_trans_id bigint,
+  trade_transaction_id      bigint,
   book_id                   bigint,
   constraint pk_tradebooks primary key (id))
 ;
 
 create table tradetransaction (
-  trans_id                  bigint not null,
+  id                        bigint not null,
   owner_id                  bigint,
   recipient_id              bigint,
   state                     varchar(12),
   comment_owner             varchar(255),
   comment_recipient         varchar(255),
-  init_time                 timestamp,
+  init_time                 timestamp not null,
   constraint ck_tradetransaction_state check (state in ('INIT','REFUSE','RESPONSE','FINAL_REFUSE','APPROVE','INVALID')),
-  constraint pk_tradetransaction primary key (trans_id))
+  constraint pk_tradetransaction primary key (id))
 ;
 
 create table account (
@@ -60,8 +60,8 @@ create sequence account_seq;
 
 alter table book add constraint fk_book_owner_1 foreign key (owner_id) references account (id);
 create index ix_book_owner_1 on book (owner_id);
-alter table tradebooks add constraint fk_tradebooks_tradeTransaction_2 foreign key (trade_transaction_trans_id) references tradetransaction (trans_id);
-create index ix_tradebooks_tradeTransaction_2 on tradebooks (trade_transaction_trans_id);
+alter table tradebooks add constraint fk_tradebooks_tradeTransaction_2 foreign key (trade_transaction_id) references tradetransaction (id);
+create index ix_tradebooks_tradeTransaction_2 on tradebooks (trade_transaction_id);
 alter table tradebooks add constraint fk_tradebooks_book_3 foreign key (book_id) references book (id);
 create index ix_tradebooks_book_3 on tradebooks (book_id);
 alter table tradetransaction add constraint fk_tradetransaction_owner_4 foreign key (owner_id) references account (id);
