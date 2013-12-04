@@ -8,6 +8,7 @@ import java.util.List;
 import models.Book;
 import models.User;
 import play.Logger;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.mvc.Controller;
@@ -32,6 +33,46 @@ public final class BookController extends Controller {
         // TODO Need a view for that stuff...
         return null;
     }
+    
+    @Transactional
+    public static Result getForm() {
+        
+    	return ok(views.html.book.createBook.render(bookForm));
+    }
+    
+    @Transactional
+    public static Result createBook() {
+    	
+    	Form<Book> filledForm = bookForm.bindFromRequest();
+    	
+    	filledForm.errors().remove("owner");
+    	filledForm.errors().remove("tradeable");
+		
+		if(filledForm.hasErrors()) {
+			return badRequest(views.html.book.createBook.render(filledForm));
+		} else {
+			
+			Book book = new Book();
+			book.owner = Common.currentUser();
+			book.tradeable = false;
+
+			// Fill an and update the model manually 
+			// because the its just a partial form
+			book.title = filledForm.field("title").value();
+			book.subtitle = filledForm.field("subtitle").value();
+			book.author = filledForm.field("author").value();
+			book.isbn = filledForm.field("isbn").value();
+			book.year = Long.parseLong(filledForm.field("year").value());
+			book.coverUrl = filledForm.field("thumbnail").value();
+			book.comment = filledForm.field("comment").value();
+			
+			book.save();
+			return redirect(routes.BookController.getBook(book.id));
+
+
+		}
+    }
+    
 
     /**
      * Persists a book in the database.
@@ -47,7 +88,8 @@ public final class BookController extends Controller {
         }
     }
 
-    public static Result createBook() {
+
+    public static Result createBookByIsbn() {
         Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
         if (pForm.hasErrors()) {
             Logger.error("Error in form");
@@ -58,6 +100,7 @@ public final class BookController extends Controller {
                 return ok(views.html.book.editBook.render(bookForm,book));
         }
     }
+ 
 
     // public static Result addComment(Long)
     /**
@@ -86,7 +129,7 @@ public final class BookController extends Controller {
             return badRequest();
         }
     }
-
+    
     /**
      * Delete a book.
      */

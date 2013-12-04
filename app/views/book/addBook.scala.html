@@ -2,7 +2,7 @@
 @import helper._
 @main("Buch hinzufuegen"){
 
-    @helper.form(action = routes.BookController.createBook()){
+    @helper.form(action = routes.BookController.createBookByIsbn()){
         @if(addBookForm.hasGlobalErrors) {
                 <p class="error">@addBookForm.globalError.message</p>
         }
@@ -15,6 +15,9 @@
         )
         
         <input type="submit" class="btn_primary" value="Absenden">
+        </br>
+        </br>
+        <a href="@routes.BookController.createBook()">Buch per Hand hinzufügen</a>
     }
 
 }
