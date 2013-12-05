@@ -3,18 +3,31 @@
 @import helper._
 
 @main("Userverwaltung") {
- 	<ul>
- 	@for(user <- users) {
-          <li><a href="@routes.UserController.showProfile(user.id)">@user.username</a>
-               @if(user.isActive) {
-               <a href="@routes.UserAdministrationController.toogleActive(user.id)">Deaktivieren</a>
-               } else {
-               <a href="@routes.UserAdministrationController.toogleActive(user.id)">Aktivieren</a>
-               }
-               <a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger" onclick="return confirm('Bist du dir ganz sicher?');">Löschen</a>
-          </li>
+<table border="0">
+	<tr>
+		<th>Benutzer</th>
+		<th>Role</th>
+		<th>Aktiv</th>
+		<th>Löschen</th>
+	</tr>
+
+	@for(user <- users) {
+	<tr>
+		<th><a href="@routes.UserController.showProfile(user.id)" class="btn btn-link btn-xs">@user.username</a></th>
+          @if(User.isAdmin(user.id)) {
+               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-warning btn-xs">Rolle zu Benutzer</a></th>
+          } else {
+               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Bist du dir ganz sicher?');">Rolle zu Admin</a></th>
+		}
+          @if(user.isActive) {
+               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-warning btn-xs">Deaktivieren</a></th>
+          } else {
+               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-info btn-xs">Aktivieren</a></th>
+          }
+          <th><a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Bist du dir ganz sicher?');">Löschen</a></th>
+		</tr>
  	}
- 	</ul>
+</table>
 }
 
 

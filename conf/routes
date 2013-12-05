@@ -21,6 +21,7 @@ GET  /passwordRecovery/:token controllers.UserController.checkPasswordRecoveryTo
 GET  /userAdministration controllers.UserAdministrationController.index()
 GET  /userAdministration/toogleActive/:id controllers.UserAdministrationController.toogleActive(id: Long)
 GET  /userAdministration/deleteUser/:id controllers.UserAdministrationController.deleteUser(id: Long)
+GET  /userAdministration/toggleRole/:id controllers.UserAdministrationController.toggleRole(id: Long)
 
 # Home page
 GET   /                   controllers.Application.index()

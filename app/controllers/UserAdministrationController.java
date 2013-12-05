@@ -3,6 +3,7 @@ package controllers;
 import controllers.Common;
 import models.User;
 import models.Book;
+import models.enums.Roles;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -17,6 +18,25 @@ public class UserAdministrationController extends Controller {
           List<User> users = null;
           users = User.findAllBut(Common.currentUser());
           return ok(views.html.userAdministration.render(users));
+     }
+
+     /**
+     * Changes the role. Admin -> User or User -> Admin.
+     */
+     @Transactional
+	public static Result toggleRole(Long id) {
+          User user = User.findById(id);
+          if (User.isAdmin(user.id)) {
+               user.role = Roles.USER;
+               user.save();
+               flash("success", "Benutzerrolle zu Benutzer geändert!");
+          }
+          else {
+               user.role = Roles.ADMIN;
+               user.save();
+               flash("success", "Benutzerrolle zu Admin geändert!");
+          }
+          return redirect(routes.UserAdministrationController.index());
      }
 
      /**
