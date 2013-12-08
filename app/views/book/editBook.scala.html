@@ -1,6 +1,21 @@
-@(filledForm: Form[Book], book: Book)
+@(bookForm: Form[Book])
 @import helper._
 @main("Buch hinzufuegen"){
-    @book.title
-    <img src="@book.coverUrl" alt="Boris"><br>
+    @if(bookForm.hasGlobalErrors) {
+        @bookForm.globalError.message
+    }
+    
+    
+    @helper.form(action = routes.BookController.createBook()){
+        @helper.inputText(bookForm("title"))
+        @helper.inputText(bookForm("subtitle"))
+        @helper.inputText(bookForm("author"))
+        @helper.inputText(bookForm("isbn"))
+        @helper.inputText(bookForm("year"))
+        @helper.inputText(bookForm("coverUrl"))
+        @helper.inputText(bookForm("comment"))
+        
+        <input type="submit" class="btn_primary" value="Buch anlegen">
+    }
+
 }
