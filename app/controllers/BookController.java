@@ -62,7 +62,7 @@ public final class BookController extends Controller {
             book.author = filledForm.field("author").value();
             book.isbn = filledForm.field("isbn").value();
             book.year = Long.parseLong(filledForm.field("year").value());
-            book.coverUrl = filledForm.field("thumbnail").value();
+            book.coverUrl = filledForm.field("coverUrl").value();
             book.comment = filledForm.field("comment").value();
             
             book.save();
