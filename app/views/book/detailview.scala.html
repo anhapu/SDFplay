@@ -1,43 +1,47 @@
 @(book: Book)
 @main("Buch Details") {
-	</br>
-	</br>
-	<div class="row">
-  		<div class="col-md-4">
-  			</br>
-  			<img class="center" src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-		</div>
-  		<div class="col-md-8">
-  			<table class="table">
-  				<thead>
-	  				<tr>
-	  					<td><b>Titel:</b></td>
-	  					<td>@book.title</td>
-	  				</tr>
-  				</thead>
-  				<tbody>
-	  				<tr>
-	  					<td><b>Untertitel:</b></td>
-	  					<td>@book.subtitle</td>
-	  				</tr>
-	  				<tr>
-	  					<td><b>Erscheinungsjahr:</b></td>
-	  					<td>@book.year</td>
-	  				</tr>
-	  				<tr>
-	  					<td><b>Autor(en):</b></td>
-	  					<td>@book.author</td>
-	  				</tr>
-	  				<tr>
-	  					<td><b>ISBN:</b></td>
-	  					<td>@book.isbn</td>
-	  				</tr>
-	  				<tr>
-	  					<td><b>Kommentar von @book.owner.username:</b></td>
-	  					<td>@book.comment</td>
-	  				</tr>
-  				</tbody>
-    		</table>
-    	</div>
+    </br>
+    </br>
+    <div class="row">
+          <div class="col-md-4">
+              </br>
+              @if(book.coverUrl != null && !book.coverUrl.isEmpty()) {
+                <img class="center" src="@book.coverUrl">
+              } else {
+                 <img class="center" src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+            }
+        </div>
+          <div class="col-md-8">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <td><b>Titel:</b></td>
+                          <td>@book.title</td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td><b>Untertitel:</b></td>
+                          <td>@book.subtitle</td>
+                      </tr>
+                      <tr>
+                          <td><b>Erscheinungsjahr:</b></td>
+                          <td>@book.year</td>
+                      </tr>
+                      <tr>
+                          <td><b>Autor(en):</b></td>
+                          <td>@book.author</td>
+                      </tr>
+                      <tr>
+                          <td><b>ISBN:</b></td>
+                          <td>@book.isbn</td>
+                      </tr>
+                      <tr>
+                          <td><b>Kommentar von @book.owner.username:</b></td>
+                          <td>@book.comment</td>
+                      </tr>
+                  </tbody>
+            </table>
+        </div>
     </div>
 }
