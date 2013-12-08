@@ -74,7 +74,7 @@ public class Utils {
      * @return Returns an persisted book with the current user as owner or null.
      * @throws IOException
      */
-    public static Book getBookInformationFromAWS( final String isbn ) {
+    public static Book getBookInformationFromAWS( final long isbn ) {
         Logger.info( "Try to get book informations from aws with isbn: " + isbn );
 
         SignedRequestsHelper helper;
@@ -90,10 +90,10 @@ public class Utils {
             params.put( "Operation", "ItemLookup" );
             params.put( "SearchIndex", "Books" );
             params.put( "IdType", "ISBN" );
-            params.put( "AssociateTag", isbn ); // This stuff is only if you
+            params.put( "AssociateTag", Long.toString( isbn ) ); // This stuff is only if you
                                                 // wanna
                                                 // earn money with it.
-            params.put( "ItemId", isbn.replace( "-", "" ) );
+            params.put( "ItemId", Long.toString(isbn ));
             params.put( "ResponseGroup", "Large" );
 
             requestUrl = helper.sign( params );

@@ -36,40 +36,40 @@ public final class BookController extends Controller {
     @Transactional
     public static Result getForm() {
         
-    	return ok(views.html.book.createBook.render(bookForm));
+        return ok(views.html.book.createBook.render(bookForm));
     }
     
     @Transactional
     public static Result createBook() {
-    	
-    	Form<Book> filledForm = bookForm.bindFromRequest();
-    	
-    	filledForm.errors().remove("owner");
-    	filledForm.errors().remove("tradeable");
-		
-		if(filledForm.hasErrors()) {
-			return badRequest(views.html.book.createBook.render(filledForm));
-		} else {
-			
-			Book book = new Book();
-			book.owner = Common.currentUser();
-			book.tradeable = false;
+        
+        Form<Book> filledForm = bookForm.bindFromRequest();
+        
+        filledForm.errors().remove("owner");
+        filledForm.errors().remove("tradeable");
+        
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.book.createBook.render(filledForm));
+        } else {
+            
+            Book book = new Book();
+            book.owner = Common.currentUser();
+            book.tradeable = false;
 
-			// Fill an and update the model manually 
-			// because the its just a partial form
-			book.title = filledForm.field("title").value();
-			book.subtitle = filledForm.field("subtitle").value();
-			book.author = filledForm.field("author").value();
-			book.isbn = filledForm.field("isbn").value();
-			book.year = Long.parseLong(filledForm.field("year").value());
-			book.coverUrl = filledForm.field("thumbnail").value();
-			book.comment = filledForm.field("comment").value();
-			
-			book.save();
-			return redirect(routes.BookController.getBook(book.id));
+            // Fill an and update the model manually
+            // because the its just a partial form
+            book.title = filledForm.field("title").value();
+            book.subtitle = filledForm.field("subtitle").value();
+            book.author = filledForm.field("author").value();
+            book.isbn = filledForm.field("isbn").value();
+            book.year = Long.parseLong(filledForm.field("year").value());
+            book.coverUrl = filledForm.field("thumbnail").value();
+            book.comment = filledForm.field("comment").value();
+            
+            book.save();
+            return redirect(routes.BookController.getBook(book.id));
 
 
-		}
+        }
     }
     
 
@@ -93,7 +93,8 @@ public final class BookController extends Controller {
         if (pForm.hasErrors()) {
             Logger.error("Error in form");
             // TODO redirect to something useful
-            return badRequest();
+            flash( "error", "Die ISBN darf nur Zahlen enthalten" );
+            return ok(views.html.book.addBook.render( form(SimpleProfile.class) ));
         } else {
                 Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
                 return ok(views.html.book.editBook.render(bookForm,book));
@@ -243,12 +244,12 @@ public final class BookController extends Controller {
     }
 
     public static class SimpleProfile {
-        public String isbn;
+        public long isbn;
 
         public SimpleProfile() {
         }
 
-        public SimpleProfile(String isbn) {
+        public SimpleProfile(long isbn) {
             this.isbn = isbn;
 
         }
