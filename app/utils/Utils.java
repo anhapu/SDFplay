@@ -93,7 +93,7 @@ public class Utils {
             params.put( "AssociateTag", isbn ); // This stuff is only if you
                                                 // wanna
                                                 // earn money with it.
-            params.put( "ItemId", isbn );
+            params.put( "ItemId", isbn.replace( "-", "" ) );
             params.put( "ResponseGroup", "Large" );
 
             requestUrl = helper.sign( params );
@@ -135,17 +135,25 @@ public class Utils {
             Node titleNode = doc.getElementsByTagName( "Title" ).item( 0 );
             Node authorNode = doc.getElementsByTagName( "Author" ).item( 0 );
             Node mediumImageUrl = doc.getElementsByTagName( "MediumImage" ).item( 0 );
-            book.title = titleNode.getTextContent();
-            book.author = authorNode.getTextContent();
-            book.coverUrl = mediumImageUrl.getFirstChild().getTextContent();
+            Node isbnNode = doc.getElementsByTagName( "ISBN" ).item( 0 );
+            Node dateNode = doc.getElementsByTagName( "PublicationDate" ).item( 0 );
+            if(titleNode != null) {
+                book.title = titleNode.getTextContent();
+            }
+            if(authorNode != null) {
+                book.author = authorNode.getTextContent();
+            }
+            if(mediumImageUrl != null) {
+                book.coverUrl = mediumImageUrl.getFirstChild().getTextContent();
+            }
             book.owner = Common.currentUser();
-            book.isbn = doc.getElementsByTagName( "ISBN" ).item( 0 ).getTextContent();
-            book.year =
-                    formatter.parse(
-                            doc.getElementsByTagName( "PublicationDate" ).item( 0 )
-                                    .getTextContent() ).getTime();
+            if(isbnNode != null) {
+                book.isbn = isbnNode.getTextContent();
+            }
+            if(dateNode != null) {
+                book.year = formatter.parse( dateNode.getTextContent() ).getTime();
+            }
             book.tradeable = false;
-            book.save();
         }
         catch ( DOMException e )
         {
