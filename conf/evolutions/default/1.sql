@@ -33,6 +33,7 @@ create table tradetransaction (
   comment_recipient         varchar(255),
   init_time                 timestamp not null,
   constraint ck_tradetransaction_state check (state in ('INIT','REFUSE','RESPONSE','FINAL_REFUSE','APPROVE','INVALID')),
+  constraint uq_tradetransaction_1 unique (owner_id,recipient_id),
   constraint pk_tradetransaction primary key (id))
 ;
 
