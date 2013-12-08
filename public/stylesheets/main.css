@@ -22,3 +22,14 @@
 .inList {
 	border-color: #5B5;
 }
+
+#trade-progress-bar {
+	font-size: 18px;
+	padding-bottom: 20px;
+	
+}
+
+.trade-arrow {
+	padding-left: 5px;
+	padding-right: 20px;
+}

@@ -25,6 +25,7 @@ GET  /userAdministration/toggleRole/:id controllers.UserAdministrationController
 
 # Home page
 GET   /                   controllers.Application.index()
+GET   /error			  controllers.Application.error()
 
 # Map static resources from the /public folder to the /assets URL path
 GET   /assets/*file       controllers.Assets.at(path="/public", file)
@@ -33,7 +34,6 @@ GET   /assets/*file       controllers.Assets.at(path="/public", file)
 GET     /book/create    		controllers.BookController.getForm()
 POST    /book/create    		controllers.BookController.createBook()
 GET     /book/details/:id       controllers.BookController.getBook(id: Long)
-GET     /book/:id/bookshelf     controllers.BookController.showBookshelf(id: Long)
 GET     /book/mybookshelf     	controllers.BookController.myBookshelf()
 GET     /book/:id/showcase      controllers.BookController.getShowcase(id: Long)
 GET     /book/:id/tradeable     controllers.BookController.markAsTradeable(id: Long)
@@ -48,4 +48,7 @@ GET     /book/delete/:bookId    controllers.BookController.deleteBook(bookId: Lo
 
 
 #Trade
+GET     /trade/user/:id		     	controllers.TradeController.viewForUser(id: Long)
+GET     /trade/:id		     		controllers.TradeController.view(id: Long)
+GET     /trade/:id/delete		    controllers.TradeController.delete(id: Long)
 POST	/trade/create/:recipientId	controllers.TradeController.init(recipientId: Long)

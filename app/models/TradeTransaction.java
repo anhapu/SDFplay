@@ -80,16 +80,16 @@ public class TradeTransaction extends Model{
         return find.where().eq( "id", id ).findUnique();
     }
     
-    /** Returns true, if a TradeTransaction with this owner and this recipient 
-     * 	already exists. Otherwise it returns false.
+    /** Returns a TradeTransaction, if a TradeTransaction with this owner and this recipient 
+     * 	already exists. Otherwise it returns null.
      * 
      * @param owner		user, who owns this TradeTransaction
      * @param recipient	user, who is recipient in this TradeTransaction
      * @return			Returns true, if a TradeTransaction with this owner and this recipient 
      * 					already exists. Otherwise it returns false.
      */
-    public static Boolean exists(final User owner, final User recipient) {
-    	return (find.where(Expr.and(Expr.eq("owner", owner), Expr.eq("recipient", recipient))).findRowCount() >= 1);
+    public static TradeTransaction exists(final User owner, final User recipient) {
+    	return find.where(Expr.and(Expr.eq("owner", owner), Expr.eq("recipient", recipient))).findUnique();
     }
     
     /** Returns a list of trade transactions, where a given user is the owner

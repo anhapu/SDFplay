@@ -4,8 +4,18 @@
 @main(user.username + "'s Bücherregal") {
 
 	<div class="page-header">
-  		<h2>@{user.username}'s Bücherregal</h2>
+  		<h2>Bücher tauschen mit @{user.username}</h2>
 	</div>
+	
+	<div id="trade-progress-bar">
+		<span class="label label-default">Erstellt</span>
+		<span class="label label-default">Antwort</span>
+		<span class="label label-default">Abgeschlossen</span>
+		<span class="label label-default">Abgelehnt</span>
+	</div>
+
+	
+	
 	<div class="row"><!-- Content -->
 		<div id="showcase">
 			@for(book <- books) {

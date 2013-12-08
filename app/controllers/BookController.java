@@ -16,7 +16,6 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import utils.Utils;
-import views.html.book.bookshelf;
 import views.html.book.detailview;
 import views.html.book.mybookshelf;
 
@@ -137,7 +136,7 @@ public final class BookController extends Controller {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
             book.delete();
-            return redirect(routes.BookController.showBookshelf(book.owner.id));
+            return redirect(routes.BookController.myBookshelf());
         } else {
             return forbidden();
         }
@@ -157,20 +156,6 @@ public final class BookController extends Controller {
         }
     }
     
-    
-    public static Result showBookshelf(Long id) {
-        User searchedUser = User.findById(id);
-        if (searchedUser != null) {
-            List<Book> books = Book.findByUser(searchedUser);
-            Logger.info("Found " + books.size() + " books for user " + searchedUser.username);
-            return ok(bookshelf.render(Book.findByUser(searchedUser),searchedUser));
-        } else {
-            // TODO redirect to something useful
-            Logger.error("Did not find any user for id: " + id);
-            return redirect(routes.Application.index());
-        }
-    }
-
     /**
      * Returns the showcase of a specific user
      *
@@ -205,7 +190,7 @@ public final class BookController extends Controller {
         if (Secured.isOwnerOfBook(book)) {
             Book.markAsTradeable(book);
             Logger.info("Marked book as tradeable");
-            return redirect(routes.BookController.showBookshelf(book.owner.id));
+            return redirect(routes.BookController.myBookshelf());
         } else {
             Logger.error("User is not allowed to mark book as tradeable");
             return forbidden();
@@ -223,7 +208,7 @@ public final class BookController extends Controller {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
             Book.unmarkAsTradeable(book);
-            return redirect(routes.BookController.showBookshelf(book.owner.id));
+            return redirect(routes.BookController.myBookshelf());
 
         } else {
 

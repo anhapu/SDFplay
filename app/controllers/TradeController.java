@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import models.Book;
@@ -14,11 +16,83 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import static play.data.Form.*;
+import views.html.trade.init;
+import views.html.trade.create;
 
 @With(Common.class)
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
 
+	/**
+	 * This is a entry point for starting or viewing a transaction
+	 * between the current user and another user.
+	 */
+	public static Result viewForUser(Long id) {
+		User current = Common.currentUser();
+		User partner = User.findById(id);
+		
+		if(partner == null) {
+			return redirect(routes.Application.error());
+		}
+		
+		TradeTransaction trade = TradeTransaction.exists(current, partner);
+		if(trade == null) {
+			// TODO Not the showcase books yet
+			List<Book> books = Book.findByUser(partner);
+			Logger.info("Found " + books.size() + " books for user " + partner.username);
+			return ok(create.render(books,partner));
+		} else {
+			// There is already a Transaction, so forward it to the state machine
+			return redirect(routes.TradeController.view(trade.id));
+		}
+	}
+	
+	/**
+	 * TRADE STATE MACHINE
+	 * 
+	 * This is the main entry point for a trade!
+	 * This method determins the current state of the transaction
+	 * and redirects to the responsible method.
+	 */
+	public static Result view(Long id) {
+		Logger.info("Processing Trade State Machine");
+		TradeTransaction trade = TradeTransaction.findById(id);
+		States state = trade.state;
+		User current = Common.currentUser();
+		
+		// Get the right perspective - which role has the current user?
+		if(trade.owner.equals(current)) {
+			if(state == States.INIT) {
+				return viewInit(trade);
+			} else {
+				return null;
+			}			
+		} else if (trade.recipient.equals(current)) {
+			return null;
+		} else {
+			Logger.info("Could not determine perspective");
+			return redirect(routes.Application.error());
+		}
+
+	}
+	
+	private static Result viewInit(TradeTransaction trade) {
+		User current = Common.currentUser();
+		User partner = trade.recipient;
+		List<Book> pickedBooks = new ArrayList<Book>();		
+		List<Book> restBooks = Book.findByUser(partner);
+		
+		// Separating the already picked books from all books
+		List<TradeBooks> tradeBooks = trade.tradeBooks;
+		for (TradeBooks tradeBook : tradeBooks) {
+			Book book = tradeBook.book;
+			restBooks.remove(book);
+			pickedBooks.add(book);
+			
+		}
+		return ok(init.render(pickedBooks,restBooks,trade,partner));	
+	}
+	
 	
 	/**
 	 * Inits the trade transaction
@@ -31,8 +105,8 @@ public class TradeController extends Controller {
     	User recipient = User.findById(recipientId);
 
     	//Check if transaction already exists.
-    	Logger.info("A TradeTransaction for (owner = " + owner.username + " ,recipient = " + recipient.username + ") already exists? " + TradeTransaction.exists(owner, recipient).toString().toUpperCase());
-    	if (TradeTransaction.exists(owner, recipient)) {
+    	if (TradeTransaction.exists(owner, recipient) != null) {
+    		Logger.info("A TradeTransaction for (owner = " + owner.username + " ,recipient = " + recipient.username + ") already exists? ");
     		flash("error", "Dieser Wunschzettel existiert bereits und konnte nicht neu angelegt werden.");
     	} else {
 	    	// Create the transaction
@@ -48,7 +122,7 @@ public class TradeController extends Controller {
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
 	    	if(bookSelection == null) {
 	    		flash("error", "Bitte wähle min. ein Buch aus.");
-	    		return redirect(routes.BookController.showBookshelf(recipientId));
+	    		return redirect(routes.TradeController.viewForUser(recipientId));
 	    	}
 	    	
 	 		Long bookId = null;
@@ -64,8 +138,24 @@ public class TradeController extends Controller {
 			}
 	    	
 	 		flash("success", "Wunschzettel angelegt");
+	    	return redirect(routes.TradeController.view(trade.id));
     	}
     	return redirect(routes.Application.index());
+    }
+    
+    public static Result delete(Long id){
+    	// Security here!!!
+    	
+    	TradeTransaction trade = TradeTransaction.findById(id);
+    	if(trade == null) {
+    		return redirect(routes.Application.error());
+    	}
+    	
+    	User partner = trade.recipient;
+    	trade.delete();
+    	flash("success", "Wunschzettel wurde gelöscht");
+    	return redirect(routes.TradeController.viewForUser(partner.id));
+    	
     }
 	
 }
