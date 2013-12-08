@@ -82,13 +82,15 @@ public class TradeController extends Controller {
 		List<Book> pickedBooks = new ArrayList<Book>();		
 		List<Book> restBooks = Book.findByUser(partner);
 		
-		// Separating the already picked books from all books
+		// Separating the already picked books from all books from the partner
 		List<TradeBooks> tradeBooks = trade.tradeBooks;
 		for (TradeBooks tradeBook : tradeBooks) {
 			Book book = tradeBook.book;
-			restBooks.remove(book);
-			pickedBooks.add(book);
-			
+			if(restBooks.contains(book)){
+				restBooks.remove(book);
+				pickedBooks.add(book);
+				
+			}
 		}
 		return ok(init.render(pickedBooks,restBooks,trade,partner));	
 	}
@@ -109,6 +111,16 @@ public class TradeController extends Controller {
     		Logger.info("A TradeTransaction for (owner = " + owner.username + " ,recipient = " + recipient.username + ") already exists? ");
     		flash("error", "Dieser Wunschzettel existiert bereits und konnte nicht neu angelegt werden.");
     	} else {
+    		
+        	// Getting the selection
+	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
+	    	if(bookSelection == null) {
+	    		flash("error", "Bitte wähle min. ein Buch aus.");
+	    		Logger.info("Error in Selection");
+	    		return redirect(routes.TradeController.viewForUser(recipientId));
+	    	}
+    		
+    		
 	    	// Create the transaction
 	    	TradeTransaction trade = new TradeTransaction();
 	    	trade.owner = owner;
@@ -117,13 +129,6 @@ public class TradeController extends Controller {
 	    	trade.commentOwner = "Hallo! Wie waere es mit einem Buchtausch?";
 	    	trade.commentRecipient = "Ok. Geht klar.";
 	    	trade.save();
-	    	
-	    	// Getting the selection
-	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
-	    	if(bookSelection == null) {
-	    		flash("error", "Bitte wähle min. ein Buch aus.");
-	    		return redirect(routes.TradeController.viewForUser(recipientId));
-	    	}
 	    	
 	 		Long bookId = null;
 	 		Book book = null;
