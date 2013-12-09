@@ -35,16 +35,6 @@ public class TradeController extends Controller {
         return ok(index.render(users));
     }
 	
-	public static Result showAllShowcases() {
-		List<User> users = null;
-    	if(Common.currentUser() != null){
-    		users = User.findAllBut(Common.currentUser());
-    	} else {
-    		return redirect(routes.Application.error());
-    	}
-        return ok(views.html.trade.showAllShowcases.render(users));
-	}
-    	
 	/**
 	 * This is a entry point for starting or viewing a transaction
 	 * between the current user and another user.

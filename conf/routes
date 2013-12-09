@@ -49,7 +49,6 @@ GET     /book/delete/:bookId    controllers.BookController.deleteBook(bookId: Lo
 
 #Trade
 GET		/trade						controllers.TradeController.viewAllTrades()
-GET		/trade/create				controllers.TradeController.showAllShowcases()
 GET     /trade/user/:id		     	controllers.TradeController.viewForUser(id: Long)
 GET     /trade/:id		     		controllers.TradeController.view(id: Long)
 GET     /trade/:id/delete		    controllers.TradeController.delete(id: Long)
