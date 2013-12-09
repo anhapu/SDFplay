@@ -21,7 +21,7 @@
 			@for(tradeBook <- tradeTransaction.tradeBooks) {
 			<div class="col-sm-4 col-md-2 col-xs-6">
 				<a href="@routes.BookController.getBook(tradeBook.book.id)" class="thumbnail" data-toggle="popover" title="@tradeBook.book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @tradeBook.book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @tradeBook.book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=tradeBook.book.coverUrl>
+					<img src=@tradeBook.book.coverUrl>
 				</a>
 			</div>
 			}
@@ -48,7 +48,7 @@
 			@for(tradeBook <- tradeTransaction.tradeBooks) {
 			<div class="col-sm-4 col-md-2 col-xs-6">
 				<a href="@routes.BookController.getBook(tradeBook.book.id)" class="thumbnail" data-toggle="popover" title="@tradeBook.book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @tradeBook.book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @tradeBook.book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=tradeBook.book.coverUrl>
+					<img src=@tradeBook.book.coverUrl>
 				</a>
 			</div>
 			}
