@@ -10,23 +10,8 @@
 	
 		@for(tradeTransaction <- tradeListOwner) {
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">Tauschanfrage an @tradeTransaction.recipient.username</a></h3>
-			<div id="trade-progress-bar">
-			<span class="label label-success">Erstellt</span>
-			<span class="label label-default">Antwort</span>
-			<span class="label label-default">Abgeschlossen</span>
-			<span class="label label-default">Abgelehnt</span>
-			</div>
-			
-			<div class="row"><!-- Content -->
-			@for(tradeBook <- tradeTransaction.tradeBooks) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(tradeBook.book.id)" class="thumbnail" data-toggle="popover" title="@tradeBook.book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @tradeBook.book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @tradeBook.book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@tradeBook.book.coverUrl>
-				</a>
-			</div>
-			}
-			</div>
-	
+			@snippets.tradeProgressBar(tradeTransaction)
+			@snippets.tradeBooks(tradeTransaction)	
 		}
 	}
 
@@ -37,22 +22,8 @@
 		
 		@for(tradeTransaction <- tradeListRecipient) {
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">Tauschanfrage von @tradeTransaction.owner.username</a></h3>
-			<div id="trade-progress-bar">
-			<span class="label label-success">Erstellt</span>
-			<span class="label label-default">Antwort</span>
-			<span class="label label-default">Abgeschlossen</span>
-			<span class="label label-default">Abgelehnt</span>
-			</div>
-			
-			<div class="row"><!-- Content -->
-			@for(tradeBook <- tradeTransaction.tradeBooks) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(tradeBook.book.id)" class="thumbnail" data-toggle="popover" title="@tradeBook.book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @tradeBook.book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @tradeBook.book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@tradeBook.book.coverUrl>
-				</a>
-			</div>
-			}
-			</div>
+			@snippets.tradeProgressBar(tradeTransaction)
+			@snippets.tradeBooks(tradeTransaction)
 		}
 	}
 }

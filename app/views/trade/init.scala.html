@@ -1,4 +1,4 @@
-@(pickedBooks: List[Book], restBooks: List[Book], trade: TradeTransaction, user: User)
+@(pickedBooks: List[Book], restBooks: List[Book], tradeTransaction: TradeTransaction, user: User)
 @import helper._
 
 @main(user.username + "'s Bücherregal") {
@@ -7,25 +7,11 @@
   		<h2>Bücher tauschen mit @{user.username}</h2>
 	</div>
 	
-	<div id="trade-progress-bar">
-		<span class="label label-success">Erstellt</span>
-		<span class="label label-default">Antwort</span>
-		<span class="label label-default">Abgeschlossen</span>
-		<span class="label label-default">Abgelehnt</span>
-	</div>
+	@snippets.tradeProgressBar(tradeTransaction)
 	
 	<h3>Deine ausgewählten Bücher</h3>
-
-	<div class="row"><!-- Content -->
-		@for(book <- pickedBooks) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@book.coverUrl>
-				</a>
-			</div>
-		}
-	</div><!-- /Content -->
-	
+	@snippets.tradeBooks(tradeTransaction)
+		
 	<h3>Was übrig bleibt</h3>
 	
 	<div class="row"><!-- Content -->
@@ -38,6 +24,6 @@
 		}
 	</div><!-- /Content -->
 	
-	<a href="@routes.TradeController.delete(trade.id)" class="btn btn-danger">Wunschzettel löschen</a>
+	<a href="@routes.TradeController.delete(tradeTransaction.id)" class="btn btn-danger">Wunschzettel löschen</a>
 }
 
