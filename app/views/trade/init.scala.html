@@ -1,4 +1,4 @@
-@(pickedBooks: List[Book], restBooks: List[Book], tradeTransaction: TradeTransaction, user: User)
+@(restBooks: List[Book], tradeTransaction: TradeTransaction, user: User)
 @import helper._
 
 @main(user.username + "'s Bücherregal") {
@@ -12,7 +12,7 @@
 	<h3>Deine ausgewählten Bücher</h3>
 	@snippets.tradeBooks(tradeTransaction)
 		
-	<h3>Was übrig bleibt</h3>
+	<h3>Im Showcase verbleibende Bücher:</h3>
 	
 	<div class="row"><!-- Content -->
 		@for(book <- restBooks) {

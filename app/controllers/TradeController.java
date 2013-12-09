@@ -21,17 +21,17 @@ import views.html.trade.showAll;
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
 
-	/** Displays an overview of all book exchange offer, where
-	 * 	the current user is involved in.
+	/** Displays an overview of all book exchange offers, 
+	 * 	in which the current user is involved in.
 	 * 
 	 * @return	html page with all TradeTransactions for the current user
 	 */
 	public static Result viewAllTrades() {
-		User user = Common.currentUser();
-		if (user != null) {
-			List<TradeTransaction> tradeListOwner = TradeTransaction.findByOwner(user);
-			List<TradeTransaction> tradeListRecipient = TradeTransaction.findByRecipient(user);			
-			return ok(showAll.render(user, tradeListOwner, tradeListRecipient));
+		User currentUser = Common.currentUser();
+		if (currentUser != null) {
+			List<TradeTransaction> tradeListOwner = TradeTransaction.findByOwner(currentUser);
+			List<TradeTransaction> tradeListRecipient = TradeTransaction.findByRecipient(currentUser);			
+			return ok(showAll.render(currentUser, tradeListOwner, tradeListRecipient));
     	} else {
     		return redirect(routes.Application.error());
     	}
@@ -42,21 +42,21 @@ public class TradeController extends Controller {
 	 * between the current user and another user.
 	 */
 	public static Result viewForUser(Long id) {
-		User current = Common.currentUser();
-		User partner = User.findById(id);
-		Logger.info("Partner = " + partner.username);
-		Logger.info("user = " + current.username);
+		User currentUser = Common.currentUser();
+		User recipient = User.findById(id);
+		Logger.info("recipient = " + recipient.username);
+		Logger.info("user = " + currentUser.username);
 		
-		if(partner == null) {
+		if(recipient == null) {
 			return redirect(routes.Application.error());
 		}
 		
-		TradeTransaction trade = TradeTransaction.exists(current, partner);
+		TradeTransaction trade = TradeTransaction.exists(currentUser, recipient);
 		if(trade == null) {
 			// TODO Not the showcase books yet
-			List<Book> books = Book.findByUser(partner);
-			Logger.info("Found " + books.size() + " books for user " + partner.username);
-			return ok(create.render(books,partner));
+			List<Book> books = Book.findByUser(recipient);
+			Logger.info("Found " + books.size() + " books for user " + recipient.username);
+			return ok(create.render(books,recipient));
 		} else {
 			// There is already a Transaction, so forward it to the state machine
 			return redirect(routes.TradeController.view(trade.id));
@@ -72,18 +72,17 @@ public class TradeController extends Controller {
 	 */
 	public static Result view(Long id) {
 		Logger.info("Processing Trade State Machine");
-		TradeTransaction trade = TradeTransaction.findById(id);
-		States state = trade.state;
-		User current = Common.currentUser();
+		TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+		User currentUser = Common.currentUser();
 		
 		// Get the right perspective - which role has the current user?
-		if(trade.owner.equals(current)) {
-			if(state == States.INIT) {
-				return viewInit(trade);
+		if(tradeTransaction.owner.equals(currentUser)) {
+			if(tradeTransaction.state == States.INIT) {
+				return viewInit(tradeTransaction);
 			} else {
 				return null;
 			}			
-		} else if (trade.recipient.equals(current)) {
+		} else if (tradeTransaction.recipient.equals(currentUser)) {
 			return null;
 		} else {
 			Logger.info("Could not determine perspective");
@@ -92,14 +91,15 @@ public class TradeController extends Controller {
 
 	}
 	
-	private static Result viewInit(TradeTransaction trade) {
-		User current = Common.currentUser();
-		User partner = trade.recipient;
+	private static Result viewInit(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		User recipient = tradeTransaction.recipient;
+		
 		List<Book> pickedBooks = new ArrayList<Book>();		
-		List<Book> restBooks = Book.findByUser(partner);
+		List<Book> restBooks = Book.findByUser(recipient);
 		
 		// Separating the already picked books from all books from the partner
-		List<TradeBooks> tradeBooks = trade.tradeBooks;
+		List<TradeBooks> tradeBooks = tradeTransaction.tradeBooks;
 		for (TradeBooks tradeBook : tradeBooks) {
 			Book book = tradeBook.book;
 			if(restBooks.contains(book)){
@@ -108,7 +108,7 @@ public class TradeController extends Controller {
 				
 			}
 		}
-		return ok(init.render(pickedBooks,restBooks,trade,partner));	
+		return ok(init.render(restBooks,tradeTransaction,recipient));	
 	}
 	
 	
