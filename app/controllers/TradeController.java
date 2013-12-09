@@ -30,6 +30,8 @@ public class TradeController extends Controller {
 	public static Result viewForUser(Long id) {
 		User current = Common.currentUser();
 		User partner = User.findById(id);
+		Logger.info("Partner = " + partner.username);
+		Logger.info("user = " + current.username);
 		
 		if(partner == null) {
 			return redirect(routes.Application.error());
