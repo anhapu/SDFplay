@@ -1,0 +1,24 @@
+@(tradeTransaction: TradeTransaction)<!-- Displays the correct state for this TradeTransaction. -->
+<div id="trade-progress-bar">
+	@if(tradeTransaction.state.name() == "INIT") {
+		<span class="label label-success">Erstellt</span>
+	} else {
+		<span class="label label-default">Erstellt</span>
+	}
+	@if(tradeTransaction.state.name() == "RESPONSE") {
+		<span class="label label-success">Antwort</span>
+	} else {
+		<span class="label label-default">Antwort</span>
+	}
+	@if((tradeTransaction.state.name() == "REFUSE") || (tradeTransaction.state.name() == "FINAL_REFUSE")) {
+		<span class="label label-success">Abgeschlossen</span>
+	} else {
+		<span class="label label-default">Abgeschlossen</span>
+	}
+	@if(tradeTransaction.state.name() == "APPROVE") {
+		<span class="label label-success">Abgelehnt</span>
+	} else {
+		<span class="label label-default">Abgelehnt</span>
+	}
+			
+</div>
