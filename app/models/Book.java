@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Constraint;
 
@@ -53,7 +55,7 @@ public class Book extends Model
     
     @ManyToOne
     public User owner;
-    
+        
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
     
     /**

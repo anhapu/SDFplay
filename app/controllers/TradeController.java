@@ -1,9 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import models.Book;
 import models.TradeBooks;
@@ -15,9 +13,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
-import static play.data.Form.*;
-import views.html.error;
-import views.html.index;
 import views.html.trade.init;
 import views.html.trade.create;
 import views.html.trade.showAll;
@@ -26,12 +21,16 @@ import views.html.trade.showAll;
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
 
+	/** Displays an overview of all book exchange offer, where
+	 * 	the current user is involved in.
+	 * 
+	 * @return	html page with all TradeTransactions for the current user
+	 */
 	public static Result viewAllTrades() {
 		User user = Common.currentUser();
 		if (user != null) {
 			List<TradeTransaction> tradeListOwner = TradeTransaction.findByOwner(user);
-			List<TradeTransaction> tradeListRecipient = TradeTransaction.findByRecipient(user);
-			
+			List<TradeTransaction> tradeListRecipient = TradeTransaction.findByRecipient(user);			
 			return ok(showAll.render(user, tradeListOwner, tradeListRecipient));
     	} else {
     		return redirect(routes.Application.error());
