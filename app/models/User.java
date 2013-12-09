@@ -58,6 +58,11 @@ public class User extends Model
 	@OneToMany(targetEntity = models.Book.class, cascade=CascadeType.ALL, mappedBy="owner")
 	public List<Book> books;
 
+	@OneToMany(targetEntity = models.TradeTransaction.class, cascade=CascadeType.ALL, mappedBy="owner")
+	public List<TradeTransaction> tradeTransactionOwnerList;
+	
+	@OneToMany(targetEntity = models.TradeTransaction.class, cascade=CascadeType.ALL, mappedBy="recipient")
+	public List<TradeTransaction> tradeTransactionRecipientList;
     
     /**
      * This token is used for a password reset, if it's null the object will be inactive.

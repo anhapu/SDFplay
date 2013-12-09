@@ -1,0 +1,33 @@
+@(user: User, tradeListOwner: List[TradeTransaction], tradeListRecipient: List[TradeTransaction])
+@import helper._
+
+@main(user.username + "s Tauschanfragen") {
+	<div class="page-header">
+  		<h2>Tauschanfragen</h2>
+	</div>
+
+	@if(!tradeListOwner.isEmpty()) {
+		<h3>Eigene Tauschanfragen:</h3>
+		@for(tradeTransaction <- tradeListOwner) {
+			<div id="trade-progress-bar">
+			<span class="label label-success">Erstellt</span>
+			<span class="label label-default">Antwort</span>
+			<span class="label label-default">Abgeschlossen</span>
+			<span class="label label-default">Abgelehnt</span>
+			</div>
+		}
+	}
+
+	@if(!tradeListRecipient.isEmpty()) {
+		<h3>Tauschanfragen anderer User an Sie:</h3>
+		@for(tradeTransaction <- tradeListRecipient) {
+			<div id="trade-progress-bar">
+			<span class="label label-success">Erstellt</span>
+			<span class="label label-default">Antwort</span>
+			<span class="label label-default">Abgeschlossen</span>
+			<span class="label label-default">Abgelehnt</span>
+			</div>
+		}
+	}
+}
+

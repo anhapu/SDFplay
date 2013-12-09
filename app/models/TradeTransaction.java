@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -29,9 +30,9 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.mvc.With;
 
-/** An entity, which takes care of the list of wishes, which one user shows to another one.
+/** An entity, which takes care of the list of wishes, which one user shows to another user.
  * 	If both users agree, they will be able to exchange books. If one user does not agree with
- * 	the deal, he or she will be able to send an alternative offer or refue the deal.
+ * 	the deal, he or she will be able to send an alternative offer or refuse the deal.
  */
 @Entity
 @Table(name="tradetransaction", uniqueConstraints=@UniqueConstraint(columnNames={"owner_id", "recipient_id"}))
@@ -40,11 +41,11 @@ public class TradeTransaction extends Model{
 	@Id
     public Long id;
 	
-	@OneToOne(targetEntity = models.User.class)
+	@ManyToOne(targetEntity = models.User.class)
 	@Required
 	public User owner;
 	
-	@OneToOne(targetEntity = models.User.class)
+	@ManyToOne(targetEntity = models.User.class)
 	@Required
 	public User recipient;
 

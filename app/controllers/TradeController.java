@@ -20,19 +20,22 @@ import views.html.error;
 import views.html.index;
 import views.html.trade.init;
 import views.html.trade.create;
+import views.html.trade.showAll;
 
 @With(Common.class)
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
 
 	public static Result viewAllTrades() {
-		List<User> users = null;
-    	if(Common.currentUser() != null){
-    		users = User.findAllBut(Common.currentUser());
+		User user = Common.currentUser();
+		if (user != null) {
+			List<TradeTransaction> tradeListOwner = TradeTransaction.findByOwner(user);
+			List<TradeTransaction> tradeListRecipient = TradeTransaction.findByRecipient(user);
+			
+			return ok(showAll.render(user, tradeListOwner, tradeListRecipient));
     	} else {
     		return redirect(routes.Application.error());
     	}
-        return ok(index.render(users));
     }
 	
 	/**
