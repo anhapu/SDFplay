@@ -21,7 +21,7 @@
 			@for(book <- books) {
 				<div id="@book.id" class="col-sm-4 col-md-2 col-xs-6 book">
 					<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Untertitel:&lt;&#47;b&gt; @book.subtitle&lt;br&gt;&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-						<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+						<img src=@book.coverUrl>
 					</a>
 					<input type="hidden" name="book_selection" value="@book.id" />
 				</div>
