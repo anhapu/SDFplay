@@ -16,6 +16,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
 import static play.data.Form.*;
+import views.html.error;
+import views.html.index;
 import views.html.trade.init;
 import views.html.trade.create;
 
@@ -23,6 +25,26 @@ import views.html.trade.create;
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
 
+	public static Result viewAllTrades() {
+		List<User> users = null;
+    	if(Common.currentUser() != null){
+    		users = User.findAllBut(Common.currentUser());
+    	} else {
+    		return redirect(routes.Application.error());
+    	}
+        return ok(index.render(users));
+    }
+	
+	public static Result showAllShowcases() {
+		List<User> users = null;
+    	if(Common.currentUser() != null){
+    		users = User.findAllBut(Common.currentUser());
+    	} else {
+    		return redirect(routes.Application.error());
+    	}
+        return ok(views.html.trade.showAllShowcases.render(users));
+	}
+    	
 	/**
 	 * This is a entry point for starting or viewing a transaction
 	 * between the current user and another user.
