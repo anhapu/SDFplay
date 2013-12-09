@@ -94,6 +94,10 @@ public class Book extends Model
         return find.where().eq("tradeable", true).findList();
     }
     
+    public static List<Book> findAllTradeableBooksByTitle(final String title){
+        return find.where().eq( "tradeable", true ).ilike( "title", "%" + title + "%" ).findList();
+    }
+    
     /**
      * Returns all books of a given User.
      * @param user

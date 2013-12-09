@@ -12,102 +12,102 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/book.png")">
     </head>
     <body>
-			@if(Common.currentUser != null) {
-			      <!-- Brand and toggle get grouped for better mobile display -->
-			  <div class="navbar navbar-inverse">
-				  <div class="navbar-header">
-				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				      <span class="sr-only">Toggle navigation</span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				    </button>
-				    <a href="@routes.Application.index()"><img src="@routes.Assets.at("images/logo.png")" alt="Logo" height="50px"></a>
-				  </div>
-				
-				  <!-- Collect the nav links, forms, and other content for toggling -->
-				  <div class="navbar-collapse collapse navbar-responsive-collapse" id="bs-example-navbar-collapse-1">
-				    <ul class="nav navbar-nav">
-				      <li class="dropdown active">
-				        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mein Profil<b class="caret"></b></a>
-				        <ul class="dropdown-menu">
-				          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Ansehen</a></li>
-				          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Bearbeiten</a></li>
-				        </ul>
-				      </li>
-				      <li class="dropdown">
-				        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher<b class="caret"></b></a>
-				        <ul class="dropdown-menu">
-				          <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
-				          <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
-				          <li class="divider"></li>
-				          <li><a href="@routes.BookController.addBook()">Buch hinzufügen</a></li>
-				        </ul>
-				      </li>
-				      <li class="dropdown">
-				        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen<b class="caret"></b></a>
-				        <ul class="dropdown-menu">
-				          <li><a href="@routes.TradeController.viewAllTrades()">Ansehen</a></li>
-				        </ul>
-				      </li>
-				      @if(User.isAdmin(Common.currentUser.id)) {
-				        <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
-				      }
-				    </ul>
-				    <form class="navbar-form navbar-left" action="@routes.BookController.searchBook("title", "Harry")" method="GET">
-				      <div class="form-group">
-				        <input type="search" class="form-control" placeholder="Buchtitel" name="f">
-				      </div>
-				      <input type="submit" value="Suchen" class="btn primary">
-				    </form>
-				    <ul class="nav navbar-nav navbar-right">
-				      <li>Logged in as: @Common.currentUser.username</li>
-				      <li><a href="@routes.UserController.logout">Logout</a></li>
-				    </ul>
-				  </div><!-- /.navbar-collapse -->
-				 </div>
-			   } else {
-			   
-			   <div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			      <span class="sr-only">Toggle navigation</span>
-			      <span class="icon-bar"></span>
-			      <span class="icon-bar"></span>
-			      <span class="icon-bar"></span>
-			    </button>
-			    <a href="@routes.Application.index()"><img src="@routes.Assets.at("images/logo.png")" alt="Logo" height="50px"></a>
-			  </div>
-			
-			  <!-- Collect the nav links, forms, and other content for toggling -->
-			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			    <ul class="nav navbar-nav">
-			      <li><a href="@routes.Registration.index()">Registrieren</a></li>
-			    </ul>
-			  </div><!-- /.navbar-collapse -->
-			            }
-			    <br />
-				@if(flash.containsKey("success")) {
-					<div class="alert alert-success fade in">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						@flash.get("success")
-					</div>
-				} 
-				@if(flash.containsKey("info")) {
-					<div class="alert alert-info fade in">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						@flash.get("info")
-					</div>
-				} 
-				@if(flash.containsKey("error")) {
-					<div class="alert alert-danger fade in">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						@flash.get("error")
-					</div>
-				} 
-			    
-			    <div class="container">        
-			    	@content
-			   	</div>
+            @if(Common.currentUser != null) {
+                  <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar navbar-inverse">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a href="@routes.Application.index()"><img src="@routes.Assets.at("images/logo.png")" alt="Logo" height="50px"></a>
+                  </div>
+                
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="navbar-collapse collapse navbar-responsive-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mein Profil<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Ansehen</a></li>
+                          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Bearbeiten</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
+                          <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
+                          <li class="divider"></li>
+                          <li><a href="@routes.BookController.addBook()">Buch hinzufügen</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="@routes.TradeController.viewAllTrades()">Ansehen</a></li>
+                        </ul>
+                      </li>
+                      @if(User.isAdmin(Common.currentUser.id)) {
+                        <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
+                      }
+                    </ul>
+                     <form class="navbar-form navbar-left" action="@routes.BookController.searchBook()" method="GET">
+                      <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Buchtitel" id="searchQuery" name="keyword">
+                      </div>
+                      <input type="submit" value="Suchen" class="btn primary">
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li>Logged in as: @Common.currentUser.username</li>
+                      <li><a href="@routes.UserController.logout">Logout</a></li>
+                    </ul>
+                  </div><!-- /.navbar-collapse -->
+                 </div>
+               } else {
+               
+               <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a href="@routes.Application.index()"><img src="@routes.Assets.at("images/logo.png")" alt="Logo" height="50px"></a>
+              </div>
+            
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li><a href="@routes.Registration.index()">Registrieren</a></li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+                        }
+                <br />
+                @if(flash.containsKey("success")) {
+                    <div class="alert alert-success fade in">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        @flash.get("success")
+                    </div>
+                }
+                @if(flash.containsKey("info")) {
+                    <div class="alert alert-info fade in">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        @flash.get("info")
+                    </div>
+                }
+                @if(flash.containsKey("error")) {
+                    <div class="alert alert-danger fade in">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        @flash.get("error")
+                    </div>
+                }
+                
+                <div class="container">
+                    @content
+                   </div>
     
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/jquery-ui.min.js")" type="text/javascript"></script>
