@@ -2,13 +2,13 @@ package controllers;
 
 import static play.data.Form.form;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import models.Book;
 import models.User;
 import play.Logger;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.mvc.Controller;
@@ -233,13 +233,19 @@ public final class BookController extends Controller {
      * @param field
      * @param term
      */
-    public static Result searchBook(final String field, final String term) {
-        Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term + "' in field " + field);
-        List<Book> books = Book.findByTitle(term);
-        if (books != null) {
-            Logger.info("[BOOK-SEARCH] Found " + books.size() + " matching entries");
-            return ok(views.html.book.searchResults.render(books));
+    public static Result searchBook() {
+        List<Book> books = null;
+        final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+        for(Map.Entry< String, String[] > entry : entries){
+            if(entry.getKey().equals( "keyword" )){
+                final String term = entry.getValue()[0];
+                Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term);
+                books = Book.findByTitle(term);
+                Logger.info( "[BOOK-SEARCH] found " + books.size() );
+                return ok(views.html.book.searchResults.render(books));
+            }
         }
+
         return redirect(routes.Application.index());
     }
 
