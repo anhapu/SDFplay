@@ -27,6 +27,9 @@ public class TradeController extends Controller {
 	 * @return	html page with all TradeTransactions for the current user
 	 */
 	public static Result viewAllTrades() {
+		// ---- ToDo ---- 
+		// distinguish between books which are from owner and books which are from recipient 
+		// e.g. in state RESPONSE both user have offered books and they are mixed at the moment
 		User currentUser = Common.currentUser();
 		if (currentUser != null) {
 			List<TradeTransaction> tradeListOwner = TradeTransaction.findByOwner(currentUser);
