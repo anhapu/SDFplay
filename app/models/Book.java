@@ -52,7 +52,12 @@ public class Book extends Model
     
     @ManyToOne
     public User owner;
-        
+    
+    /**
+	@ManyToMany(mappedBy = "bookList")
+    public List<TradeTransaction> tradeTransactionList;
+     */
+    
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
     
     /**

@@ -64,6 +64,14 @@ public class TradeTransaction extends Model{
 	@CreatedTimestamp
 	public Timestamp initTime;
 	
+	/**
+	@JoinTable(name = "tradetransaction_has_book", 
+	        joinColumns = { @JoinColumn(name = "tradetransaction_id", referencedColumnName = "id")}, 
+	        inverseJoinColumns = { @JoinColumn(name = "book_id", referencedColumnName = "id")})
+	@ManyToMany
+	public List<Book> bookList;
+	*/
+	
 	public static Model.Finder<String,TradeTransaction> find = new Model.Finder<String,TradeTransaction>(String.class, TradeTransaction.class);
 	
     /**	Retrieve all trade transactions.
@@ -125,7 +133,7 @@ public class TradeTransaction extends Model{
      * @return					a list of books
      */
     public static List<Book> findBooks(final User transactionOwner, final User bookOwner) {
-    	String sqlString = "SELECT book.id, book.author, book.title, book.subtitle, book.isbn, book.cover_url, "
+    	String sqlString = "SELECT book.id, book.author, book.title, book.isbn, book.cover_url, "
     			+ " book.year, book.tradeable, book.comment, book.owner_id FROM book "
     			+ "INNER JOIN tradebooks ON tradebooks.book_id = book.id "
     			+ "INNER JOIN tradetransaction ON tradebooks.trade_transaction_id = tradetransaction.id "
@@ -134,7 +142,6 @@ public class TradeTransaction extends Model{
     	RawSql rawSql = RawSqlBuilder.parse(sqlString).columnMapping("book.id", "id")
     			.columnMapping("book.author", "author")
     			.columnMapping("book.title", "title")
-    			.columnMapping("book.subtitle", "subtitle")
     			.columnMapping("book.isbn", "isbn")
     			.columnMapping("book.cover_url", "coverUrl")
     			.columnMapping("book.year", "year")
