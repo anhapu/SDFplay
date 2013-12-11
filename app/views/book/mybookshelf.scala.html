@@ -15,12 +15,18 @@
                     }
                 </a>
                 <div class="caption">
-                    @if(book.tradeable){
-                        <p><a href="@routes.BookController.unmarkAsTradeable(book.id)" class="btn btn-warning btn-xs" role="button">Vom Showcase entfernen</a></p>
-                    }else{
-                        <p><a href="@routes.BookController.markAsTradeable(book.id)" class="btn btn-success btn-xs" role="button">Zum Showcase hinzufuegen</a></p>
-                    }
-                    <p><a href="@routes.BookController.deleteBook(book.id)" class="btn btn-danger btn-xs" role="button">Buch loeschen</a></p>
+                	<p class="pull-left book-buttons">
+	                    @if(book.tradeable){
+	                        <a href="@routes.BookController.unmarkAsTradeable(book.id)" class="btn btn-warning btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch vom Tausch zrückziehen" data-container="body"><span class="glyphicon glyphicon-cloud-download"></span></a>
+	                    }else{
+	                        <a href="@routes.BookController.markAsTradeable(book.id)" class="btn btn-success btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch zum Tausch freigeben" data-container="body"><span class="glyphicon glyphicon-cloud-upload"></span></a>
+	                    }
+	                </p>
+	                <p class="pull-right book-buttons">
+	                    <a href="@routes.BookController.editBook(book.id)" class="btn btn-primary btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch bearbeiten" data-container="body"><span class="glyphicon glyphicon-edit"></span></a>
+                    	<a href="@routes.BookController.deleteBook(book.id)" class="btn btn-danger btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch löschen" data-container="body"><span class="glyphicon glyphicon-trash"></span></a>
+                    	
+                    </p>
                 </div>
             </div>
         }

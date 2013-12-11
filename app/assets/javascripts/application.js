@@ -30,3 +30,4 @@ $(document).ready(function() {
 });
 
 $('[data-toggle="popover"]').popover('hide');
+$('[data-toggle="tooltip"]').tooltip('hide');

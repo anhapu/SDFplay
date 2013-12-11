@@ -41,3 +41,7 @@
 .form-group > dl > dd {
 	margin-top: -14px;
 }
+
+.book-buttons {
+	margin: 0px 10px;
+}
