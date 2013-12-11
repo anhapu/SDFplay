@@ -58,7 +58,6 @@ public final class BookController extends Controller {
             // Fill an and update the model manually
             // because the its just a partial form
             book.title = filledForm.field("title").value();
-            book.subtitle = filledForm.field("subtitle").value();
             book.author = filledForm.field("author").value();
             book.isbn = filledForm.field("isbn").value();
             book.year = Long.parseLong(filledForm.field("year").value());

@@ -33,3 +33,11 @@
 	padding-left: 5px;
 	padding-right: 20px;
 }
+
+.form-group > dl > dt {
+	display: none;
+}
+
+.form-group > dl > dd {
+	margin-top: -14px;
+}

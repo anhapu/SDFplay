@@ -33,9 +33,6 @@ public class Book extends Model
     @JsonProperty("title")
     public String title;
     
-    
-    public String subtitle;
-    
     @Constraints.Required
     @Formats.NonEmpty
     public String isbn;
