@@ -67,48 +67,47 @@ public class TradeController extends Controller {
 	 * TRADE STATE MACHINE
 	 * 
 	 * This is the main entry point for a trade!
-	 * This method determins the current state of the transaction
+	 * This method determines the current state of the transaction
 	 * and redirects to the responsible method.
 	 */
 	public static Result view(Long id) {
 		Logger.info("Processing Trade State Machine");
 		TradeTransaction tradeTransaction = TradeTransaction.findById(id);
-		User currentUser = Common.currentUser();
-		
-		// Get the right perspective - which role has the current user?
-		if(tradeTransaction.owner.equals(currentUser)) {
-			if(tradeTransaction.state == States.INIT) {
-				return viewInit(tradeTransaction);
-			} else {
-				return null;
-			}			
-		} else if (tradeTransaction.recipient.equals(currentUser)) {
-			return null;
-		} else {
-			Logger.info("Could not determine perspective");
-			return redirect(routes.Application.error());
+		Logger.info("TradeTransaction (id " + id + ") is in State " + tradeTransaction.state.name());
+		switch (tradeTransaction.state) {
+		 case INIT:			return viewInit(tradeTransaction);
+		 case REFUSE:		return null;
+		 case RESPONSE:		return null;
+		 case FINAL_REFUSE:	return null;
+		 case APPROVE:		return null;
+		 case INVALID:		return null;
+		 default:			Logger.info("Could not determine perspective");
+		 					return redirect(routes.Application.error());
 		}
-
 	}
 	
 	private static Result viewInit(TradeTransaction tradeTransaction) {
 		User currentUser = Common.currentUser();
-		User recipient = tradeTransaction.recipient;
-		
-		List<Book> pickedBooks = new ArrayList<Book>();		
-		List<Book> restBooks = Book.findByUser(recipient);
-		
-		// Separating the already picked books from all books from the partner
-		List<TradeBooks> tradeBooks = tradeTransaction.tradeBooks;
-		for (TradeBooks tradeBook : tradeBooks) {
-			Book book = tradeBook.book;
-			if(restBooks.contains(book)){
-				restBooks.remove(book);
-				pickedBooks.add(book);
-				
+		if (currentUser.equals(tradeTransaction.owner)) {
+			List<Book> pickedBooks = new ArrayList<Book>();		
+			List<Book> restBooks = Book.findByUser(tradeTransaction.recipient);
+			// Separating the already picked books from all books from the partner
+			for (TradeBooks tradeBook : tradeTransaction.tradeBooks) {
+				if(restBooks.contains(tradeBook.book)) {
+					restBooks.remove(tradeBook.book);
+					pickedBooks.add(tradeBook.book);
+				}
 			}
-		}
-		return ok(init.render(restBooks,tradeTransaction,recipient));	
+			return ok(init.render(restBooks,tradeTransaction,tradeTransaction.recipient));
+		} else 
+			if (currentUser.equals(tradeTransaction.recipient)) {
+			List<Book> ownerBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner);
+			List<Book> recipientBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient);
+
+			return redirect(routes.Application.error());
+		} else {
+			return redirect(routes.Application.error());
+		}	
 	}
 	
 	

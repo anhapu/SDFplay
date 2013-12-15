@@ -127,20 +127,18 @@ public class TradeTransaction extends Model{
     }
     
     
-    /** Return a list of books, which are part of a TradeTransaction. You are able to
-     * 	define, who is the owner of this TradeTransaction and who is the owner of the
-     * 	books, which are returned.
+    /** Returns a list of books, for a specified TradeTransaction and user.
      * 
-     * @param transactionOwner	user, who initiated this TradeTransaction
+     * @param id				id of TradeTransaction
      * @param bookOwner			user, who owns these books
      * @return					a list of books
      */
-    public static List<Book> findBooks(final User transactionOwner, final User bookOwner) {
+    public static List<Book> findBooks(final long id, final User bookOwner) {
     	String sqlString = "SELECT book.id, book.author, book.title, book.isbn, book.cover_url, "
     			+ " book.year, book.tradeable, book.comment, book.owner_id FROM book "
     			+ "INNER JOIN tradebooks ON tradebooks.book_id = book.id "
     			+ "INNER JOIN tradetransaction ON tradebooks.trade_transaction_id = tradetransaction.id "
-    			+ "WHERE book.owner_id = " + bookOwner.id + " AND tradetransaction.owner_id = " + transactionOwner.id;
+    			+ "WHERE book.owner_id = " + bookOwner.id + " AND tradetransaction.id = " + id;
     	
     	RawSql rawSql = RawSqlBuilder.parse(sqlString).columnMapping("book.id", "id")
     			.columnMapping("book.author", "author")

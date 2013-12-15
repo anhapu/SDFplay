@@ -13,9 +13,9 @@
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">an @tradeTransaction.recipient.username</a></h3>
 			@snippets.tradeProgressBar(tradeTransaction)
 			<h4>Sie wünschen sich von @tradeTransaction.recipient.username :</h4>
-			@snippets.books(TradeTransaction.findBooks(user, tradeTransaction.recipient))
+			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient))
 			<h4>@tradeTransaction.recipient.username wünscht sich von Ihnen :</h4>
-			@snippets.books(TradeTransaction.findBooks(user, tradeTransaction.owner))
+			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner))
 			@snippets.comments(tradeTransaction)
 		}
 	}
@@ -29,9 +29,9 @@
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">von @tradeTransaction.owner.username</a></h3>
 			@snippets.tradeProgressBar(tradeTransaction)
 			<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.owner, user))
+			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, user))
 			<h4>Sie wünschen sich von @tradeTransaction.owner.username :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.owner, tradeTransaction.owner))
+			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner))
 			@snippets.comments(tradeTransaction)	
 		}
 	}
