@@ -64,23 +64,17 @@ create index ix_tradetransaction_recipient_3 on tradetransaction (recipient_id);
 
 
 
-<<<<<<< HEAD
-
-# --- !Downs
-
-=======
 alter table tradetransaction_book add constraint fk_tradetransaction_book_trad_01 foreign key (tradetransaction_id) references tradetransaction (id);
 
 alter table tradetransaction_book add constraint fk_tradetransaction_book_book_02 foreign key (book_id) references book (id);
 
 # --- !Downs
 
->>>>>>> 933e8a52ef931b4d5eaafc54dcec2bb023488748
 drop table if exists book cascade;
 
-drop table if exists tradetransaction_book cascade;
-
 drop table if exists tradetransaction cascade;
+
+drop table if exists tradetransaction_book cascade;
 
 drop table if exists account cascade;
 
