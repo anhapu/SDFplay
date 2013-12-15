@@ -1,4 +1,4 @@
-@(recipientBookList: List[Book], ownerBookList: List[Book], tradeTransaction: TradeTransaction)
+@(recipientBookList: List[Book], ownerBookList: List[Book], tradeTransaction: TradeTransaction, transForm: Form[TradeTransaction])
 @import helper._
 
 @main("Tauschanfrage von " + tradeTransaction.owner.username) {
@@ -25,11 +25,13 @@
 		</div>
 	</div>
 	<div class="row">
-		@helper.form(action = routes.TradeController.init(tradeTransaction.owner.id)){
+		@helper.form(action = routes.TradeController.response(tradeTransaction.id)){
 			<div id="wishlist"></div>
+			@helper.textarea(transForm("comment"), 'class -> "form-control", '_label -> "Kommentar", 'rows -> "5")	
 			<input type="submit" class="btn" value="Wunschzettel bestätigen">
-			<input type="submit" class="btn" value="Tauschanfrage ablehnen">
 		}
+		
+		<a href="#" class="btn submit">Tauschanfrage ablehnen</a>
 	</div>
 }
 

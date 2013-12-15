@@ -1,4 +1,4 @@
-@(books: List[Book], user: User)
+@(books: List[Book], user: User, transForm: Form[TradeTransaction])
 @import helper._
 
 @main(user.username + "'s Bücherregal") {
@@ -7,15 +7,8 @@
   		<h2>Bücher tauschen mit @{user.username}</h2>
 	</div>
 	
-	<div id="trade-progress-bar">
-		<span class="label label-default">Erstellt</span>
-		<span class="label label-default">Antwort</span>
-		<span class="label label-default">Abgeschlossen</span>
-		<span class="label label-default">Abgelehnt</span>
-	</div>
+	@snippets.tradeProgressBar(null)
 
-	
-	
 	<div class="row"><!-- Content -->
 		<div id="showcase">
 			@for(book <- books) {
@@ -31,6 +24,7 @@
 	<div class="row">
 		@helper.form(action = routes.TradeController.init(user.id)){
 			<div id="wishlist"></div>
+			@helper.textarea(transForm("comment"), 'class -> "form-control", '_label -> "Kommentar", 'rows -> "5")	
 			<input type="submit" class="btn" value="Wunschzettel erstellen">
 		}
 	</div><!-- /Content -->
