@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.Common;
+import controllers.Secured;
 import models.User;
 import models.Book;
 import models.enums.Roles;
@@ -16,9 +17,14 @@ public class UserAdministrationController extends Controller {
 
      @Security.Authenticated(Secured.class)
      public static Result index() {
-          List<User> users = null;
-          users = User.findAllBut(Common.currentUser());
-          return ok(views.html.userAdministration.render(users));
+          if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
+               List<User> users = null;
+               users = User.findAllBut(Common.currentUser());
+               return ok(views.html.userAdministration.render(users));
+          } else {
+               flash("error", "Zugriff nicht gestattet!");
+               return redirect(routes.Application.index());
+          }
      }
 
      /**
@@ -28,17 +34,23 @@ public class UserAdministrationController extends Controller {
      @Transactional
 	public static Result toggleRole(Long id) {
           User user = User.findById(id);
-          if (User.isAdmin(user.id)) {
-               user.role = Roles.USER;
-               user.save();
-               flash("success", "Benutzerrolle zu Benutzer geändert!");
+          if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+               if (User.isAdmin(user.id)) {
+                    user.role = Roles.USER;
+                    user.save();
+                    flash("success", "Benutzerrolle zu Benutzer geändert!");
+               }
+               else {
+                    user.role = Roles.ADMIN;
+                    user.save();
+                    flash("success", "Benutzerrolle zu Admin geändert!");
+               }
+               return redirect(routes.UserAdministrationController.index());
           }
           else {
-               user.role = Roles.ADMIN;
-               user.save();
-               flash("success", "Benutzerrolle zu Admin geändert!");
+               flash("error", "Zugriff nicht gestattet!");
+               return redirect(routes.Application.index());
           }
-          return redirect(routes.UserAdministrationController.index());
      }
 
      /**
@@ -49,19 +61,25 @@ public class UserAdministrationController extends Controller {
      @Transactional
      public static Result toogleActive(Long id) {
          User user = User.findById(id);
-         // deactivate
-         if (user.isActive()) {
-              user.token = "123";
-              user.save();
-              flash("success", "Benutzer " + user.username + " deaktiviert!");
+         if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+              // deactivate
+              if (user.isActive()) {
+                   user.token = "123";
+                   user.save();
+                   flash("success", "Benutzer " + user.username + " deaktiviert!");
+              }
+              // activate
+              else {
+                   user.token = null;
+                   user.save();
+                   flash("success", "Benutzer " + user.username + " aktiviert!");
+              }
+              return redirect(routes.UserAdministrationController.index());
          }
-         // activate
          else {
-              user.token = null;
-              user.save();
-              flash("success", "Benutzer " + user.username + " aktiviert!");
+              flash("error", "Zugriff nicht gestattet!");
+              return redirect(routes.Application.index());
          }
-         return redirect(routes.UserAdministrationController.index());
     }
 
     @Security.Authenticated(Secured.class)
@@ -71,13 +89,18 @@ public class UserAdministrationController extends Controller {
      */
     public static Result deleteUser(Long id) {
 		User user = User.findById(id);
-		if(user != Common.currentUser()) {
-			String userName = user.username;
-			user.delete();
-			flash("success", "Benutzer " + userName + " gelöscht!");
-		} else {
-			flash("error", "Man kann sich nicht selbst löschen!");
-		}
-		return redirect(routes.UserAdministrationController.index());
-	}
+          if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+               if(user != Common.currentUser()) {
+                    String userName = user.username;
+                    user.delete();
+                    flash("success", "Benutzer " + userName + " gelöscht!");
+               } else {
+                    flash("error", "Man kann sich nicht selbst löschen!");
+               }
+               return redirect(routes.UserAdministrationController.index());
+          } else {
+               flash("error", "Zugriff nicht gestattet!");
+               return redirect(routes.Application.index());
+          }
+     }
 }
