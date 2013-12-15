@@ -19,4 +19,4 @@ dist
 .classpath
 .project
 conf/application.conf
-/conf/evolutions/default/1.sql
+conf/evolutions/default/1.sql
