@@ -27,7 +27,7 @@ books:
         author: Test author
         title: Test title
         isbn: 1234567890
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51%2B3V6VEdiL._SL160_.jpg
         year: 2013
         tradeable: false
         comment: Test comment
@@ -38,7 +38,7 @@ books:
         author: Joanne K. Rowling
         title: Harry Potter und der Stein der Weisen
         isbn: 3551551677
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51ZCkfjgyzL._SL160_.jpg
         year: 1998
         tradeable: false
         comment: Test comment
@@ -49,7 +49,7 @@ books:
         author: Joanne K. Rowling
         title: Harry Potter und die Kammer des Schreckens
         isbn: 3551551685
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51ayAOPA3LL._SL160_.jpg
         year: 1999
         tradeable: false
         comment: Test comment
@@ -60,7 +60,7 @@ books:
         author: Joanne K. Rowling
         title: Harry Potter und der Gefangene von Askaban
         isbn: 3551551693
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51kkaJ6D%2BhL._SL160_.jpg
         year: 1999
         tradeable: true
         comment: Test comment
@@ -73,7 +73,7 @@ books:
         author: George R. R. Martin
         title: A Game of Thrones
         isbn: 1234567890
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51S8cBWGXNL._SL160_.jpg
         year: 2013
         tradeable: false
         comment: Test comment
@@ -84,7 +84,7 @@ books:
         author: George R. R. Martin
         title: A Clash of Kings
         isbn: 3551551677
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51w76WgEGFL._SL160_.jpg
         year: 1998
         tradeable: false
         comment: Test comment
@@ -95,7 +95,7 @@ books:
         author: George R. R. Martin
         title: A Storm of Swords
         isbn: 3551551685
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51Boa%2BzJKhL._SL160_.jpg
         year: 1999
         tradeable: false
         comment: Test comment
@@ -106,7 +106,7 @@ books:
         author: George R. R. Martin
         title: A Feast for Crows
         isbn: 3551551693
-        coverUrl: http://testurl.de
+        coverUrl: http://ecx.images-amazon.com/images/I/51O0VWiq6lL._SL160_.jpg
         year: 1999
         tradeable: true
         comment: Test comment
