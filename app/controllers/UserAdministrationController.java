@@ -14,6 +14,7 @@ import play.db.ebean.Transactional;
 @With(Common.class)
 public class UserAdministrationController extends Controller {
 
+     @Security.Authenticated(Secured.class)
      public static Result index() {
           List<User> users = null;
           users = User.findAllBut(Common.currentUser());
@@ -23,6 +24,7 @@ public class UserAdministrationController extends Controller {
      /**
      * Changes the role. Admin -> User or User -> Admin.
      */
+     @Security.Authenticated(Secured.class)
      @Transactional
 	public static Result toggleRole(Long id) {
           User user = User.findById(id);
@@ -43,6 +45,7 @@ public class UserAdministrationController extends Controller {
      * Activate and deactive a user, this is possible by changing the value of token to null or
      * something else.
      */
+     @Security.Authenticated(Secured.class)
      @Transactional
      public static Result toogleActive(Long id) {
          User user = User.findById(id);
@@ -61,6 +64,7 @@ public class UserAdministrationController extends Controller {
          return redirect(routes.UserAdministrationController.index());
     }
 
+    @Security.Authenticated(Secured.class)
     @Transactional
     /**
      * Deletes the user and all of it's books.
