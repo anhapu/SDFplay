@@ -1,4 +1,4 @@
-@(restBooks: List[Book], tradeTransaction: TradeTransaction, user: User)
+@(books: List[Book], tradeTransaction: TradeTransaction, user: User)
 @import helper._
 
 @main(user.username + "'s Bücherregal") {
@@ -10,19 +10,8 @@
 	@snippets.tradeProgressBar(tradeTransaction)
 	
 	<h3>Deine ausgewählten Bücher</h3>
-	@snippets.tradeBooks(tradeTransaction)
+	@snippets.books(books)
 		
-	<h3>Im Showcase verbleibende Bücher:</h3>
-	
-	<div class="row"><!-- Content -->
-		@for(book <- restBooks) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@book.coverUrl>
-				</a>
-			</div>
-		}
-	</div><!-- /Content -->
 	
 	<a href="@routes.TradeController.delete(tradeTransaction.id)" class="btn btn-danger">Wunschzettel löschen</a>
 }

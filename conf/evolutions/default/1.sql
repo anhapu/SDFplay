@@ -16,13 +16,6 @@ create table book (
   constraint pk_book primary key (id))
 ;
 
-create table tradebooks (
-  id                        bigint not null,
-  trade_transaction_id      bigint,
-  book_id                   bigint,
-  constraint pk_tradebooks primary key (id))
-;
-
 create table tradetransaction (
   id                        bigint not null,
   owner_id                  bigint,
@@ -50,9 +43,13 @@ create table account (
   constraint pk_account primary key (id))
 ;
 
-create sequence book_seq;
 
-create sequence tradebooks_seq;
+create table tradetransaction_book (
+  tradetransaction_id            bigint not null,
+  book_id                        bigint not null,
+  constraint pk_tradetransaction_book primary key (tradetransaction_id, book_id))
+;
+create sequence book_seq;
 
 create sequence tradetransaction_seq;
 
@@ -60,30 +57,34 @@ create sequence account_seq;
 
 alter table book add constraint fk_book_owner_1 foreign key (owner_id) references account (id);
 create index ix_book_owner_1 on book (owner_id);
-alter table tradebooks add constraint fk_tradebooks_tradeTransaction_2 foreign key (trade_transaction_id) references tradetransaction (id);
-create index ix_tradebooks_tradeTransaction_2 on tradebooks (trade_transaction_id);
-alter table tradebooks add constraint fk_tradebooks_book_3 foreign key (book_id) references book (id);
-create index ix_tradebooks_book_3 on tradebooks (book_id);
-alter table tradetransaction add constraint fk_tradetransaction_owner_4 foreign key (owner_id) references account (id);
-create index ix_tradetransaction_owner_4 on tradetransaction (owner_id);
-alter table tradetransaction add constraint fk_tradetransaction_recipient_5 foreign key (recipient_id) references account (id);
-create index ix_tradetransaction_recipient_5 on tradetransaction (recipient_id);
+alter table tradetransaction add constraint fk_tradetransaction_owner_2 foreign key (owner_id) references account (id);
+create index ix_tradetransaction_owner_2 on tradetransaction (owner_id);
+alter table tradetransaction add constraint fk_tradetransaction_recipient_3 foreign key (recipient_id) references account (id);
+create index ix_tradetransaction_recipient_3 on tradetransaction (recipient_id);
 
 
+
+<<<<<<< HEAD
 
 # --- !Downs
 
+=======
+alter table tradetransaction_book add constraint fk_tradetransaction_book_trad_01 foreign key (tradetransaction_id) references tradetransaction (id);
+
+alter table tradetransaction_book add constraint fk_tradetransaction_book_book_02 foreign key (book_id) references book (id);
+
+# --- !Downs
+
+>>>>>>> 933e8a52ef931b4d5eaafc54dcec2bb023488748
 drop table if exists book cascade;
 
-drop table if exists tradebooks cascade;
+drop table if exists tradetransaction_book cascade;
 
 drop table if exists tradetransaction cascade;
 
 drop table if exists account cascade;
 
 drop sequence if exists book_seq;
-
-drop sequence if exists tradebooks_seq;
 
 drop sequence if exists tradetransaction_seq;
 

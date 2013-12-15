@@ -161,4 +161,10 @@ public class Book extends Model
         book.update();
         return book;
     }
+
+    
+    public static List<Book> findByTransactionAndOwner(TradeTransaction trans, User owner) {
+        return find.where().eq("tradeTransactionList", trans).eq("owner", owner).findList();
+    }
+    
 }

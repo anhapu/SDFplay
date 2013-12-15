@@ -57,6 +57,7 @@ public class UserController extends Controller {
              return result;
         }
         
+        @Security.Authenticated(Secured.class)
         public static Result logout() {
                 session().clear();
                 return redirect(routes.Application.index());
@@ -124,6 +125,7 @@ public class UserController extends Controller {
             }
         }
 
+        @Security.Authenticated(Secured.class)
         @Transactional
         public static Result saveProfile(Long id) {
                 Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
@@ -173,6 +175,7 @@ public class UserController extends Controller {
              return user;
         }
 
+        @Security.Authenticated(Secured.class)
         public static Result editPassword(String mystery) {
                 final Form form = form().bindFromRequest();
                 User searchedUser = solveMystery(mystery);
@@ -183,6 +186,7 @@ public class UserController extends Controller {
                 }
         }
 
+        @Security.Authenticated(Secured.class)
         @Transactional
         public static Result savePassword(String mystery) {
                 Form<ChangePassword> pForm = form(ChangePassword.class).bindFromRequest();

@@ -8,14 +8,13 @@
   			<h2>Eigene Tauschanfragen:</h2>
 		</div>
 	
-		
 		@for(tradeTransaction <- tradeListOwner) {
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">an @tradeTransaction.recipient.username</a></h3>
 			@snippets.tradeProgressBar(tradeTransaction)
 			<h4>Sie wünschen sich von @tradeTransaction.recipient.username :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient))
+			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
 			<h4>@tradeTransaction.recipient.username wünscht sich von Ihnen :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner))
+			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
 			@snippets.comments(tradeTransaction)
 		}
 	}
@@ -29,9 +28,9 @@
 			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">von @tradeTransaction.owner.username</a></h3>
 			@snippets.tradeProgressBar(tradeTransaction)
 			<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, user))
+			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, user))
 			<h4>Sie wünschen sich von @tradeTransaction.owner.username :</h4>
-			@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner))
+			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
 			@snippets.comments(tradeTransaction)	
 		}
 	}

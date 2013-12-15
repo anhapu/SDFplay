@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Book;
-import models.TradeBooks;
 import models.TradeTransaction;
 import models.User;
 import models.enums.States;
 import play.Logger;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -21,7 +21,9 @@ import views.html.trade.showAll;
 @With(Common.class)
 @Security.Authenticated(Secured.class)
 public class TradeController extends Controller {
-
+	
+	static Form<TradeTransaction> transactionForm = Form.form(TradeTransaction.class);
+	
 	/** Displays an overview of all book exchange offers, 
 	 * 	in which the current user is involved in.
 	 * 
@@ -45,19 +47,20 @@ public class TradeController extends Controller {
 	public static Result viewForUser(Long id) {
 		User currentUser = Common.currentUser();
 		User recipient = User.findById(id);
-		Logger.info("recipient = " + recipient.username);
-		Logger.info("user = " + currentUser.username);
 		
 		if(recipient == null) {
 			return redirect(routes.Application.error());
 		}
 		
+		Logger.info("recipient = " + recipient.username);
+		Logger.info("user = " + currentUser.username);
+		
 		TradeTransaction trade = TradeTransaction.exists(currentUser, recipient);
 		if(trade == null) {
 			// TODO Not the showcase books yet
-			List<Book> books = Book.findByUser(recipient);
+			List<Book> books = Book.getShowcaseForUser(recipient);
 			Logger.info("Found " + books.size() + " books for user " + recipient.username);
-			return ok(create.render(books,recipient));
+			return ok(create.render(books,recipient,transactionForm));
 		} else {
 			// There is already a Transaction, so forward it to the state machine
 			return redirect(routes.TradeController.view(trade.id));
@@ -77,11 +80,11 @@ public class TradeController extends Controller {
 		Logger.info("TradeTransaction (id " + id + ") is in State " + tradeTransaction.state.name());
 		switch (tradeTransaction.state) {
 		 case INIT:			return viewInit(tradeTransaction);
-		 case REFUSE:		return null;
-		 case RESPONSE:		return null;
-		 case FINAL_REFUSE:	return null;
-		 case APPROVE:		return null;
-		 case INVALID:		return null;
+		 case REFUSE:		return ok("This view is not implemented yet");
+		 case RESPONSE:		return ok("This view is not implemented yet");
+		 case FINAL_REFUSE:	return ok("This view is not implemented yet");
+		 case APPROVE:		return ok("This view is not implemented yet");
+		 case INVALID:		return ok("This view is not implemented yet");
 		 default:			Logger.info("Could not determine perspective");
 		 					return redirect(routes.Application.error());
 		}
@@ -90,21 +93,15 @@ public class TradeController extends Controller {
 	private static Result viewInit(TradeTransaction tradeTransaction) {
 		User currentUser = Common.currentUser();
 		if (currentUser.equals(tradeTransaction.owner)) {
-			List<Book> pickedBooks = new ArrayList<Book>();		
-			List<Book> restBooks = Book.findByUser(tradeTransaction.recipient);
-			// Separating the already picked books from all books from the partner
-			for (TradeBooks tradeBook : tradeTransaction.tradeBooks) {
-				if(restBooks.contains(tradeBook.book)) {
-					restBooks.remove(tradeBook.book);
-					pickedBooks.add(tradeBook.book);
-				}
-			}
-			return ok(initOwner.render(restBooks,tradeTransaction,tradeTransaction.recipient));
-		} else 
-			if (currentUser.equals(tradeTransaction.recipient)) {
-			List<Book> recipientBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient);
+			Logger.info("Current user is owner of TradeTransaction (id " + tradeTransaction.id + ")");
+			List<Book> pickedBooks = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+			return ok(initOwner.render(pickedBooks,tradeTransaction,tradeTransaction.recipient));
+			
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("Current user is recipient of TradeTransaction (id " + tradeTransaction.id + ")");
+			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
-			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction));
+			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, transactionForm));
 		} else {
 			return redirect(routes.Application.error());
 		}	
@@ -127,40 +124,79 @@ public class TradeController extends Controller {
     		flash("error", "Dieser Wunschzettel existiert bereits und konnte nicht neu angelegt werden.");
     	} else {
     		
+    		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
+  
         	// Getting the selection
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
 	    	if(bookSelection == null) {
 	    		flash("error", "Bitte wähle min. ein Buch aus.");
 	    		Logger.info("Error in Selection");
-	    		return redirect(routes.TradeController.viewForUser(recipientId));
+				List<Book> books = Book.getShowcaseForUser(recipient);
+				return badRequest(create.render(books,recipient,filledForm));
 	    	}
-    		
     		
 	    	// Create the transaction
 	    	TradeTransaction trade = new TradeTransaction();
 	    	trade.owner = owner;
 	    	trade.recipient = recipient;
 	    	trade.state = States.INIT;
-	    	trade.commentOwner = "Hallo! Wie waere es mit einem Buchtausch?";
-	    	trade.commentRecipient = "Ok. Geht klar.";
-	    	trade.save();
+	    	trade.commentOwner = filledForm.data().get("comment");
 	    	
 	 		Long bookId = null;
 	 		Book book = null;
 	 		for (String bookString : bookSelection) {
 	    		bookId = Long.parseLong(bookString);
 	    		book = Book.findById(bookId);
-	    		TradeBooks tradeBook = new TradeBooks();
-	    		tradeBook.book = book;
-	    		tradeBook.tradeTransaction = trade;
-	    		tradeBook.save();
-				Logger.info("Added Book " + book.id.toString() + " to Transaction " + trade.id.toString());
+	    		trade.bookList.add(book);
+				Logger.info("Added Book " + book.id.toString());
 			}
-	    	
+	 			 		
+	    	trade.save();
 	 		flash("success", "Wunschzettel angelegt");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
     	return redirect(routes.Application.index());
+    }
+    
+    
+    public static Result response(Long id) {
+    	
+    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
+		
+       	// Getting the selection
+    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
+    	if(bookSelection == null) {
+    		flash("error", "Bitte wähle min. ein Buch aus.");
+    		Logger.info("Error in Selection");
+    		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
+			return badRequest(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, filledForm));
+    	}
+    	
+    	Long bookId = null;
+ 		Book book = null;
+ 		for (String bookString : bookSelection) {
+    		bookId = Long.parseLong(bookString);
+    		book = Book.findById(bookId);
+    		tradeTransaction.bookList.add(book);
+			Logger.info("Added Book " + book.id.toString());
+		}
+ 		
+    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
+    	tradeTransaction.state = States.RESPONSE;
+    	tradeTransaction.save();
+ 		flash("success", "Wunschzettel bestätigt");
+    	return redirect(routes.TradeController.view(tradeTransaction.id));
+    }
+    
+    public static Result refuse(Long id) {
+    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+    	tradeTransaction.state = States.REFUSE;
+    	tradeTransaction.save();
+ 		flash("success", "Wunschzettel wurde abgelehnt.");
+ 		//		<a href="#" class="btn submit">Tauschanfrage ablehnen</a>
+    	return redirect(routes.TradeController.view(tradeTransaction.id));
     }
     
     public static Result delete(Long id){

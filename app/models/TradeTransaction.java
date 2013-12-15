@@ -29,7 +29,6 @@ import com.avaje.ebean.RawSqlBuilder;
 import com.avaje.ebean.annotation.CreatedTimestamp;
 
 import models.enums.States;
-import models.TradeBooks;
 import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -56,9 +55,6 @@ public class TradeTransaction extends Model{
 
 	@Enumerated(EnumType.STRING)  //If you have EnumType.ORDINAL set, you would run into problems when updating your enum.
 	public States state;
-
-	@OneToMany(targetEntity = models.TradeBooks.class, cascade=CascadeType.ALL, mappedBy="tradeTransaction")
-	public List<TradeBooks> tradeBooks;
 	
 	public String commentOwner;
 	
@@ -67,13 +63,12 @@ public class TradeTransaction extends Model{
 	@CreatedTimestamp
 	public Timestamp initTime;
 
-	/**
-	@JoinTable(name = "tradetransaction_has_book", 
+	
+	@JoinTable(name = "tradetransaction_book", 
 	        joinColumns = { @JoinColumn(name = "tradetransaction_id", referencedColumnName = "id")}, 
 	        inverseJoinColumns = { @JoinColumn(name = "book_id", referencedColumnName = "id")})
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	public List<Book> bookList;
-	*/
 	
 	public static Model.Finder<String,TradeTransaction> find = new Model.Finder<String,TradeTransaction>(String.class, TradeTransaction.class);
 	
@@ -126,31 +121,9 @@ public class TradeTransaction extends Model{
         return find.where().eq("recipient", recipient).findList();
     }
     
-    
-    /** Returns a list of books, for a specified TradeTransaction and user.
-     * 
-     * @param id				id of TradeTransaction
-     * @param bookOwner			user, who owns these books
-     * @return					a list of books
-     */
-    public static List<Book> findBooks(final long id, final User bookOwner) {
-    	String sqlString = "SELECT book.id, book.author, book.title, book.isbn, book.cover_url, "
-    			+ " book.year, book.tradeable, book.comment, book.owner_id FROM book "
-    			+ "INNER JOIN tradebooks ON tradebooks.book_id = book.id "
-    			+ "INNER JOIN tradetransaction ON tradebooks.trade_transaction_id = tradetransaction.id "
-    			+ "WHERE book.owner_id = " + bookOwner.id + " AND tradetransaction.id = " + id;
-    	
-    	RawSql rawSql = RawSqlBuilder.parse(sqlString).columnMapping("book.id", "id")
-    			.columnMapping("book.author", "author")
-    			.columnMapping("book.title", "title")
-    			.columnMapping("book.isbn", "isbn")
-    			.columnMapping("book.cover_url", "coverUrl")
-    			.columnMapping("book.year", "year")
-    			.columnMapping("book.tradeable", "tradeable")
-    			.columnMapping("book.comment", "comment")
-    			.columnMapping("book.owner_id", "owner.id")
-    			.create();
-    	return Ebean.find(Book.class).setRawSql(rawSql).findList();
+    public static List<TradeTransaction> test(User user) {
+    	return find.where().eq("tradeBooks.book.author", "George R. R. Martin").findList();	
     }
+    
 
 }
