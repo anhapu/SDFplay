@@ -55,9 +55,9 @@ public class Book extends Model
     public User owner;
     
     /**
-	@ManyToMany(mappedBy = "bookList")
+    @ManyToMany(mappedBy = "bookList")
     public List<TradeTransaction> tradeTransactionList;
-	*/
+    */
     
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
     
@@ -75,7 +75,7 @@ public class Book extends Model
      */
     public static List<Book> findByTitle(final String booktitle)
     {
-        return find.where().ilike( "title", "%" + booktitle + "%" ).findList();
+        return find.where().ilike( "title", "%" + booktitle + "%" ).orderBy("title asc").findList();
     }
     
     /**
@@ -83,22 +83,20 @@ public class Book extends Model
      * @param nameOfAuthor The name of the author.
      * @return List of books can be empty.
      */
-    public static List<Book> findByAuthor(final String nameOfAuthor)
-    {
-        return find.where().like( "author", nameOfAuthor ).findList();
+    public static List<Book> findByAuthor(final String nameOfAuthor) {
+        return find.where().like( "author", nameOfAuthor ).orderBy( "title asc" ).findList();
     }
     
     /**
      * Returns a list of all swapable books.
      * @return
      */
-    public static List<Book> findAllTradeableBooks()
-    {
-        return find.where().eq("tradeable", true).findList();
+    public static List<Book> findAllTradeableBooks() {
+        return find.where().eq( "tradeable", true ).orderBy( "title asc" ).findList();
     }
     
-    public static List<Book> findAllTradeableBooksByTitle(final String title){
-        return find.where().eq( "tradeable", true ).ilike( "title", "%" + title + "%" ).findList();
+    public static List<Book> findAllTradeableBooksByTitle(final String title) {
+        return find.where().eq( "tradeable", true ).ilike( "title", "%" + title + "%" ).orderBy( "title asc" ).findList();
     }
     
     /**
@@ -106,9 +104,8 @@ public class Book extends Model
      * @param user
      * @return List of books.
      */
-    public static List<Book> findByUser(final User user)
-    {
-        return find.where().eq( "owner.id", user.id ).findList();
+    public static List<Book> findByUser(final User user) {
+        return find.where().eq( "owner.id", user.id ).orderBy( "title asc" ).findList();
     }
     
     /**
@@ -116,9 +113,9 @@ public class Book extends Model
      * @param user
      * @return List of books
      */
-    public static List<Book> getShowcaseForUser(final User user)
-    {
-        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).findList();
+    public static List<Book> getShowcaseForUser(final User user) {
+        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "title asc" )
+                .findList();
     }
     /**
      * Returns a book by a given id.
