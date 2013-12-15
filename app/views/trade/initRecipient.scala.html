@@ -9,7 +9,7 @@
 	
 	@snippets.tradeProgressBar(tradeTransaction)	
 	<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
-	@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient))
+	@snippets.books(recipientBookList)
 	
 	<h4>Suchen Sie sich Bücher aus dem Showcase von @tradeTransaction.owner.username :</h4>
 	<div class="row">

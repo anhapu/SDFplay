@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Book;
-import models.TradeBooks;
 import models.TradeTransaction;
 import models.User;
 import models.enums.States;
@@ -90,19 +89,12 @@ public class TradeController extends Controller {
 	private static Result viewInit(TradeTransaction tradeTransaction) {
 		User currentUser = Common.currentUser();
 		if (currentUser.equals(tradeTransaction.owner)) {
-			List<Book> pickedBooks = new ArrayList<Book>();		
-			List<Book> restBooks = Book.findByUser(tradeTransaction.recipient);
-			// Separating the already picked books from all books from the partner
-			for (TradeBooks tradeBook : tradeTransaction.tradeBooks) {
-				if(restBooks.contains(tradeBook.book)) {
-					restBooks.remove(tradeBook.book);
-					pickedBooks.add(tradeBook.book);
-				}
-			}
-			return ok(initOwner.render(restBooks,tradeTransaction,tradeTransaction.recipient));
-		} else 
-			if (currentUser.equals(tradeTransaction.recipient)) {
-			List<Book> recipientBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient);
+		
+			List<Book> pickedBooks = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+			return ok(initOwner.render(pickedBooks,tradeTransaction,tradeTransaction.recipient));
+			
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
 			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction));
 		} else {
@@ -135,7 +127,6 @@ public class TradeController extends Controller {
 	    		return redirect(routes.TradeController.viewForUser(recipientId));
 	    	}
     		
-    		
 	    	// Create the transaction
 	    	TradeTransaction trade = new TradeTransaction();
 	    	trade.owner = owner;
@@ -143,20 +134,17 @@ public class TradeController extends Controller {
 	    	trade.state = States.INIT;
 	    	trade.commentOwner = "Hallo! Wie waere es mit einem Buchtausch?";
 	    	trade.commentRecipient = "Ok. Geht klar.";
-	    	trade.save();
 	    	
 	 		Long bookId = null;
 	 		Book book = null;
 	 		for (String bookString : bookSelection) {
 	    		bookId = Long.parseLong(bookString);
 	    		book = Book.findById(bookId);
-	    		TradeBooks tradeBook = new TradeBooks();
-	    		tradeBook.book = book;
-	    		tradeBook.tradeTransaction = trade;
-	    		tradeBook.save();
-				Logger.info("Added Book " + book.id.toString() + " to Transaction " + trade.id.toString());
+	    		trade.bookList.add(book);
+				Logger.info("Added Book " + book.id.toString());
 			}
-	    	
+	 		
+	    	trade.save();
 	 		flash("success", "Wunschzettel angelegt");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
