@@ -1,0 +1,35 @@
+@(recipientBookList: List[Book], ownerBookList: List[Book], tradeTransaction: TradeTransaction)
+@import helper._
+
+@main("Tauschanfrage von " + tradeTransaction.owner.username) {
+
+	<div class="page-header">
+  		<h2>Tauschanfrage von @tradeTransaction.owner.username :</h2>
+	</div>
+	
+	@snippets.tradeProgressBar(tradeTransaction)	
+	<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
+	@snippets.books(TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient))
+	
+	<h4>Suchen Sie sich Bücher aus dem Showcase von @tradeTransaction.owner.username :</h4>
+	<div class="row">
+		<div id="showcase">
+			@for(book <- ownerBookList) {
+				<div id="@book.id" class="col-sm-4 col-md-2 col-xs-6 book">
+					<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
+						<img src=@book.coverUrl>
+					</a>
+					<input type="hidden" name="book_selection" value="@book.id" />
+				</div>
+			}
+		</div>
+	</div>
+	<div class="row">
+		@helper.form(action = routes.TradeController.init(tradeTransaction.owner.id)){
+			<div id="wishlist"></div>
+			<input type="submit" class="btn" value="Wunschzettel bestätigen">
+			<input type="submit" class="btn" value="Tauschanfrage ablehnen">
+		}
+	</div>
+}
+

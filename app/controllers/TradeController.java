@@ -13,7 +13,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
-import views.html.trade.init;
+import views.html.trade.initOwner;
+import views.html.trade.initRecipient;
 import views.html.trade.create;
 import views.html.trade.showAll;
 
@@ -98,13 +99,12 @@ public class TradeController extends Controller {
 					pickedBooks.add(tradeBook.book);
 				}
 			}
-			return ok(init.render(restBooks,tradeTransaction,tradeTransaction.recipient));
+			return ok(initOwner.render(restBooks,tradeTransaction,tradeTransaction.recipient));
 		} else 
 			if (currentUser.equals(tradeTransaction.recipient)) {
-			List<Book> ownerBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.owner);
 			List<Book> recipientBookList = TradeTransaction.findBooks(tradeTransaction.id, tradeTransaction.recipient);
-
-			return redirect(routes.Application.error());
+			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
+			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction));
 		} else {
 			return redirect(routes.Application.error());
 		}	
