@@ -93,11 +93,12 @@ public class TradeController extends Controller {
 	private static Result viewInit(TradeTransaction tradeTransaction) {
 		User currentUser = Common.currentUser();
 		if (currentUser.equals(tradeTransaction.owner)) {
-		
+			Logger.info("Current user is owner of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> pickedBooks = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			return ok(initOwner.render(pickedBooks,tradeTransaction,tradeTransaction.recipient));
 			
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("Current user is recipient of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
 			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, transactionForm));
@@ -186,6 +187,15 @@ public class TradeController extends Controller {
     	tradeTransaction.state = States.RESPONSE;
     	tradeTransaction.save();
  		flash("success", "Wunschzettel bestätigt");
+    	return redirect(routes.TradeController.view(tradeTransaction.id));
+    }
+    
+    public static Result refuse(Long id) {
+    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+    	tradeTransaction.state = States.REFUSE;
+    	tradeTransaction.save();
+ 		flash("success", "Wunschzettel wurde abgelehnt.");
+ 		//		<a href="#" class="btn submit">Tauschanfrage ablehnen</a>
     	return redirect(routes.TradeController.view(tradeTransaction.id));
     }
     

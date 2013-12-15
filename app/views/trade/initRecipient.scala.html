@@ -31,7 +31,9 @@
 			<input type="submit" class="btn" value="Wunschzettel bestätigen">
 		}
 		
-		<a href="#" class="btn submit">Tauschanfrage ablehnen</a>
+		@helper.form(action = routes.TradeController.refuse(tradeTransaction.id)){
+		<input type="submit" class="btn" value="Tauschanfrage ablehnen">
+		}
 	</div>
 }
 

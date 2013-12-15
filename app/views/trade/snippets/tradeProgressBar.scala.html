@@ -17,12 +17,12 @@
 		} else {
 			<span class="label label-default">Antwort</span>
 		}
-		@if((tradeTransaction.state.name() == "REFUSE") || (tradeTransaction.state.name() == "FINAL_REFUSE")) {
+		@if(tradeTransaction.state.name() == "APPROVE") {
 			<span class="label label-success">Abgeschlossen</span>
 		} else {
 			<span class="label label-default">Abgeschlossen</span>
 		}
-		@if(tradeTransaction.state.name() == "APPROVE") {
+		@if((tradeTransaction.state.name() == "REFUSE") || (tradeTransaction.state.name() == "FINAL_REFUSE")) {
 			<span class="label label-success">Abgelehnt</span>
 		} else {
 			<span class="label label-default">Abgelehnt</span>
