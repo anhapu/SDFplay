@@ -12,6 +12,7 @@
 	<h3>Deine ausgewählten Bücher</h3>
 	@snippets.books(books)
 	@snippets.comments(tradeTransaction)
+	
 	<a href="@routes.TradeController.delete(tradeTransaction.id)" class="btn btn-danger">Wunschzettel löschen</a>
 }
 

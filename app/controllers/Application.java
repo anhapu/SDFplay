@@ -10,6 +10,7 @@ import play.mvc.Security;
 import play.mvc.With;
 import views.html.index;
 import views.html.error;
+import views.html.denied;
 
 @With(Common.class)
 public class Application extends Controller {
@@ -32,6 +33,10 @@ public class Application extends Controller {
     
     public static Result error() {
     	return badRequest(error.render());
+    }
+    
+    public static Result denied() {
+    	return badRequest(denied.render());
     }
 
 }

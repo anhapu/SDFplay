@@ -3,9 +3,9 @@ package controllers;
 
 import play.mvc.*;
 import play.mvc.Http.*;
-
 import models.*;
 import models.enums.Roles;
+import models.enums.States;
 
 
 public class Secured extends Security.Authenticator
@@ -20,8 +20,6 @@ public class Secured extends Security.Authenticator
     public Result onUnauthorized(Context ctx) {
         return redirect(routes.Application.index());
     }
-    
-  
     
     /**
      * Checks if the current user is the owner of the given book.
@@ -98,6 +96,52 @@ public class Secured extends Security.Authenticator
               allowed = true;
          }
          return allowed;
+    }
+    
+    /**
+     * Determines if the current user is allowed to access a specific TradeTransaction
+     * @param trade
+     * @return
+     */
+    public static boolean viewTradeTransaction(TradeTransaction trade) {
+    	User current = Common.currentUser();
+    	if(trade.owner.equals(current) || 
+    			trade.recipient.equals(current) || 
+    			current.role == Roles.ADMIN) {
+    		return true;
+    	} else {
+    		return false;
+    	} 	
+    }
+    
+    /**
+     * Determines if the current user is allowed to delete a specific TradeTransaction
+     * @param trade
+     * @return
+     */
+    public static boolean deleteTradeTransaction(TradeTransaction trade) {
+    	User current = Common.currentUser();
+    	if(trade.owner.equals(current) && trade.state == States.INIT) {
+    		return true;
+    	} else if(current.role == Roles.ADMIN){
+    		return true;
+    	} else {
+    		return false;
+    	} 	
+    }
+    
+    /**
+     * Determines if the current user is allowed to response to a specific TradeTransaction
+     * @param trade
+     * @return
+     */
+    public static boolean responseTradeTransaction(TradeTransaction trade) {
+    	User current = Common.currentUser();
+    	if(trade.recipient.equals(current) && trade.state == States.INIT) {
+    		return true;
+    	} else {
+    		return false;
+    	} 	
     }
         
 }

@@ -26,6 +26,12 @@
 		} else {
 			<span class="label label-default">Abgelehnt</span>
 		}
+		@if((tradeTransaction.state.name() == "INVALID")  ) {
+			<span class="label label-danger">Ungültig</span>
+		} else {
+			<span class="label label-default">Ungültig</span>
+		}
+		
 	
 	}
 		

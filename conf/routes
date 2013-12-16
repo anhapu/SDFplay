@@ -26,6 +26,7 @@ GET  /userAdministration/toggleRole/:id controllers.UserAdministrationController
 # Home page
 GET   /                   controllers.Application.index()
 GET   /error			  controllers.Application.error()
+GET   /denied			  controllers.Application.denied()
 
 # Map static resources from the /public folder to the /assets URL path
 GET   /assets/*file       controllers.Assets.at(path="/public", file)

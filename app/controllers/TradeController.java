@@ -85,6 +85,10 @@ public class TradeController extends Controller {
 			return redirect(routes.Application.error());
 		}
 		
+		if(!Secured.viewTradeTransaction(tradeTransaction)){
+			return redirect(routes.Application.denied());
+		}
+		
 		Logger.info("TradeTransaction (id " + id + ") is in State " + tradeTransaction.state.name());
 		switch (tradeTransaction.state) {
 		 case INIT:			return viewInit(tradeTransaction);
@@ -195,6 +199,11 @@ public class TradeController extends Controller {
     public static Result response(Long id) {
     	
     	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+    	
+		if(!Secured.responseTradeTransaction(tradeTransaction)){
+			return redirect(routes.Application.denied());
+		}
+    	
 		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
 		
 		// Process the Response Button
@@ -238,13 +247,16 @@ public class TradeController extends Controller {
     }
     
     
-    public static Result delete(Long id){
-    	// Security here!!!
-    	
+    public static Result delete(Long id){    	
     	TradeTransaction trade = TradeTransaction.findById(id);
     	if(trade == null) {
     		return redirect(routes.Application.error());
     	}
+    	
+    	// For debugging not in use, so we can delete a transaction
+//    	if(!Secured.deleteTradeTransaction(trade)){
+//			return redirect(routes.Application.denied());
+//    	}
     	
     	User partner = trade.recipient;
     	trade.delete();
