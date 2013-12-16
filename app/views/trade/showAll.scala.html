@@ -1,38 +1,53 @@
 @(user: User, tradeListOwner: List[TradeTransaction], tradeListRecipient: List[TradeTransaction])
 @import helper._
 
-@main(user.username + "s Tauschanfragen") {
+@main(user.username + "s Wunschzettel") {
+	
+	@if(!tradeListRecipient.isEmpty()) {
+		<div class="page-header">
+  			<h2>Wünsche an mich:</h2>
+		</div>
+			
+		@for(tradeTransaction <- tradeListRecipient) {
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Von @tradeTransaction.owner.username</h4>
+				@snippets.tradeProgressBar(tradeTransaction)
+			</div>
+			<div class="panel-body">
+				<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
+				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, user))
+				<h4>Sie wünschen sich von @tradeTransaction.owner.username :</h4>
+				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
+			</div>
+			</div>
+		}
+	}
+	
 	
 	@if(!tradeListOwner.isEmpty()) {
 		<div class="page-header">
-  			<h2>Eigene Tauschanfragen:</h2>
+  			<h2>Wünsche von mir:</h2>
 		</div>
 	
 		@for(tradeTransaction <- tradeListOwner) {
-			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">an @tradeTransaction.recipient.username</a></h3>
-			@snippets.tradeProgressBar(tradeTransaction)
-			<h4>Sie wünschen sich von @tradeTransaction.recipient.username :</h4>
-			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
-			<h4>@tradeTransaction.recipient.username wünscht sich von Ihnen :</h4>
-			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
-			@snippets.comments(tradeTransaction)
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>An @tradeTransaction.recipient.username</h4>
+				@snippets.tradeProgressBar(tradeTransaction)
+			</div>
+			<div class="panel-body">
+				<h4>Sie wünschen sich von @tradeTransaction.recipient.username :</h4>
+				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
+				<h4>@tradeTransaction.recipient.username wünscht sich von Ihnen :</h4>
+				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
+			</div>
+			</div>
 		}
 	}
 
-	@if(!tradeListRecipient.isEmpty()) {
-		<div class="page-header">
-  			<h2>Tauschanfragen anderer User an Sie:</h2>
-		</div>
-		
-		@for(tradeTransaction <- tradeListRecipient) {
-			<h3><a href="@routes.TradeController.view(tradeTransaction.id)">von @tradeTransaction.owner.username</a></h3>
-			@snippets.tradeProgressBar(tradeTransaction)
-			<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
-			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, user))
-			<h4>Sie wünschen sich von @tradeTransaction.owner.username :</h4>
-			@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
-			@snippets.comments(tradeTransaction)	
-		}
-	}
+	
 }
 

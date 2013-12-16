@@ -1,13 +1,12 @@
 @(tradeTransaction: TradeTransaction)<!-- Displays the correct state for this TradeTransaction. -->
 <div id="trade-progress-bar">
-
 	@if(tradeTransaction == null) {
 		<span class="label label-default">Erstellt</span>
 		<span class="label label-default">Antwort</span>
 		<span class="label label-default">Abgeschlossen</span>
 		<span class="label label-default">Abgelehnt</span>
 	} else {
-		@if(tradeTransaction.state.name() == "INIT" || tradeTransaction.state.name() == "RESPONSE") {
+		@if(tradeTransaction.state.name() == "INIT" || tradeTransaction.state.name() == "RESPONSE" || (tradeTransaction.state.name() == "REFUSE") ) {
 			<span class="label label-success">Erstellt</span>
 		} else {
 			<span class="label label-default">Erstellt</span>
@@ -23,13 +22,11 @@
 			<span class="label label-default">Abgeschlossen</span>
 		}
 		@if((tradeTransaction.state.name() == "REFUSE") || (tradeTransaction.state.name() == "FINAL_REFUSE")) {
-			<span class="label label-success">Abgelehnt</span>
+			<span class="label label-warning">Abgelehnt</span>
 		} else {
 			<span class="label label-default">Abgelehnt</span>
 		}
 	
 	}
-
-	
-			
+		
 </div>

@@ -15,6 +15,10 @@ import play.mvc.Security;
 import play.mvc.With;
 import views.html.trade.initOwner;
 import views.html.trade.initRecipient;
+import views.html.trade.refuseRecipient;
+import views.html.trade.refuseOwner;
+import views.html.trade.responseOwner;
+import views.html.trade.responseRecipient;
 import views.html.trade.create;
 import views.html.trade.showAll;
 
@@ -77,11 +81,15 @@ public class TradeController extends Controller {
 	public static Result view(Long id) {
 		Logger.info("Processing Trade State Machine");
 		TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+		if(tradeTransaction == null) {
+			return redirect(routes.Application.error());
+		}
+		
 		Logger.info("TradeTransaction (id " + id + ") is in State " + tradeTransaction.state.name());
 		switch (tradeTransaction.state) {
 		 case INIT:			return viewInit(tradeTransaction);
-		 case REFUSE:		return ok("This view is not implemented yet");
-		 case RESPONSE:		return ok("This view is not implemented yet");
+		 case REFUSE:		return viewRefuse(tradeTransaction);
+		 case RESPONSE:		return viewResponse(tradeTransaction);
 		 case FINAL_REFUSE:	return ok("This view is not implemented yet");
 		 case APPROVE:		return ok("This view is not implemented yet");
 		 case INVALID:		return ok("This view is not implemented yet");
@@ -102,6 +110,31 @@ public class TradeController extends Controller {
 			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
 			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, transactionForm));
+		} else {
+			return redirect(routes.Application.error());
+		}	
+	}
+	
+	private static Result viewRefuse(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+		if (currentUser.equals(tradeTransaction.owner)) {
+			return ok(refuseOwner.render(recipientBookList, tradeTransaction));
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			return ok(refuseRecipient.render(recipientBookList, tradeTransaction));
+		} else {
+			return redirect(routes.Application.error());
+		}	
+	}
+	
+	private static Result viewResponse(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+		List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
+		if (currentUser.equals(tradeTransaction.owner)) {
+			return ok(responseOwner.render(recipientBookList, ownerBookList, tradeTransaction));
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			return ok(responseRecipient.render(recipientBookList, ownerBookList, tradeTransaction));
 		} else {
 			return redirect(routes.Application.error());
 		}	
@@ -164,40 +197,46 @@ public class TradeController extends Controller {
     	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
 		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
 		
-       	// Getting the selection
-    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
-    	if(bookSelection == null) {
-    		flash("error", "Bitte wähle min. ein Buch aus.");
-    		Logger.info("Error in Selection");
-    		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
-			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
-			return badRequest(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, filledForm));
-    	}
-    	
-    	Long bookId = null;
- 		Book book = null;
- 		for (String bookString : bookSelection) {
-    		bookId = Long.parseLong(bookString);
-    		book = Book.findById(bookId);
-    		tradeTransaction.bookList.add(book);
-			Logger.info("Added Book " + book.id.toString());
+		// Process the Response Button
+		if(filledForm.data().get("response") != null) {
+			
+	       	// Getting the selection
+	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
+	    	if(bookSelection == null) {
+	    		flash("error", "Bitte wähle min. ein Buch aus.");
+	    		Logger.info("Error in Selection");
+	    		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+				List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
+				return badRequest(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, filledForm));
+	    	}
+	    	
+	    	Long bookId = null;
+	 		Book book = null;
+	 		for (String bookString : bookSelection) {
+	    		bookId = Long.parseLong(bookString);
+	    		book = Book.findById(bookId);
+	    		tradeTransaction.bookList.add(book);
+				Logger.info("Added Book " + book.id.toString());
+			}
+	 		
+	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
+	    	tradeTransaction.state = States.RESPONSE;
+	    	tradeTransaction.save();
+	 		flash("success", "Wunschzettel bestätigt");	
+	 		
+	 	// Process the Refuse Button
+		} else if(filledForm.data().get("refuse") != null){
+
+	    	tradeTransaction.state = States.REFUSE;
+	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
+	    	tradeTransaction.save();
+	 		flash("success", "Du hast den Wunschzettel abgelehnt.");
+			
 		}
- 		
-    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
-    	tradeTransaction.state = States.RESPONSE;
-    	tradeTransaction.save();
- 		flash("success", "Wunschzettel bestätigt");
+		
     	return redirect(routes.TradeController.view(tradeTransaction.id));
     }
     
-    public static Result refuse(Long id) {
-    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
-    	tradeTransaction.state = States.REFUSE;
-    	tradeTransaction.save();
- 		flash("success", "Wunschzettel wurde abgelehnt.");
- 		//		<a href="#" class="btn submit">Tauschanfrage ablehnen</a>
-    	return redirect(routes.TradeController.view(tradeTransaction.id));
-    }
     
     public static Result delete(Long id){
     	// Security here!!!

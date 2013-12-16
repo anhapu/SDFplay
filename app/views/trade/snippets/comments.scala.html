@@ -1,6 +1,9 @@
 @(tradeTransaction: TradeTransaction)<!-- Displays the comments of this TradeTransaction. -->
-	<h4>Kommentare :</h4>
-	<table border="0">
-	<tr><td><h5>@tradeTransaction.owner.username :</h5></td><td>@tradeTransaction.commentOwner</td></tr>
-	<tr><td><h5>@tradeTransaction.recipient.username :</h5></td><td>@tradeTransaction.commentRecipient</td></tr>
-	</table>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Kommentare</div>
+  <div class="panel-body">
+    <p>@tradeTransaction.owner.username: @tradeTransaction.commentOwner</p>
+    <p>@tradeTransaction.recipient.username: @tradeTransaction.commentRecipient</p>
+  </div>
+</div>

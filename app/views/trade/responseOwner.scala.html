@@ -1,0 +1,21 @@
+@(recipientBookList: List[Book], ownerBookList: List[Book], tradeTransaction: TradeTransaction)
+@import helper._
+
+@main("Tauschanfrage an " + tradeTransaction.owner.username) {
+
+	<div class="page-header">
+  		<h2>Tauschanfrage an @tradeTransaction.owner.username :</h2>
+	</div>
+	
+	@snippets.tradeProgressBar(tradeTransaction)	
+	<h4>Du wünscht dir:</h4>
+	@snippets.books(recipientBookList)
+	
+	<h4>@tradeTransaction.recipient.username möchte gerne folgende Bücher haben.</h4>
+	@snippets.books(ownerBookList)
+	@snippets.comments(tradeTransaction)
+	
+	<a href="#" class="btn btn-success">Wunschzettel abschließen</a>
+	<a href="#" class="btn btn-danger">Wunschzettel ablehnen</a>
+}
+
