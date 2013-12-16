@@ -94,7 +94,8 @@ public class UserController extends Controller {
                   Date currentDate = new Date();
                   long elapsedTime = ((currentDate.getTime()/60000) - (user.tokenCreatedAt.getTime()/60000));
                   if (elapsedTime > 5) {
-                       return badRequest("Die Zeit von 5 Minuten ist abgelaufen!");
+                       flash("error", "Die Zeit von 5 Minuten ist abgelaufen!");
+                       return redirect(routes.Application.index());
                   }
                   else {
                     // forward to change PW page ...
@@ -103,7 +104,8 @@ public class UserController extends Controller {
                   }
              }
              else {
-               return badRequest("Dieser Token ist invalid.");
+                  flash("error", "Dieser Token ist invalid!");
+                  return redirect(routes.Application.index());
              }
         }
      
@@ -184,7 +186,6 @@ public class UserController extends Controller {
              return user;
         }
 
-        @Security.Authenticated(Secured.class)
         public static Result editPassword(String mystery) {
                 final Form form = form().bindFromRequest();
                 User searchedUser = solveMystery(mystery);
@@ -196,7 +197,6 @@ public class UserController extends Controller {
                 }
         }
 
-        @Security.Authenticated(Secured.class)
         @Transactional
         public static Result savePassword(String mystery) {
                 Form<ChangePassword> pForm = form(ChangePassword.class).bindFromRequest();
