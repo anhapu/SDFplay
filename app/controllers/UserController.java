@@ -117,30 +117,39 @@ public class UserController extends Controller {
                                                searchedUser.username, searchedUser.lastname, searchedUser.firstname)), searchedUser.id));
                  }
                  else {
-                      return redirect(routes.Registration.index());
+                      flash("error", "Benutzer nicht gefunden!");
+                      return redirect(routes.Application.index());
                  }
             }
             else {
-                 return redirect(routes.Registration.index());
+                 flash("error", "Zugriff nicht gestattet!");
+                 return redirect(routes.Application.index());
             }
         }
 
         @Security.Authenticated(Secured.class)
         @Transactional
         public static Result saveProfile(Long id) {
-                Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
-                if (pForm.hasErrors()) {
-                        return badRequest(views.html.user.profileForm.render(pForm, Long.valueOf(form().bindFromRequest().get("id"))));
-                }
-                else {
-                        User created = User.findById(Long.valueOf(form().bindFromRequest().get("id")));
-                        created.email = pForm.get().email;
-                        created.username = pForm.get().username;
-                        created.lastname = pForm.get().lastname;
-                        created.firstname = pForm.get().firstname;
-                        created.update();
-                        return redirect(routes.Application.index());
-                }
+             Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
+             if (pForm.hasErrors()) {
+                  return badRequest(views.html.user.profileForm.render(pForm, Long.valueOf(form().bindFromRequest().get("id"))));
+             }
+             else {
+                  User created = User.findById(Long.valueOf(form().bindFromRequest().get("id")));
+                  if (Secured.editUserProfile(created)) {
+                       created.email = pForm.get().email;
+                       created.username = pForm.get().username;
+                       created.lastname = pForm.get().lastname;
+                       created.firstname = pForm.get().firstname;
+                       created.update();
+                       flash("success", "Benutzer erfolgreich geändert!");
+                       return redirect(routes.Application.index());
+                  }
+                  else {
+                       flash("error", "Zugriff nicht gestattet!");
+                       return redirect(routes.Application.index());
+                  }
+             }
         }
         
         private static String createMystery(Long id) {
@@ -182,6 +191,7 @@ public class UserController extends Controller {
                 if (searchedUser != null) {
                      return ok(passwordForm.render(mystery, form));
                 } else {
+                     flash("error", "Benutzer nicht gefunden!");
                      return redirect(routes.Registration.index());
                 }
         }
@@ -208,15 +218,14 @@ public class UserController extends Controller {
 
         @Security.Authenticated(Secured.class)
         public static Result showProfile(Long id) {
-                User searchedUser = User.findById(id);
-                if (searchedUser != null) {
-                        Secured.showUserProfile(searchedUser);
-                        return ok(userProfile.render(searchedUser));
-                }
-                else {
-                        //ToDo redirect to something useful
-                        return redirect(routes.Application.index());
-                }
+             User searchedUser = User.findById(id);
+             if (searchedUser != null && Secured.showUserProfile(searchedUser)) {
+                  return ok(userProfile.render(searchedUser));
+             }
+             else {
+                  flash("error", "Zugriff nicht gestattet!");
+                  return redirect(routes.Application.index());
+             }
         }
 
 
