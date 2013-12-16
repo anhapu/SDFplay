@@ -45,9 +45,13 @@
                         </ul>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
+                        <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="@routes.TradeController.viewAllTrades()">Ansehen</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">@TradeTransaction.countForUserAsOwner(Common.currentUser) Wunschzettel von mir</a></li>
+                          <li><a href="#">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Wunschzettel an mich</a></li>
                         </ul>
                       </li>
                       @if(User.isAdmin(Common.currentUser.id)) {

@@ -120,6 +120,8 @@ public class Secured extends Security.Authenticator
      * @return
      */
     public static boolean deleteTradeTransaction(TradeTransaction trade) {
+    	// NOT READY YET, THE RIGHT TO DELETE IS COMPLICATED
+    	
     	User current = Common.currentUser();
     	if(trade.owner.equals(current) && trade.state == States.INIT) {
     		return true;
