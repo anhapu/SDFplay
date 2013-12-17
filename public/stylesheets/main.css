@@ -38,10 +38,6 @@
 	display: none;
 }
 
-.form-group > dl > dd {
-	margin-top: -14px;
-}
-
 .book-buttons {
 	margin: 0px 10px;
 }
@@ -51,6 +47,19 @@
 	margin-top: 100px;
 }
 
+.isbn-container {
+	width: 500px;
+	margin-top: 30px;
+}
+
 .login-form {
 	width: 300px;
+}
+
+.btn-isbn {
+	margin-top: -7px;
+}
+
+.form-isbn {
+	width: 370px;
 }
