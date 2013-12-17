@@ -121,9 +121,17 @@ public class TradeTransaction extends Model{
         return find.where().eq("recipient", recipient).findList();
     }
     
-    public static List<TradeTransaction> test(User user) {
-    	return find.where().eq("tradeBooks.book.author", "George R. R. Martin").findList();	
+    public static int countForUser(User user) {
+    	return find.where().or(Expr.eq("owner", user), Expr.eq("recipient", user)).findRowCount();
     }
     
+    public static int countForUserAsOwner(User user) {
+    	return find.where().eq("owner", user).findRowCount();
+    }
+    
+    public static int countForUserAsRecipient(User user) {
+    	return find.where().eq("recipient", user).findRowCount();
+    }
+        
 
 }

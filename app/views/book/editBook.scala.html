@@ -1,4 +1,4 @@
-@(bookForm: Form[Book])
+@(bookForm: Form[Book], bookId: Long)
 @import helper._
 @main("Buch hinzufuegen"){
     @if(bookForm.hasGlobalErrors) {
@@ -13,7 +13,7 @@
             <img class="center" src="@bookForm("coverUrl")">
         </div>
         
-    @helper.form(action = routes.BookController.createBook()){
+    @helper.form(action = routes.BookController.updateBook(bookId)){
         @helper.inputText(bookForm("title"))
         @helper.inputText(bookForm("author"))
         @helper.inputText(bookForm("isbn"))
@@ -21,7 +21,7 @@
         @helper.inputText(bookForm("coverUrl"))
         @helper.inputText(bookForm("comment"))
         
-        <input type="submit" class="btn_primary" value="Buch anlegen">
+        <input type="submit" class="btn_primary" value="Speichern">
     }
     
     </div>

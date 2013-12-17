@@ -71,6 +71,31 @@ public final class BookController extends Controller {
         }
     }
     
+    @Transactional
+    public static Result updateBook(Long bookId) {
+        Form<Book> filledForm = bookForm.bindFromRequest();
+        
+        if(filledForm.hasErrors()){
+            return badRequest(views.html.book.editBook.render(filledForm, bookId));
+        } else {
+            Book oriBook = Book.findById( bookId );
+            
+            if(Secured.isOwnerOfBook( oriBook )){
+                Book book = filledForm.get();
+                oriBook.author = book.author;
+                oriBook.title = book.title;
+                oriBook.comment = book.comment;
+                oriBook.coverUrl = book.coverUrl;
+                oriBook.isbn = book.isbn;
+                oriBook.year = book.year;
+                oriBook.update();
+                return redirect( routes.BookController.getBook( oriBook.id ) );
+            } else {
+                return forbidden();
+            }
+        }
+    }
+    
 
     /**
      * Persists a book in the database.
@@ -96,12 +121,12 @@ public final class BookController extends Controller {
             return ok(views.html.book.addBook.render( form(SimpleProfile.class) ));
         } else {
                 Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
-                return ok(views.html.book.editBook.render(bookForm.fill( book )));
+                return ok(views.html.book.editBook.render(bookForm.fill( book ) , book.id));
         }
     }
  
 
-    // public static Result addComment(Long)
+    
     /**
      * Edit a book.
      *
@@ -114,14 +139,8 @@ public final class BookController extends Controller {
         Book book = Book.findById(bookId);
         if (book != null) {
             if (Secured.isOwnerOfBook(book)) {
-                Form<Book> filledForm = bookForm.bindFromRequest();
-                book = filledForm.get();
-                book.owner = Common.currentUser();
-                book.update();
-                return ok();
-
+                return ok(views.html.book.editBook.render( bookForm.fill( book ), book.id ));
             } else {
-
                 return forbidden();
             }
         } else {

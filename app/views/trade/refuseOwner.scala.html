@@ -1,0 +1,16 @@
+@(recipientBookList: List[Book], tradeTransaction: TradeTransaction)
+@import helper._
+
+@main("Tauschanfrage an " + tradeTransaction.owner.username) {
+
+	<div class="page-header">
+  		<h2>Tauschanfrage an @tradeTransaction.owner.username :</h2>
+	</div>
+	
+	@snippets.tradeProgressBar(tradeTransaction)	
+	<h4>Du hasttest dir gewünscht:</h4>
+	@snippets.books(recipientBookList)
+	@snippets.comments(tradeTransaction)
+	@snippets.delete(tradeTransaction)
+}
+

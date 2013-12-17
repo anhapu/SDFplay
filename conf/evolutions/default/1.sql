@@ -72,9 +72,9 @@ alter table tradetransaction_book add constraint fk_tradetransaction_book_book_0
 
 drop table if exists book cascade;
 
-drop table if exists tradetransaction cascade;
-
 drop table if exists tradetransaction_book cascade;
+
+drop table if exists tradetransaction cascade;
 
 drop table if exists account cascade;
 

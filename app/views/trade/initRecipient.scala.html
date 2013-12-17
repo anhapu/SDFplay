@@ -27,13 +27,12 @@
 	<div class="row">
 		@helper.form(action = routes.TradeController.response(tradeTransaction.id)){
 			<div id="wishlist"></div>
+			@snippets.comments(tradeTransaction)
 			@helper.textarea(transForm("comment"), 'class -> "form-control", '_label -> "Kommentar", 'rows -> "5")	
-			<input type="submit" class="btn" value="Wunschzettel bestätigen">
+			<input type="submit" class="btn btn-success" name="response" value="Wunschzettel bestätigen">
+			<input type="submit" class="btn btn-danger" name="refuse" value="Wunschzettel ablehnen">
 		}
-		
-		@helper.form(action = routes.TradeController.refuse(tradeTransaction.id)){
-		<input type="submit" class="btn" value="Tauschanfrage ablehnen">
-		}
+	
 	</div>
 }
 
