@@ -3,41 +3,12 @@
 @main("Home") {
 
 	@if(Common.currentUser != null) {
- 
+
 		<h2>Das tauschen andere User:</h2>
 		@for(user <- users) {
-			<!-- Carousel================================================== -->
-			<div id="myCarousel" class="carousel slide" style="width: 1140px; margin: 0 auto">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="@routes.Assets.at("images/background.png")" alt="First slide">
-						<div class="container">
-							<div class="carousel-caption">
-								<h4><a href="@routes.TradeController.viewForUser(user.id)">@user.username</a></h4>
-								<div class="row">
-									<div class="inline">
-					              	@for(book <- user.books) {
-
-						                	<a class="thumbnail showcase" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-						                		<img src="@book.coverUrl">
-						                	</a>
-					              	}
-					              	</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-			</div><!-- /.carousel -->
-			</br>
+			@book.snippets.carousel(user, user.books)
 		}
- 		
+
 	} else {
 		@Common.getLoginForm
 	}
