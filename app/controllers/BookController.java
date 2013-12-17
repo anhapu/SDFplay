@@ -121,7 +121,7 @@ public final class BookController extends Controller {
             return ok(views.html.book.addBook.render( form(SimpleProfile.class) ));
         } else {
                 Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
-                return ok(views.html.book.editBook.render(bookForm.fill( book ) , book.id));
+                return ok(views.html.book.createBook.render(bookForm.fill( book )));
         }
     }
  
