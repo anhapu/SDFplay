@@ -1,9 +1,25 @@
 @(form: Form[UserController.Login])
 
-@helper.form(routes.UserController.login) {
-   <h3>Login</h3>
-   <p><input type="email" name="email" placeholder="Email" value="@form("email").value"></p>
-   <p><input type="password" name="password" placeholder="Password"></p>
-   <p><button type="submit" name="action" value="login">Login</button></p>
-   <p><button type="submit" name="action" value="passwordRecovery">Passwort vergessen</button></p>
-}
+
+<div class="row login-container center-block">
+	<div class="col-md-6">
+		<img src="@routes.Assets.at("images/logo_big.png")" alt="Logo" height="260px" class="center-block">
+	</div>
+	<div class="col-md-6">
+		<div class="login-form center-block">
+			@helper.form(routes.UserController.login) {
+				<h3>Anmelden</h3>
+				<p><input type="email" name="email" placeholder="Email" value="@form("email").value" class="form-control"></p>
+				<p><input type="password" name="password" placeholder="Password" class="form-control"></p>
+				<p>
+	   				<button type="submit" name="action" value="login" class="btn btn-primary">Login</button>
+	   				<button type="submit" name="action" value="passwordRecovery" class="btn btn-default pull-right">Passwort vergessen</button>
+	   			</p>
+			}
+			</br>
+			<div>
+				oder <a href="@routes.Registration.index()">Registrieren</a>
+			</div>
+		<div>
+	</div>
+</div>
