@@ -6,27 +6,22 @@
 	<div class="page-header">
   		<h2>Bücher tauschen mit @{user.username}</h2>
 	</div>
+
+	@helper.form(action = routes.TradeController.init(user.id)) {
+		@snippets.wishlist()
+	}
 	
 	@snippets.tradeProgressBar(null)
 
-	<div class="row"><!-- Content -->
-		<div id="showcase">
-			@for(book <- books) {
-				<div id="@book.id" class="col-sm-4 col-md-2 col-xs-6 book">
-					<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-						<img src=@book.coverUrl>
-					</a>
-					<input type="hidden" name="book_selection" value="@book.id" />
-				</div>
-			}
-		</div>
-	</div>
-	<div class="row">
-		@helper.form(action = routes.TradeController.init(user.id)){
-			<div id="wishlist"></div>
-			@helper.textarea(transForm("comment"), 'class -> "form-control", '_label -> "Kommentar", 'rows -> "5")	
-			<input type="submit" class="btn" value="Wunschzettel erstellen">
+	<div id="showcase">
+		@for(book <- books) {
+			<div id="@book.id" class="col-md-2 book">
+				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
+					<img src=@book.coverUrl>
+				</a>
+				<input type="hidden" name="book_selection" value="@book.id" />
+			</div>
 		}
-	</div><!-- /Content -->
+	</div>
 }
 

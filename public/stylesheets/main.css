@@ -9,14 +9,41 @@
 }
 
 #showcase {
-	min-height: 100px;
+	min-height: 1000px;
+	border: solid 1px #DDD;
+	width: 60%;
+	display:inline-block;
+	float:left;
+}
+
+#wishlist-wrapper {
+	left: 60%;
+	width: 30%;
+	position: absolute;
+}
+
+#wishlist-wrapper.affix {
+	left: 60%;
+	width: 30%;
+	top: 0px;
+	position: fixed;
+}
+
+#wishlist-container {
+	padding: 5px;
 	border: solid 1px #DDD;
 }
 
 #wishlist {
 	background-color: #EEE;
-	min-height: 400px;
-	border: solid 1px #DDD;
+	min-height: 200px;
+	width: 100%;
+	display: inline-block;
+}
+
+#comment-container {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .inList {
