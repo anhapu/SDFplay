@@ -5579,7 +5579,6 @@ a.list-group-item.active > .badge,
 
 .thumbnail {
   display: inline-block;
-  display: block;
   height: auto;
   max-width: 100%;
   padding: 4px;
@@ -6814,9 +6813,9 @@ button.close {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 15%;
+  width: 10%;
   font-size: 20px;
-  color: #ffffff;
+  /*color: #ffffff;*/
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   opacity: 0.5;
@@ -6824,10 +6823,10 @@ button.close {
 }
 
 .carousel-control.left {
-  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
-  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(2, 47, 90, 0.5)), to(rgba(2, 47, 90, 0.0001)));
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(2, 47, 90, 0.5) 0), color-stop(rgba(2, 47, 90, 0.0001) 100%));
+  background-image: -moz-linear-gradient(left, rgba(2, 47, 90, 0.5) 0, rgba(2, 47, 90, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(2, 47, 90, 0.5) 0, rgba(2, 47, 90, 0.0001) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
 }
@@ -6835,17 +6834,19 @@ button.close {
 .carousel-control.right {
   right: 0;
   left: auto;
-  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
-  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0), color-stop(rgba(0, 0, 0, 0.5) 100%));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
+  
+  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(2, 47, 90, 0.0001)), to(rgba(2, 47, 90, 0.5)));
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(2, 47, 90, 0.0001) 0), color-stop(rgba(2, 47, 90, 0.5) 100%));
+  background-image: -moz-linear-gradient(left, rgba(2, 47, 90, 0.0001) 0, rgba(2, 47, 90, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(2, 47, 90, 0.0001) 0, rgba(2, 47, 90, 0.5) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  
 }
 
 .carousel-control:hover,
 .carousel-control:focus {
-  color: #ffffff;
+  color: #022f5a;
   text-decoration: none;
   opacity: 0.9;
   filter: alpha(opacity=90);
@@ -6863,12 +6864,12 @@ button.close {
 
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
-  left: 50%;
+  left: 40%;
 }
 
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-right {
-  right: 50%;
+  right: 40%;
 }
 
 .carousel-control .icon-prev,
@@ -6890,7 +6891,7 @@ button.close {
 
 .carousel-indicators {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   left: 50%;
   z-index: 15;
   width: 60%;
@@ -6909,7 +6910,7 @@ button.close {
   cursor: pointer;
   background-color: #000 \9;
   background-color: rgba(0, 0, 0, 0);
-  border: 1px solid #ffffff;
+  border: 1px solid #022f5a;
   border-radius: 10px;
 }
 
@@ -6917,45 +6918,22 @@ button.close {
   width: 12px;
   height: 12px;
   margin: 0;
-  background-color: #ffffff;
+  background-color: #3d74b6;
 }
 
 .carousel-caption {
   position: absolute;
-  right: 15%;
-  bottom: 20px;
-  left: 15%;
+  right: 7%;
+  bottom: 25px;
+  left: 7%;
   z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   color: #ffffff;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .carousel-caption .btn {
   text-shadow: none;
-}
-
-@media screen and (min-width: 768px) {
-  .carousel-control .glyphicons-chevron-left,
-  .carousel-control .glyphicons-chevron-right,
-  .carousel-control .icon-prev,
-  .carousel-control .icon-next {
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    margin-left: -15px;
-    font-size: 30px;
-  }
-  .carousel-caption {
-    right: 20%;
-    left: 20%;
-    padding-bottom: 30px;
-  }
-  .carousel-indicators {
-    bottom: 20px;
-  }
 }
 
 .clearfix:before,

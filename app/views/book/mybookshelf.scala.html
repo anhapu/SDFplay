@@ -6,8 +6,8 @@
     </div>
     <div class="row"><!-- Content -->
         @for(book <- books) {
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
+            <div class="col-sm-2">
+                <a href="@routes.BookController.getBook(book.id)" class="thumbnail center-block" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
                     @if(book.coverUrl != null && !book.coverUrl.isEmpty()){
                        <img src="@book.coverUrl">
                     } else {
@@ -17,15 +17,14 @@
                 <div class="caption">
                 	<p class="pull-left book-buttons">
 	                    @if(book.tradeable){
-	                        <a href="@routes.BookController.unmarkAsTradeable(book.id)" class="btn btn-warning btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch vom Tausch zrückziehen" data-container="body"><span class="glyphicon glyphicon-cloud-download"></span></a>
+	                        <a href="@routes.BookController.unmarkAsTradeable(book.id)" class="btn btn-primary btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch vom Tausch zrückziehen" data-container="body"><span class="glyphicon glyphicon-cloud-download"></span></a>
 	                    }else{
-	                        <a href="@routes.BookController.markAsTradeable(book.id)" class="btn btn-success btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch zum Tausch freigeben" data-container="body"><span class="glyphicon glyphicon-cloud-upload"></span></a>
+	                        <a href="@routes.BookController.markAsTradeable(book.id)" class="btn btn-primary btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch zum Tausch freigeben" data-container="body"><span class="glyphicon glyphicon-cloud-upload"></span></a>
 	                    }
-	                </p>
-	                <p class="pull-right book-buttons">
+					</p>
+					<p class="pull-right book-buttons">
 	                    <a href="@routes.BookController.editBook(book.id)" class="btn btn-primary btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch bearbeiten" data-container="body"><span class="glyphicon glyphicon-edit"></span></a>
                     	<a href="@routes.BookController.deleteBook(book.id)" class="btn btn-danger btn-xs" role="button" data-toggle="tooltip" data-original-title="Buch löschen" data-container="body"><span class="glyphicon glyphicon-trash"></span></a>
-                    	
                     </p>
                 </div>
             </div>
