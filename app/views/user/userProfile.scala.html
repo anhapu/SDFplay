@@ -1,15 +1,29 @@
 @(userProfile: User) 
 
 @main("Mein Profil") {
-
-
-		Username: @userProfile.username</br>
-		Vorname: @userProfile.firstname</br>
-		Nachname: @userProfile.lastname</br>
-		Passwort Hash: @userProfile.password</br>
-		Email: @userProfile.email</br>
-		Rolle: @userProfile.role</br>
-		ID: @userProfile.id
-
+	<div class="isbn-container center-block">
+		<table class="table table-hover table-condensed" width="50%">
+			<thead>
+				<tr>
+					<td><b>Benutzername</b></td>
+					<td>@userProfile.username</td>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<tr>
+					<td><b>Vorname</b></td>
+					<td>@userProfile.firstname</td>
+				</tr>
+				<tr>
+					<td><b>Nachname</b></td>
+					<td>@userProfile.lastname</td>
+				</tr>
+				<tr>
+					<td><b>E-Mail</b></td>
+					<td>@userProfile.email</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 }
- 

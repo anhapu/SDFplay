@@ -27,26 +27,29 @@
                 
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="navbar-collapse collapse navbar-responsive-collapse" id="bs-example-navbar-collapse-1">
+                  	<form class="navbar-form navbar-left" action="@routes.BookController.searchBook()" method="GET">
+                      <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Buchtitel" id="searchQuery" name="keyword">
+                      </div>
+                      <input type="submit" value="Suchen" class="btn primary">
+                    </form>
                     <ul class="nav navbar-nav">
-                      <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mein Profil<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Ansehen</a></li>
-                          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Bearbeiten</a></li>
-                        </ul>
-                      </li>
+                      <li><a href="@routes.BookController.addBook()"><span class="glyphicon glyphicon-plus"></span> Buch einstellen</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      @if(User.isAdmin(Common.currentUser.id)) {
+                        <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
+                      }
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
                           <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
-                          <li class="divider"></li>
-                          <li><a href="@routes.BookController.addBook()">Buch hinzufügen</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
-                        <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span><b class="caret"></b></a>
+                        <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="@routes.TradeController.viewAllTrades()">Ansehen</a></li>
                           <li class="divider"></li>
@@ -54,19 +57,15 @@
                           <li><a href="#">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Wunschzettel an mich</a></li>
                         </ul>
                       </li>
-                      @if(User.isAdmin(Common.currentUser.id)) {
-                        <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
-                      }
-                    </ul>
-                     <form class="navbar-form navbar-left" action="@routes.BookController.searchBook()" method="GET">
-                      <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Buchtitel" id="searchQuery" name="keyword">
-                      </div>
-                      <input type="submit" value="Suchen" class="btn primary">
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="@routes.UserController.logout">Logout</a></li>
-                    </ul>
+                      <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Common.currentUser.username <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Profil ansehen</a></li>
+                          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Profil bearbeiten</a></li>
+                          <li class="divider"></li>
+                          <li><a href="@routes.UserController.logout">Logout</a></li>
+                        </ul>
+                      </li>
                   </div><!-- /.navbar-collapse -->
                  </div>
                }

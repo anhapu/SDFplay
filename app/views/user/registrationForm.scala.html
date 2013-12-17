@@ -1,18 +1,18 @@
 @(form: Form[UserController.SimpleProfile])
 @main("Registrierung") {
-	@if(form.hasGlobalErrors) {
-    	<p class="error">
-    		@for(e <- form.globalErrors) {
-          		@e.message
-          		<br>
-     		}
-    	</p>
-	}
-	@helper.form(action = routes.Registration.submit) {
-		@snippets.profile(form)
-		@snippets.password()
-		<div><input type="checkbox" id="accept" name="accept"> Ich habe die <a href="">AGB's</a> gelesen und akzeptiert</div>
-		@snippets.submitForm()
-	}
 
+	<div class="isbn-container center-block">
+		@helper.form(action = routes.Registration.submit) {
+			@if(form.hasGlobalErrors) {
+	    			<p class="error">@form.globalError.message</p>
+			}
+			
+			@snippets.profile(form)
+			@snippets.password()
+			</br>
+			<div><input type="checkbox" id="accept" name="accept"> Ich habe die <a href="">AGB's</a> gelesen und akzeptiert</div>
+			</br>
+			@snippets.submitForm()
+		}
+	</div>
 }
