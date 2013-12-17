@@ -1,19 +1,46 @@
 @(bookForm: Form[Book])
 @import helper._
-@main("Buch hinzufuegen"){
+@main("Buch hinzufuegen") {
 
-	@if(bookForm.hasGlobalErrors) {
-		@bookForm.globalError.message
-	}
+	<div class="isbn-container center-block">	
+		@helper.form(action = routes.BookController.createBook()){
+			
+			@if(bookForm.hasGlobalErrors) {
+				<p class="error">@bookForm.globalError.message</p>
+			}
+				@inputText(
+					bookForm("title"),
+					'_label -> "Titel",
+					'class -> "form-control input-sm"
+				)
+				@inputText(
+					bookForm("author"),
+					'_label -> "Autor",
+					'class -> "form-control input-sm"
+				)
+				@inputText(
+					bookForm("isbn"),
+					'_label -> "ISBN",
+					'class -> "form-control input-sm"
+				)
+				@inputText(
+					bookForm("year"),
+					'_label -> "Erscheinungsjahr",
+					'class -> "form-control input-sm"
+				)
+				@inputText(
+					bookForm("coverUrl"),
+					'_label -> "Cover-URL",
+					'class -> "form-control input-sm"
+				)
+				@inputText(
+					bookForm("comment"),
+					'_label -> "Kommentar",
+					'class -> "form-control input-sm"
+				)		
+				<input type="submit" class="btn btn-primary" value="Buch anlegen">
+				<a href="@routes.BookController.addBook()" class="btn btn-default pull-right">Abbrechen</a>
+		}
+	</div>
 
-	@helper.form(action = routes.BookController.createBook()){
-		@helper.inputText(bookForm("title"))
-		@helper.inputText(bookForm("author"))
-		@helper.inputText(bookForm("isbn"))
-		@helper.inputText(bookForm("year"))
-		@helper.inputText(bookForm("coverUrl"))
-		@helper.inputText(bookForm("comment"))
-		
-		<input type="submit" class="btn btn_primary" value="Buch anlegen">
-	}
 }

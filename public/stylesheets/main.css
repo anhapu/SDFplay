@@ -38,6 +38,10 @@
 	display: none;
 }
 
+.info {
+	display: none;
+}
+
 .book-buttons {
 	margin: 0px 10px;
 }
