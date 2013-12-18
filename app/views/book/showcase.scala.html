@@ -1,33 +1,5 @@
 @(books: List[Book])
 @main("Showcase"){
 
-    <div class="page-header">
-          <h2>Mein Showcase</h2>
-    </div>
-   <!-- Carousel================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="@routes.Assets.at("images/background.png")" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-                  @for(book <- books) {
-                        <a href="@routes.BookController.getBook(book.id)" class="thumbnail showcase" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-                            @if(book.coverUrl != null && !book.coverUrl.isEmpty()){
-                                <img src="@book.coverUrl">
-                            } else {
-                                <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                            }
-                        </a>
-                  }
-            </div>
-          </div>
-        </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	  <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
+    @book.snippets.carousel(Common.currentUser, books)
 }

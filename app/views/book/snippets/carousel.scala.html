@@ -8,52 +8,42 @@
 @defining( if (books.length % BUCHZAHL == 0) books.length / BUCHZAHL else books.length / BUCHZAHL + 1 ) { anzahlSeiten =>
 <!-- Carousel================================================== -->
 <div id="@user.id" class="carousel slide" style="width: 1140px; margin: 0 auto">
-	<!-- Indicators -->
-	<ol class="carousel-indicators">
-		<li data-target="#@user.id" data-slide-to="0" class="active"></li>
-		@for(slide <- 1 to anzahlSeiten - 1) {
-			<li data-target="#@user.id" data-slide-to="@slide"></li>
-		}
-	</ol>
-	<!-- /Indicators -->
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src="@routes.Assets.at("images/background.png")" alt="First slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h4><a href="@routes.TradeController.viewForUser(user.id)">@user.username</a></h4>
-					<div class="row">
-						<div class="inline">
 							@for(i <- 0 to BUCHZAHL - 1 if i <= books.length - 1) {
 								@book.snippets.cover(books(i))
 							}
-						</div>
-					</div> <!--/.row-->
 				</div> <!--/.carousel-caption-->
 			</div> <!--/.container-->
 		</div> <!--/.item .active-->
 		@for(slide <- 1 to anzahlSeiten - 1) {
 			<div class="item">
-				<img src="@routes.Assets.at("images/background.png")" alt="First slide">
 				<div class="container">
 					<div class="carousel-caption">
-						<h4><a href="@routes.TradeController.viewForUser(user.id)">@user.username</a></h4>
-						<div class="row">
-							<div class="inline">
 								@for(i <- (slide * BUCHZAHL) to (slide * BUCHZAHL + BUCHZAHL - 1) if i <= books.length - 1) {
-									<a class="thumbnail showcase" data-toggle="popover" title="@books(i).title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @books(i).author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-									<img src="@books(i).coverUrl">
-									</a>
+									@book.snippets.cover(books(i))
 								}
-							</div>
-						</div> <!--/.row-->
 					</div> <!--/.carousel-caption-->
 				</div> <!--/.container-->
 			</div> <!--/.item-->
 		}
 	</div> <!--/.carousel-inner-->
-	<a class="left carousel-control" href="#@user.id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	<a class="right carousel-control" href="#@user.id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	<a class="left carousel-control" href="#@user.id" data-slide="prev">
+		@if(books.length < BUCHZAHL) {
+			<g-h2><span class="glyphicon glyphicon-chevron-left"></span></g-h2>
+		} else {
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		}
+	</a>
+	<a class="right carousel-control" href="#@user.id" data-slide="next">
+		@if(books.length < BUCHZAHL) {
+			<g-h2><span class="glyphicon glyphicon-chevron-right"></span></g-h2>
+		} else {
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		}
+	</a>
 </div> <!--/myCarousel-->
 </br>
 }
