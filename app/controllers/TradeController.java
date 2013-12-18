@@ -307,11 +307,14 @@ public class TradeController extends Controller {
 				book.owner = tradeTransaction.owner;
 				book.save();
 			}
+			
+			//funktioniert noch nicht
+			/**
 			List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInTradeTransaction(tradeTransaction);
 			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
 				invalidTradeTransaction.state = States.INVALID;
 			}
-			
+			*/
 			
 	 	// Process the Refuse Button
 		} else if(filledForm.data().get("finalrefuse") != null){
