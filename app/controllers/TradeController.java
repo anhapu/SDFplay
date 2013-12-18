@@ -308,13 +308,13 @@ public class TradeController extends Controller {
 				book.save();
 			}
 			
-			//funktioniert noch nicht
-			/**
 			List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInTradeTransaction(tradeTransaction);
-			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
-				invalidTradeTransaction.state = States.INVALID;
+			for (TradeTransaction trade : invalidTradeTransactions) {
+					trade.state = States.INVALID;
+					trade.save();
 			}
-			*/
+			
+
 			
 	 	// Process the Refuse Button
 		} else if(filledForm.data().get("finalrefuse") != null){
