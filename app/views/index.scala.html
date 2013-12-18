@@ -6,7 +6,7 @@
 
 		<h2>Das tauschen andere User:</h2>
 		@for(user <- users) {
-			<h4><a href="@routes.TradeController.viewForUser(book.owner.id)">@user.username</a></h4>
+			<h4><a href="@routes.TradeController.viewForUser(user.id)">@user.username</a></h4>
 			@book.snippets.carousel(user, user.books)
 		}
 
