@@ -34,7 +34,7 @@ public class UserAdministrationController extends Controller {
      @Transactional
 	public static Result toggleRole(Long id) {
           User user = User.findById(id);
-          if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+          if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
                if (User.isAdmin(user.id)) {
                     user.role = Roles.USER;
                     user.save();
@@ -61,7 +61,7 @@ public class UserAdministrationController extends Controller {
      @Transactional
      public static Result toogleActive(Long id) {
          User user = User.findById(id);
-         if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+         if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
               // deactivate
               if (user.isActive()) {
                    user.token = "123";
@@ -89,7 +89,7 @@ public class UserAdministrationController extends Controller {
      */
     public static Result deleteUser(Long id) {
 		User user = User.findById(id);
-          if (Secured.isAllowedToAccessUserAdminInterface(user)) {
+          if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
                if(user != Common.currentUser()) {
                     String userName = user.username;
                     user.delete();
