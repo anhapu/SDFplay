@@ -4,10 +4,9 @@
     <div class="page-header">
           <h2>Mein Bücherregal</h2>
     </div>
-    <div class="center-block"><!-- Content -->
-        @for(book <- books) {
-    			@snippets.cover(book)
-        }
-    </div><!-- /Content -->
+	@for(book <- books) {
+		@snippets.infoModal(book)
+		@snippets.cover(book)
+	}
 }
 

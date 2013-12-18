@@ -1,5 +1,9 @@
 @(user: User, books: List[Book])
 
+@for(book <- books) {
+	@infoModal(book)
+}
+
 @defining(6) { BUCHZAHL =>
 @defining( if (books.length % BUCHZAHL == 0) books.length / BUCHZAHL else books.length / BUCHZAHL + 1 ) { anzahlSeiten =>
 <!-- Carousel================================================== -->
@@ -21,9 +25,7 @@
 					<div class="row">
 						<div class="inline">
 							@for(i <- 0 to BUCHZAHL - 1 if i <= books.length - 1) {
-								<a class="thumbnail showcase" data-toggle="popover" title="@books(i).title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @books(i).author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-								<img src="@books(i).coverUrl">
-								</a>
+								@book.snippets.cover(books(i))
 							}
 						</div>
 					</div> <!--/.row-->

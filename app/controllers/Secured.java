@@ -59,9 +59,9 @@ public class Secured extends Security.Authenticator
      * Checks if we have a current user. Users are allowed to add books to the system.
      * @return Returns true if there is an user in the session otherwise false.
      */
-    public static boolean isAllowedToEditBook(final User user)
+    public static boolean isAllowedToEditBook(final Book book)
     {
-        if(user == Common.currentUser())
+        if(book.owner.id == Common.currentUser().id)
         {
             return true;
         }

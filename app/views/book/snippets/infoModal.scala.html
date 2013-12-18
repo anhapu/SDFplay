@@ -1,0 +1,46 @@
+@(book: Book)
+<!-- Modal -->
+<div class="modal fade" id="infoModal_@book.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+       <h4 class="modal-title" id="myModalLabel">@book.title</h4>
+     </div>
+      <div class="modal-body">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>Cover</th>
+					<th colspan="2">Details</th>
+				</tr>
+			</thead>
+			<tr>
+				<td rowspan="6"><img src="@book.coverUrl" width="100px" height="150px"></td>
+				<th>Dieses Buch gehört:</th>
+				<td><a href="@routes.TradeController.viewForUser(book.owner.id)">@book.owner.username</a></td>
+			</tr>
+			<tr>
+				<th>Erscheinungsjahr:</th>
+				<td>@book.year</td>
+			</tr>
+			<tr>
+				<th>Autor:</th>
+				<td>@book.author</td>
+			</tr>
+			<tr>
+				<td><b>ISBN:</b></td>
+				<td>@book.isbn</td>
+			</tr>
+			<tr>
+				<td><b>Kommentar von @book.owner.username:</b></td>
+				<td>@book.comment</td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
