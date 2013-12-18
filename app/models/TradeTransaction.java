@@ -133,5 +133,7 @@ public class TradeTransaction extends Model{
     	return find.where().eq("recipient", user).findRowCount();
     }
         
-
+    public static List<TradeTransaction> findListOfTradeTransactionInvolvedInTradeTransaction(TradeTransaction tradeTransaction) {
+    	return find.where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.eq("bookList", tradeTransaction.bookList))).findList();
+    }
 }
