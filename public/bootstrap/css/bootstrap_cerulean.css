@@ -6752,7 +6752,6 @@ button.close {
 .carousel-inner {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
 .carousel-inner > .item {
@@ -6906,7 +6905,7 @@ button.close {
 
 .carousel-caption {
   position: absolute;
-  margin-top: 10px;
+  margin-top: 0px;
   right: 7%;
   left: 7%;
   z-index: 10;
