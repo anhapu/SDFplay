@@ -1,0 +1,16 @@
+@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction)
+@import helper._
+
+@main("abgelehnte Tauschanfrage von " + tradeTransaction.owner.username) {
+
+	<div class="page-header">
+  		<h2>abgelehnte Tauschanfrage von @tradeTransaction.owner.username :</h2>
+	</div>
+	
+	<h4>Du hattest dir folgende Bücher von @tradeTransaction.owner.username gewünscht:</h4>
+	@snippets.books(ownerBookList)
+	<h4>Du hättest folgende Bücher an @tradeTransaction.owner.username gegeben::</h4>
+	@snippets.books(recipientBookList)
+	@snippets.comments(tradeTransaction)
+	@snippets.delete(tradeTransaction)
+}

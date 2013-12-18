@@ -54,6 +54,7 @@ GET		/trade						controllers.TradeController.viewAllTrades()
 GET     /trade/user/:id		     	controllers.TradeController.viewForUser(id: Long)
 GET     /trade/:id		     		controllers.TradeController.view(id: Long)
 POST    /trade/:id/response		    controllers.TradeController.response(id: Long)
+GET		/trade/:id/approve			controllers.TradeController.approve(id: Long)
 GET     /trade/:id/delete		    controllers.TradeController.delete(id: Long)
 POST	/trade/create/:recipientId	controllers.TradeController.init(recipientId: Long)
 

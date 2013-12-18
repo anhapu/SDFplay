@@ -19,6 +19,10 @@ import views.html.trade.refuseRecipient;
 import views.html.trade.refuseOwner;
 import views.html.trade.responseOwner;
 import views.html.trade.responseRecipient;
+import views.html.trade.finalRefuseOwner;
+import views.html.trade.finalRefuseRecipient;
+import views.html.trade.approveOwner;
+import views.html.trade.approveRecipient;
 import views.html.trade.create;
 import views.html.trade.showAll;
 
@@ -79,7 +83,7 @@ public class TradeController extends Controller {
 	 * and redirects to the responsible method.
 	 */
 	public static Result view(Long id) {
-		Logger.info("Processing Trade State Machine");
+		Logger.info("--- Processing Trade State Machine ---");
 		TradeTransaction tradeTransaction = TradeTransaction.findById(id);
 		if(tradeTransaction == null) {
 			return redirect(routes.Application.error());
@@ -94,8 +98,8 @@ public class TradeController extends Controller {
 		 case INIT:			return viewInit(tradeTransaction);
 		 case REFUSE:		return viewRefuse(tradeTransaction);
 		 case RESPONSE:		return viewResponse(tradeTransaction);
-		 case FINAL_REFUSE:	return ok("This view is not implemented yet");
-		 case APPROVE:		return ok("This view is not implemented yet");
+		 case FINAL_REFUSE:	return viewFinalRefuse(tradeTransaction);
+		 case APPROVE:		return viewApprove(tradeTransaction);
 		 case INVALID:		return ok("This view is not implemented yet");
 		 default:			Logger.info("Could not determine perspective");
 		 					return redirect(routes.Application.error());
@@ -105,12 +109,12 @@ public class TradeController extends Controller {
 	private static Result viewInit(TradeTransaction tradeTransaction) {
 		User currentUser = Common.currentUser();
 		if (currentUser.equals(tradeTransaction.owner)) {
-			Logger.info("Current user is owner of TradeTransaction (id " + tradeTransaction.id + ")");
+			Logger.info("viewInit for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> pickedBooks = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			return ok(initOwner.render(pickedBooks,tradeTransaction,tradeTransaction.recipient));
 			
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
-			Logger.info("Current user is recipient of TradeTransaction (id " + tradeTransaction.id + ")");
+			Logger.info("viewInit for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
 			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, transactionForm));
@@ -123,8 +127,10 @@ public class TradeController extends Controller {
 		User currentUser = Common.currentUser();
 		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 		if (currentUser.equals(tradeTransaction.owner)) {
+			Logger.info("viewRefuse for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			return ok(refuseOwner.render(recipientBookList, tradeTransaction));
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("viewRefuse for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			return ok(refuseRecipient.render(recipientBookList, tradeTransaction));
 		} else {
 			return redirect(routes.Application.error());
@@ -136,14 +142,46 @@ public class TradeController extends Controller {
 		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 		List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
 		if (currentUser.equals(tradeTransaction.owner)) {
+			Logger.info("viewResponse for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			return ok(responseOwner.render(recipientBookList, ownerBookList, tradeTransaction));
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("viewResponse for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			return ok(responseRecipient.render(recipientBookList, ownerBookList, tradeTransaction));
 		} else {
 			return redirect(routes.Application.error());
 		}	
 	}
 	
+	private static Result viewApprove(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+		List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
+		if (currentUser.equals(tradeTransaction.owner)) {
+			Logger.info("viewApprove for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(approveOwner.render(ownerBookList, recipientBookList, tradeTransaction));
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("viewApprove for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(approveRecipient.render(ownerBookList, recipientBookList, tradeTransaction));
+		} else {
+			return redirect(routes.Application.error());
+		}	
+	}
+	
+	
+	private static Result viewFinalRefuse(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+		List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
+		if (currentUser.equals(tradeTransaction.owner)) {
+			Logger.info("viewFinalRefuse for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(finalRefuseOwner.render(ownerBookList, recipientBookList, tradeTransaction));
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("viewFinalRefuse for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(finalRefuseRecipient.render(ownerBookList, recipientBookList, tradeTransaction));
+		} else {
+			return redirect(routes.Application.error());
+		}	
+	}	
 	
 	/**
 	 * Inits the trade transaction
@@ -245,6 +283,40 @@ public class TradeController extends Controller {
 		
     	return redirect(routes.TradeController.view(tradeTransaction.id));
     }
+    
+    public static Result approve(Long id) {
+    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
+		
+		// Process the Approve Button
+		if(filledForm.data().get("approve") != null) {
+			tradeTransaction.state = States.APPROVE;
+			tradeTransaction.save();
+			flash("success", "Buchtausch erfolgreich!");
+			
+			List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
+			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+				
+	    	//exchange books owner
+			for (Book book : ownerBookList) {
+				book.owner = tradeTransaction.recipient;
+				book.save();
+			}
+			//exchange books recipient
+			for (Book book : recipientBookList) {
+				book.owner = tradeTransaction.owner;
+				book.save();
+			}
+	 	// Process the Refuse Button
+		} else if(filledForm.data().get("finalrefuse") != null){
+
+	    	tradeTransaction.state = States.FINAL_REFUSE;
+	    	tradeTransaction.save();
+	 		flash("success", "Du hast den Wunschzettel abgelehnt.");
+		}
+    	return redirect(routes.TradeController.view(tradeTransaction.id));
+    }
+    
     
     
     public static Result delete(Long id){    	
