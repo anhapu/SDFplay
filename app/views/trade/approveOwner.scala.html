@@ -1,0 +1,18 @@
+@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction)
+@import helper._
+
+@main("abgeschlossener Büchertausch mit " + tradeTransaction.recipient.username) {
+
+	<div class="page-header">
+  		<h2>abgeschlossener Büchertausch mit @tradeTransaction.recipient.username :</h2>
+	</div>
+	
+	@snippets.tradeProgressBar(tradeTransaction)	
+	<h4>Du hast folgende Bücher von @tradeTransaction.recipient.username erhalten:</h4>
+	@snippets.books(ownerBookList)
+	<h4>Du hast folgende Bücher an @tradeTransaction.recipient.username gegeben:</h4>
+	@snippets.books(recipientBookList)
+	@snippets.comments(tradeTransaction)
+	@snippets.delete(tradeTransaction)
+}
+

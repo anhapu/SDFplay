@@ -27,6 +27,13 @@ $(document).ready(function() {
 			$('#showcase').remove('#' + ui.draggable[0].id);
 		}
 	});
+
+	$('#wishlist-wrapper').affix({
+		offset: {
+			top: $('#wishlist-wrapper').offset().top, 
+			bottom: 0
+		}
+	});
 });
 
 $('[data-toggle="popover"]').popover('hide');

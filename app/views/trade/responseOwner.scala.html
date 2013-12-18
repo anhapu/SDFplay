@@ -15,7 +15,16 @@
 	@snippets.books(ownerBookList)
 	@snippets.comments(tradeTransaction)
 	
-	<a href="#" class="btn btn-success">Wunschzettel abschließen</a>
-	<a href="#" class="btn btn-danger">Wunschzettel ablehnen</a>
+	
+	<div class="row">
+		@helper.form(action = routes.TradeController.approve(tradeTransaction.id)){
+			<div id="wishlist"></div>
+			<input type="submit" class="btn btn-success" name="approve" value="Wunschzettel bestätigen">
+			<input type="submit" class="btn btn-danger" name="finalrefuse" value="Wunschzettel ablehnen">
+		}
+	
+	</div>
+	
+	
 }
 

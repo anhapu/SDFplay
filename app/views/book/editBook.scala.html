@@ -1,29 +1,59 @@
-@(bookForm: Form[Book], bookId: Long)
+@(bookForm: Form[Book], book: Book)
 @import helper._
-@main("Buch hinzufuegen"){
-    @if(bookForm.hasGlobalErrors) {
-        @bookForm.globalError.message
-    }
-    
-    </br>
-    </br>
-    <div class="row">
-        <div class="col-md-4">
-            </br>
-            <img class="center" src="@bookForm("coverUrl")">
-        </div>
-        
-    @helper.form(action = routes.BookController.updateBook(bookId)){
-        @helper.inputText(bookForm("title"))
-        @helper.inputText(bookForm("author"))
-        @helper.inputText(bookForm("isbn"))
-        @helper.inputText(bookForm("year"))
-        @helper.inputText(bookForm("coverUrl"))
-        @helper.inputText(bookForm("comment"))
-        
-        <input type="submit" class="btn_primary" value="Speichern">
-    }
-    
-    </div>
+@main("Buch bearbeiten"){
+<div class="row">
+	<div class="col-sm-4">
+		</br>
+		</br>
+		</br>
+		@if(book.coverUrl != null && !book.coverUrl.isEmpty()) {
+			<img src="@book.coverUrl" class="thumbnail pull-right">
+		} else {
+			<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+		}
+	</div>
+	<div class="col-sm-8">
+
+		<div class="isbn-container center-block">	
+			@helper.form(action = routes.BookController.updateBook(book.id)){
+				
+				@if(bookForm.hasGlobalErrors) {
+					<p class="error">@bookForm.globalError.message</p>
+				}
+					@inputText(
+						bookForm("title"),
+						'_label -> "Titel",
+						'class -> "form-control input-sm"
+					)
+					@inputText(
+						bookForm("author"),
+						'_label -> "Autor",
+						'class -> "form-control input-sm"
+					)
+					@inputText(
+						bookForm("isbn"),
+						'_label -> "ISBN",
+						'class -> "form-control input-sm"
+					)
+					@inputText(
+						bookForm("year"),
+						'_label -> "Erscheinungsjahr",
+						'class -> "form-control input-sm"
+					)
+					@inputText(
+						bookForm("coverUrl"),
+						'_label -> "Cover-URL",
+						'class -> "form-control input-sm"
+					)
+					@inputText(
+						bookForm("comment"),
+						'_label -> "Kommentar",
+						'class -> "form-control input-sm"
+					)		
+					<input type="submit" class="btn btn-primary" value="Änderungen speichern">
+					<a href="@routes.BookController.myBookshelf()" class="btn btn-default pull-right">Abbrechen</a>
+			}
+		</div>
+	</div>
 
 }

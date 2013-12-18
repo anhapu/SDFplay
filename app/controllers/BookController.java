@@ -74,11 +74,11 @@ public final class BookController extends Controller {
     @Transactional
     public static Result updateBook(Long bookId) {
         Form<Book> filledForm = bookForm.bindFromRequest();
+        Book oriBook = Book.findById(bookId);
         
         if(filledForm.hasErrors()){
-            return badRequest(views.html.book.editBook.render(filledForm, bookId));
+            return badRequest(views.html.book.editBook.render(filledForm, oriBook));
         } else {
-            Book oriBook = Book.findById( bookId );
             
             if(Secured.isOwnerOfBook( oriBook )){
                 Book book = filledForm.get();
@@ -139,7 +139,7 @@ public final class BookController extends Controller {
         Book book = Book.findById(bookId);
         if (book != null) {
             if (Secured.isOwnerOfBook(book)) {
-                return ok(views.html.book.editBook.render( bookForm.fill( book ), book.id ));
+                return ok(views.html.book.editBook.render( bookForm.fill( book ), book ));
             } else {
                 return forbidden();
             }

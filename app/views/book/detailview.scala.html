@@ -3,15 +3,15 @@
     </br>
     </br>
     <div class="row">
-          <div class="col-md-4">
-              </br>
+          <div class="col-sm-4">
+          	</br>
               @if(book.coverUrl != null && !book.coverUrl.isEmpty()) {
-                <img class="center" src="@book.coverUrl">
+                <img class="thumbnail center-block" src="@book.coverUrl">
               } else {
-                 <img class="center" src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
+                 <img class="thumbnail center-block" src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
             }
         </div>
-          <div class="col-md-8">
+          <div class="col-sm-8">
               <table class="table">
                   <thead>
                       <tr>
