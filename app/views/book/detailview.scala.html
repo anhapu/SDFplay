@@ -4,12 +4,9 @@
     </br>
     <div class="row">
           <div class="col-sm-4">
-          	</br>
-              @if(book.coverUrl != null && !book.coverUrl.isEmpty()) {
-                <img class="thumbnail center-block" src="@book.coverUrl">
-              } else {
-                 <img class="thumbnail center-block" src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-            }
+          	<div class="center-block">
+    			@snippets.cover(book)
+    		</div>
         </div>
           <div class="col-sm-8">
               <table class="table">

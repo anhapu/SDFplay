@@ -56,6 +56,22 @@ public class Secured extends Security.Authenticator
     }
     
     /**
+     * Checks if we have a current user. Users are allowed to add books to the system.
+     * @return Returns true if there is an user in the session otherwise false.
+     */
+    public static boolean isAllowedToEditBook(final User user)
+    {
+        if(user == Common.currentUser())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    /**
      * Defines who's allowed to see a profile.
      * You can see your own profile and ADMINs can see a profile.
      * @param user The user of the userprofile that should be shown.
