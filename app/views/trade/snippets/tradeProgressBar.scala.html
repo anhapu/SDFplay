@@ -5,6 +5,7 @@
 		<span class="label label-default">Antwort</span>
 		<span class="label label-default">Abgeschlossen</span>
 		<span class="label label-default">Abgelehnt</span>
+		<span class="label label-default">Ungültig</span>
 	} else {
 		@if(tradeTransaction.state.name() == "INIT" || tradeTransaction.state.name() == "RESPONSE" || tradeTransaction.state.name() == "APPROVE") {
 			<span class="label label-success">Erstellt</span>

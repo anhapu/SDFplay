@@ -1,0 +1,77 @@
+@(tradeList: List[TradeTransaction], user: User, id: String)
+
+@import models.enums.States
+
+<div class="panel-group" id="@id">
+	@for(tradeTransaction <- tradeList) {
+
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			@if(user.equals(tradeTransaction.recipient)) {
+			<h4>@tradeTransaction.owner.username</h4>
+			} else {
+			<h4>@tradeTransaction.recipient.username</h4>
+			}
+			<div class="row">
+			 	<div class="col-md-8">
+					@tradeProgressBar(tradeTransaction)
+				</div>
+				<div class="col-md-4">
+					<span class="pull-right">
+						<a href="#collapse-@tradeTransaction.id" class="btn btn-primary" data-toggle="collapse" data-parent="#@id" >
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="collapse-@tradeTransaction.id" class="panel-collapse collapse">
+			<div class="panel-body">
+				<div class="row">
+					@if(user.equals(tradeTransaction.recipient)) {
+						<div class="col-md-6">
+							<h4>Deine Bücher:</h4>
+							@if(tradeTransaction.state == States.APPROVE){
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+							} else {
+								@books(Book.findByTransactionAndOwner(tradeTransaction, user))
+							}
+
+						</div>
+						<div class="col-md-6">
+							<h4>@tradeTransaction.owner.username's Bücher:</h4>
+							@if(tradeTransaction.state == States.APPROVE){
+								@books(Book.findByTransactionAndOwner(tradeTransaction, user))
+							} else {
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+							}
+						</div>
+					}
+				
+					@if(user.equals(tradeTransaction.owner)) {
+						<div class="col-md-6">
+							<h4>@tradeTransaction.recipient.username's Bücher:</h4>
+							@if(tradeTransaction.state == States.APPROVE){
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+							} else {
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
+							}
+
+						</div>
+						<div class="col-md-6">
+							<h4>Deine Bücher:</h4>
+							@if(tradeTransaction.state == States.APPROVE){
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
+							} else {
+								@books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
+							}
+
+						</div>				
+					}			
+				</div>
+			</div>
+		</div>
+		</div>
+	}
+</div>

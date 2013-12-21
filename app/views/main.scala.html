@@ -52,10 +52,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
                         <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="@routes.TradeController.viewAllTrades()">Ansehen</a></li>
+                          <li><a href="@routes.TradeController.viewAllTrades()">Alle Ansehen</a></li>
                           <li class="divider"></li>
-                          <li><a href="#">@TradeTransaction.countForUserAsOwner(Common.currentUser) Wunschzettel von mir</a></li>
-                          <li><a href="#">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Wunschzettel an mich</a></li>
+                          <li><a href="@routes.TradeController.viewAllTrades()#me">@TradeTransaction.countForUserAsOwner(Common.currentUser) Tauschanfrage(n) von mir</a></li>
+                          <li><a href="@routes.TradeController.viewAllTrades()">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Tauschanfrage(n) an mich</a></li>
                         </ul>
                       </li>
                       <li class="dropdown active">

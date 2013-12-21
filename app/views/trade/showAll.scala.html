@@ -2,52 +2,24 @@
 @import helper._
 
 @main(user.username + "s Tauschanfragen") {
-	
-	@if(!tradeListRecipient.isEmpty()) {
-		<div class="page-header">
-  			<h2>Tauschanfragen an mich:</h2>
-		</div>
-			
-		@for(tradeTransaction <- tradeListRecipient) {
-			<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Von @tradeTransaction.owner.username</h4>
-				@snippets.tradeProgressBar(tradeTransaction)
-			</div>
-			<div class="panel-body">
-				<h4>@tradeTransaction.owner.username's Auswahl Ihrer Bücher:</h4>
-				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, user))
-				<h4>Ihre ausgewählten Bücher von @tradeTransaction.owner.username:</h4>
-				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
-				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
-			</div>
-			</div>
-		}
-	}
-	
-	
-	@if(!tradeListOwner.isEmpty()) {
-		<div class="page-header">
-  			<h2>Tauschanfragen von mir an andere Nutzer:</h2>
-		</div>
-	
-		@for(tradeTransaction <- tradeListOwner) {
-			<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>An @tradeTransaction.recipient.username</h4>
-				@snippets.tradeProgressBar(tradeTransaction)
-			</div>
-			<div class="panel-body">
-				<h4>Ihre ausgewählten Bücher von @tradeTransaction.recipient.username:</h4>
-				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
-				<h4>@tradeTransaction.recipient.username's Auswahl Ihrer Bücher:</h4>
-				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
-				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
-			</div>
-			</div>
-		}
-	}
 
-	
+			@if(!tradeListRecipient.isEmpty()) {
+				<div class="page-header">
+		  			<h2>Tauschanfragen an mich:</h2>
+				</div>
+			
+				@snippets.tradeList(tradeListRecipient,user,"accord1")
+			}
+
+
+			@if(!tradeListOwner.isEmpty()) {
+				<div class="page-header">
+		  			<h2 id="me">Tauschanfragen von mir an andere Nutzer:</h2>
+				</div>
+			
+				@snippets.tradeList(tradeListOwner,user,"accord2")
+			
+			}
+
 }
 
