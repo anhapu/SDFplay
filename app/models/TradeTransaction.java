@@ -134,18 +134,17 @@ public class TradeTransaction extends Model{
     }
         
     public static List<TradeTransaction> findListOfTradeTransactionInvolvedInTradeTransaction(TradeTransaction tradeTransaction) {
-    	//return find.fetch("book").where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.eq("bookList", tradeTransaction.bookList))).findList();
-
-    	List<Book> books = tradeTransaction.bookList;
-    	List<TradeTransaction> trades = new ArrayList<TradeTransaction>();
-    	for(Book book : books) {
-    		List<TradeTransaction> list = find.where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.eq("bookList", book))).findList();
-    		if ((!list.isEmpty()) && (list != null)) {
-    			trades.addAll(list);
-    		}
-    				
-    	}
-    	return trades;
+    	return find.where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.in("bookList", tradeTransaction.bookList))).findList();
+//    	List<Book> books = tradeTransaction.bookList;
+//    	List<TradeTransaction> trades = new ArrayList<TradeTransaction>();
+//    	for(Book book : books) {
+//    		List<TradeTransaction> list = find.where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.eq("bookList", book))).findList();
+//    		if ((!list.isEmpty()) && (list != null)) {
+//    			trades.addAll(list);
+//    		}
+//    				
+//    	}
+//    	return trades;
     }
     
     public static List<TradeTransaction> findListOfTradeTransactionInvolvedInBook(Book book) {
