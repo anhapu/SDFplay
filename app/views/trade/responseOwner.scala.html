@@ -4,17 +4,16 @@
 @main("Tauschanfrage an " + tradeTransaction.owner.username) {
 
 	<div class="page-header">
-  		<h2>Tauschanfrage an @tradeTransaction.owner.username :</h2>
+  		<h2>Tauschanfrage an @tradeTransaction.owner.username:</h2>
 	</div>
 	
 	@snippets.tradeProgressBar(tradeTransaction)	
-	<h4>Du wünscht dir:</h4>
+	<h4>Ihre ausgewählten Bücher:</h4>
 	@snippets.books(recipientBookList)
 	
-	<h4>@tradeTransaction.recipient.username möchte gerne folgende Bücher haben.</h4>
+	<h4>@tradeTransaction.recipient.username's Auswahl Ihrer Bücher:</h4>
 	@snippets.books(ownerBookList)
 	@snippets.comments(tradeTransaction)
-	
 	
 	<div class="row">
 		@helper.form(action = routes.TradeController.approve(tradeTransaction.id)){

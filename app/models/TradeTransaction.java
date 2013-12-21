@@ -140,11 +140,15 @@ public class TradeTransaction extends Model{
     	List<TradeTransaction> trades = new ArrayList<TradeTransaction>();
     	for(Book book : books) {
     		List<TradeTransaction> list = find.where(Expr.and(Expr.ne("id", tradeTransaction.id), Expr.eq("bookList", book))).findList();
-    		if (!list.isEmpty()) {
+    		if ((!list.isEmpty()) && (list != null)) {
     			trades.addAll(list);
     		}
     				
     	}
     	return trades;
+    }
+    
+    public static List<TradeTransaction> findListOfTradeTransactionInvolvedInBook(Book book) {
+    	return find.where().eq("bookList", book).findList();
     }
 }

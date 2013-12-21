@@ -23,6 +23,8 @@ import views.html.trade.finalRefuseOwner;
 import views.html.trade.finalRefuseRecipient;
 import views.html.trade.approveOwner;
 import views.html.trade.approveRecipient;
+import views.html.trade.invalidOwner;
+import views.html.trade.invalidRecipient;
 import views.html.trade.create;
 import views.html.trade.showAll;
 
@@ -100,7 +102,7 @@ public class TradeController extends Controller {
 		 case RESPONSE:		return viewResponse(tradeTransaction);
 		 case FINAL_REFUSE:	return viewFinalRefuse(tradeTransaction);
 		 case APPROVE:		return viewApprove(tradeTransaction);
-		 case INVALID:		return ok("This view is not implemented yet");
+		 case INVALID:		return viewInvalid(tradeTransaction);
 		 default:			Logger.info("Could not determine perspective");
 		 					return redirect(routes.Application.error());
 		}
@@ -111,7 +113,7 @@ public class TradeController extends Controller {
 		if (currentUser.equals(tradeTransaction.owner)) {
 			Logger.info("viewInit for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> pickedBooks = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
-			return ok(initOwner.render(pickedBooks,tradeTransaction,tradeTransaction.recipient));
+			return ok(initOwner.render(pickedBooks,tradeTransaction));
 			
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
 			Logger.info("viewInit for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
@@ -183,6 +185,23 @@ public class TradeController extends Controller {
 		}	
 	}	
 	
+	private static Result viewInvalid(TradeTransaction tradeTransaction) {
+		User currentUser = Common.currentUser();
+		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+		List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);		
+		if (currentUser.equals(tradeTransaction.owner)) {
+			Logger.info("viewInvalid for owner (" + tradeTransaction.owner.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(invalidOwner.render(ownerBookList, recipientBookList, tradeTransaction));
+			
+		} else if (currentUser.equals(tradeTransaction.recipient)) {
+			Logger.info("viewInvalid for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
+			return ok(invalidRecipient.render(ownerBookList, recipientBookList, tradeTransaction));
+		} else {
+			return redirect(routes.Application.error());
+		}	
+	}
+	
+	
 	/**
 	 * Inits the trade transaction
 	 * @return
@@ -196,7 +215,7 @@ public class TradeController extends Controller {
     	//Check if transaction already exists.
     	if (TradeTransaction.exists(owner, recipient) != null) {
     		Logger.info("A TradeTransaction for (owner = " + owner.username + " ,recipient = " + recipient.username + ") already exists? ");
-    		flash("error", "Dieser Wunschzettel existiert bereits und konnte nicht neu angelegt werden.");
+    		flash("error", "Diese Tauschanfrage existiert bereits und konnte nicht neu angelegt werden.");
     	} else {
     		
     		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
@@ -204,7 +223,7 @@ public class TradeController extends Controller {
         	// Getting the selection
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
 	    	if(bookSelection == null) {
-	    		flash("error", "Bitte wähle min. ein Buch aus.");
+	    		flash("error", "Bitte wählen Sie mindestens ein Buch aus!");
 	    		Logger.info("Error in Selection");
 				List<Book> books = Book.getShowcaseForUser(recipient);
 				return badRequest(create.render(books,recipient,filledForm));
@@ -227,7 +246,7 @@ public class TradeController extends Controller {
 			}
 	 			 		
 	    	trade.save();
-	 		flash("success", "Wunschzettel angelegt");
+	 		flash("success", "Wunschzettel wurde angelegt!");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
     	return redirect(routes.Application.index());
@@ -250,7 +269,7 @@ public class TradeController extends Controller {
 	       	// Getting the selection
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
 	    	if(bookSelection == null) {
-	    		flash("error", "Bitte wähle min. ein Buch aus.");
+	    		flash("error", "Bitte wählen Sie mindestens ein Buch aus!");
 	    		Logger.info("Error in Selection");
 	    		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
 				List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
@@ -277,7 +296,7 @@ public class TradeController extends Controller {
 	    	tradeTransaction.state = States.REFUSE;
 	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
 	    	tradeTransaction.save();
-	 		flash("success", "Du hast den Wunschzettel abgelehnt.");
+	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
 			
 		}
 		
@@ -292,7 +311,6 @@ public class TradeController extends Controller {
 		if(filledForm.data().get("approve") != null) {
 			tradeTransaction.state = States.APPROVE;
 			tradeTransaction.save();
-			flash("success", "Buchtausch erfolgreich!");
 			
 			List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
 			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
@@ -305,6 +323,7 @@ public class TradeController extends Controller {
 			//exchange books recipient
 			for (Book book : recipientBookList) {
 				book.owner = tradeTransaction.owner;
+				book.tradeable = false;
 				book.save();
 			}
 			
@@ -313,15 +332,12 @@ public class TradeController extends Controller {
 					trade.state = States.INVALID;
 					trade.save();
 			}
-			
-
-			
+			flash("success", "Buchtausch erfolgreich!");
 	 	// Process the Refuse Button
-		} else if(filledForm.data().get("finalrefuse") != null){
-
+		} else if(filledForm.data().get("finalrefuse") != null) {
 	    	tradeTransaction.state = States.FINAL_REFUSE;
 	    	tradeTransaction.save();
-	 		flash("success", "Du hast den Wunschzettel abgelehnt.");
+	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
 		}
     	return redirect(routes.TradeController.view(tradeTransaction.id));
     }
@@ -341,7 +357,7 @@ public class TradeController extends Controller {
     	
     	User partner = trade.recipient;
     	trade.delete();
-    	flash("success", "Wunschzettel wurde gelöscht");
+    	flash("success", "Die Tauschanfrage wurde gelöscht");
     	return redirect(routes.TradeController.viewForUser(partner.id));
     	
     }

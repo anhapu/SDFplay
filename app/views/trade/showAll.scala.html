@@ -1,11 +1,11 @@
 @(user: User, tradeListOwner: List[TradeTransaction], tradeListRecipient: List[TradeTransaction])
 @import helper._
 
-@main(user.username + "s Wunschzettel") {
+@main(user.username + "s Tauschanfragen") {
 	
 	@if(!tradeListRecipient.isEmpty()) {
 		<div class="page-header">
-  			<h2>Wünsche an mich:</h2>
+  			<h2>Tauschanfragen an mich:</h2>
 		</div>
 			
 		@for(tradeTransaction <- tradeListRecipient) {
@@ -15,9 +15,9 @@
 				@snippets.tradeProgressBar(tradeTransaction)
 			</div>
 			<div class="panel-body">
-				<h4>@tradeTransaction.owner.username wünscht sich von Ihnen :</h4>
+				<h4>@tradeTransaction.owner.username's Auswahl Ihrer Bücher:</h4>
 				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, user))
-				<h4>Sie wünschen sich von @tradeTransaction.owner.username :</h4>
+				<h4>Ihre ausgewählten Bücher von @tradeTransaction.owner.username:</h4>
 				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
 				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
 			</div>
@@ -28,7 +28,7 @@
 	
 	@if(!tradeListOwner.isEmpty()) {
 		<div class="page-header">
-  			<h2>Wünsche von mir:</h2>
+  			<h2>Tauschanfragen von mir an andere Nutzer:</h2>
 		</div>
 	
 		@for(tradeTransaction <- tradeListOwner) {
@@ -38,9 +38,9 @@
 				@snippets.tradeProgressBar(tradeTransaction)
 			</div>
 			<div class="panel-body">
-				<h4>Sie wünschen sich von @tradeTransaction.recipient.username :</h4>
+				<h4>Ihre ausgewählten Bücher von @tradeTransaction.recipient.username:</h4>
 				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient))
-				<h4>@tradeTransaction.recipient.username wünscht sich von Ihnen :</h4>
+				<h4>@tradeTransaction.recipient.username's Auswahl Ihrer Bücher:</h4>
 				@snippets.books(Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner))
 				<a href="@routes.TradeController.view(tradeTransaction.id)" class="btn btn-primary">Details</a>
 			</div>

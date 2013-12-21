@@ -1,3 +1,4 @@
+@(createButtonOnly: Boolean)
 <div id="wishlist-wrapper">
 	<div id="wishlist-container">
 		<h4>Mein Wunschzettel</h4>
@@ -7,6 +8,11 @@
 			<label for="comment">Kommentar</label><br>
 			<textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
 		</div>
-		<input type="submit" class="btn" value="Wunschzettel erstellen">
+		@if(createButtonOnly) {
+			<input type="submit" class="btn btn-success" value="Wunschzettel erstellen">
+		} else {
+			<input type="submit" class="btn btn-success" name="response" value="Wunschzettel bestätigen">
+			<input type="submit" class="btn btn-danger" name="refuse" value="Wunschzettel ablehnen">
+		}
 	</div>
 </div>
