@@ -17,6 +17,8 @@ import javax.mail.internet.MimeMessage;
 
 import models.User;
 import controllers.SMTPAuthenticator;
+import views.html.email.exchangeInvalidOwner;
+import views.html.email.exchangeInvalidRecipient;
 import views.html.email.forgotPassword;
 import views.html.email.registration;
 import views.html.email.exchangeInit;
@@ -166,9 +168,37 @@ public class EmailSender {
 		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
 		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
 		List<Email> emailList = new ArrayList<Email>();
-		emailList.add(new Email("Tauschanfrage an " + toUser.username + " erfolgreich abgeschlossen.", messageOwner, fromUser.email));
-		emailList.add(new Email("Tauschanfrage von " + fromUser.username + " erfolgreich abgeschlossen.", messageOwner, toUser.email));
+		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
+		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
 		send(emailList);
+	}
+	
+	/** Liefert eine Liste von Email-Objekten, die dafür verwendet wird um Nutzern mitzuteilen, dass eine Tauschanfrage abgeschlossen wurde. (State.APPROVE)
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static List<Email> getBookExchangeApprove(User fromUser, User toUser) {
+		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
+		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
+		List<Email> emailList = new ArrayList<Email>();
+		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
+		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
+		return emailList;
+	}
+	
+	/** Liefert eine Liste von Email-Objekten, die dafür verwendet wird um Nutzern mitzuteilen, dass eine Tauschanfrage ungültig wurde. (State.INVALID)
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static List<Email> getBookExchangeInvalid(User fromUser, User toUser) {
+		List<Email> emailList = new ArrayList<Email>();
+		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde für ungültig erklärt.", exchangeInvalidOwner.render(fromUser.username, toUser.username).toString(), fromUser.email));
+		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " an Sie wurde für ungültig erklärt.", exchangeInvalidRecipient.render(fromUser.username, toUser.username).toString(), toUser.email));
+		return emailList;
 	}
 	
 	/** Versendet eine E-Mail mit Informationen zum Status FINALREFUSE an einen Nutzer.

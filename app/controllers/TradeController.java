@@ -332,14 +332,19 @@ public class TradeController extends Controller {
 				book.tradeable = false;
 				book.save();
 			}
-			
+			//set involved tradeTransactions to INVALID and send emails to all users involved
+			List<Email> emailList = new ArrayList<Email>();
 			List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInTradeTransaction(tradeTransaction);
-			for (TradeTransaction trade : invalidTradeTransactions) {
-					trade.state = States.INVALID;
-					trade.save();
+			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+					invalidTradeTransaction.state = States.INVALID;
+					invalidTradeTransaction.save();
+					// add emails to user whose tradeTransaction became invalid
+					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
 			}
-			//send email
-			EmailSender.sendBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient);
+			//add emails of users whose tradeTransaction was APPROVED
+			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient));
+			//send emails
+			EmailSender.send(emailList);
 			flash("success", "Buchtausch erfolgreich!");
 	 	// Process the Refuse Button
 		} else if(filledForm.data().get("finalrefuse") != null) {
