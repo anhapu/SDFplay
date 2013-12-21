@@ -170,7 +170,7 @@ public final class BookController extends Controller {
             return ok(mybookshelf.render(Book.findByUser(searchedUser)));
         } else {
             // TODO redirect to something useful
-            Logger.error("Did not find any user for id: " + searchedUser.id);
+            Logger.error("Current user is null.");
             return redirect(routes.Application.index());
         }
     }
