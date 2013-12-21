@@ -6,12 +6,12 @@
 		<span class="label label-default">Abgeschlossen</span>
 		<span class="label label-default">Abgelehnt</span>
 	} else {
-		@if(tradeTransaction.state.name() == "INIT" || tradeTransaction.state.name() == "RESPONSE" || (tradeTransaction.state.name() == "REFUSE") ) {
+		@if(tradeTransaction.state.name() == "INIT" || tradeTransaction.state.name() == "RESPONSE" || tradeTransaction.state.name() == "APPROVE") {
 			<span class="label label-success">Erstellt</span>
 		} else {
 			<span class="label label-default">Erstellt</span>
 		}
-		@if(tradeTransaction.state.name() == "RESPONSE") {
+		@if(tradeTransaction.state.name() == "RESPONSE" || tradeTransaction.state.name() == "APPROVE") {
 			<span class="label label-success">Antwort</span>
 		} else {
 			<span class="label label-default">Antwort</span>

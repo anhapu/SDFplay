@@ -8,9 +8,9 @@
 	</div>
 	
 	@snippets.tradeProgressBar(tradeTransaction)
-	<h4>Du hattest dir folgende Bücher von @tradeTransaction.owner.username gewünscht:</h4>
+	<h4>Ihre ausgewählten Bücher:</h4>
 	@snippets.books(ownerBookList)
-	<h4>Du hättest folgende Bücher an @tradeTransaction.owner.username gegeben::</h4>
+	<h4>@tradeTransaction.owner.username's Auswahl Ihrer Bücher:</h4>
 	@snippets.books(recipientBookList)
 	@snippets.comments(tradeTransaction)
 	@snippets.delete(tradeTransaction)

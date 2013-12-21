@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Set;
 
 import models.Book;
+import models.TradeTransaction;
 import models.User;
+import models.enums.States;
 import play.Logger;
 import play.data.Form;
 import play.db.ebean.Transactional;
@@ -154,6 +156,14 @@ public final class BookController extends Controller {
     public static Result deleteBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
+        	//find TradeTransaction involved and set them INVALID
+        	List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
+        	if (invalidTradeTransactions != null) {
+    			for (TradeTransaction trade : invalidTradeTransactions) {
+					trade.state = States.INVALID;
+					trade.save();
+    			}
+        	}
             book.delete();
             return redirect(routes.BookController.myBookshelf());
         } else {

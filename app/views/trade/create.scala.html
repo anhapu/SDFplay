@@ -1,27 +1,15 @@
 @(books: List[Book], user: User, transForm: Form[TradeTransaction])
 @import helper._
 
-@main(user.username + "'s Bücherregal") {
+@main("Tauschanfrage an " + user.username) {
 
 	<div class="page-header">
-  		<h2>Bücher tauschen mit @{user.username}</h2>
+  		<h2>Wählen Sie Bücher von @{user.username}!</h2>
 	</div>
-
 	@helper.form(action = routes.TradeController.init(user.id)) {
-		@snippets.wishlist()
+		@snippets.wishlist(true)
 	}
-	
 	@snippets.tradeProgressBar(null)
-
-	<div id="showcase">
-		@for(book <- books) {
-			<div id="@book.id" class="col-md-2 book">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@book.coverUrl>
-				</a>
-				<input type="hidden" name="book_selection" value="@book.id" />
-			</div>
-		}
-	</div>
+	@snippets.showcase(books)
 }
 

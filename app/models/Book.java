@@ -2,6 +2,7 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -54,7 +55,8 @@ public class Book extends Model
     @ManyToOne
     public User owner;
     
-    @ManyToMany(mappedBy = "bookList")
+    // If you delete a book, the entries of this book in a TradeTransaction will be removed as well.
+    @ManyToMany(mappedBy = "bookList", cascade=CascadeType.REMOVE)
     public List<TradeTransaction> tradeTransactionList;
     
     
