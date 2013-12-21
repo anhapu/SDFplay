@@ -246,6 +246,8 @@ public class TradeController extends Controller {
 			}
 	 			 		
 	    	trade.save();
+	    	//send email
+	    	EmailSender.sendBookExchangeRequest(trade.owner, trade.recipient);
 	 		flash("success", "Wunschzettel wurde angelegt!");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
@@ -288,6 +290,8 @@ public class TradeController extends Controller {
 	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
 	    	tradeTransaction.state = States.RESPONSE;
 	    	tradeTransaction.save();
+	    	//send email
+	    	EmailSender.sendBookExchangeResponse(tradeTransaction.owner, tradeTransaction.recipient);
 	 		flash("success", "Wunschzettel bestätigt");	
 	 		
 	 	// Process the Refuse Button
@@ -296,6 +300,8 @@ public class TradeController extends Controller {
 	    	tradeTransaction.state = States.REFUSE;
 	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
 	    	tradeTransaction.save();
+	    	//send email
+	    	EmailSender.sendBookExchangeRefuse(tradeTransaction.owner, tradeTransaction.recipient);
 	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
 			
 		}
@@ -332,11 +338,15 @@ public class TradeController extends Controller {
 					trade.state = States.INVALID;
 					trade.save();
 			}
+			//send email
+			EmailSender.sendBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient);
 			flash("success", "Buchtausch erfolgreich!");
 	 	// Process the Refuse Button
 		} else if(filledForm.data().get("finalrefuse") != null) {
 	    	tradeTransaction.state = States.FINAL_REFUSE;
 	    	tradeTransaction.save();
+	    	// send email
+	    	EmailSender.sendBookExchangeFinalRefuse(tradeTransaction.owner, tradeTransaction.recipient);
 	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
 		}
     	return redirect(routes.TradeController.view(tradeTransaction.id));

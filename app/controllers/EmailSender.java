@@ -1,7 +1,10 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.Exchanger;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -16,7 +19,12 @@ import models.User;
 import controllers.SMTPAuthenticator;
 import views.html.email.forgotPassword;
 import views.html.email.registration;
-import views.html.email.exchangeRequest;
+import views.html.email.exchangeInit;
+import views.html.email.exchangeResponse;
+import views.html.email.exchangeRefuse;
+import views.html.email.exchangeApproveOwner;
+import views.html.email.exchangeApproveRecipient;
+import views.html.email.exchangeFinalRefuse;
 
 /** Ein Objekt zum Versand von Emails.
  */
@@ -35,18 +43,33 @@ public class EmailSender {
 	 * @param to			Ziel-E-Mail-Adresse
 	 */
 	public static void send(String subject, String message, String to) {
+		List<Email> emailList = new ArrayList<Email>();
+		emailList.add(new Email(subject, message, to));
+		send(emailList);
+	}
+	
+	/** Versendet E-Mails mit dem angegebenen Betreff und Inhalt an die gewuenschte Ziel-E-Mail-Adresse.
+	 *  Der Absender ist buecher.boerse@gmx.de. 
+	 * 
+	 * @param emailList		Eine Liste von Objekten vom Typ Email
+	 */
+	public static void send(List<Email> emailList) {
 		Properties props = prepareProperties();
 	    Session mailSession = Session.getInstance(props, new SMTPAuthenticator(props.getProperty("mail.smtp.user"), props.getProperty("mail.smtp.password"), true));
 	    try {
 		    Message msg = new MimeMessage(mailSession);
 		    msg.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
-		    InternetAddress[] address = {new InternetAddress(to)};
-		    msg.setRecipients(Message.RecipientType.TO, address);
-		    msg.setSubject(subject);
-		    msg.setSentDate(new Date());
-		    msg.setContent(message, "text/plain; charset=utf-8");
-		  //msg.setContent( message, "text/html; charset=utf-8" );
-		    Transport.send(msg);
+		    
+		    for (Email email : emailList) {
+		    	InternetAddress[] address = {new InternetAddress(email.getTo())};
+			    msg.setRecipients(Message.RecipientType.TO, address);
+			    msg.setSubject(email.getSubject());
+			    msg.setSentDate(new Date());
+			    msg.setContent(email.getMessage(), "text/plain; charset=utf-8");
+			  //msg.setContent( message, "text/html; charset=utf-8" );
+			    Transport.send(msg);
+		    }
+  
 		} catch (MessagingException mex) {
 		    mex.printStackTrace();
 		    System.out.println();
@@ -105,8 +128,67 @@ public class EmailSender {
 	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
 	 */
 	public static void sendBookExchangeRequest(User fromUser, User toUser) {
-		String message = exchangeRequest.render(fromUser.username, toUser.username).toString();
+		String message = exchangeInit.render(fromUser.username, toUser.username).toString();
 		send("Neue Tauschanfrage von " + fromUser.username, message, toUser.email);
+	}
+	
+	/** Versendet eine E-Mail mit Informationen zum Status RESPONSE an einen Nutzer.
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static void sendBookExchangeResponse(User fromUser, User toUser) {
+		String message = exchangeResponse.render(fromUser.username, toUser.username).toString();
+		send("Reaktion auf Ihre Tauschanfrage an " + fromUser.username, message, fromUser.email);
+	}
+	
+	
+	/** Versendet eine E-Mail mit Informationen zum Status REFUSE an einen Nutzer.
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static void sendBookExchangeRefuse(User fromUser, User toUser) {
+		String message = exchangeRefuse.render(fromUser.username, toUser.username).toString();
+		send("Ihre Tauschanfrage an " + fromUser.username + " wurde abgelehnt.", message, fromUser.email);
+	}
+	
+
+	/** Versendet E-Mails an owner und recipient, dass eine Tauschanfrage abgeschlossen wurde. (State.APPROCE)
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static void sendBookExchangeApprove(User fromUser, User toUser) {
+		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
+		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
+		List<Email> emailList = new ArrayList<Email>();
+		emailList.add(new Email("Tauschanfrage an " + toUser.username + " erfolgreich abgeschlossen.", messageOwner, fromUser.email));
+		emailList.add(new Email("Tauschanfrage von " + fromUser.username + " erfolgreich abgeschlossen.", messageOwner, toUser.email));
+		send(emailList);
+	}
+	
+	/** Versendet eine E-Mail mit Informationen zum Status FINALREFUSE an einen Nutzer.
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static void sendBookExchangeFinalRefuse(User fromUser, User toUser) {
+		String message = exchangeFinalRefuse.render(fromUser.username, toUser.username).toString();
+		send("Die Tauschanfrage von " + fromUser.username + " an Sie wurde abgelehnt.", message, toUser.email);
+	}
+	
+	/** Versendet E-Mails mit Informationen zu dem Status INVALID an eine Reihe von Nutzern.
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param emailListe		Eine Liste von zu versendenden E-Mails
+	 */
+	public static void sendBookExchangeInvalid(List<Email> emailListe) {
+		send(emailListe);
 	}
 	
 	/** Sendet eine E-Mail mit einem Link zu Resetten des Passworts.
