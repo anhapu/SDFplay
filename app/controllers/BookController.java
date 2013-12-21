@@ -2,6 +2,7 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -150,19 +151,25 @@ public final class BookController extends Controller {
         }
     }
     
-    /**
-     * Delete a book.
-     */
+    /** Delete a book. This action will also lead to a search for INVALID TradeTransactions. If this
+     * 	book is used in a TradeTransaction, then this TradeTransaction will become INVALID. For each
+     * 	invalid TradeTransaction one E-Mail is sent to the owner and another one is sent to the recipient.
+     * 
+     * 	@param bookId	the id of the book that you want to delete
+     */ 
     public static Result deleteBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
-        	//find TradeTransaction involved and set them INVALID
+        	//find TradeTransaction involved, set them INVALID and set notifications to all users involved 
         	List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
         	if (invalidTradeTransactions != null) {
-    			for (TradeTransaction trade : invalidTradeTransactions) {
-					trade.state = States.INVALID;
-					trade.save();
+        		List<Email> emailList = new ArrayList<Email>();
+    			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+					invalidTradeTransaction.state = States.INVALID;
+					invalidTradeTransaction.save();
+					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
     			}
+    			EmailSender.send(emailList);
         	}
             book.delete();
             return redirect(routes.BookController.myBookshelf());
