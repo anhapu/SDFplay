@@ -7,7 +7,7 @@
   		<h2>Wählen Sie Bücher von @{user.username}!</h2>
 	</div>
 	@helper.form(action = routes.TradeController.init(user.id)) {
-		@snippets.wishlist(true)
+		@snippets.wishlist(true, transForm)
 	}
 	@snippets.tradeProgressBar(null)
 	@snippets.showcase(books)

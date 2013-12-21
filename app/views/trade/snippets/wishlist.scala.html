@@ -1,12 +1,11 @@
-@(createButtonOnly: Boolean)
+@(createButtonOnly: Boolean, transForm: Form[TradeTransaction])
 <div id="wishlist-wrapper">
 	<div id="wishlist-container">
 		<h4>Mein Wunschzettel</h4>
 		<div id="wishlist"></div>
 
 		<div id="comment-container">
-			<label for="comment">Kommentar</label><br>
-			<textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
+			 @helper.textarea(transForm("comment"), 'class -> "form-control", '_label -> "Kommentar", 'rows -> "5")  
 		</div>
 		@if(createButtonOnly) {
 			<input type="submit" class="btn btn-success" value="Wunschzettel erstellen">

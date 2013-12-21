@@ -13,7 +13,7 @@
 	
 	<h4>Wählen Sie Bücher von @tradeTransaction.owner.username!</h4>
 		@helper.form(action = routes.TradeController.response(tradeTransaction.id)) {
-			@snippets.wishlist(false)
+			@snippets.wishlist(false, transForm)
 		}
 	@snippets.showcase(ownerBookList)
 }
