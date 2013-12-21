@@ -169,7 +169,9 @@ public final class BookController extends Controller {
 					invalidTradeTransaction.save();
 					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
     			}
-    			EmailSender.send(emailList);
+    			if (!emailList.isEmpty()) {
+    				EmailSender.send(emailList);
+    			}
         	}
             book.delete();
             return redirect(routes.BookController.myBookshelf());
