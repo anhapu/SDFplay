@@ -359,22 +359,22 @@ public class TradeController extends Controller {
     
     
     
-    public static Result delete(Long id){    	
-    	TradeTransaction trade = TradeTransaction.findById(id);
-    	if(trade == null) {
+    public static Result delete(Long id) {
+    	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
+    	if(tradeTransaction == null) {
     		return redirect(routes.Application.error());
+    	} else {
+    	
+    		// For debugging not in use, so we can delete a transaction
+    		//    	if(!Secured.deleteTradeTransaction(trade)){
+    		//			return redirect(routes.Application.denied());
+    		//	}
+    		EmailSender.send(EmailSender.getBookExchangeDeleted(tradeTransaction.owner, tradeTransaction.recipient));
+			User partner = tradeTransaction.recipient;
+			tradeTransaction.delete();
+			flash("success", "Die Tauschanfrage wurde gelöscht");
+			return redirect(routes.TradeController.viewForUser(partner.id));
     	}
-    	
-    	// For debugging not in use, so we can delete a transaction
-//    	if(!Secured.deleteTradeTransaction(trade)){
-//			return redirect(routes.Application.denied());
-//    	}
-    	
-    	User partner = trade.recipient;
-    	trade.delete();
-    	flash("success", "Die Tauschanfrage wurde gelöscht");
-    	return redirect(routes.TradeController.viewForUser(partner.id));
-    	
     }
 	
 }

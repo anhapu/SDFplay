@@ -27,6 +27,8 @@ import views.html.email.exchangeRefuse;
 import views.html.email.exchangeApproveOwner;
 import views.html.email.exchangeApproveRecipient;
 import views.html.email.exchangeFinalRefuse;
+import views.html.email.exchangeDeletedOwner;
+import views.html.email.exchangeDeletedRecipient;
 
 /** Ein Objekt zum Versand von Emails.
  */
@@ -198,6 +200,19 @@ public class EmailSender {
 		List<Email> emailList = new ArrayList<Email>();
 		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde für ungültig erklärt.", exchangeInvalidOwner.render(fromUser.username, toUser.username).toString(), fromUser.email));
 		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " an Sie wurde für ungültig erklärt.", exchangeInvalidRecipient.render(fromUser.username, toUser.username).toString(), toUser.email));
+		return emailList;
+	}
+	
+	/** Liefert eine Liste von Email-Objekten, die dafür verwendet wird um Nutzern mitzuteilen, dass eine Tauschanfrage gelöscht wurde.
+	 *  Der Absender ist buecher.boerse@gmx.de.
+	 *  
+	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
+	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 */
+	public static List<Email> getBookExchangeDeleted(User fromUser, User toUser) {
+		List<Email> emailList = new ArrayList<Email>();
+		emailList.add(new Email("Die Tauschanfrage an " + toUser.username + " wurde gelöscht.", exchangeDeletedOwner.render(fromUser.username, toUser.username).toString(), fromUser.email));
+		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde gelöscht.", exchangeDeletedRecipient.render(fromUser.username, toUser.username).toString(), toUser.email));
 		return emailList;
 	}
 	
