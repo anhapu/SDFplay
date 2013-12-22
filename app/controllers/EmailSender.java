@@ -15,6 +15,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import play.Logger;
 import models.User;
 import controllers.SMTPAuthenticator;
 import views.html.email.exchangeInvalidOwner;
@@ -71,6 +72,7 @@ public class EmailSender {
 			    msg.setSentDate(new Date());
 			    msg.setContent(email.getMessage(), "text/plain; charset=utf-8");
 			  //msg.setContent( message, "text/html; charset=utf-8" );
+			    Logger.info("Sending E-Mail : >>" + email.getSubject() + "<< to " + email.getTo());
 			    Transport.send(msg);
 		    }
   
