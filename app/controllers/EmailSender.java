@@ -260,7 +260,8 @@ public class EmailSender {
 	    props.setProperty("mail.smtp.user", "buecher.boerse@gmx.de");
 	    props.setProperty("mail.smtp.password", "#123#abc#");
 	    props.setProperty("mail.smtp.auth", "true");
-	    props.setProperty("mail.debug", "true");
+	    // set debug to true, if you want mailing output :)
+	    props.setProperty("mail.debug", "false");
 	    props.setProperty("mail.smtp.ssl.enable", "true");
 	    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
        return props;
