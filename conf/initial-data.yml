@@ -19,6 +19,51 @@ users:
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
         role: USER
 
+    - !!models.User
+        id: 3
+        email: bernd@das-brot.de
+        username: Bernd Dasbrot
+        firstname: Bernd
+        lastname: Dasbrot
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
+    - !!models.User
+        id: 4
+        email: ivana.tinkle@localhost.com
+        username: Lassmiranda Dennsiewillja
+        firstname: Lassmiranda
+        lastname: Dennsiewillja
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
+    - !!models.User
+        id: 5
+        email: albert.einstein@localhost.com
+        username: Albert Einstein
+        firstname: Albert
+        lastname: Einstein
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
+    - !!models.User
+        id: 6
+        email: not-mr-president@localhost.com
+        username: Barack Obama
+        firstname: Barack
+        lastname: Obama
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
+    - !!models.User
+        id: 7
+        email: bill@gatez.bz
+        username: Bill Gatez
+        firstname: Bill 
+        lastname: Gatez
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
 books:
 
 # For User 1
@@ -112,3 +157,440 @@ books:
         comment: Test comment
         owner: !!models.User
                      id: 2
+
+# User 3
+    - !!models.Book
+        author: Bernd Armbrust
+        title: Brot
+        isbn: 3833821965
+        coverUrl: http://ecx.images-amazon.com/images/I/51jD%2BQLrqrL.jpg
+        year: 2011
+        tradeable: true
+        comment: Meine Familiengeschichte
+        owner: !!models.User
+            id: 3
+
+    - !!models.Book
+        author: Anna Koch, Axel Lilienblum
+        title: Ich bin da, aber die Haustür nicht
+        isbn: 3499630516
+        coverUrl: http://ecx.images-amazon.com/images/I/41w171ilVhL.jpg
+        year: 2013
+        tradeable: false
+        comment: Lustig ... HaHa HoHo HeHe
+        owner: !!models.User
+            id: 3
+
+    - !!models.Book
+        author: Bernd Höcker
+        title:  GEZ abschaffen Einblicke in die Dunkelwelt des öffentlich-rechtlichen Rundfunks
+        isbn: 3980461785
+        coverUrl: http://ecx.images-amazon.com/images/I/313XJ1MEFZL.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 3
+
+    - !!models.Book
+        author: Jonas Jonasson, Wibke Kuhn 
+        title:  Die Analphabetin, die rechnen konnte 
+        isbn: 3570585123
+        coverUrl: http://ecx.images-amazon.com/images/I/51iC3H6wNML.jpg
+        year: 2013
+        tradeable: false
+        comment: Test Comment
+        owner: !!models.User
+            id: 3
+
+
+    - !!models.Book
+        author: Rosenmehl
+        title: Weihnachtsbäckerei Die Schätze aus Omas Backbuch 
+        isbn: 357208122X 
+        coverUrl: http://ecx.images-amazon.com/images/I/91Rg5l1GzKL.jpg 
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 3
+
+# User 4
+
+    - !!models.Book
+        author: Daniel Cole Young
+        title:  Kacka Sutra 52 inspirierende Techniken, das große Geschäft zu verrichten
+        isbn: 386883351X
+        coverUrl: http://ecx.images-amazon.com/images/I/51pKMWYn3NL.jpg
+        year: 2013 
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Lance Dane, Michael Meyer
+        title:  Kamasutra Das illustrierte Lehrbuch der Erotik 
+        isbn: 3895552798
+        coverUrl: http://ecx.images-amazon.com/images/I/515sBnD44ZL.jpg
+        year: 2005 
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Margot Anand, Karin Petersen 
+        title: Tantra oder Die Kunst der sexuellen Ekstase
+        isbn: 3442138477 
+        coverUrl: http://ecx.images-amazon.com/images/I/511R26LC-zL.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Cynthia W. Gentry, Bettina Spangler 
+        title: Was Frauen im Bett wirklich wollen Geheime Wünsche und Sehnsüchte, die Männer kennen sollten
+        isbn: 3442172802
+        coverUrl: http://ecx.images-amazon.com/images/I/51Ri12sH1-L.jpg
+        year: 2012
+        tradeable: false
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Niko Kaindl
+        title: Akne und Pickel einfach loswerden - erfolgreich gegen Mitesser, Rosacea und unreine Haut vorgehen 
+        isbn: 3848208296 
+        coverUrl: http://ecx.images-amazon.com/images/I/41ki7OO6brL.jpg 
+        year: 2012
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Charlotte Roche 
+        title: Feuchtgebiete 
+        isbn: 3548280404
+        coverUrl: http://ecx.images-amazon.com/images/I/41D%2BisoDF5L.jpg 
+        year: 2011
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+
+    - !!models.Book
+        author: Anita Isiris 
+        title:  Die Schokospalte Erotische Geschichten Erotische Roman 
+        isbn: 3453545400
+        coverUrl: http://ecx.images-amazon.com/images/I/71V8N0CUVBL._SL1130_.jpg
+        year: 2011
+        tradeable: false
+        comment: Test Comment
+        owner: !!models.User
+            id: 4
+# User 5
+
+    - !!models.Book
+        author: Steven Holzner, Regine Freudenstein
+        title: Quantenphysik für Dummies (Fur Dummies)
+        isbn: 3527708715
+        coverUrl: http://ecx.images-amazon.com/images/I/51y2SFVR2wL.jpg 
+        year: 2012
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Jörn Bleck-Neuhaus
+        title: Elementare Teilchen Von den Atomen über das Standard-Modell bis zum Higgs-Boson
+        isbn: 3642325785
+        coverUrl: http://ecx.images-amazon.com/images/I/61%2B8qZElT4L.jpg
+        year: 2012 
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Boris Lemmer
+        title: Bis(s) ins Innere des Protons Ein Science Slam durch die Welt der Elementarteilchen, der Beschleuniger und Supernerds
+        isbn: 3642377130
+        coverUrl: http://ecx.images-amazon.com/images/I/51GDYeKyyaL.jpg
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Richard von Schirach
+        title: Die Nacht der Physiker Heisenberg, Hahn, Weizsäcker und die deutsche Bombe
+        isbn: 3937834540
+        coverUrl: http://ecx.images-amazon.com/images/I/41xSWlsTFgL.jpg
+        year: 2012 
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: John Gribbin, Friedrich Griese
+        title: Auf der Suche nach Schrödingers Katze Quantenphysik und Wirklichkeit
+        isbn: 3492240305
+        coverUrl: http://ecx.images-amazon.com/images/I/41yU7JMa8HL.jpg
+        year: 2010
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Albert Einstein 
+        title: Einsteins Annalen Papers. The Complete Collection 1901-1922
+        isbn: 352740564X
+        coverUrl: http://ecx.images-amazon.com/images/I/41c-7Cv5mFL.jpg
+        year: 2005
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Erich Lohrmann, Paul Söding
+        title: Von schnellen Teilchen und hellem Licht - 50 Jahre Deutsches Elektronen-Synchrotron DESY 
+        isbn: 3527409904
+        coverUrl: http://ecx.images-amazon.com/images/I/51F3JWOV5UL.jpg
+        year: 2009
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Don Lincoln, Thomas Filk
+        title: Die Weltmaschine - Der LHC und der Beginn einer neuen Physik 
+        isbn: 3827424631
+        coverUrl: http://ecx.images-amazon.com/images/I/51JzJQdd4sL.jpg
+        year: 2011
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+
+    - !!models.Book
+        author: Edition Trötsch
+        title:  Puzzlebuch - Der kleine Maulwurf
+        isbn: 3868482202
+        coverUrl: http://ecx.images-amazon.com/images/I/51%2Bq9qmWYKL.jpg
+        year: 2010
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 5
+# User 6
+
+    - !!models.Book
+        author: Christian Fuchs, John Goetz
+        title: Geheimer Krieg - Wie von Deutschland aus der Kampf gegen den Terror gesteuert wird 
+        isbn: 3498021389
+        coverUrl: http://ecx.images-amazon.com/images/I/411DyYJ4WqL.jpg 
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Jeremy Scahill
+        title: Schmutzige Kriege Amerikas geheime Kommandoaktionen
+        isbn: 3888978688
+        coverUrl: http://ecx.images-amazon.com/images/I/41YWd86efJL.jpg 
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Jeremy Scahill, Bernhard Jendricke
+        title: Blackwater Der Aufstieg der mächtigsten Privatarmee der Welt
+        isbn: 3888975123 
+        coverUrl: http://ecx.images-amazon.com/images/I/41eHu6VOnhL.jpg
+        year: 2008
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: James Bamford
+        title: NSA
+        isbn: 3570151514
+        coverUrl: http://ecx.images-amazon.com/images/I/512RB7H242L.jpg
+        year: 2001
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Juli Zeh, Ilija Trojanow
+        title: Angriff auf die Freiheit - Sicherheitswahn, Überwachungsstaat und der Abbau bürgerlicher Rechte
+        isbn: 3423346027
+        coverUrl: http://ecx.images-amazon.com/images/I/41fXhc9sM3L.jpg
+        year: 2010
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Howard E. Wasdin, Stephen Templin
+        title: Navy Seals Team 6 Die Einheit, die Osama bin Laden tötete - Ein Elitekämpfer enthüllt die Geheimnisse seiner Einheit 
+        isbn: 3868831835
+        coverUrl: http://ecx.images-amazon.com/images/I/71w7xEl-2DL._SL1200_.jpg
+        year: 2011
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Marcus B. Klöckner
+        title: 9/11 - Der Kampf um die Wahrheit 
+        isbn: 3936931712
+        coverUrl: http://ecx.images-amazon.com/images/I/41yMJ5iDZmL.jpg
+        year: 2011
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Mathias Bröckers
+        title: JFK - Staatsstreich in Amerika 
+        isbn: 3864890438
+        coverUrl: http://ecx.images-amazon.com/images/I/91Lq3dIPimL.jpg
+        year: 2013
+        tradeable: false
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+    - !!models.Book
+        author: Markus Beckedahl, Andre Meister
+        title: Überwachtes Netz - Edward Snowden und der größte Überwachungsskandal der Geschichte 
+        isbn: 3944622022
+        coverUrl: http://ecx.images-amazon.com/images/I/5171USfkYiL.jpg
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 6
+
+# User 7
+
+    - !!models.Book
+        author: Rene Preißel, Bjørn Stachmann 
+        title: Git - Dezentrale Versionsverwaltung im Team - Grundlagen und Workflows 
+        isbn: 3864901308
+        coverUrl: http://ecx.images-amazon.com/images/I/41shS4YYIJL.jpg
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Joshua Bloch
+        title: Effective Java A Programming Language Guide
+        isbn: 0321356683
+        coverUrl: http://ecx.images-amazon.com/images/I/51J1rHXaovL.jpg
+        year: 2008
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Michael Inden
+        title:  Der Weg zum Java-Profi Konzepte und Techniken für die professionelle Java-Entwicklung
+        isbn: 3864900050
+        coverUrl: http://ecx.images-amazon.com/images/I/71A0RjVnb9L._SL1280_.jpg
+        year: 2012
+        tradeable: false 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Jon Erickson 
+        title: Hacking Die Kunst des Exploits
+        isbn: 3898645363
+        coverUrl: http://ecx.images-amazon.com/images/I/41%2Bj53AiGFL.jpg
+        year: 2008
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Klaus Schmeh 
+        title: Kryptografie Verfahren - Protokolle - Infrastrukturen
+        isbn: 3864900158
+        coverUrl: http://ecx.images-amazon.com/images/I/41MrMqqsG2L.jpg
+        year: 2013
+        tradeable: false 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Mela Eckenfels 
+        title: Das Kochbuch für Geeks
+        isbn: 3897214628
+        coverUrl: http://ecx.images-amazon.com/images/I/51MdEhv1kOL.jpg
+        year: 2007
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Nicole Dornseif, Maximillian Dornseif
+        title: Eltern sein - kurz und geek
+        isbn: 3868998276
+        coverUrl: http://ecx.images-amazon.com/images/I/51XeFQg0TKL.jpg
+        year: 2012
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Martin Odersky 
+        title: Programming in Scala 
+        isbn: 0981531644
+        coverUrl: http://ecx.images-amazon.com/images/I/51w1YjEaT-L.jpg
+        year: 2011
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
+
+    - !!models.Book
+        author: Hasso Plattner, Alexander Zeier
+        title: In-Memory Data Management - Technology and Applications
+        isbn: 3642295746
+        coverUrl: http://ecx.images-amazon.com/images/I/41sRb3xEaeL.jpg
+        year: 2012
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 7
