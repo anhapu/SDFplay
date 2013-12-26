@@ -64,6 +64,24 @@ users:
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
         role: USER
 
+    - !!models.User
+        id: 8
+        email: caesar@your-dictator.com
+        username: Galius-Julius Caesar
+        firstname: Galius-Julius
+        lastname: Caesar
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
+    - !!models.User
+        id: 9
+        email: donald.duck@localhost
+        username: Donald Duck
+        firstname: Donald
+        lastname: Duck
+        password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        role: USER
+
 books:
 
 # For User 1
@@ -594,3 +612,4418 @@ books:
         comment: Test Comment
         owner: !!models.User
             id: 7
+
+# User 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 34 Asterix und Obelix feiern Geburtstag - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/4/34_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 33 Gallien in Gefahr - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/3/33_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 32 Asterix plaudert aus der Schule - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/2/32_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 31 Asterix und Latraviata - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/1/31_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 30 Obelix auf Kreuzfahrt - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/0/30_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 29 Asterix und Maestria - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/9/29_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 28 Asterix im Morgenland  - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/8/28_3.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 27 Der Sohn des Asterix - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/7/27_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 26 Die Odyssee - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/6/26_1_3.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 25 Der große Graben - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/5/25_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 24 Asterix bei den Belgiern - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/4/24_6.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 23 Obelix GmbH &amp; Co KG - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/3/23_1_2.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 22 Die große Überfahrt - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/2/22_9.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 21 Das Geschenk Cäsars - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/1/21_7.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 20 Asterix auf Korsika - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/0/20_7.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 19 Der Seher - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/9/19_6.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 18 Die Lorbeeren des Cäsar - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/8/18_6.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 17 Die Trabantenstadt - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/7/17_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 16 Asterix bei den Schweizern - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/6/16_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 15 Streit um Asterix- gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/5/15_6.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 14 Asterix in Spanien - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/4/14_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 13 Asterix und der Kupferkessel - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/3/13_3.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 12 Asterix bei den Olympischen Spielen - gebundene Ausgaben
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/2/12_3.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 11 Asterix und der Arvernerschild - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_1_2.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 10 Asterix als Legionär - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/0/10_3.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 9 Asterix und die Normannen - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/9/_/9_2.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 8 Asterix bei den Briten - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/8/_/8_2.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 7 Asterix und die Goten - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/7/_/7_1_4.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 6 Tour de France - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/6/_/6_5.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 5 Die goldene Sichel - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/5/_/5_7.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 4 Der Kampf der Häuptlinge - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/4/_/4_7.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 3 Asterix als Gladiator - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/3/_/3_1_6.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 2 Asterix und Kleopatra - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/2/_/2_7.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+    - !!models.Book
+        author: René Goscinny, Albert Uderzo
+        title: Asterix Nr. 1 Asterix, der Gallier - gebundene Ausgabe
+        isbn: 0000000000
+        coverUrl: http://media.ehapa-shop.de/media/catalog/product/cache/1/small_image/206x/9df78eab33525d08d6e5fb8d27136e95/1/_/1_1_9.png
+        year: 2013
+        tradeable: true 
+        comment: Test Comment
+        owner: !!models.User
+            id: 8
+
+# User 9
+#
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 001 Der Kolumbusfalter .. Und andere Abenteuer
+        isbn: 0000000001
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_001.jpg
+        year: 1967
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 002 Onkel Dagoberts Millionen
+        isbn: 0000000002
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_002.jpg
+        year: 1968
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 003 Donald, der König des Wilden Westens
+        isbn: 0000000003
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_003.jpg
+        year: 1968
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 004 Onkel Dagobert bleibt Sieger
+        isbn: 0000000004
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_004.jpg
+        year: 1968
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 005 Donald in 1000 Nöten
+        isbn: 0000000005
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_005.jpg
+        year: 1968
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 006 Donald gibt nicht auf
+        isbn: 0000000006
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_006.jpg
+        year: 1969
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 007 Micky ist der Größte
+        isbn: 0000000007
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_007.jpg
+        year: 1969
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 008 Mit Onkel Dagobert auf Weltreise
+        isbn: 0000000008
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_008.jpg
+        year: 1969
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 009 Hexenzauber mit Micky und Goofy
+        isbn: 0000000009
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_009.jpg
+        year: 1969
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 010 Donald in Hypnose
+        isbn: 0000000010
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_010.jpg
+        year: 1969
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 011 Micky in Gefahr
+        isbn: 0000000011
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_011.jpg
+        year: 1970
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 012 Donald sucht Streit
+        isbn: 0000000012
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_012.jpg
+        year: 1970
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 013 Abenteuer mit Micky und Goofy
+        isbn: 0000000013
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_013.jpg
+        year: 1970
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 014 Micky und Minni
+        isbn: 0000000014
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_014.jpg
+        year: 1970
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 015 Donald ist unschlagbar
+        isbn: 0000000015
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_015.jpg
+        year: 1971
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 016 Pech für die Panzerknacker
+        isbn: 0000000016
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_016.jpg
+        year: 1971
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 017 Onkel Dagobert sieht rot
+        isbn: 0000000017
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_017.jpg
+        year: 1971
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 018 70 für Onkel Dagobert
+        isbn: 0000000018
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_018.jpg
+        year: 1972
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 019 Donald auf großer Fahrt
+        isbn: 0000000019
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_019.jpg
+        year: 1972
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 020 Ritter Donald ist der Beste
+        isbn: 0000000020
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_020.jpg
+        year: 1972
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 021 Donald geht ein Licht auf
+        isbn: 0000000021
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_021.jpg
+        year: 1972
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 022 Onkel Dagobert schaffts allein
+        isbn: 0000000022
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_022.jpg
+        year: 1973
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 023 Donald der Große
+        isbn: 0000000023
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_023.jpg
+        year: 1973
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 024 Wer wagt, gewinnt
+        isbn: 0000000024
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_024.jpg
+        year: 1973
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 025 Micky der Westernheld
+        isbn: 0000000025
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_025.jpg
+        year: 1974
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 026 Hier geht&acutes rund
+        isbn: 0000000026
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_026.jpg
+        year: 1974
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 027 Unverhofft kommt oft
+        isbn: 0000000027
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_027.jpg
+        year: 1974
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 028 Donald im Glück
+        isbn: 0000000028
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_028.jpg
+        year: 1974
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 029 Ein Milliardär hat&acutes schwer
+        isbn: 0000000029
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_029.jpg
+        year: 1974
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 030 Supermicky
+        isbn: 0000000030
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_030.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 031 Aus Onkel Donalds Memoiren
+        isbn: 0000000031
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_031.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 032 Onkel Donald auf heißer Spur
+        isbn: 0000000032
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_032.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 033 Ehrlich spart am längsten
+        isbn: 0000000033
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_033.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 034 Donald hier - Donald da...
+        isbn: 0000000034
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_034.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 035 Auf geht&acutes, Micky
+        isbn: 0000000035
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_035.jpg
+        year: 1975
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 036 Donald mal ganz anders
+        isbn: 0000000036
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_036.jpg
+        year: 1976
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 037 Micky denkt am schnellsten
+        isbn: 0000000037
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_037.jpg
+        year: 1976
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 038 Unterwegs in Sachen Gold
+        isbn: 0000000038
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_038.jpg
+        year: 1976
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 039 Phantomias fliegt wieder
+        isbn: 0000000039
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_039.jpg
+        year: 1976
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 040 Bahn frei für Donald
+        isbn: 0000000040
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_040.jpg
+        year: 1976
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 041 Micky hat den Bogen raus
+        isbn: 0000000041
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_041.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 042 Hoppla, die Ducks kommen
+        isbn: 0000000042
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_042.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 043 Volltreffer für Micky
+        isbn: 0000000043
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_043.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 044 Ohne Fleiß kein Preis
+        isbn: 0000000044
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_044.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 045 Dagobert gewinnt immer
+        isbn: 0000000045
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_045.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 046 Kopf hoch, Donald
+        isbn: 0000000046
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_046.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 047 Micky immer auf Achse
+        isbn: 0000000047
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_047.jpg
+        year: 1977
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 048 Dagobert, der Milliardenakrobat
+        isbn: 0000000048
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_048.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 049 Micky der Meisterdetektiv
+        isbn: 0000000049
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_049.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 050 Dagobert macht Geschichten
+        isbn: 0000000050
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_050.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 051 Achtung - Fertig - Los
+        isbn: 0000000051
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_051.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 052 Phantomias gegen Phantomime
+        isbn: 0000000052
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_052.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 053 Donald, der Held des Tages
+        isbn: 0000000053
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_053.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 054 Donald ohne furcht und Tadel
+        isbn: 0000000054
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_054.jpg
+        year: 1978
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 055 Ohne Donald geht es nicht
+        isbn: 0000000055
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_055.jpg
+        year: 1979
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 056 Micky auf Gespensterjagd
+        isbn: 0000000056
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_056.jpg
+        year: 1979
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 057 Micky, der rasende Reporter
+        isbn: 0000000057
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_057.jpg
+        year: 1979
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 058 Onkel Dagoberts Traumreisen
+        isbn: 0000000058
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_058.jpg
+        year: 1979
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 059 Spaß mit Micky und Minni
+        isbn: 0000000059
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_059.jpg
+        year: 1979
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 060 Donald dreht durch
+        isbn: 0000000060
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_060.jpg
+        year: 1980
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 061 Micky Maus - Superstar
+        isbn: 0000000061
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_061.jpg
+        year: 1980
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 062 Alles Gute, Donald
+        isbn: 0000000062
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_062.jpg
+        year: 1980
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 063 Dagoberts große Schau
+        isbn: 0000000063
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_063.jpg
+        year: 1980
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 064 Viel Lärm um Donald
+        isbn: 0000000064
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_064.jpg
+        year: 1980
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 065 Micky greift ein
+        isbn: 0000000065
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_065.jpg
+        year: 1981
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 066 Der Stolz der Familie
+        isbn: 0000000066
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_066.jpg
+        year: 1981
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 067 Ferien mit Phantomias
+        isbn: 0000000067
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_067.jpg
+        year: 1981
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 068 Ein Fall für Micky
+        isbn: 0000000068
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_068.jpg
+        year: 1981
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 069 Donald im Rampenlicht
+        isbn: 0000000069
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_069.jpg
+        year: 1981
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 070 Donald vor Noch ein Tor
+        isbn: 0000000070
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_070.jpg
+        year: 1982
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 071 Phantomias bittet zum Tanz
+        isbn: 0000000071
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_071.jpg
+        year: 1982
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 072 Mit Volldampf ins Abenteuer
+        isbn: 0000000072
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_072.jpg
+        year: 1982
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 073 Ein Hoch auf Donald Duck
+        isbn: 0000000073
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_073.jpg
+        year: 1982
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 074 Micky ist wieder da
+        isbn: 0000000074
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_074.jpg
+        year: 1982
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 075 Donald sticht in See
+        isbn: 0000000075
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_075.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 076 Der Boß bin ich
+        isbn: 0000000076
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_076.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 077 Mickys Mondfahrt
+        isbn: 0000000077
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_077.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 078 Der Weg zum Erfolg
+        isbn: 0000000078
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_078.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 079 Donalds bunte Welt
+        isbn: 0000000079
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_079.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 080 Die Macht des Goldes
+        isbn: 0000000080
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_080.jpg
+        year: 1983
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 081 Micky groß in Form
+        isbn: 0000000081
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_081.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 082 Onkel Dagobert erzählt
+        isbn: 0000000082
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_082.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 083 Donald bleibt auf Kurs
+        isbn: 0000000083
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_083.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 084 Olympisches Allerlei
+        isbn: 0000000084
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_084.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 085 Ein Fest für Donald
+        isbn: 0000000085
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_085.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 086 Der Duck Clan
+        isbn: 0000000086
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_086.jpg
+        year: 1984
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 087 Dagobert, das Finanzgenie
+        isbn: 0000000087
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_087.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 088 Ich bin die Nummer Eins
+        isbn: 0000000088
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_088.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 089 Donald der Tausendsassa
+        isbn: 0000000089
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_089.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 090 Wer zuletzt lacht...
+        isbn: 0000000090
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_090.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 091 Donald ist im Bilde
+        isbn: 0000000091
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_091.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 092 Das Lied der Prärie
+        isbn: 0000000092
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_092.jpg
+        year: 1985
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 093 Donald ist mein Typ
+        isbn: 0000000093
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_093.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 094 Dagobert dreht voll auf
+        isbn: 0000000094
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_094.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 095 Mit Pauken und Trompeten
+        isbn: 0000000095
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_095.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 096 Rallye Entenhausen
+        isbn: 0000000096
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_096.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 097 Riesenspaß beim Ringelpiez
+        isbn: 0000000097
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_097.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 098 Donald, der Weltenbummler
+        isbn: 0000000098
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_098.jpg
+        year: 1986
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 099 Fern von Entenhausen
+        isbn: 0000000099
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_099.jpg
+        year: 1987
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 100 Entenhausender Wunschkonzert
+        isbn: 0000000100
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_100.jpg
+        year: 1987
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 101 Onkel Dagobert lebe hoch
+        isbn: 0000000101
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_101.jpg
+        year: 1987
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 102 Wettlauf ins Ungewisse
+        isbn: 0000000102
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_102.jpg
+        year: 1987
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 103 Donald, der Pechvogel
+        isbn: 0000000103
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_103.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 104 Die Ducks auf Abwegen
+        isbn: 0000000104
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_104.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 105 Goldregen bringt Segen
+        isbn: 0000000105
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_105.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 106 Einer spielt falsch
+        isbn: 0000000106
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_106.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 107 Olympisches Fieber
+        isbn: 0000000107
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_107.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 108 Im Reich der Sterne
+        isbn: 0000000108
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_108.jpg
+        year: 1988
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 109 Die neue Eiszeit
+        isbn: 0000000109
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_109.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 110 Traum oder Wirklichkeit?
+        isbn: 0000000110
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_110.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 111 Donald im Pech
+        isbn: 0000000111
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_111.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 112 Heißes Gold
+        isbn: 0000000112
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_112.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 113 Das güldene Faß
+        isbn: 0000000113
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_113.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 114 Donald ganz locker
+        isbn: 0000000114
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_114.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 115 Voll in Fahrt
+        isbn: 0000000115
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_115.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 116 Der ewige Zweite...
+        isbn: 0000000116
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_116.jpg
+        year: 1989
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 117 Der Tiger von Masalia
+        isbn: 0000000117
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_117.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 118 Goldene Träume
+        isbn: 0000000118
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_118.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 119 Das Talermonster
+        isbn: 0000000119
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_119.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 120 Die Sportskanonen
+        isbn: 0000000120
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_120.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 121 Gold unter Wasser
+        isbn: 0000000121
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_121.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 122 Der magische Ring
+        isbn: 0000000122
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_122.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 123 Der goldene Krieger
+        isbn: 0000000123
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_123.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 124 Jubiläums-Ausgabe
+        isbn: 0000000124
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_124.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 125 Der Dimensions-Sprung
+        isbn: 0000000125
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_125.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 126 Der Unglücksbringer
+        isbn: 0000000126
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_126.jpg
+        year: 1990
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 127 Abenteuer im Regenwald
+        isbn: 0000000127
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_127.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 128 Antike Geschäfte
+        isbn: 0000000128
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_128.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 129 Phantomias jagt Spektakulus
+        isbn: 0000000129
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_129.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 130 Der Indische Tempel
+        isbn: 0000000130
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_130.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 131 Das Geheimnis von Paris
+        isbn: 0000000131
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_131.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 132 Der wahre Pioniergeist
+        isbn: 0000000132
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_132.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 133 Der Hexentaler
+        isbn: 0000000133
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_133.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 134 Der goldene Totempfahl
+        isbn: 0000000134
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_134.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 135 Der dreizähnige Drache
+        isbn: 0000000135
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_135.jpg
+        year: 1991
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 136 Die Sieben Weltwunder
+        isbn: 0000000136
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_136.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 137 Kampf der Galaxien
+        isbn: 0000000137
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_137.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 138 Die schwimmende Insel
+        isbn: 0000000138
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_138.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 139 Eine Braut zuviel
+        isbn: 0000000139
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_139.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 140 25 TOLLE JAHRE
+        isbn: 0000000140
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_140.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 141 GRRR
+        isbn: 0000000141
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_141.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 142 Olympia in Entenhausen
+        isbn: 0000000142
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_142.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 143 Jubiläums-Ausgabe
+        isbn: 0000000143
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_143.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 144 Der verhinderte Entdecker
+        isbn: 0000000144
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_144.jpg
+        year: 1992
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 145 Die neue Statue
+        isbn: 0000000145
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_145.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 146 Die Zauberglocke
+        isbn: 0000000146
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_146.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 147 Eine fantastische Reise
+        isbn: 0000000147
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_147.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 148 Das Wunderpferd
+        isbn: 0000000148
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_148.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 149 Der Held der Pharaonen
+        isbn: 0000000149
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_149.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 150 Die Perle der Südsee
+        isbn: 0000000150
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_150.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 151 Abenteuer in Absurdistan
+        isbn: 0000000151
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_151.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 152 Prallball im Weltall
+        isbn: 0000000152
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_152.jpg
+        year: 1993
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 153 Phantomias auf Abwegen?
+        isbn: 0000000153
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_153.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 154 Der Wüstenwurm
+        isbn: 0000000154
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_154.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 155 Der Wildbach-Marathon
+        isbn: 0000000155
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_155.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 156 60 Jahre Superstar
+        isbn: 0000000156
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_156.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 157 Drachengold
+        isbn: 0000000157
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_157.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 158 Das grüne Gewissen
+        isbn: 0000000158
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_158.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 159 Abenteuer in Pyramontanien
+        isbn: 0000000159
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_159.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 160 Jubiläums-Ausgabe
+        isbn: 0000000160
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_160.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 161 Das Hexenlicht
+        isbn: 0000000161
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_161.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 162 Ein wahrer Held
+        isbn: 0000000162
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_162.jpg
+        year: 1994
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 163 Der Palast des Dagomesch
+        isbn: 0000000163
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_163.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 164 Die Adelsprüfung
+        isbn: 0000000164
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_164.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 165 Im Indianerland
+        isbn: 0000000165
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_165.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 166 Der Prügelknabe
+        isbn: 0000000166
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_166.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 167 Die Wächter der Zeit
+        isbn: 0000000167
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_167.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 168 Der gewaltige Zing Zong
+        isbn: 0000000168
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_168.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 169 Eine tolle Entdeckung
+        isbn: 0000000169
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_169.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 170 Der Glücksstern
+        isbn: 0000000170
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_170.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 171 Wo ist Onkel Dagobert?
+        isbn: 0000000171
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_171.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 172 Die Verlorene Welt
+        isbn: 0000000172
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_172.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 173 Der Dieb von Bagdad
+        isbn: 0000000173
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_173.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 174 Donleon der Schreckliche
+        isbn: 0000000174
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_174.jpg
+        year: 1995
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 175 Der doppelte Dagobert
+        isbn: 0000000175
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_175.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 176 Die Formel des Reichtums
+        isbn: 0000000176
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_176.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 177 Die Glückstaler-Allergie
+        isbn: 0000000177
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_177.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 178 Der Zauber-Zylinder
+        isbn: 0000000178
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_178.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 179 Das Geheimnis des 313
+        isbn: 0000000179
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_179.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 180 Das Buch der Wünsche
+        isbn: 0000000180
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_180.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 181 Die Zeitwanne
+        isbn: 0000000181
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_181.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 182 Schwebende Schurken
+        isbn: 0000000182
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_182.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 183 Jubiläums-Ausgabe
+        isbn: 0000000183
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_183.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 184 Der Geist aus der Kanne
+        isbn: 0000000184
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_184.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 185 Scherben bringen Glück
+        isbn: 0000000185
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_185.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 186 Der Goldene Preis
+        isbn: 0000000186
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_186.jpg
+        year: 1996
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 187 Der Gangsterschatz
+        isbn: 0000000187
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_187.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 188 Das Stimmwunder
+        isbn: 0000000188
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_188.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 189 Zeit ist Geld
+        isbn: 0000000189
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_189.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 190 Der Schulbus-Fahrer
+        isbn: 0000000190
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_190.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 191 50 Jahre Onkel Dagobert
+        isbn: 0000000191
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_191.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 192 Im Land der Saurier
+        isbn: 0000000192
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_192.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 193 Phantomias enttarnt?
+        isbn: 0000000193
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_193.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 194 Die glorreiche Gänse-Garde
+        isbn: 0000000194
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_194.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 195 Achtung, Aufnahme
+        isbn: 0000000195
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_195.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 196 Wettlauf der Erben
+        isbn: 0000000196
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_196.jpg
+        year: 1997
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 197 Heisse Tage in Afrika
+        isbn: 0000000197
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_197.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 198 Der Regenmacher
+        isbn: 0000000198
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_198.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 199 Donaldo der Ballzauberer
+        isbn: 0000000199
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_199.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 200 Gefangen im Fürchtelforst
+        isbn: 0000000200
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_200.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 201 Der verrückte Professor
+        isbn: 0000000201
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_201.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 202 Jubiläums-Ausgabe
+        isbn: 0000000202
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_202.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 203 Schatzsuche im Eis
+        isbn: 0000000203
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_203.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 204 Happy Bithday, Micky
+        isbn: 0000000204
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_204.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 205 Das große Wagenrennen
+        isbn: 0000000205
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_205.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 206 Geschäfte in Transsylvanien
+        isbn: 0000000206
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_206.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 207 Donald in Aktion
+        isbn: 0000000207
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_207.jpg
+        year: 1998
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 208 Die Vulkaninsel
+        isbn: 0000000208
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_208.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 209 Der Zauberer von Hokapoka
+        isbn: 0000000209
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_209.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 210 Der Waldgeist
+        isbn: 0000000210
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_210.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 211 Die große Flut
+        isbn: 0000000211
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_211.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 212 Der Alptraum-Abwasch
+        isbn: 0000000212
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_212.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 213 Dämonische Doppelgänger
+        isbn: 0000000213
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_213.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 214 Eine irrwitzige Irrfahrt
+        isbn: 0000000214
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_214.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 215 Rennfahrer wider Willen
+        isbn: 0000000215
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_215.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 216 Ferien am Südpol
+        isbn: 0000000216
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_216.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 217 Ab ins Jahr 2000
+        isbn: 0000000217
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_217.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 218 Jetzt schlägt&acutes 2000
+        isbn: 0000000218
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_218.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 219 Der niesende Geldsack
+        isbn: 0000000219
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_219.jpg
+        year: 1999
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 220 Die Wunderblume
+        isbn: 0000000220
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_220.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 221 Kleine Sensationen
+        isbn: 0000000221
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_221.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 222 Im Fußballfieber
+        isbn: 0000000222
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_222.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 223 Das Nest im Weltraum
+        isbn: 0000000223
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_223.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 224 Ein tolles Hobby
+        isbn: 0000000224
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_224.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 225 Dabei sein ist alles
+        isbn: 0000000225
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_225.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 226 Der König der Tiefe
+        isbn: 0000000226
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_226.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 227 Eine lästige Allergie
+        isbn: 0000000227
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_227.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 228 Der Herr des Dschungels
+        isbn: 0000000228
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_228.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 229 Gefangen in Darkmoor
+        isbn: 0000000229
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_229.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 230 Am Anfang war das Eis
+        isbn: 0000000230
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_230.jpg
+        year: 2000
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 231 Die geheimnisvolle Maske
+        isbn: 0000000231
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_231.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 232 Ein verrücktes Pferderennen
+        isbn: 0000000232
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_232.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 233 Unter Wölfen
+        isbn: 0000000233
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_233.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 234 Käpt&acuten Wirrbarts Münze
+        isbn: 0000000234
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_234.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 235 Superhelden im Doppelpack
+        isbn: 0000000235
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_235.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 236 Vertauschte Rollen
+        isbn: 0000000236
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_236.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 237 Die Monster vom Schlork
+        isbn: 0000000237
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_237.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 238 In den Fängen der Mumie
+        isbn: 0000000238
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_238.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 239 Sprung in die Zukunft
+        isbn: 0000000239
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_239.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 240 100 Jahre Walt Disney
+        isbn: 0000000240
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_240.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 241 Gefährliche Träume
+        isbn: 0000000241
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_241.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 242 Die O.M.A. schlägt zurück
+        isbn: 0000000242
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_242.jpg
+        year: 2001
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 243 Der Ball ist rund
+        isbn: 0000000243
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_243.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 244 70 Jahre Superstar
+        isbn: 0000000244
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_244.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 245 Jubiläums-Ausgabe
+        isbn: 0000000245
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_245.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 246 Der listige Lampengeist
+        isbn: 0000000246
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_246.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 247 Riskanter Einsatz
+        isbn: 0000000247
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_247.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 248 Im Strudel der Zeit
+        isbn: 0000000248
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_248.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 249 Superheld im Anflug
+        isbn: 0000000249
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_249.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 250 Glückwunsch, Glückspilz
+        isbn: 0000000250
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_250.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 251 Gefahr aus der Tiefe
+        isbn: 0000000251
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_251.jpg
+        year: 2002
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 252 Halt den Schnabel
+        isbn: 0000000252
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_252.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 253 Der schwarze Schatten
+        isbn: 0000000253
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_253.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 254 Die rote Sonne
+        isbn: 0000000254
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_254.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 255 Die Unterwasser-Pillen
+        isbn: 0000000255
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_255.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 256 313
+        isbn: 0000000256
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_256.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 257 Ferien mit Donald Duck
+        isbn: 0000000257
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_257.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 258 Die Wunderbrille
+        isbn: 0000000258
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_258.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 259 Der Piratenschatz
+        isbn: 0000000259
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_259.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 260 Im Auge des Gesetzes
+        isbn: 0000000260
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_260.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 261 Alles Gute, Micky
+        isbn: 0000000261
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_261.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 262 Herr der Klinge
+        isbn: 0000000262
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_262.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 263 Diamantenfieber
+        isbn: 0000000263
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_263.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 264 Angriff der Ameisen
+        isbn: 0000000264
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_264.jpg
+        year: 2003
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 265 Operation Omega
+        isbn: 0000000265
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_265.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 266 Der Wert des Geldes
+        isbn: 0000000266
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_266.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 267 Donald Duck - Megastar
+        isbn: 0000000267
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_267.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 268 Typisch Donald
+        isbn: 0000000268
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_268.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 269 Bademeister Duck
+        isbn: 0000000269
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_269.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 270 Fair geht vor
+        isbn: 0000000270
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_270.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 271 Unter Hypnose
+        isbn: 0000000271
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_271.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 272 Der Supersänger
+        isbn: 0000000272
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_272.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 273 In tierischer Mission
+        isbn: 0000000273
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_273.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 274 Die Rückkehr des Rächers
+        isbn: 0000000274
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_274.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 275 333
+        isbn: 0000000275
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_275.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 276 Stromausfall in Entenhausen
+        isbn: 0000000276
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_276.jpg
+        year: 2004
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 277 Walkampf
+        isbn: 0000000277
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_277.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 278 Gefangen in der Wüste
+        isbn: 0000000278
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_278.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 279 Die Superhelden
+        isbn: 0000000279
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_279.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 280 Die Weltraumritter
+        isbn: 0000000280
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_280.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 281 Ferien mit den Ducks
+        isbn: 0000000281
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_281.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 282 Club der Milliardäre
+        isbn: 0000000282
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_282.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 283 Gefangen im Spukschloss
+        isbn: 0000000283
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_283.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 284 Spaß im Schnee
+        isbn: 0000000284
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_284.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 285 Wo ist Donald Duck?
+        isbn: 0000000285
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_285.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 286 Spione wie wir
+        isbn: 0000000286
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_286.jpg
+        year: 2005
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 287 Das Geisterhaus
+        isbn: 0000000287
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_287.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 288 Skandal in Entenhausen
+        isbn: 0000000288
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_288.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 289 Jubiläums-Ausgabe LTB 350
+        isbn: 0000000289
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_289.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 290 Volltreffer
+        isbn: 0000000290
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_290.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 291 Reif für die Insel
+        isbn: 0000000291
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_291.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 292 Donald taucht ab
+        isbn: 0000000292
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_292.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 293 Ein Hundeleben
+        isbn: 0000000293
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_293.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 294 Scheriff gesucht
+        isbn: 0000000294
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_294.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 295 Rätsel um da Vinci
+        isbn: 0000000295
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_295.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 296 Unheimliche Erbschaft
+        isbn: 0000000296
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_296.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 297 Spion wider willen
+        isbn: 0000000297
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_297.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 298 Spiel auf Zeit
+        isbn: 0000000298
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_298.jpg
+        year: 2006
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 299 Unter Rittern
+        isbn: 0000000299
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_299.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 300 Auf Irrwegen
+        isbn: 0000000300
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_300.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 301 Der Ruf des Abenteuers
+        isbn: 0000000301
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_301.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 302 Glückwunsch, Goofy 
+        isbn: 0000000302
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_302.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 303 Die Insel der Piraten
+        isbn: 0000000303
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_303.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 304 Held in Badehosen
+        isbn: 0000000304
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_304.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 305 Kopfüber in den Sommer
+        isbn: 0000000305
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_305.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 306 Neffen in Gefahr 
+        isbn: 0000000306
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_306.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 307 Rollentausch
+        isbn: 0000000307
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_307.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 308 Geld, Gold und Glück 
+        isbn: 0000000308
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_308.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 309 Alarm 
+        isbn: 0000000309
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_309.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 310 Flucht nach Duckland
+        isbn: 0000000310
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_310.jpg
+        year: 2007
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 311 Donald blickt durch
+        isbn: 0000000311
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_311.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 312 Patient Donald Duck
+        isbn: 0000000312
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_312.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 313 Finale 
+        isbn: 0000000313
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_313.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 314 Endlich Ferien 
+        isbn: 0000000314
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_314.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 315 Platsch
+        isbn: 0000000315
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_315.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 316 Ring frei
+        isbn: 0000000316
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_316.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 317 Welt ohne Farbe
+        isbn: 0000000317
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_317.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 318 Happy Birthday Micky
+        isbn: 0000000318
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_318.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 319 Agent DoppelDuck
+        isbn: 0000000319
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_319.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 320 Hexenzauber
+        isbn: 0000000320
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_320.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 321 Liebe und Hiebe
+        isbn: 0000000321
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_321.jpg
+        year: 2008
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 322 Im Lesefieber
+        isbn: 0000000322
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_322.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 323 Schurken und Scherben
+        isbn: 0000000323
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_323.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 324 Im Bann des Phantoms
+        isbn: 0000000324
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_324.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 325 Alles Gute, Donald 
+        isbn: 0000000325
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_325.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 326 Spass am Strand
+        isbn: 0000000326
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_326.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 327 Urlaubsreif
+        isbn: 0000000327
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_327.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 328 Mission Monster
+        isbn: 0000000328
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_328.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 329 Rasanter Einsatz
+        isbn: 0000000329
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_329.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 330 Raus aus der Krise
+        isbn: 0000000330
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_330.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 331 Duell der Giganten
+        isbn: 0000000331
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_331.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 332 Geldspeicher in Gefahr
+        isbn: 0000000332
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_332.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 333 Phantomias Superstar
+        isbn: 0000000333
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_333.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 334 Seine erste Million
+        isbn: 0000000334
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_334.jpg
+        year: 2009
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 335 Jubiläumsausgabe
+        isbn: 0000000335
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_335.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 336 Agent ohne Angst
+        isbn: 0000000336
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_336.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 337 Glücksjäger
+        isbn: 0000000337
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_337.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 338 Cup am Kap
+        isbn: 0000000338
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_338.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 339 Sommerzeit
+        isbn: 0000000339
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_339.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 340 Urlaubszeit
+        isbn: 0000000340
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_340.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 341 Im Zwielicht
+        isbn: 0000000341
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_341.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 342 Spaß muss sein
+        isbn: 0000000342
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_342.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 343 Phantomias taucht ab
+        isbn: 0000000343
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_343.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 344 Der Knall im All
+        isbn: 0000000344
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_344.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 345 Winterzauber
+        isbn: 0000000345
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_345.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 346 Entenhausen Eiskalt
+        isbn: 0000000346
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_346.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 347 Ausgezeichnet
+        isbn: 0000000347
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_347.jpg
+        year: 2010
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 348 Auf der Jagd
+        isbn: 0000000348
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_348.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 349 Held der Nacht
+        isbn: 0000000349
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_349.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 350 Kampf der Piraten
+        isbn: 0000000350
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_350.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 351 Reise ins Ich
+        isbn: 0000000351
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_351.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 352 Sommer ...
+        isbn: 0000000352
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_352.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 353 ... Ferien
+        isbn: 0000000353
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_353.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 354 Rivalen für immer
+        isbn: 0000000354
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_354.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 355 Mission in Berlin
+        isbn: 0000000355
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_355.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 356 Die Unverbesserlichen
+        isbn: 0000000356
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_356.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 357 Sein ganzer Stolz
+        isbn: 0000000357
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_357.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 358 Donalds Lieblinge
+        isbn: 0000000358
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_358.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 359 Extremer Einsatz
+        isbn: 0000000359
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_359.jpg
+        year: 2011
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 360 Am Boden zerstört
+        isbn: 0000000360
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_360.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 361 Total im Stress
+        isbn: 0000000361
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_361.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 362 Enten in Schwarz
+        isbn: 0000000362
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_362.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 363 Jagd nach dem Ball
+        isbn: 0000000363
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_363.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 364 Sommer & Sonne
+        isbn: 0000000364
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_364.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 365 Strand & Meer
+        isbn: 0000000365
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_365.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 366 Abflug ins Abenteuer
+        isbn: 0000000366
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_366.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
+
+    - !!models.Book
+        author: Walt Disney Corp.
+        title: Lustiges Taschenbuch Nr. 367 Einsatz bei Nacht
+        isbn: 0000000367
+        coverUrl: http://www.matahari2000.de/images/Lustige_Taschenbuecher/Lustige_Taschenbuecher_367.jpg
+        year: 2012
+        tradeable: true
+        comment: Test Comment
+        owner: !!models.User
+            id: 9
