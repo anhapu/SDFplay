@@ -46,7 +46,7 @@ GET     /book/edit/:bookId      controllers.BookController.editBook(bookId: Long
 POST    /book/edit/:bookId      controllers.BookController.updateBook(bookId: Long)
 POST    /book/addBook/       	controllers.BookController.createBookByIsbn()
 GET     /book/delete/:bookId    controllers.BookController.deleteBook(bookId: Long)
-
+GET		/book/searchInBookShelf	controllers.BookController.searchInMyBooks()
 
 
 #Trade

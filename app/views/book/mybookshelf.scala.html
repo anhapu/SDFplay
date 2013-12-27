@@ -3,6 +3,12 @@
 
     <div class="page-header">
           <h2>Mein Bücherregal</h2>
+          <form class="navbar-form navbar-left" action="@routes.BookController.searchInMyBooks()" method="GET">
+         	<div class="form-group">
+            	<input type="search" class="form-control" placeholder="Durchsuche deine Bücher" id="searchQuery" name="keyword">
+            </div>
+         	<input type="submit" value="Suchen" class="btn primary">
+          </form>
     </div>
 	@for(book <- books) {
 		@snippets.infoModal(book)

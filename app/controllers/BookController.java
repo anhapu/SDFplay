@@ -30,7 +30,7 @@ public final class BookController extends Controller {
 
     @Transactional
     public static Result index() {
-        List<Book> books = Book.findAll();
+        //List<Book> books = Book.findAll();
 
         // TODO Need a view for that stuff...
         return null;
@@ -296,5 +296,22 @@ public final class BookController extends Controller {
             this.isbn = isbn;
 
         }
+    }
+    
+    @Transactional
+    public static Result searchInMyBooks(){
+    	List<Book> books = null;
+        final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+        for(Map.Entry< String, String[] > entry : entries){
+            if(entry.getKey().equals( "keyword" )){
+                final String term = entry.getValue()[0];
+                Logger.info("[BOOK-SEARCH-IN-OWN-BOOKS] Looking up Database for term '" + term);
+                books = Book.findByUserAndTitle(Common.currentUser(), term);
+                Logger.info( "[BOOK-SEARCH-IN-OWN-BOOKS] found " + books.size() );
+                return ok(views.html.book.searchResults.render(books));
+            }
+        }
+
+        return redirect(routes.Application.index());
     }
 }

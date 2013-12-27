@@ -168,4 +168,7 @@ public class Book extends Model
         return find.where().eq("tradeTransactionList", trans).eq("owner", owner).findList();
     }
     
+    public static List<Book> findByUserAndTitle(final User owner, final String title) {
+    	return find.where().eq("owner", owner).ilike( "title", "%" + title + "%" ).orderBy("title asc").findList();
+    }
 }
