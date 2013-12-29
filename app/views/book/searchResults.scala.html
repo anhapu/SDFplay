@@ -1,7 +1,10 @@
-@(books : List[Book])
+@(books : List[Book], searchString : String)
 @main("Suchergebnisse"){
+"<b>@searchString</b>"<br><br>
+@if(books.size == 0) {
+     Keine Bücher gefunden :(
+}else{
     @for(book <- books){
-       
             <div class="col-sm-4 col-md-2 col-xs-6">
                 <a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
                     @if( book.coverUrl != null && !book.coverUrl.isEmpty()){
@@ -12,6 +15,7 @@
                 </a>
             </div>
         
+            }
     }
 
 }

@@ -279,7 +279,7 @@ public final class BookController extends Controller {
                 Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term);
                 books = Book.findAllTradeableBooksByTitle(term);
                 Logger.info( "[BOOK-SEARCH] found " + books.size() );
-                return ok(views.html.book.searchResults.render(books));
+                return ok(views.html.book.searchResults.render(books, term));
             }
         }
 
@@ -308,7 +308,7 @@ public final class BookController extends Controller {
                 Logger.info("[BOOK-SEARCH-IN-OWN-BOOKS] Looking up Database for term '" + term);
                 books = Book.findByUserAndTitle(Common.currentUser(), term);
                 Logger.info( "[BOOK-SEARCH-IN-OWN-BOOKS] found " + books.size() );
-                return ok(views.html.book.searchResults.render(books));
+                return ok(views.html.book.searchResults.render(books, term));
             }
         }
 
