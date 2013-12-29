@@ -276,7 +276,7 @@ public final class BookController extends Controller {
         for(Map.Entry< String, String[] > entry : entries){
             if(entry.getKey().equals( "keyword" )){
                 final String term = entry.getValue()[0];
-                Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term);
+                Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term + "'");
                 books = Book.findAllTradeableBooksByTitle(term);
                 Logger.info( "[BOOK-SEARCH] found " + books.size() );
                 return ok(views.html.book.searchResults.render(books, term));
