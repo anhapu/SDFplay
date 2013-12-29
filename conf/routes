@@ -16,6 +16,7 @@ GET   /registration       controllers.Registration.index()
 POST  /registration       controllers.Registration.submit()
 POST	/forgotPassword     controllers.UserController.sendRecoveryMail()
 GET  /passwordRecovery/:token controllers.UserController.checkPasswordRecoveryToken(token: String)
+GET   /passwordRecovery   controllers.UserController.recoverPassword()
 
 # User Administration
 GET  /userAdministration controllers.UserAdministrationController.index()

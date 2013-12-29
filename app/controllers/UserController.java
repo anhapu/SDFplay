@@ -56,6 +56,11 @@ public class UserController extends Controller {
              }
              return result;
         }
+
+        public static Result recoverPassword() {
+          Form<Email> emailForm = form(Email.class);
+          return ok(passwordRecoveryMailForm.render(emailForm.fill(new Email())));
+        }
         
         @Security.Authenticated(Secured.class)
         public static Result logout() {

@@ -61,7 +61,7 @@ public class Secured extends Security.Authenticator
      */
     public static boolean isAllowedToEditBook(final Book book)
     {
-        if(book.owner.id == Common.currentUser().id)
+        if(Common.currentUser() != null && book.owner.id == Common.currentUser().id)
         {
             return true;
         }

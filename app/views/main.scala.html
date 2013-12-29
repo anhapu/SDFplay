@@ -13,7 +13,6 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/book.png")">
     </head>
     <body>
-            @if(Common.currentUser != null) {
                   <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar navbar-inverse">
                   <div class="navbar-header">
@@ -34,42 +33,51 @@
                       </div>
                       <input type="submit" value="Suchen" class="btn primary">
                     </form>
-                    <ul class="nav navbar-nav">
-                      <li><a href="@routes.BookController.addBook()"><span class="glyphicon glyphicon-plus"></span> Buch einstellen</a></li>
-                    </ul>
+                    @if(Common.currentUser != null) {
+                      <ul class="nav navbar-nav">
+                        <li><a href="@routes.BookController.addBook()"><span class="glyphicon glyphicon-plus"></span> Buch einstellen</a></li>
+                      </ul>
+                    }
                     <ul class="nav navbar-nav navbar-right">
-                      @if(User.isAdmin(Common.currentUser.id)) {
-                        <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
+                      @if(Common.currentUser != null) {
+                        @if(User.isAdmin(Common.currentUser.id)) {
+                          <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
+                        }
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
+                            <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
+                          <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="@routes.TradeController.viewAllTrades()">Alle Ansehen</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@routes.TradeController.viewAllTrades()#me">@TradeTransaction.countForUserAsOwner(Common.currentUser) Tauschanfrage(n) von mir</a></li>
+                            <li><a href="@routes.TradeController.viewAllTrades()">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Tauschanfrage(n) an mich</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown active">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Common.currentUser.username <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Profil ansehen</a></li>
+                            <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Profil bearbeiten</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@routes.UserController.logout">Logout</a></li>
+                          </ul>
+                        </li>
+                      } else {
+                        <form class="navbar-form navbar-left" action="@routes.UserController.login()" method="POST">
+                          <div style="display:inline-block;"><input type="email" name="email" placeholder="Email" class="form-control" style="width: auto;" tabindex="1"></br><a href="@routes.Registration.index()">Registrieren</a> </div>
+                          <div style="display:inline-block;"><input type="password" name="password" placeholder="Password" class="form-control" style="width: auto;" tabindex="2"></br><a href="@routes.UserController.recoverPassword()">Passwort vergessen</a> </div>
+                          <div style="display:inline-block; vertical-align: top;"><button type="submit" name="action" value="login" class="btn btn-primary" tabindex="3">Login</button></div>
+                        </form>
                       }
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
-                          <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
-                        </ul>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
-                        <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="@routes.TradeController.viewAllTrades()">Alle Ansehen</a></li>
-                          <li class="divider"></li>
-                          <li><a href="@routes.TradeController.viewAllTrades()#me">@TradeTransaction.countForUserAsOwner(Common.currentUser) Tauschanfrage(n) von mir</a></li>
-                          <li><a href="@routes.TradeController.viewAllTrades()">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Tauschanfrage(n) an mich</a></li>
-                        </ul>
-                      </li>
-                      <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Common.currentUser.username <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="@routes.UserController.showProfile(Common.currentUser.id)">Profil ansehen</a></li>
-                          <li><a href="@routes.UserController.editProfile(Common.currentUser.id)">Profil bearbeiten</a></li>
-                          <li class="divider"></li>
-                          <li><a href="@routes.UserController.logout">Logout</a></li>
-                        </ul>
-                      </li>
                   </div><!-- /.navbar-collapse -->
                  </div>
-               }
                 <br />
                 @if(flash.containsKey("success")) {
                     <div class="alert alert-success fade in">
