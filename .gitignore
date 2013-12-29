@@ -20,3 +20,5 @@ dist
 .project
 conf/application.conf
 conf/evolutions/default/1.sql
+.DS_Store
+.DS_Store?
