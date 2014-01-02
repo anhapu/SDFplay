@@ -99,6 +99,17 @@ public class Book extends Model
     public static List<Book> findAllTradeableBooksByTitle(final String title) {
         return find.where().eq( "tradeable", true ).ilike( "title", "%" + title + "%" ).orderBy( "title asc" ).findList();
     }
+
+    /**
+     * Find all tradeable books for a searchterm of a book attr, result is sorted by
+     * searchDirection.
+     * @param searchString
+     * @param searchAttribute
+     * @param searchDirection
+     */
+    public static List<Book> findAllTradeableBooksBy(String searchString, String searchAttribute, String searchDirection) {
+        return find.where().eq( "tradeable", true ).ilike( searchAttribute, "%" + searchString + "%" ).orderBy( searchAttribute + " " + searchDirection ).findList();
+    }
     
     /**
      * Returns all books of a given User.

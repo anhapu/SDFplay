@@ -272,12 +272,22 @@ public final class BookController extends Controller {
      */
     public static Result searchBook() {
         List<Book> books = null;
+        String sortAttribute = "title";
+        String sortDirection = "asc";
         final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+        for(Map.Entry< String, String[] > entry : entries){
+             if(entry.getKey().equals("sorting")) {
+                final String sortTerm = entry.getValue()[0];
+                String[] data = sortTerm.split(":");
+                sortAttribute = data[0];
+                sortDirection = data[1];
+             }
+        }
         for(Map.Entry< String, String[] > entry : entries){
             if(entry.getKey().equals( "keyword" )){
                 final String term = entry.getValue()[0];
                 Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term + "'");
-                books = Book.findAllTradeableBooksByTitle(term);
+                books = Book.findAllTradeableBooksBy(term, sortAttribute, sortDirection);
                 Logger.info( "[BOOK-SEARCH] found " + books.size() );
                 return ok(views.html.book.searchResults.render(books, term));
             }

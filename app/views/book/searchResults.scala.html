@@ -1,5 +1,18 @@
 @(books : List[Book], searchString : String)
 @main("Suchergebnisse"){
+<!-- let's sort something -->
+@if(books.size > 1) {
+<form action="@routes.BookController.searchBook()" method="GET">
+     <input type="hidden" value="@searchString" name="keyword">
+     <select onchange="this.form.submit()" name="sorting">
+          <option value="author:asc">Autor↑</option>
+          <option value="author:desc">Autor↓</option>
+          <option value="title:asc">Titel↑</option>
+          <option value="title:desc">Titel↓</option>
+     </select>
+</form>
+}
+<br>
 "<b>@searchString</b>"<br><br>
 @if(books.size == 0) {
      Keine Bücher gefunden :(
