@@ -108,7 +108,7 @@ public class Book extends Model
      * @param searchDirection
      */
     public static List<Book> findAllTradeableBooksBy(String searchString, String searchAttribute, String searchDirection) {
-        return find.where().eq( "tradeable", true ).ilike( searchAttribute, "%" + searchString + "%" ).orderBy( searchAttribute + " " + searchDirection ).findList();
+        return find.where().eq( "tradeable", true ).ilike( "title", "%" + searchString + "%" ).orderBy( searchAttribute + " " + searchDirection ).findList();
     }
     
     /**
