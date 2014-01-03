@@ -1,17 +1,27 @@
-@(books : List[Book], searchString : String)
+@(books : List[Book], searchString : String, sortAttribute : String, sortDirection : String, owner :
+String)
 @main("Suchergebnisse"){
 <!-- let's sort something -->
 @if(books.size > 1) {
-<form action="@routes.BookController.searchBook()" method="GET">
+     @if(owner.equals("all")) {
+          <form action="@routes.BookController.searchBook()" method="GET">
+     } else {
+          <form action="@routes.BookController.searchInMyBooks()" method="GET">
+     }
      <input type="hidden" value="@searchString" name="keyword">
-     <select onchange="this.form.submit()" name="sorting">
-          <option value="title:asc">Sortierung:</option>
+     <select id="sortSelect" onchange="this.form.submit()" name="sorting">
           <option value="author:asc">Autor↑</option>
           <option value="author:desc">Autor↓</option>
           <option value="title:asc">Titel↑</option>
           <option value="title:desc">Titel↓</option>
      </select>
 </form>
+<script>
+     window.onload = function() {
+          var element = document.getElementById("sortSelect");
+          element.value = "@sortAttribute" + ":" + "@sortDirection";
+     };
+</script>
 }
 <br>
 "<b>@searchString</b>"<br><br>

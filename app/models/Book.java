@@ -182,4 +182,16 @@ public class Book extends Model
     public static List<Book> findByUserAndTitle(final User owner, final String title) {
     	return find.where().eq("owner", owner).ilike( "title", "%" + title + "%" ).orderBy("title asc").findList();
     }
+
+    /**
+     * Find all books of a user for a searchterm of a book attr, result is sorted by
+     * searchDirection.
+     * @param user
+     * @param searchString
+     * @param searchAttribute
+     * @param searchDirection
+     */
+    public static List<Book> findAllBooksFromBy(final User owner, String searchString, String searchAttribute, String searchDirection) {
+        return find.where().eq("owner", owner).ilike( "title", "%" + searchString + "%" ).orderBy( searchAttribute + " " + searchDirection ).findList();
+    }
 }
