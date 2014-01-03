@@ -23,7 +23,6 @@ import views.html.book.detailview;
 import views.html.book.mybookshelf;
 
 @With(Common.class)
-@Security.Authenticated(Secured.class)
 public final class BookController extends Controller {
 
     private static Form<Book> bookForm = Form.form(Book.class);
@@ -37,12 +36,14 @@ public final class BookController extends Controller {
     }
     
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result getForm() {
         
         return ok(views.html.book.createBook.render(bookForm));
     }
     
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result createBook() {
         
         Form<Book> filledForm = bookForm.bindFromRequest();
@@ -75,6 +76,7 @@ public final class BookController extends Controller {
     }
     
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result updateBook(Long bookId) {
         Form<Book> filledForm = bookForm.bindFromRequest();
         Book oriBook = Book.findById(bookId);
@@ -106,6 +108,7 @@ public final class BookController extends Controller {
      * @return
      */
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result addBook() {
         if (Secured.isAllowedToAddBook()) {
             return ok(views.html.book.addBook.render(form(SimpleProfile.class)));
@@ -115,6 +118,7 @@ public final class BookController extends Controller {
     }
 
 
+    @Security.Authenticated(Secured.class)
     public static Result createBookByIsbn() {
         Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
         if (pForm.hasErrors()) {
@@ -138,6 +142,7 @@ public final class BookController extends Controller {
      * @return
      */
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result editBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (book != null) {
@@ -157,6 +162,7 @@ public final class BookController extends Controller {
      * 
      * 	@param bookId	the id of the book that you want to delete
      */ 
+    @Security.Authenticated(Secured.class)
     public static Result deleteBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
@@ -180,6 +186,7 @@ public final class BookController extends Controller {
         }
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result myBookshelf() {
         User searchedUser = Common.currentUser();
         if (searchedUser != null) {
@@ -201,6 +208,7 @@ public final class BookController extends Controller {
      *            UserId
      * @return
      */
+    @Security.Authenticated(Secured.class)
     public static Result getShowcase(final Long id) {
         final User searchedUser = User.findById(id);
         if (searchedUser != null) {
@@ -223,6 +231,7 @@ public final class BookController extends Controller {
      * @param id
      *            ID of the book which should be marked as tradeable.
      */
+    @Security.Authenticated(Secured.class)
     public static Result markAsTradeable(final Long id) {
         Book book = Book.findById(id);
         if (Secured.isOwnerOfBook(book)) {
@@ -242,6 +251,7 @@ public final class BookController extends Controller {
      * @param bookId
      * @return
      */
+    @Security.Authenticated(Secured.class)
     public static Result unmarkAsTradeable(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
@@ -255,6 +265,7 @@ public final class BookController extends Controller {
         }
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result getBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (book != null) {
@@ -309,6 +320,7 @@ public final class BookController extends Controller {
     }
     
     @Transactional
+    @Security.Authenticated(Secured.class)
     public static Result searchInMyBooks(){
     	List<Book> books = null;
         final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
