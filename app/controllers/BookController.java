@@ -308,12 +308,12 @@ public final class BookController extends Controller {
     }
 
     public static class SimpleProfile {
-        public long isbn;
+        public String isbn;
 
         public SimpleProfile() {
         }
 
-        public SimpleProfile(long isbn) {
+        public SimpleProfile(String isbn) {
             this.isbn = isbn;
 
         }
