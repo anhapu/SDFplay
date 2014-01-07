@@ -1,7 +1,14 @@
 @(book: Book)
-<!-- Modal -->
-<div class="modal fade" id="infoModal_@book.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+@if(book == null) {
+	<div class="modal-dialog">
+    <div class="modal-content">
+		 <div class="modal-body">
+		 	Da ist was schiefgegangen!
+		 </div>
+  	</div>
+    </div>
+} else {
+<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -43,4 +50,4 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+ }

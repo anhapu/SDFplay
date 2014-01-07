@@ -34,7 +34,14 @@ $(document).ready(function() {
 			bottom: 0
 		}
 	});
+	
+});
+
+
+$('body').on('hidden.bs.modal', '#centralModal', function () {
+    $(this).removeData('bs.modal');
 });
 
 $('[data-toggle="popover"]').popover('hide');
 $('[data-toggle="tooltip"]').tooltip('hide');
+

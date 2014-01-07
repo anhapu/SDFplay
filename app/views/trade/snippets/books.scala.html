@@ -3,12 +3,8 @@
 	@if(books.isEmpty()) {
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(noch) keine Bücher
 	} else {
-		@for(book <- books) {
-			<div class="col-sm-4 col-md-2 col-xs-6">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@book.coverUrl>
-				</a>
-			</div>
+		@for(b <- books) {
+			@book.snippets.cover(b)
 		}
 	}	
 </div>

@@ -12,6 +12,7 @@ import models.TradeTransaction;
 import models.User;
 import models.enums.States;
 import play.Logger;
+import play.api.templates.Html;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.mvc.Controller;
@@ -21,6 +22,7 @@ import play.mvc.With;
 import utils.Utils;
 import views.html.book.detailview;
 import views.html.book.mybookshelf;
+import views.html.book.modalview;
 
 @With(Common.class)
 public final class BookController extends Controller {
@@ -278,6 +280,12 @@ public final class BookController extends Controller {
             Logger.error("No results for request!");
             return badRequest();
         }
+    }
+    
+    
+    public static Result view(Long bookId) {
+        Book book = Book.findById(bookId);
+        return ok(modalview.render(book));
     }
     
     /*

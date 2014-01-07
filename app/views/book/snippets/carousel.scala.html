@@ -1,9 +1,5 @@
 @(user: User, books: List[Book])
 
-@for(book <- books) {
-	@infoModal(book)
-}
-
 @defining(6) { BUCHZAHL =>
 @defining( if (books.length % BUCHZAHL == 0) books.length / BUCHZAHL else books.length / BUCHZAHL + 1 ) { anzahlSeiten =>
 <!-- Carousel================================================== -->
