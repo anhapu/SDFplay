@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Constraint;
+
+import com.avaje.ebean.annotation.CreatedTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -55,6 +59,9 @@ public class Book extends Model
     @ManyToOne
     public User owner;
     
+    @CreatedTimestamp
+    public Timestamp initTime;
+
     // If you delete a book, the entries of this book in a TradeTransaction will be removed as well.
     @ManyToMany(mappedBy = "bookList", cascade=CascadeType.REMOVE)
     public List<TradeTransaction> tradeTransactionList;
