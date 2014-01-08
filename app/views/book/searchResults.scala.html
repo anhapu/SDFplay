@@ -24,7 +24,9 @@ String)
 </script>
 }
 <br>
-"<b>@searchString</b>"<br><br>
+@if(!searchString.equals("")) {
+     "<b>@searchString</b>"<br><br>
+}
 @if(books.size == 0) {
      Keine Bücher gefunden :(
 }else{
