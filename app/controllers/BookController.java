@@ -198,7 +198,7 @@ public final class BookController extends Controller {
             List<Book> books = Book.findByUser(searchedUser);
             Logger.info("Found " + books.size() + " books for user "
                     + searchedUser.username);
-            return ok(mybookshelf.render(Book.findByUser(searchedUser)));
+            return ok(mybookshelf.render(Book.findByUser(searchedUser), "title", "asc"));
         } else {
             // TODO redirect to something useful
             Logger.error("Current user is null.");
@@ -356,4 +356,25 @@ public final class BookController extends Controller {
          }
          return redirect(routes.Application.index());
     }
+
+    @Transactional
+    @Security.Authenticated(Secured.class)
+    public static Result sortMyBooks(){
+         List<Book> books = null;
+         String sortAttribute = "title";
+         String sortDirection = "asc";
+         final Set<Map.Entry<String,String[]>> entries = request().queryString().entrySet();
+         for(Map.Entry< String, String[] > entry : entries){
+              if(entry.getKey().equals("sorting")) {
+                   final String sortTerm = entry.getValue()[0];
+                   String[] data = sortTerm.split(":");
+                   sortAttribute = data[0];
+                   sortDirection = data[1];
+              }
+         }
+         // "" to get all books 
+         books = Book.findAllBooksFromBy(Common.currentUser(), "", sortAttribute, sortDirection);
+         return ok(views.html.book.mybookshelf.render(books, sortAttribute, sortDirection));
+     }
+
 }
