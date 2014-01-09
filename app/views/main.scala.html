@@ -49,13 +49,7 @@
                         @if(User.isAdmin(Common.currentUser.id)) {
                           <li><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
                         }
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Bücher <b class="caret"></b></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
-                            <li><a href="@routes.BookController.getShowcase(Common.currentUser.id)">Mein Showcase</a></li>
-                          </ul>
-                        </li>
+                        <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
                           <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
