@@ -34,7 +34,7 @@ String)
 @if(books.size == 0) {
      Keine Bücher gefunden :(
 }else{
-     if (books.size == 1) {
+     @if(books.size == 1) {
           @books.size() gefundenes Buch<br><br>
      } else {
           @books.size() gefundene Bücher<br><br>
