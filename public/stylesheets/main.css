@@ -104,7 +104,7 @@
 }
 
 .user-index {
-	margin-left: 100px;
+	margin-left: 210px;
 }
 
 .nav-search {
@@ -113,4 +113,14 @@
 
 .logo {
 	margin-left: 20px;
+}
+
+.title {
+	margin: 3px 5px 0 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.red {
+	color: #c71c22;
 }

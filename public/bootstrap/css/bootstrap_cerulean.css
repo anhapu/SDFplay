@@ -297,11 +297,11 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto",Arial,sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #555555;
-  background-color: #d5d5d5;
+  color: #333;
+  background-color: #e5e5e5;
 }
 
 input,
@@ -473,10 +473,10 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1.1;
-  color: #000000;
+  font-family: "Roboto",Arial,sans-serif;
+  font-weight: 100;
+  line-height: 1.4;
+  color: #333;
 }
 
 h1 small,
@@ -557,7 +557,7 @@ h3,
 
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 h5,
@@ -5510,11 +5510,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   font-size: 12px;
   font-weight: bold;
   line-height: 1;
-  color: #ffffff;
+  color: #178acc;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: #999999;
+  background-color: #fff;
   border-radius: 10px;
 }
 
@@ -6832,7 +6832,7 @@ button.close {
 
 .carousel-control:hover,
 .carousel-control:focus {
-  color: #022f5a;
+  color: #178acc;
   text-decoration: none;
   opacity: 0.9;
   filter: alpha(opacity=90);
@@ -6914,7 +6914,6 @@ button.close {
   left: 7%;
   z-index: 10;
   padding-bottom: 5px;
-  color: #ffffff;
   text-align: center;
 }
 

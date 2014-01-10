@@ -4,17 +4,24 @@
 	<a href="@routes.BookController.view(book.id)" data-toggle="modal" data-target="#centralModal">
 		<img src="@book.coverUrl" width="100px" height="150px" data-toggle="popover" title="@book.title" data-content='<b>Autor:</b> @book.author' data-trigger="hover" data-html="true" data-placement="top" data-container="body">
 	</a>
+	<div class="title">
+		@book.title
+	</div>
 	@if(Secured.isAllowedToEditBook(book)){
-		<div class="pull-left book-button-left"><g-h1>
-			@if(book.tradeable){
-				<a href="@routes.BookController.unmarkAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch aus dem Showcase entfernen" data-container="body"><span class="glyphicon glyphicon-eye-close"></span></a>
-			}else{
-				<a href="@routes.BookController.markAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch in den Showcase stellen" data-container="body"><span class="glyphicon glyphicon-eye-open"></span></a>
-			}
-		</g-h1></div>
-		<div class="pull-right book-button-right"><g-h1>
-			<a href="@routes.BookController.editBook(book.id)" data-toggle="tooltip" data-original-title="Buch bearbeiten" data-container="body"><span class="glyphicon glyphicon-edit"></span></a>
-			<a href="@routes.BookController.deleteBook(book.id)" data-toggle="tooltip" data-original-title="Buch löschen" data-container="body"><span class="glyphicon glyphicon-trash"></span></a>
-		</g-h1></div>
+		<div class="pull-left book-button-left">
+			<g-h1>
+				@if(book.tradeable){
+					<a href="@routes.BookController.unmarkAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch aus dem Showcase entfernen" data-container="body"><span class="glyphicon glyphicon-eye-close red"></span></a>
+				}else{
+					<a href="@routes.BookController.markAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch in den Showcase stellen" data-container="body"><span class="glyphicon glyphicon-eye-open"></span></a>
+				}
+			</g-h1>
+		</div>
+			<div class="pull-right book-button-right">
+				<g-h1>
+					<a href="@routes.BookController.editBook(book.id)" data-toggle="tooltip" data-original-title="Buch bearbeiten" data-container="body"><span class="glyphicon glyphicon-edit"></span></a>
+					<a href="@routes.BookController.deleteBook(book.id)" data-toggle="tooltip" data-original-title="Buch löschen" data-container="body"><span class="glyphicon glyphicon-trash"></span></a>
+				</g-h1>
+		</div>
 	}
 </section>
