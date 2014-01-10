@@ -4519,6 +4519,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border: 1px solid transparent;
 }
 
+.navbar a {
+  color: #fff;
+}
+
 .navbar:before,
 .navbar:after {
   display: table;
