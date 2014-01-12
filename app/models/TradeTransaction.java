@@ -27,6 +27,7 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
 import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
 
 import models.enums.States;
 import play.Logger;
@@ -62,6 +63,9 @@ public class TradeTransaction extends Model{
 	
 	@CreatedTimestamp
 	public Timestamp initTime;
+	
+	@UpdatedTimestamp
+	public Timestamp updatedTime;
 
 	
 	@JoinTable(name = "tradetransaction_book", 
@@ -77,7 +81,7 @@ public class TradeTransaction extends Model{
      * @return a list of all trade transactions
      */
     public static List<TradeTransaction> findAll() {    	
-        return find.all();        
+        return find.orderBy("updated_time desc").findList();        
     }
         
     /** Returns a trade transaction for a given id.
@@ -108,7 +112,7 @@ public class TradeTransaction extends Model{
      * @return List of trade transactions (can be empty).
      */
     public static List<TradeTransaction> findByOwner(final User owner) {
-        return find.where().eq("owner", owner).findList();
+        return find.where().eq("owner", owner).orderBy("updated_time desc").findList();
     }
     
     /** Returns a list of trade transactions, where a given user is the recipient
@@ -118,7 +122,7 @@ public class TradeTransaction extends Model{
      * @return List of trade transactions (can be empty).
      */
     public static List<TradeTransaction> findByRecipient(final User recipient) {
-        return find.where().eq("recipient", recipient).findList();
+        return find.where().eq("recipient", recipient).orderBy("updated_time desc").findList();
     }
     
     public static int countForUser(User user) {
