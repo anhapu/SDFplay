@@ -1,2 +1,2 @@
-@(trade: TradeTransaction)
-<a href="@routes.TradeController.delete(trade.id)" class="btn btn-danger">Tauschanfrage löschen</a>
+@(tradeTransaction: TradeTransaction)
+<a href="@routes.TradeController.delete(tradeTransaction.id)" class="btn btn-danger" onclick="return confirm('Wollen Sie diese Tauschanfrage wirklich löschen?');">Tauschanfrage löschen</a>
