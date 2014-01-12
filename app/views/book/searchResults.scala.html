@@ -2,6 +2,9 @@
 String, navigation : String)
 @main("Suchergebnisse", navigation){
 <!-- let's sort something -->
+@if(!owner.equals("all")) {
+<h2>Suche in meinen Büchern</h2>
+}
 @if(books.size > 1) {
      @if(owner.equals("all")) {
           <form action="@routes.BookController.searchBook()" method="GET">
