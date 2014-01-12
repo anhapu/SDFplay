@@ -264,6 +264,7 @@ public class EmailSender {
 	    props.setProperty("mail.smtp.auth", "true");
 	    // set debug to true, if you want mailing output :)
 	    props.setProperty("mail.debug", "false");
+	    props.setProperty("mail.smtp.timeout", "1000");
 	    props.setProperty("mail.smtp.ssl.enable", "true");
 	    props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
        return props;
