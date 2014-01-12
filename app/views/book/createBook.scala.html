@@ -1,6 +1,6 @@
-@(bookForm: Form[Book])
+@(bookForm: Form[Book], navigation: String)
 @import helper._
-@main("Buch hinzufuegen", "") {
+@main("Buch hinzufuegen", navigation) {
 
 	<div class="isbn-container center-block">	
 		@helper.form(action = routes.BookController.createBook()){

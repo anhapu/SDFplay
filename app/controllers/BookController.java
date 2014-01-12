@@ -40,13 +40,14 @@ public final class BookController extends Controller {
     @Transactional
     @Security.Authenticated(Secured.class)
     public static Result getForm() {
-        
-        return ok(views.html.book.createBook.render(bookForm));
+        String navigation = "addBook";
+        return ok(views.html.book.createBook.render(bookForm, navigation));
     }
     
     @Transactional
     @Security.Authenticated(Secured.class)
     public static Result createBook() {
+        String navigation = "addBook";
         
         Form<Book> filledForm = bookForm.bindFromRequest();
         
@@ -54,7 +55,7 @@ public final class BookController extends Controller {
         filledForm.errors().remove("tradeable");
         
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.book.createBook.render(filledForm));
+            return badRequest(views.html.book.createBook.render(filledForm, navigation));
         } else {
             
             Book book = new Book();
@@ -112,8 +113,9 @@ public final class BookController extends Controller {
     @Transactional
     @Security.Authenticated(Secured.class)
     public static Result addBook() {
+        String navigation = "addBook";
         if (Secured.isAllowedToAddBook()) {
-            return ok(views.html.book.addBook.render(form(SimpleProfile.class)));
+            return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
         } else {
             return forbidden();
         }
@@ -122,12 +124,13 @@ public final class BookController extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result createBookByIsbn() {
+        String navigation = "addBook";
         Form<SimpleProfile> pForm = form(SimpleProfile.class).bindFromRequest();
         if (pForm.hasErrors()) {
             Logger.error("Error in form");
             // TODO redirect to something useful
             flash( "error", "Die ISBN darf nur Zahlen enthalten" );
-            return ok(views.html.book.addBook.render( form(SimpleProfile.class) ));
+            return ok(views.html.book.addBook.render( form(SimpleProfile.class), navigation ));
         } else {
             Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
             if(book.title == null){
@@ -135,7 +138,7 @@ public final class BookController extends Controller {
             } else {
             	flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
             }            
-            return ok(views.html.book.createBook.render(bookForm.fill( book )));
+            return ok(views.html.book.createBook.render(bookForm.fill( book ), navigation));
         }
     }
  
