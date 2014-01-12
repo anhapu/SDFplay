@@ -1,5 +1,5 @@
 @(books: List[Book], sortAttribute : String, sortDirection : String)
-@main("Mein Bücherregal") {
+@main("Mein Bücherregal", "") {
           <h2>Mein Bücherregal</h2>
           <div class="col-lg-4 pull-right">
 			  <form class="input-group" action="@routes.BookController.searchInMyBooks()" method="GET">

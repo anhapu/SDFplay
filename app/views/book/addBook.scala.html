@@ -1,6 +1,6 @@
 @(addBookForm: Form[BookController.SimpleProfile])
 @import helper._
-@main("Buch hinzufuegen"){
+@main("Buch hinzufuegen", ""){
 <div class="row isbn-container center-block">
 				<h2>Buch per ISBN Nummer suchen</h2>
 				@helper.form(action = routes.BookController.createBookByIsbn()){

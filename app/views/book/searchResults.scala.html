@@ -1,6 +1,6 @@
 @(books : List[Book], searchString : String, sortAttribute : String, sortDirection : String, owner :
 String)
-@main("Suchergebnisse"){
+@main("Suchergebnisse", ""){
 <!-- let's sort something -->
 @if(books.size > 1) {
      @if(owner.equals("all")) {

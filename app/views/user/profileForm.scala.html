@@ -1,7 +1,7 @@
 @(profileForm: Form[UserController.SimpleProfile], id: Long)
 @import helper._
 
-@main("Editiere Profil") {
+@main("Editiere Profil", "") {
 	<div class="isbn-container center-block">
 		@helper.form(action = routes.UserController.saveProfile(id)){
 			@if(profileForm.hasGlobalErrors) {

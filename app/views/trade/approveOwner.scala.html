@@ -1,7 +1,7 @@
 @(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction)
 @import helper._
 
-@main("abgeschlossener Büchertausch mit " + tradeTransaction.recipient.username) {
+@main("abgeschlossener Büchertausch mit " + tradeTransaction.recipient.username, "") {
 
 	<div class="page-header">
   		<h2>abgeschlossener Büchertausch mit @tradeTransaction.recipient.username :</h2>

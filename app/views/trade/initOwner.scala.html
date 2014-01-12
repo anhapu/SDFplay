@@ -1,7 +1,7 @@
 @(books: List[Book], tradeTransaction: TradeTransaction)
 @import helper._
 
-@main("Tauschanfrage an " + tradeTransaction.recipient.username) {
+@main("Tauschanfrage an " + tradeTransaction.recipient.username, "") {
 
 	<div class="page-header">
   		<h2>Tauschanfrage an @{tradeTransaction.recipient.username}</h2>
