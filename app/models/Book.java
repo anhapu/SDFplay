@@ -1,7 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.Constraint;
 
 import com.avaje.ebean.annotation.CreatedTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import play.data.format.Formats;
@@ -50,7 +49,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
-    public long year;
+    public Date year;
     
     public boolean tradeable;
     
