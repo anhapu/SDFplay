@@ -50,8 +50,8 @@
                         @if(User.isAdmin(Common.currentUser.id)) {
                         <li @if(navigation.equals("UserAdministration")){ class="active" } ><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
                         }
-                        <li@if(navigation.equals("myBooks")){ class="active" }><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
-                        <li class="dropdown">
+                        <li @if(navigation.equals("myBooks")){ class="active" }><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
+                        <li class="dropdown @if(navigation.equals("Trade")){ active }">
                           <a href="@routes.TradeController.viewAllTrades()">Meine Tauschanfragen 
                           @defining(TradeTransaction.countForUser(Common.currentUser)) { countTrade =>
                           	          <span class="badge @if(countTrade > 0){ badge-important }">@countTrade</span></a> 

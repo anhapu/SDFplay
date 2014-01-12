@@ -1,7 +1,8 @@
-@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction)
+@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction,
+navigation: String)
 @import helper._
 
-@main("ungültige Tauschanfrage an " + tradeTransaction.owner.username, "") {
+@main("ungültige Tauschanfrage an " + tradeTransaction.owner.username, navigation) {
 
 	<div class="page-header">
   		<h2>ungültige Tauschanfrage an @tradeTransaction.owner.username:</h2>

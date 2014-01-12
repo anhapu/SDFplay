@@ -1,7 +1,8 @@
-@(books: List[Book], user: User, transForm: Form[TradeTransaction])
+@(books: List[Book], user: User, transForm: Form[TradeTransaction],
+navigation: String)
 @import helper._
 
-@main("Tauschanfrage an " + user.username, "") {
+@main("Tauschanfrage an " + user.username, navigation) {
 
 	<div class="page-header">
   		<h2>Wählen Sie Bücher von @{user.username}!</h2>

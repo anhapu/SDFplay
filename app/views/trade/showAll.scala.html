@@ -1,7 +1,8 @@
-@(user: User, tradeListOwner: List[TradeTransaction], tradeListRecipient: List[TradeTransaction])
+@(user: User, tradeListOwner: List[TradeTransaction], tradeListRecipient: List[TradeTransaction],
+navigation: String)
 @import helper._
 
-@main(user.username + "s Tauschanfragen", "") {
+@main(user.username + "s Tauschanfragen", navigation) {
 
 			<h2>Übersicht:</h2>
 		

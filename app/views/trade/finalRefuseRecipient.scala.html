@@ -1,7 +1,8 @@
-@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction)
+@(ownerBookList: List[Book], recipientBookList: List[Book], tradeTransaction: TradeTransaction,
+navigation: String)
 @import helper._
 
-@main("abgelehnte Tauschanfrage von " + tradeTransaction.owner.username, "") {
+@main("abgelehnte Tauschanfrage von " + tradeTransaction.owner.username, navigation) {
 
 	<div class="page-header">
   		<h2>abgelehnte Tauschanfrage von @tradeTransaction.owner.username :</h2>
