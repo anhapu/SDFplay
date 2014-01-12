@@ -1,5 +1,5 @@
-@(books: List[Book], sortAttribute : String, sortDirection : String)
-@main("Mein Bücherregal", "") {
+@(books: List[Book], sortAttribute : String, sortDirection : String, navigation : String)
+@main("Mein Bücherregal", navigation) {
 	<h2>Mein Showcase</h2>
 	@book.snippets.carousel(Common.currentUser, Book.getShowcaseForUser(Common.currentUser))
 

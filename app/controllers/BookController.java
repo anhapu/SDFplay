@@ -183,12 +183,13 @@ public final class BookController extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result myBookshelf() {
+         String navigation = "myBooks";
         User searchedUser = Common.currentUser();
         if (searchedUser != null) {
             List<Book> books = Book.findByUser(searchedUser);
             Logger.info("Found " + books.size() + " books for user "
                     + searchedUser.username);
-            return ok(mybookshelf.render(Book.findByUser(searchedUser), "title", "asc"));
+            return ok(mybookshelf.render(Book.findByUser(searchedUser), "title", "asc", navigation));
         } else {
             // TODO redirect to something useful
             Logger.error("Current user is null.");
@@ -284,6 +285,7 @@ public final class BookController extends Controller {
      * @param term
      */
     public static Result searchBook() {
+         String navigation = "searchBooks";
         List<Book> books = null;
         String sortAttribute = "title";
         String sortDirection = "asc";
@@ -302,7 +304,7 @@ public final class BookController extends Controller {
                 Logger.info("[BOOK-SEARCH] Looking up Database for term '" + term + "'");
                 books = Book.findAllTradeableBooksBy(term, sortAttribute, sortDirection);
                 Logger.info( "[BOOK-SEARCH] found " + books.size() );
-                return ok(views.html.book.searchResults.render(books, term, sortAttribute, sortDirection, "all"));
+                return ok(views.html.book.searchResults.render(books, term, sortAttribute, sortDirection, "all", navigation));
             }
         }
 
@@ -324,6 +326,7 @@ public final class BookController extends Controller {
     @Transactional
     @Security.Authenticated(Secured.class)
     public static Result searchInMyBooks(){
+         String navigation = "myBooks";
          List<Book> books = null;
          String sortAttribute = "title";
          String sortDirection = "asc";
@@ -342,7 +345,7 @@ public final class BookController extends Controller {
                    Logger.info("[BOOK-SEARCH-IN-OWN-BOOKS] Looking up Database for term '" + term);
                    books = Book.findAllBooksFromBy(Common.currentUser(), term, sortAttribute, sortDirection);
                    Logger.info( "[BOOK-SEARCH-IN-OWN-BOOKS] found " + books.size() );
-                   return ok(views.html.book.searchResults.render(books, term, sortAttribute, sortDirection, ""));
+                   return ok(views.html.book.searchResults.render(books, term, sortAttribute, sortDirection, "", navigation));
               }
          }
          return redirect(routes.Application.index());
@@ -351,6 +354,7 @@ public final class BookController extends Controller {
     @Transactional
     @Security.Authenticated(Secured.class)
     public static Result sortMyBooks(){
+         String navigation = "myBooks";
          List<Book> books = null;
          String sortAttribute = "title";
          String sortDirection = "asc";
@@ -365,7 +369,7 @@ public final class BookController extends Controller {
          }
          // "" to get all books 
          books = Book.findAllBooksFromBy(Common.currentUser(), "", sortAttribute, sortDirection);
-         return ok(views.html.book.mybookshelf.render(books, sortAttribute, sortDirection));
+         return ok(views.html.book.mybookshelf.render(books, sortAttribute, sortDirection, navigation));
      }
 
     /** This method should be used, if a user deleted a book or removed it from his or her "showcase".

@@ -42,7 +42,7 @@
 	    				</div>
                     @if(Common.currentUser != null) {
                       <ul class="nav navbar-nav">
-                        <li><a href="@routes.BookController.addBook()"><span class="glyphicon glyphicon-plus"></span> Buch einstellen</a></li>
+                        <li @if(navigation.equals("addBook")){ class="active" }><a href="@routes.BookController.addBook()"><span class="glyphicon glyphicon-plus"></span> Buch einstellen</a></li>
                       </ul>
                     }
                     <ul class="nav navbar-nav navbar-right">
@@ -50,7 +50,7 @@
                         @if(User.isAdmin(Common.currentUser.id)) {
                         <li @if(navigation.equals("UserAdministration")){ class="active" } ><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
                         }
-                        <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
+                        <li@if(navigation.equals("myBooks")){ class="active" }><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
                         <li class="dropdown">
                           <a href="@routes.TradeController.viewAllTrades()">Meine Tauschanfragen 
                           @defining(TradeTransaction.countForUser(Common.currentUser)) { countTrade =>
