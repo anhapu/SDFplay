@@ -3,6 +3,21 @@
 
 @main(user.username + "s Tauschanfragen") {
 
+			<h2>Übersicht:</h2>
+		
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			  @if(TradeTransaction.countForUser(user) > 0) {
+			  	<p>@TradeTransaction.countForUserAsOwner(user) Tauschanfrage(n) von mir</p>
+			   	<p>@TradeTransaction.countForUserAsRecipient(user) Tauschanfrage(n) an mich</a></p>
+			  } else {
+			  	<p>Du hast derzeit keine Tauschanfragen!</p>
+			  }
+
+			  </div>
+			</div>
+						
+
 			@if(!tradeListRecipient.isEmpty()) {
 				<div class="page-header">
 		  			<h2>Tauschanfragen an mich:</h2>

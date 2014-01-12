@@ -124,3 +124,15 @@
 .red {
 	color: #c71c22;
 }
+
+.form-hint {
+	margin-top: 20px;
+}
+
+.book-comment {
+	white-space: pre;
+}
+
+.badge-important {
+	background-color:#F0AD4E;
+}

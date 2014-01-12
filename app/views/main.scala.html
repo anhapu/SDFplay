@@ -53,14 +53,10 @@
                         }
                         <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Meine Tauschanfragen 
-                          <span class="badge">@TradeTransaction.countForUser(Common.currentUser)</span> <b class="caret"></b></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="@routes.TradeController.viewAllTrades()">Alle Ansehen</a></li>
-                            <li class="divider"></li>
-                            <li><a href="@routes.TradeController.viewAllTrades()#me">@TradeTransaction.countForUserAsOwner(Common.currentUser) Tauschanfrage(n) von mir</a></li>
-                            <li><a href="@routes.TradeController.viewAllTrades()">@TradeTransaction.countForUserAsRecipient(Common.currentUser) Tauschanfrage(n) an mich</a></li>
-                          </ul>
+                          <a href="@routes.TradeController.viewAllTrades()">Meine Tauschanfragen 
+                          @defining(TradeTransaction.countForUser(Common.currentUser)) { countTrade =>
+                          	          <span class="badge @if(countTrade > 0){ badge-important }">@countTrade</span></a> 
+                          }
                         </li>
                         <li class="dropdown active">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Common.currentUser.username <b class="caret"></b></a>
@@ -81,26 +77,29 @@
                   </div><!-- /.navbar-collapse -->
                  </div>
                 <br />
-                @if(flash.containsKey("success")) {
-                    <div class="alert alert-success fade in">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        @flash.get("success")
-                    </div>
-                }
-                @if(flash.containsKey("info")) {
-                    <div class="alert alert-info fade in">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        @flash.get("info")
-                    </div>
-                }
-                @if(flash.containsKey("error")) {
-                    <div class="alert alert-danger fade in">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        @flash.get("error")
-                    </div>
-                }
+
                 
                 <div class="container">
+              
+              		@if(flash.containsKey("success")) {
+	                    <div class="alert alert-success fade in">
+	                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+	                        @flash.get("success")
+	                    </div>
+	                }
+	                @if(flash.containsKey("info")) {
+	                    <div class="alert alert-info fade in">
+	                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+	                        @flash.get("info")
+	                    </div>
+	                }
+	                @if(flash.containsKey("error")) {
+	                    <div class="alert alert-danger fade in">
+	                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+	                        @flash.get("error")
+	                    </div>
+	                } 
+                
                     @content
                 </div>
     

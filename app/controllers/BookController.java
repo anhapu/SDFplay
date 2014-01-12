@@ -129,11 +129,13 @@ public final class BookController extends Controller {
             flash( "error", "Die ISBN darf nur Zahlen enthalten" );
             return ok(views.html.book.addBook.render( form(SimpleProfile.class) ));
         } else {
-                Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
-                if(book.title == null){
-                	flash("info", "Es konnten nicht alle Daten geladen werden. Bitte tragen Sie diese selbst nach.");
-                }
-                return ok(views.html.book.createBook.render(bookForm.fill( book )));
+            Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
+            if(book.title == null){
+            	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es manuell hinzu!");
+            } else {
+            	flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
+            }            
+            return ok(views.html.book.createBook.render(bookForm.fill( book )));
         }
     }
  
