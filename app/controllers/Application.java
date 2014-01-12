@@ -11,6 +11,7 @@ import play.mvc.With;
 import views.html.index;
 import views.html.error;
 import views.html.denied;
+import views.html.agb;
 
 @With(Common.class)
 public class Application extends Controller {
@@ -37,6 +38,10 @@ public class Application extends Controller {
     
     public static Result denied() {
     	return badRequest(denied.render());
+    }
+
+    public static Result agb() {
+        return ok(agb.render());
     }
 
 }
