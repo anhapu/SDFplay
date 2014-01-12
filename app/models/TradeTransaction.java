@@ -154,4 +154,9 @@ public class TradeTransaction extends Model{
     public static List<TradeTransaction> findListOfTradeTransactionInvolvedInBook(Book book) {
     	return find.where().eq("bookList", book).findList();
     }
+    
+    public void save() {
+    	this.updatedTime = new java.sql.Timestamp(new java.util.Date().getTime());
+    	super.save();
+    }
 }
