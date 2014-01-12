@@ -2,7 +2,10 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -58,16 +61,30 @@ public final class BookController extends Controller {
             return badRequest(views.html.book.createBook.render(filledForm, navigation));
         } else {
             
+        	final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+            final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy");
+        	
             Book book = new Book();
             book.owner = Common.currentUser();
             book.tradeable = false;
 
             // Fill an and update the model manually
-            // because the its just a partial form
+            // because its just a partial form
             book.title = filledForm.field("title").value();
             book.author = filledForm.field("author").value();
             book.isbn = filledForm.field("isbn").value();
-            book.year = Long.parseLong(filledForm.field("year").value());
+            try{
+            	book.year = formatter.parse(filledForm.field("year").value());
+            }catch (final ParseException e){
+            	Logger.error(e.getMessage());
+            	try {
+            		book.year = formatter2.parse(filledForm.field("year").value());
+            	} catch ( final ParseException e2) {
+            		Logger.error(e2.getMessage());
+            		book.year = new Date();
+            	}
+            }
+            
             book.coverUrl = filledForm.field("coverUrl").value();
             book.comment = filledForm.field("comment").value();
             

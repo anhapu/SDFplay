@@ -9,18 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Constraint;
-
-import com.avaje.ebean.annotation.CreatedTimestamp;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import controllers.Common;
+
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="book")
@@ -49,6 +45,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
+    @Formats.DateTime(pattern="yyyy/MM/dd")
     public Date year;
     
     public boolean tradeable;

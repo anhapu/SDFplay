@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,7 +126,8 @@ public class Utils {
     private static Book fetchBook( String requestUrl )
     {
         Book book = null;
-        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+        final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+        final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy");
         try
         {
             book = new Book();
@@ -150,9 +152,22 @@ public class Utils {
             if(isbnNode != null) {
                 book.isbn = isbnNode.getTextContent();
             }
-            if(dateNode != null) {
-                book.year = formatter.parse( dateNode.getTextContent() ).getTime();
-            }
+			if (dateNode != null) {
+				Logger.info("DATE: " + dateNode.getTextContent());
+				try {
+					book.year = formatter.parse(dateNode.getTextContent());
+				} catch (ParseException e) {
+					Logger.error("Error: " + e.getMessage());
+					try {
+						book.year = formatter2.parse(dateNode.getTextContent());
+					} catch (ParseException e2) {
+						Logger.error("Error: " + e2.getMessage());
+						book.year = new Date();
+					}
+				}
+				Logger.info("DATE 2: "
+						+ formatter.parse(dateNode.getTextContent()).toString());
+			}
             book.tradeable = false;
         }
         catch ( DOMException e )
