@@ -19,14 +19,14 @@
 	          @if(User.isAdmin(user.id)) {
 	               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-warning btn-xs">Rolle zu Benutzer</a></th>
 	          } else {
-	               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Bist du dir ganz sicher?');">Rolle zu Admin</a></th>
+	               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Wollen Sie diesen Nutzer wirklch zum Admin machen?');">Rolle zu Admin</a></th>
 			}
 	          @if(user.isActive) {
 	               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-warning btn-xs">Deaktivieren</a></th>
 	          } else {
 	               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-info btn-xs">Aktivieren</a></th>
 	          }
-	          <th><a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Bist du dir ganz sicher?');">Löschen</a></th>
+	          <th><a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Wollen Sie diesen Nutzer wirklich löschen?');">Löschen</a></th>
 			</tr>
 	 	}
  	</tbody>
