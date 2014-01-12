@@ -1,42 +1,45 @@
 @(books: List[Book], sortAttribute : String, sortDirection : String)
 @main("Mein Bücherregal") {
-          <h2>Mein Bücherregal</h2>
-          <div class="col-lg-4 pull-right">
-			  <form class="input-group" action="@routes.BookController.searchInMyBooks()" method="GET">
-				  <input type="search" class="form-control" placeholder="Durchsuche deine Bücher" id="searchQuery" name="keyword">
-				  <span class="input-group-btn">
-				  	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-				  </span>
-			  </form>
-	      </div>
-	     
-          @if(books.size > 1) {
-              <form  class="form-horizontal" role="form" action="@routes.BookController.sortMyBooks()" method="GET">
-               	<div class="form-group">
-               		<label class="col-sm-1 control-label">Sortierung: </label>
-               		<div class="col-sm-3">
-	                    <select class="form-control" id="sortSelect" onchange="this.form.submit()" name="sorting">
-	                         <option value="author:asc">Autor↑</option>
-	                         <option value="author:desc">Autor↓</option>
-	                         <option value="title:asc">Titel↑</option>
-	                         <option value="title:desc">Titel↓</option>
-	                         <option value="initTime:asc">Älteste</option>
-	                         <option value="initTime:desc">Neuste</option>
-	                         <option value="year:asc">Erscheinungsjahr↑</option>
-	                         <option value="year:desc">Erscheinungsjahr↓</option>
-	                    </select>
-	                 </div>
-                 </div>
-              </form>
-               <script>
-                    window.onload = function() {
-                         var element = document.getElementById("sortSelect");
-                         element.value = "@sortAttribute" + ":" + "@sortDirection";
-                    };
-               </script>
+	<h2>Mein Showcase</h2>
+	@book.snippets.carousel(Common.currentUser, Book.getShowcaseForUser(Common.currentUser))
 
-          }
-          </br>
+	<h2>Mein Bücherregal</h2>
+	<div class="col-lg-4 pull-right">
+		<form class="input-group" action="@routes.BookController.searchInMyBooks()" method="GET">
+			<input type="search" class="form-control" placeholder="Durchsuche deine Bücher" id="searchQuery" name="keyword">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</form>
+	</div>
+
+	@if(books.size > 1) {
+		<form  class="form-horizontal" role="form" action="@routes.BookController.sortMyBooks()" method="GET">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">Sortierung: </label>
+				<div class="col-sm-3">
+					<select class="form-control" id="sortSelect" onchange="this.form.submit()" name="sorting">
+						<option value="author:asc">Autor↑</option>
+						<option value="author:desc">Autor↓</option>
+						<option value="title:asc">Titel↑</option>
+						<option value="title:desc">Titel↓</option>
+						<option value="initTime:asc">Älteste</option>
+						<option value="initTime:desc">Neuste</option>
+						<option value="year:asc">Erscheinungsjahr↑</option>
+						<option value="year:desc">Erscheinungsjahr↓</option>
+					</select>
+				</div>
+			</div>
+		</form>
+		<script>
+			window.onload = function() {
+				var element = document.getElementById("sortSelect");
+				element.value = "@sortAttribute" + ":" + "@sortDirection";
+			};
+		</script>
+	}
+	</br>
+
 	@for(book <- books) {
 		@snippets.cover(book)
 	}
