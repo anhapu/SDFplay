@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav navbar-right">
                       @if(Common.currentUser != null) {
                         @if(User.isAdmin(Common.currentUser.id)) {
-                        <li class="active" ><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
+                        <li @if(navigation.equals("UserAdministration")){ class="active" } ><a href="@routes.UserAdministrationController.index()">Userverwaltung</a></li>
                         }
                         <li><a href="@routes.BookController.myBookshelf()">Mein Bücherregal</a></li>
                         <li class="dropdown">

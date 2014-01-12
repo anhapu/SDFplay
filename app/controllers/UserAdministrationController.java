@@ -14,13 +14,14 @@ import play.db.ebean.Transactional;
 
 @With(Common.class)
 public class UserAdministrationController extends Controller {
+     final static String navigation = "UserAdministration";
 
      @Security.Authenticated(Secured.class)
      public static Result index() {
           if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
                List<User> users = null;
                users = User.findAllBut(Common.currentUser());
-               return ok(views.html.userAdministration.render(users));
+               return ok(views.html.userAdministration.render(users, navigation));
           } else {
                flash("error", "Zugriff nicht gestattet!");
                return redirect(routes.Application.index());
