@@ -173,19 +173,7 @@ public final class BookController extends Controller {
     public static Result deleteBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
-        	//find TradeTransaction involved, set them INVALID and set notifications to all users involved 
-        	List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
-        	if (invalidTradeTransactions != null) {
-        		List<Email> emailList = new ArrayList<Email>();
-    			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
-					invalidTradeTransaction.state = States.INVALID;
-					invalidTradeTransaction.save();
-					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
-    			}
-    			if (!emailList.isEmpty()) {
-    				EmailSender.send(emailList);
-    			}
-        	}
+        	checkForInvalidTradeTransactions(book);
             book.delete();
             return redirect(routes.BookController.myBookshelf());
         } else {
@@ -262,6 +250,7 @@ public final class BookController extends Controller {
     public static Result unmarkAsTradeable(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
+        	checkForInvalidTradeTransactions(book);
             Book.unmarkAsTradeable(book);
             return redirect(routes.BookController.myBookshelf());
 
@@ -378,5 +367,26 @@ public final class BookController extends Controller {
          books = Book.findAllBooksFromBy(Common.currentUser(), "", sortAttribute, sortDirection);
          return ok(views.html.book.mybookshelf.render(books, sortAttribute, sortDirection));
      }
+
+    /** This method should be used, if a user deleted a book or removed it from his or her "showcase".
+     * 	It will find all TradeTransaction involved and set them to "States.INVALID". It will also sent
+     *  notifications to all users involved
+     * 
+     * @param book A book that was deleted or set to to be "untradeable".
+     */
+    private static void checkForInvalidTradeTransactions(Book book) {
+    	List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
+    	if (invalidTradeTransactions != null) {
+    		List<Email> emailList = new ArrayList<Email>();
+			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+				invalidTradeTransaction.state = States.INVALID;
+				invalidTradeTransaction.save();
+				emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
+			}
+			if (!emailList.isEmpty()) {
+				EmailSender.send(emailList);
+			}
+    	}
+    }
 
 }
