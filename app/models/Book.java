@@ -45,7 +45,7 @@ public class Book extends Model
     
     @Constraints.Required
     @Formats.NonEmpty
-    @Formats.DateTime(pattern="yyyy/MM/dd")
+    @Formats.DateTime(pattern="yyyy")
     public Date year;
     
     public boolean tradeable;

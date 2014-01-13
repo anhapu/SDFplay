@@ -50,6 +50,7 @@ public class User extends Model
     @Enumerated(EnumType.ORDINAL)
     public Roles role;
     
+    public boolean alreadyTradeABook;
     
     @Constraints.Required
     @Formats.NonEmpty
