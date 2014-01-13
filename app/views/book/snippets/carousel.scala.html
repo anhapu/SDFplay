@@ -27,14 +27,14 @@
 		}
 	</div> <!--/.carousel-inner-->
 	<a class="left carousel-control" href="#@user.id" data-slide="prev">
-		@if(books.length < BUCHZAHL) {
+		@if(books.length <= BUCHZAHL) {
 			<g-h2><span class="glyphicon glyphicon-chevron-left"></span></g-h2>
 		} else {
 			<span class="glyphicon glyphicon-chevron-left"></span>
 		}
 	</a>
 	<a class="right carousel-control" href="#@user.id" data-slide="next">
-		@if(books.length < BUCHZAHL) {
+		@if(books.length <= BUCHZAHL) {
 			<g-h2><span class="glyphicon glyphicon-chevron-right"></span></g-h2>
 		} else {
 			<span class="glyphicon glyphicon-chevron-right"></span>

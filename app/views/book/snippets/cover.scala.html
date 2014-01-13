@@ -4,7 +4,7 @@
 	<a href="@routes.BookController.view(book.id)" data-toggle="modal" data-target="#centralModal">
 		<img src="@book.coverUrl" width="100px" height="150px" data-toggle="popover" title="@book.title" data-content='<b>Autor:</b> @book.author' data-trigger="hover" data-html="true" data-placement="top" data-container="body">
 	</a>
-	<div class="title">
+	<div class="title" title="@book.title">
 		@book.title
 	</div>
 	@if(Secured.isAllowedToEditBook(book)){

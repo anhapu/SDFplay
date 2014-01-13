@@ -7,22 +7,27 @@ String, navigation : String)
 }
 @if(books.size > 1) {
      @if(owner.equals("all")) {
-          <form action="@routes.BookController.searchBook()" method="GET">
+          <form class="form-horizontal" role="form" action="@routes.BookController.searchBook()" method="GET">
      } else {
-          <form action="@routes.BookController.searchInMyBooks()" method="GET">
+          <form class="form-horizontal" role="form" action="@routes.BookController.searchInMyBooks()" method="GET">
      }
-     <input type="hidden" value="@searchString" name="keyword">
-     <select id="sortSelect" onchange="this.form.submit()" name="sorting">
-          <option value="author:asc">Autor↑</option>
-          <option value="author:desc">Autor↓</option>
-          <option value="title:asc">Titel↑</option>
-          <option value="title:desc">Titel↓</option>
-          <option value="initTime:asc">Älteste</option>
-          <option value="initTime:desc">Neuste</option>
-          <option value="year:asc">Erscheinungsjahr↑</option>
-          <option value="year:desc">Erscheinungsjahr↓</option>
-     </select>
-</form>
+     <div class="form-group">
+		<label class="col-sm-1 control-label">Sortierung: </label>
+		<div class="col-sm-3">
+			<input type="hidden" value="@searchString" name="keyword">
+			<select class="form-control" id="sortSelect" onchange="this.form.submit()" name="sorting">
+				<option value="author:asc">Autor↑</option>
+				<option value="author:desc">Autor↓</option>
+				<option value="title:asc">Titel↑</option>
+				<option value="title:desc">Titel↓</option>
+				<option value="initTime:asc">Älteste</option>
+				<option value="initTime:desc">Neuste</option>
+				<option value="year:asc">Erscheinungsjahr↑</option>
+				<option value="year:desc">Erscheinungsjahr↓</option>
+			</select>
+		</div>
+	</div>
+	</form>
 <script>
      window.onload = function() {
           var element = document.getElementById("sortSelect");
@@ -42,18 +47,9 @@ String, navigation : String)
      } else {
           @books.size() gefundene Bücher<br><br>
      }
-    @for(book <- books){
-            <div class="col-sm-4 col-md-2 col-xs-6">
-                <a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-                    @if( book.coverUrl != null && !book.coverUrl.isEmpty()){
-                        <img src="@book.coverUrl">
-                    } else {
-                        <img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
-                    }
-                </a>
-            </div>
-        
-            }
+	    @for(book <- books){
+	    	@snippets.cover(book)
+		}
     }
 
 }
