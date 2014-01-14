@@ -31,6 +31,8 @@ public class Application extends Controller {
 			}
 			users = User.findAllBut(Common.currentUser());
 		} else {
+			flash("info",
+					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
 			users = User.findAll();
 		}
 		return ok(index.render(users));
