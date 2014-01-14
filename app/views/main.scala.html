@@ -32,7 +32,7 @@
                 
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="navbar-collapse collapse navbar-responsive-collapse" id="bs-example-navbar-collapse-1">
-	                  <div class="col-lg-3 @if(Common.currentUser == null) {nav-search}">
+	                  <div class="col-sm-3 @if(Common.currentUser == null) {nav-search}">
 		                  	<form class="navbar-form navbar-left input-group" action="@routes.BookController.searchBook()" method="GET">
 		      					<input type="text" class="form-control" placeholder="Buchtitel" id="searchQuery" name="keyword">
 		      					<span class="input-group-btn">

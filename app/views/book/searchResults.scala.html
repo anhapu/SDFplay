@@ -35,21 +35,19 @@ String, navigation : String)
      };
 </script>
 }
-<br>
-@if(!searchString.equals("")) {
-     "<b>@searchString</b>"<br>
-}
+
 @if(books.size == 0) {
      Keine Bücher gefunden :(
 }else{
-     @if(books.size == 1) {
-          @books.size() gefundenes Buch<br><br>
-     } else {
-          @books.size() gefundene Bücher<br><br>
-     }
-	    @for(book <- books){
-	    	@snippets.cover(book)
-		}
-    }
+	
+	@if(searchString != ""){
+		Suche nach <b>"@searchString"</b> ergab @books.size() Treffer
+	} else { @books.size() Bücher gefunden}
+
+	<br><br><br>
+	@for(book <- books){
+		@snippets.cover(book)
+	}
+}
 
 }
