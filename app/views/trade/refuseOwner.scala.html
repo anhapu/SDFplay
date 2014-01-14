@@ -4,14 +4,31 @@ navigation: String)
 
 @main("Tauschanfrage an " + tradeTransaction.owner.username, navigation) {
 
-	<div class="page-header">
-  		<h2>Tauschanfrage an @tradeTransaction.owner.username:</h2>
-	</div>
+
+	@snippets.title(tradeTransaction.recipient)
 	
-	@snippets.tradeProgressBar(tradeTransaction)	
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(recipientBookList)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	@snippets.panel("Du wolltest von " + tradeTransaction.recipient.username,"tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+
+	@snippets.sidebar() {
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+		}	
+	}
+	
+	
+	
+	
+	
+	
 }
 

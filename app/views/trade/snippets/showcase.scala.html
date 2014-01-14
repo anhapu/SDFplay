@@ -1,11 +1,16 @@
 @(books: List[Book]) <!-- Displays drag & drop showcase. -->
-	<div id="showcase">
+
+<div id="showcase">
 		@for(book <- books) {
-			<div id="@book.id" class="col-md-2 book">
-				<a href="@routes.BookController.getBook(book.id)" class="thumbnail" data-toggle="popover" title="@book.title" data-content="&lt;b&gt;Autor:&lt;&#47;b&gt; @book.author" data-trigger="hover" data-html="true" data-placement="top" data-container="body">
-					<img src=@book.coverUrl>
+			<div id="@book.id" class="g-card book">
+				<a href="@routes.BookController.view(book.id)" data-toggle="modal" data-target="#centralModal">
+					<img src="@book.coverUrl" width="100px" height="150px" data-toggle="popover" title="@book.title" data-content='<b>Autor:</b> @book.author' data-trigger="hover" data-html="true" data-placement="top" data-container="body" >
 				</a>
+				<div class="title" title="@book.title">
+					@book.title
+				</div>
 				<input type="hidden" name="book_selection" value="@book.id" />
 			</div>
 		}
-	</div>
+</div>
+

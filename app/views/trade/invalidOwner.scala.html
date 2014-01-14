@@ -3,17 +3,36 @@ navigation: String)
 @import helper._
 
 @main("ungültige Tauschanfrage an " + tradeTransaction.owner.username, navigation) {
-
-	<div class="page-header">
-  		<h2>ungültige Tauschanfrage an @tradeTransaction.owner.username:</h2>
-  		@snippets.invalidInfo()
-	</div>
 	
-	@snippets.tradeProgressBar(tradeTransaction)
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(recipientBookList)
-	<h4>@tradeTransaction.recipient.username's Auswahl Ihrer Bücher:</h4>
-	@snippets.books(ownerBookList)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	
+	@snippets.title(tradeTransaction.recipient)
+	
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	@snippets.panel("Tausch ungültig!","tradecontent") {
+			 @snippets.invalidInfo()
+	}
+	
+	@snippets.panel("Du wolltest von " + tradeTransaction.recipient.username, "tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+	@snippets.panel(tradeTransaction.recipient.username + " wollte von dir" ,"tradecontent") {
+			@snippets.books(ownerBookList)
+	}
+	
+	@snippets.sidebar() {	
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+	
+		}	
+	}
+	
+	
+	
 }

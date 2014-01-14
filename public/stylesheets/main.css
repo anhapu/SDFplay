@@ -9,17 +9,34 @@
 }
 
 #showcase {
-	min-height: 1000px;
-	border: solid 1px #DDD;
+	min-height: 200px;
+	z-index: 1000;
+	float: left;
+	width: 95%;
+	display:inline-block;
+}
+
+.tradecontent {
 	width: 60%;
 	display:inline-block;
 	float:left;
+}
+
+.sidecontent {
+	left: 60%;
+	width: 30%;
+	position: absolute;
+}
+
+.progress-heading {
+	margin-top: 20px;
 }
 
 #wishlist-wrapper {
 	left: 60%;
 	width: 30%;
 	position: absolute;
+	/* background: #2FA4E7; */
 }
 
 #wishlist-wrapper.affix {
@@ -27,6 +44,12 @@
 	width: 30%;
 	top: 0px;
 	position: fixed;
+}
+
+.book {
+	position: relative;
+	z-index: 1000;
+	animation:none !important;
 }
 
 #wishlist-container {

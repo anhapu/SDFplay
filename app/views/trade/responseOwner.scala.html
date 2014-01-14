@@ -4,26 +4,32 @@ navigation: String)
 
 @main("Tauschanfrage an " + tradeTransaction.owner.username, navigation) {
 
-	<div class="page-header">
-  		<h2>Tauschanfrage an @tradeTransaction.owner.username:</h2>
-	</div>
+	@snippets.title(tradeTransaction.recipient)
 	
-	@snippets.tradeProgressBar(tradeTransaction)	
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(recipientBookList)
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	@snippets.panel("Deine Auswahl von " + tradeTransaction.recipient.username,"tradecontent") {
+			@snippets.books(recipientBookList)
+	}
 	
-	<h4>@tradeTransaction.recipient.username's Auswahl Ihrer Bücher:</h4>
-	@snippets.books(ownerBookList)
-	@snippets.comments(tradeTransaction)
+	@snippets.panel(tradeTransaction.recipient.username + " will von dir","tradecontent") {
+			@snippets.books(ownerBookList)
+	}
 	
-	<div class="row">
-		@helper.form(action = routes.TradeController.approve(tradeTransaction.id)){
-			<input type="submit" class="btn btn-success" name="approve" value="Wunschzettel bestätigen">
-			<input type="submit" class="btn btn-danger" name="finalrefuse" value="Wunschzettel ablehnen">
+	@snippets.sidebar() {
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
 		}
+		@snippets.panel("Optionen", "") {
+			@helper.form(action = routes.TradeController.approve(tradeTransaction.id)){
+				<p><input type="submit" class="btn btn-success" name="approve" value="Tausch abschlißen"></p>
+				<p><input type="submit" class="btn btn-danger" name="finalrefuse" value="Tausch ablehnen"></p>
+			}
+		}	
+	}
 	
-	</div>
-	
-	
+
 }
 

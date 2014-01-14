@@ -3,16 +3,28 @@ navigation: String)
 @import helper._
 
 @main("abgelehnte Tauschanfrage von " + tradeTransaction.owner.username, navigation) {
-
-	<div class="page-header">
-  		<h2>abgelehnte Tauschanfrage von @tradeTransaction.owner.username :</h2>
-	</div>
 	
-	@snippets.tradeProgressBar(tradeTransaction)
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(ownerBookList)
-	<h4>@tradeTransaction.owner.username's Auswahl Ihrer Bücher:</h4>
-	@snippets.books(recipientBookList)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	@snippets.title(tradeTransaction.owner)
+	
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	@snippets.panel("Du wolltest von " + tradeTransaction.owner.username,"tradecontent") {
+			@snippets.books(ownerBookList)
+	}
+	
+	@snippets.panel(tradeTransaction.owner.username + " wollte von dir","tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+	@snippets.sidebar() {
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+		}	
+	}
+	
 }

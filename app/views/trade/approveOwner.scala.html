@@ -4,16 +4,36 @@ navigation: String)
 
 @main("abgeschlossener Büchertausch mit " + tradeTransaction.recipient.username, navigation) {
 
-	<div class="page-header">
-  		<h2>abgeschlossener Büchertausch mit @tradeTransaction.recipient.username :</h2>
-	</div>
+
+	@snippets.title(tradeTransaction.recipient)
 	
-	@snippets.tradeProgressBar(tradeTransaction)	
-	<h4>Sie erhielten folgende Bücher von @tradeTransaction.recipient.username:</h4>
-	@snippets.books(ownerBookList)
-	<h4>Sie haben dafür folgende Bücher an @tradeTransaction.recipient.username gegeben:</h4>
-	@snippets.books(recipientBookList)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	
+	@snippets.panel("Du hast von " + tradeTransaction.recipient.username + " folgende Bücher bekommen","tradecontent") {
+			@snippets.books(ownerBookList)
+	}
+	
+	@snippets.panel("Du tauscht dafür","tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+	@snippets.sidebar() {
+		@snippets.panel("Tausch erfolgreich!","") {
+			Bitte nehme mit @tradeTransaction.recipient.username  Kontakt auf, um die Übergabe der Bücher zu organisieren!
+		}
+	
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+	
+		}	
+	}
+	
+	
 }
 

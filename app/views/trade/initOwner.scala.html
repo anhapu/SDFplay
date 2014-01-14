@@ -1,16 +1,28 @@
-@(books: List[Book], tradeTransaction: TradeTransaction,
-navigation: String)
+@(books: List[Book], tradeTransaction: TradeTransaction, navigation: String)
 @import helper._
 
 @main("Tauschanfrage an " + tradeTransaction.recipient.username, navigation) {
 
-	<div class="page-header">
-  		<h2>Tauschanfrage an @{tradeTransaction.recipient.username}</h2>
-	</div>
-	@snippets.tradeProgressBar(tradeTransaction)
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(books)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	@snippets.title(tradeTransaction.recipient)
+
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+	
+	
+	@snippets.panel("Deine ausgewählten Bücher","tradecontent") {
+			@snippets.books(books)
+	}
+	
+
+	@snippets.sidebar() {
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+		}
+	}
+
 }
 
