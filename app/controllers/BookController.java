@@ -403,8 +403,8 @@ public final class BookController extends Controller {
     	if (invalidTradeTransactions != null) {
     		List<Email> emailList = new ArrayList<Email>();
 			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
-				// set State to INVALID only, if trade is not finished yet (APPROVE or FINAL_REFUSE)
-				if ((invalidTradeTransaction.state != States.APPROVE) && (invalidTradeTransaction.state != States.FINAL_REFUSE)) {
+				// set State to INVALID only, if trade is not finished yet (INIT or RESPONSE)
+				if ((invalidTradeTransaction.state == States.INIT) || (invalidTradeTransaction.state == States.RESPONSE)) {
 					invalidTradeTransaction.state = States.INVALID;
 					invalidTradeTransaction.save();
 					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
