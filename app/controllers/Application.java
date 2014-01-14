@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.User;
+import play.api.Routes;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -23,19 +24,25 @@ public class Application extends Controller {
 	 */
 
 	public static Result index() {
+		return home(1);
+	}
+	
+	public static Result home(int page) {
 		List<User> users = null;
 		if (Common.currentUser() != null) {
 			if (!Common.currentUser().alreadyTradeABook) {
 				flash("info",
 						"Du hast noch keine Bücher getauscht. Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer Nutzer und wähle Bücher aus, die du tauschen möchtest.");
 			}
-			users = User.findAllBut(Common.currentUser());
+			
+			users = User.findPaginated(2, 1, Common.currentUser());
+			//users = User.findAllBut(Common.currentUser());
 		} else {
 			flash("info",
 					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
 			users = User.findAll();
 		}
-		return ok(index.render(users));
+		return ok(index.render(users));	
 	}
 
 	public static Result error() {

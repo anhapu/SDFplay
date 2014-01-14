@@ -13,6 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 import models.enums.Roles;
@@ -88,6 +89,12 @@ public class User extends Model
         return find.where().ne("id", user.id).findList();
     }
     
+    public static List<User> findPaginated(int limit, int page, User user) {
+    	int offset = (page * limit) - limit;
+    	return find.where().ne("id", user.id).setMaxRows(limit).setFirstRow(offset).findList();
+    }
+    
+   
     /**
      * Retrieve a User from email.
      */
