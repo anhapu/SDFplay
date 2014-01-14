@@ -61,3 +61,5 @@ GET		/trade/:id/approve			controllers.TradeController.approve(id: Long)
 GET     /trade/:id/delete		    controllers.TradeController.delete(id: Long)
 POST	/trade/create/:recipientId	controllers.TradeController.init(recipientId: Long)
 
+# Help Stuff
+GET     /faq                   controllers.Application.faq()

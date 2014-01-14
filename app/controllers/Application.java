@@ -11,6 +11,7 @@ import views.html.index;
 import views.html.error;
 import views.html.denied;
 import views.html.agb;
+import views.html.help.faq;
 
 @With(Common.class)
 public class Application extends Controller {
@@ -30,6 +31,8 @@ public class Application extends Controller {
 			}
 			users = User.findAllBut(Common.currentUser());
 		} else {
+			flash("info",
+					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
 			users = User.findAll();
 		}
 		return ok(index.render(users));
@@ -46,5 +49,9 @@ public class Application extends Controller {
 	public static Result agb() {
 		return ok(agb.render());
 	}
+
+    public static Result faq() {
+        return ok(faq.render());
+    }
 
 }
