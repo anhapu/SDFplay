@@ -11,6 +11,7 @@ import views.html.index;
 import views.html.error;
 import views.html.denied;
 import views.html.agb;
+import views.html.help.faq;
 
 @With(Common.class)
 public class Application extends Controller {
@@ -46,5 +47,9 @@ public class Application extends Controller {
 	public static Result agb() {
 		return ok(agb.render());
 	}
+
+    public static Result faq() {
+        return ok(faq.render());
+    }
 
 }
