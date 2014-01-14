@@ -326,6 +326,7 @@ public class TradeController extends Controller {
 	    	//exchange books owner
 			for (Book book : ownerBookList) {
 				book.owner = tradeTransaction.recipient;
+				book.tradeable = false;
 				book.save();
 			}
 			//exchange books recipient

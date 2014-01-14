@@ -11,6 +11,7 @@ navigation: String)
 	@snippets.tradeProgressBar(tradeTransaction)	
 	<h4>@tradeTransaction.owner.username wünscht sich von Ihnen:</h4>
 	@snippets.books(recipientBookList)
+	@snippets.comments(tradeTransaction)
 	
 	<h4>Wählen Sie Bücher von @tradeTransaction.owner.username!</h4>
 		@helper.form(action = routes.TradeController.response(tradeTransaction.id)) {
