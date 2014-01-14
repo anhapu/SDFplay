@@ -3,34 +3,51 @@
 @import helper._
 
 @main("Userverwaltung", navigation) {
+<div class="row isbn-container center-block">
 <table class="table table-hover table-condensed">
 	<thead>
 		<tr>
 			<th>Benutzer</th>
 			<th>Rolle</th>
-			<th>Aktiv</th>
-			<th>Löschen</th>
+			<th>Status</th>
+			<th>Optionen</th>
 		</tr>
 	</thead>
 	<tbody>
 	@for(user <- users) {
 		<tr @if(!user.isActive) {class="danger"}>
 			<th><a href="@routes.UserController.showProfile(user.id)" class="btn btn-link btn-xs">@user.username</a></th>
-	          @if(User.isAdmin(user.id)) {
-	               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-warning btn-xs">Rolle zu Benutzer</a></th>
+	          <td>@if(User.isAdmin(user.id)) {
+	               Admin
 	          } else {
-	               <th><a href="@routes.UserAdministrationController.toggleRole(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Wollen Sie diesen Nutzer wirklch zum Admin machen?');">Rolle zu Admin</a></th>
-			}
+	               Benutzer
+				}
+			</td>
+			<td>
 	          @if(user.isActive) {
-	               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-warning btn-xs">Deaktivieren</a></th>
+	               Aktiv
 	          } else {
-	               <th><a href="@routes.UserAdministrationController.toogleActive(user.id)" class=" btn btn-info btn-xs">Aktivieren</a></th>
+	               Inaktiv
 	          }
-	          <th><a href="@routes.UserAdministrationController.deleteUser(user.id)" class="btn btn-danger btn-xs" onclick="return confirm('Wollen Sie diesen Nutzer wirklich löschen?');">Löschen</a></th>
+	          </td>
+	          <th>
+	          	@if(User.isAdmin(user.id)) {
+	               <a href="@routes.UserAdministrationController.toggleRole(user.id)" data-toggle="tooltip" title="Zum Benutzer machen" data-container="body"><span class="glyphicon glyphicon-user"></a>
+	          	} else {
+	               <a href="@routes.UserAdministrationController.toggleRole(user.id)" onclick="return confirm('Wollen Sie diesen Nutzer wirklch zum Admin machen?');" data-toggle="tooltip" title="Zum Admin machen" data-container="body"><span class="glyphicon glyphicon-star"></a>
+				}
+	          	@if(user.isActive) {
+	               <a href="@routes.UserAdministrationController.toogleActive(user.id)" data-toggle="tooltip" title="Benutzer deaktivieren" data-container="body"><span class="glyphicon glyphicon-ban-circle"></a>
+	          	} else {
+	               <a href="@routes.UserAdministrationController.toogleActive(user.id)" data-toggle="tooltip" title="Benutzer aktivieren" data-container="body"><span class="glyphicon glyphicon-ok"></a>
+	          	}
+	          	<a href="@routes.UserAdministrationController.deleteUser(user.id)" onclick="return confirm('Wollen Sie diesen Nutzer wirklich löschen?');"><span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Benutzer löschen" data-container="body"></a>
+	          </th>
 			</tr>
 	 	}
  	</tbody>
 </table>
+</div>
 }
 
 
