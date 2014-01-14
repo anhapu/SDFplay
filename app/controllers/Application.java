@@ -1,6 +1,5 @@
 package controllers;
 
-
 import java.util.List;
 
 import models.User;
@@ -22,26 +21,30 @@ public class Application extends Controller {
 	 * @return
 	 */
 
-    public static Result index() {
-    	List<User> users = null;
-    	if(Common.currentUser() != null){
-    		users = User.findAllBut(Common.currentUser());
-    	} else {
-    		users = User.findAll();
-    	}
-        return ok(index.render(users));
-    }
-    
-    public static Result error() {
-    	return badRequest(error.render());
-    }
-    
-    public static Result denied() {
-    	return badRequest(denied.render());
-    }
+	public static Result index() {
+		List<User> users = null;
+		if (Common.currentUser() != null) {
+			if (!Common.currentUser().alreadyTradeABook) {
+				flash("info",
+						"Du hast noch keine Bücher getauscht. Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer Nutzer und wähle Bücher aus, die du tauschen möchtest.");
+			}
+			users = User.findAllBut(Common.currentUser());
+		} else {
+			users = User.findAll();
+		}
+		return ok(index.render(users));
+	}
 
-    public static Result agb() {
-        return ok(agb.render());
-    }
+	public static Result error() {
+		return badRequest(error.render());
+	}
+
+	public static Result denied() {
+		return badRequest(denied.render());
+	}
+
+	public static Result agb() {
+		return ok(agb.render());
+	}
 
 }
