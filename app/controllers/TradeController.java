@@ -250,6 +250,11 @@ public class TradeController extends Controller {
 	    	trade.save();
 	    	//send email
 	    	EmailSender.sendBookExchangeRequest(trade.owner, trade.recipient);
+	    	
+	    	// Save that the user actually started a trad
+	    	owner.alreadyTradeABook = true;
+	    	owner.update();
+	    	
 	 		flash("success", "Wunschzettel wurde angelegt!");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
