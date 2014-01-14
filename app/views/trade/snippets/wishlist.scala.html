@@ -1,7 +1,8 @@
 @(createButtonOnly: Boolean, transForm: Form[TradeTransaction])
-<div id="wishlist-wrapper">
-	<div id="wishlist-container">
-		<h4>Mein Wunschzettel</h4>
+
+
+	@panel("Mein Wunschzettel","") {
+	
 		<div id="wishlist"></div>
 
 		<div id="comment-container">
@@ -10,8 +11,9 @@
 		@if(createButtonOnly) {
 			<input type="submit" class="btn btn-success" value="Wunschzettel erstellen">
 		} else {
-			<input type="submit" class="btn btn-success" name="response" value="Wunschzettel bestätigen">
-			<input type="submit" class="btn btn-danger" name="refuse" value="Wunschzettel ablehnen">
+			<p><input type="submit" class="btn btn-success" name="response" value="Tausch bestätigen"></p>
+			<p><input type="submit" class="btn btn-danger" name="refuse" value="Tausch ablehnen"></p>
 		}
-	</div>
-</div>
+
+	}
+

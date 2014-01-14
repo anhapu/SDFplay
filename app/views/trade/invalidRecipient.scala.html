@@ -4,16 +4,38 @@ navigation: String)
 
 @main("ungültige Tauschanfrage von " + tradeTransaction.owner.username, navigation) {
 
-	<div class="page-header">
-  		<h2>ungültige Tauschanfrage von @tradeTransaction.owner.username:</h2>
-  		@snippets.invalidInfo()
-	</div>
+
+	@snippets.title(tradeTransaction.owner)
 	
-	@snippets.tradeProgressBar(tradeTransaction)
-	<h4>Ihre ausgewählten Bücher:</h4>
-	@snippets.books(ownerBookList)
-	<h4>@tradeTransaction.owner.username's Auswahl Ihrer Bücher:</h4>
-	@snippets.books(recipientBookList)
-	@snippets.comments(tradeTransaction)
-	@snippets.delete(tradeTransaction)
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
+
+	@snippets.panel("Tausch ungültig!","tradecontent") {
+			 @snippets.invalidInfo()
+	}
+	
+	@snippets.panel("Du wolltest von " + tradeTransaction.owner.username, "tradecontent") {
+			@snippets.books(ownerBookList)
+	}
+	
+	@snippets.panel(tradeTransaction.owner.username + " wollte von dir" ,"tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+	@snippets.sidebar() {	
+		@snippets.panel("Kommentare", "") {
+				@snippets.comments(tradeTransaction)
+		}
+		@snippets.panel("Optionen", "") {
+				@snippets.delete(tradeTransaction)
+	
+		}	
+	}
+	
+	
+	
+	
+	
+	
 }

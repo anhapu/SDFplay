@@ -4,18 +4,36 @@ navigation: String)
 
 @main("Tauschanfrage von " + tradeTransaction.owner.username, navigation) {
 
-	<div class="page-header">
-  		<h2>Tauschanfrage von @tradeTransaction.owner.username:</h2>
-	</div>
+	@snippets.title(tradeTransaction.owner)
+
+	@snippets.header(){
+		@snippets.tradeProgressBar(tradeTransaction)
+	}
 	
-	@snippets.tradeProgressBar(tradeTransaction)	
-	<h4>@tradeTransaction.owner.username wünscht sich von Ihnen:</h4>
-	@snippets.books(recipientBookList)
-	
-	<h4>Wählen Sie Bücher von @tradeTransaction.owner.username!</h4>
-		@helper.form(action = routes.TradeController.response(tradeTransaction.id)) {
-			@snippets.wishlist(false, transForm)
+	@helper.form(action = routes.TradeController.response(tradeTransaction.id)) {
+		@snippets.sidebar() {
+				@snippets.panel("Kommentare", "") {
+					@snippets.comments(tradeTransaction)
+				}
+				@snippets.wishlist(false, transForm)
+					
 		}
-	@snippets.showcase(ownerBookList)
+	}
+	
+	
+	@snippets.panel(tradeTransaction.owner.username + " möchte von dir","tradecontent") {
+			@snippets.books(recipientBookList)
+	}
+	
+	
+	@snippets.panel("Wähle aus " + tradeTransaction.owner.username + "s Bücher","tradecontent") {
+		@snippets.showcase(ownerBookList)
+	}
+	
+	
+	
+	
+	
+	
 }
 

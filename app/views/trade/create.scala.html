@@ -1,16 +1,24 @@
-@(books: List[Book], user: User, transForm: Form[TradeTransaction],
-navigation: String)
+@(books: List[Book], user: User, transForm: Form[TradeTransaction], navigation: String)
 @import helper._
 
 @main("Tauschanfrage an " + user.username, navigation) {
 
-	<div class="page-header">
-  		<h2>Wählen Sie Bücher von @{user.username}!</h2>
-	</div>
+	@snippets.title(user)
+
 	@helper.form(action = routes.TradeController.init(user.id)) {
-		@snippets.wishlist(true, transForm)
+		@snippets.sidebar() {
+				@snippets.wishlist(true, transForm)
+			}
 	}
-	@snippets.tradeProgressBar(null)
-	@snippets.showcase(books)
+	
+	@snippets.header(){
+		@snippets.tradeProgressBar(null)
+	}
+
+
+	@snippets.panel(user.username + "s Bücher","tradecontent") {
+		@snippets.showcase(books)
+	}
+
 }
 
