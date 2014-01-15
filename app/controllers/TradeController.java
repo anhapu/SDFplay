@@ -344,10 +344,13 @@ public class TradeController extends Controller {
 			List<Email> emailList = new ArrayList<Email>();
 			List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInTradeTransaction(tradeTransaction);
 			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+				// set State to INVALID only, if trade is not finished yet (INIT or RESPONSE)
+				if ((invalidTradeTransaction.state == States.INIT) || (invalidTradeTransaction.state == States.RESPONSE)) {
 					invalidTradeTransaction.state = States.INVALID;
 					invalidTradeTransaction.save();
 					// add emails to user whose tradeTransaction became invalid
 					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
+				}
 			}
 			//add emails of users whose tradeTransaction was APPROVED
 			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient));
