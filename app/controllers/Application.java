@@ -47,11 +47,13 @@ public class Application extends Controller {
 	}
 
 	public static Result agb() {
-		return ok(agb.render());
+          String navigation = "Help";
+		return ok(agb.render(navigation));
 	}
 
     public static Result faq() {
-        return ok(faq.render());
+        String navigation = "Help";
+        return ok(faq.render(navigation));
     }
 
 }
