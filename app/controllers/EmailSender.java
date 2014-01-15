@@ -169,8 +169,8 @@ public class EmailSender {
 	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
 	 */
 	public static void sendBookExchangeApprove(User fromUser, User toUser) {
-		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
-		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
+		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username, toUser.email).toString();
+		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username, fromUser.email).toString();
 		List<Email> emailList = new ArrayList<Email>();
 		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
 		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
@@ -184,8 +184,8 @@ public class EmailSender {
 	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
 	 */
 	public static List<Email> getBookExchangeApprove(User fromUser, User toUser) {
-		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
-		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
+		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username, toUser.email).toString();
+		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username, fromUser.email).toString();
 		List<Email> emailList = new ArrayList<Email>();
 		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
 		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
