@@ -6877,7 +6877,7 @@ button.close {
 
 .carousel-indicators {
   position: absolute;
-  bottom: 0px;
+  bottom: -30px;
   left: 50%;
   z-index: 15;
   width: 60%;
@@ -6894,9 +6894,8 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: #000 \9;
-  background-color: rgba(0, 0, 0, 0);
-  border: 1px solid #022f5a;
+  background-color: #fff;
+  border: 3px solid #fff;
   border-radius: 10px;
 }
 
@@ -6904,7 +6903,7 @@ button.close {
   width: 12px;
   height: 12px;
   margin: 0;
-  background-color: #3d74b6;
+  background-color: #1995dc;
 }
 
 .carousel-caption {
