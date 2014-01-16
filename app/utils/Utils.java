@@ -193,4 +193,9 @@ public class Utils {
         }
         return book;
     }
+
+    public static String isbnParser(String isbn) {
+        // Replace all dashes, whitespaces and non-decimal characters with empty string.
+        return isbn.replaceAll("(-)*(\\s)*(\\D)*", "");
+    }
 }

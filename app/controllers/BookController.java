@@ -72,7 +72,7 @@ public final class BookController extends Controller {
             // because its just a partial form
             book.title = filledForm.field("title").value();
             book.author = filledForm.field("author").value();
-            book.isbn = filledForm.field("isbn").value();
+            book.isbn = Utils.isbnParser(filledForm.field("isbn").value());
             try{
             	book.year = formatter.parse(filledForm.field("year").value());
             }catch (final ParseException e){
@@ -111,7 +111,7 @@ public final class BookController extends Controller {
                 oriBook.title = book.title;
                 oriBook.comment = book.comment;
                 oriBook.coverUrl = book.coverUrl;
-                oriBook.isbn = book.isbn;
+                oriBook.isbn = Utils.isbnParser(book.isbn);
                 oriBook.year = book.year;
                 oriBook.update();
                 return redirect( routes.BookController.getBook( oriBook.id ) );
@@ -149,7 +149,7 @@ public final class BookController extends Controller {
             flash( "error", "Die ISBN darf nur Zahlen enthalten" );
             return ok(views.html.book.addBook.render( form(SimpleProfile.class), navigation ));
         } else {
-            Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
+            Book book = Utils.getBookInformationFromAWS(Utils.isbnParser(pForm.get().isbn));
             if (book == null) {
             	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es per Hand hinzu!");
                return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
