@@ -159,3 +159,7 @@
 .badge-important {
 	background-color:#F0AD4E;
 }
+
+.container {
+	min-height: 1000px;
+}
