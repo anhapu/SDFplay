@@ -150,8 +150,9 @@ public final class BookController extends Controller {
             return ok(views.html.book.addBook.render( form(SimpleProfile.class), navigation ));
         } else {
             Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
-            if(book.title == null){
-            	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es manuell hinzu!");
+            if (book == null) {
+            	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es per Hand hinzu!");
+               return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
             } else {
             	flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
             }            
