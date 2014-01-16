@@ -89,6 +89,7 @@ public final class BookController extends Controller {
             book.comment = filledForm.field("comment").value();
             
             book.save();
+            flash("success", "Dein Buch wurde deinem Bücherregal hinzugefügt!");
             return redirect(routes.BookController.getBook(book.id));
 
 
@@ -155,7 +156,7 @@ public final class BookController extends Controller {
                return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
             } else {
             	flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
-            }            
+            }
             return ok(views.html.book.createBook.render(bookForm.fill( book ), navigation));
         }
     }
