@@ -1,4 +1,8 @@
-@(fromUser: String, toUser: String)Hallo @fromUser !
+@(tradeTransaction: TradeTransaction, ownerBookList: List[Book], recipientBookList: List[Book])Hallo @tradeTransaction.owner.username !
 
-@toUser hat auf Ihre Tauschanfrage reagiert und sich Bücher aus Ihrem Showcase ausgesucht.
+@tradeTransaction.recipient.username hat auf Ihre Tauschanfrage reagiert und sich Bücher aus Ihrem Showcase ausgesucht.
+
+@tradeTransaction.recipient.username hat sich folgende Bücher von Ihnen ausgesucht:@snippets.books(ownerBookList)
+Sie haben sich folgende Bücher von @tradeTransaction.recipient.username ausgesucht:@snippets.books(recipientBookList)
+
 @snippets.visitUs()
