@@ -353,7 +353,7 @@ public class TradeController extends Controller {
 				}
 			}
 			//add emails of users whose tradeTransaction was APPROVED
-			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient));
+			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction, ownerBookList, recipientBookList));
 			//send emails
 			EmailSender.send(emailList);
 			flash("success", "Buchtausch erfolgreich!");
