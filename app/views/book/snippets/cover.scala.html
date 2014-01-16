@@ -11,7 +11,7 @@
 		<div class="pull-left book-button-left">
 			<g-h1>
 				@if(book.tradeable){
-					<a href="@routes.BookController.unmarkAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch aus dem Showcase entfernen" data-container="body"><span class="glyphicon glyphicon-eye-close red" onclick="return confirm('Tauschanfragen, welche dieses Buch enthalten, werden dabei ungültig, \nda sich das Buch nicht mehr in Ihrem Showcase befindet. \n\nWollen Sie das Buch dennoch aus dem Showcase entfernen?');"></span></a>
+					<a href="@routes.BookController.unmarkAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch aus dem Showcase entfernen" data-container="body"><span class="glyphicon glyphicon-eye-close error" onclick="return confirm('Tauschanfragen, welche dieses Buch enthalten, werden dabei ungültig, \nda sich das Buch nicht mehr in Ihrem Showcase befindet. \n\nWollen Sie das Buch dennoch aus dem Showcase entfernen?');"></span></a>
 				}else{
 					<a href="@routes.BookController.markAsTradeable(book.id)" data-toggle="tooltip" data-original-title="Buch in den Showcase stellen" data-container="body"><span class="glyphicon glyphicon-eye-open"></span></a>
 				}
