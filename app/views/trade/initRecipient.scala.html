@@ -13,7 +13,7 @@ navigation: String)
 
 	@helper.form(action = routes.TradeController.response(tradeTransaction.id)) {
 		@snippets.sidebar() {
-				@snippets.panel("Kommentare", "") {
+				@snippets.panel("Kommentare", "swappable_spacer") {
 					@snippets.comments(tradeTransaction)
 				}
 				@snippets.wishlist(false, transForm)

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import models.User;
@@ -35,6 +36,11 @@ public class Application extends Controller {
 					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
 			users = User.findAll();
 		}
+          if (users.size() > 10) {
+               Collections.shuffle(users);
+               List<User> smallList = users.subList(0, 10);
+               users = smallList;
+          }
 		return ok(index.render(users));
 	}
 
