@@ -17,10 +17,10 @@ navigation: String)
 	}
 	
 	@snippets.sidebar() {
-		@snippets.panel("Kommentare", "") {
+		@snippets.panel("Kommentare", "swappable_spacer_mini") {
 				@snippets.comments(tradeTransaction)
 		}
-		@snippets.panel("Optionen", "") {
+		@snippets.panel("Optionen", "swappable_spacer_mini") {
 				@snippets.delete(tradeTransaction)
 		}	
 	}
