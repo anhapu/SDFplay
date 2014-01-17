@@ -2,7 +2,7 @@
 @import helper._
 @main("Buch bearbeiten", ""){
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-xs-4">
 		</br>
 		</br>
 		</br>
@@ -12,7 +12,7 @@
 			<img src="http://bks8.books.google.de/books?id=Q-NslYvYoGYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api">
 		}
 	</div>
-	<div class="col-sm-8">
+	<div class="col-xs-8">
 
 		<div class="isbn-container center-block">	
 			@helper.form(action = routes.BookController.updateBook(book.id)){
@@ -55,5 +55,6 @@
 			}
 		</div>
 	</div>
+</div>
 
 }
