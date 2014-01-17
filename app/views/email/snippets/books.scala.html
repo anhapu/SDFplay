@@ -1,0 +1,6 @@
+@(books: List[Book])@books.size() match {
+				case 0 => { keine Bücher }
+				case default => { @for(b <- books) { 
+	> @b.title }
+		}
+}

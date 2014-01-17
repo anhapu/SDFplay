@@ -1,7 +1,10 @@
 @(createButtonOnly: Boolean, transForm: Form[TradeTransaction])
 
+	<div style="float:left; margin-top: 40%; width: 20%">
+		<img class="center-block" width="70px" src="@routes.Assets.at("images/swappable_big2.png")" />
+	</div>
 
-	@panel("Mein Wunschzettel","") {
+	@panel("Mein Wunschzettel","swappable_spacer") {
 	
 		<div id="wishlist"></div>
 

@@ -1,52 +1,67 @@
-@(bookForm: Form[Book], navigation: String)
+@(book: Book,  bookForm: Form[Book], navigation: String)
 @import helper._
 @main("Buch hinzufuegen", navigation) {
 
-	<div class="isbn-container center-block">	
-		@helper.form(action = routes.BookController.createBook()){
-			
-			@if(bookForm.hasGlobalErrors) {
-				<p class="error">@bookForm.globalError.message</p>
-			}
-				@inputText(
-					bookForm("title"),
-					'_label -> "Titel *",
-					'class -> "form-control input-sm"
-				)
-				@inputText(
-					bookForm("author"),
-					'_label -> "Autor *",
-					'class -> "form-control input-sm"
-				)
-				@inputText(
-					bookForm("isbn"),
-					'_label -> "ISBN *",
-					'class -> "form-control input-sm"
-				)
-				@inputText(
-					bookForm("year"),
-					'_label -> "Erscheinungsjahr *",
-					'class -> "form-control input-sm"
-				)
-				@inputText(
-					bookForm("coverUrl"),
-					'_label -> "Cover-URL *",
-					'class -> "form-control input-sm"
-				)
-				@textarea(
-					bookForm("comment"),
-					'_label -> "Kommentar",
-					'rows -> 4,
-					'class -> "form-control input-sm"
-				)		
-				<input type="submit" class="btn btn-primary" value="Buch anlegen">
-				<a href="@routes.BookController.addBook()" class="btn btn-default pull-right">Abbrechen</a>
-				<br />
-				<p class="form-hint">
-					* Pflichtfelder
-				</p>
-
+<div class="row">
+	<div class="col-xs-4">
+		</br>
+		</br>
+		</br>
+		@if(book != null) {
+			<img src="@book.coverUrl" class="thumbnail pull-right">
+		} else {
+			<img src="http://www.unrulyguides.com/wp-content/uploads/2011/12/generic-cover.jpg" class="thumbnail pull-right">
 		}
 	</div>
+	<div class="col-xs-8">
+
+	    <div class="isbn-container center-block">
+	        @helper.form(action = routes.BookController.createBook()){
+	            
+	            @if(bookForm.hasGlobalErrors) {
+	                <p class="error">@bookForm.globalError.message</p>
+	            }
+	                @inputText(
+	                    bookForm("title"),
+	                    '_label -> "Titel *",
+	                    'class -> "form-control input-sm"
+	                )
+	                @inputText(
+	                    bookForm("author"),
+	                    '_label -> "Autor *",
+	                    'class -> "form-control input-sm"
+	                )
+	                @inputText(
+	                    bookForm("isbn"),
+	                    '_label -> "ISBN *",
+	                    'class -> "form-control input-sm"
+	                )
+	                @inputText(
+	                    bookForm("year"),
+	                    '_label -> "Erscheinungsjahr *",
+	                    'class -> "form-control input-sm"
+	                )
+	                @inputText(
+	                    bookForm("coverUrl"),
+	                    '_label -> "Cover-URL *",
+	                    'class -> "form-control input-sm"
+	                )
+	                @textarea(
+	                    bookForm("comment"),
+	                    '_label -> "Kommentar",
+	                    'rows -> 4,
+	                    'class -> "form-control input-sm"
+	                )
+	                <input type="submit" class="btn btn-primary" value="Buch anlegen">
+	                <a href="@routes.BookController.addBook()" class="btn btn-default pull-right">Abbrechen</a>
+	                <br />
+	                <p class="form-hint">
+	                    * Pflichtfelder
+	                </p>
+	
+	        }
+	    </div>
+	</div>
+</div>
 
 }

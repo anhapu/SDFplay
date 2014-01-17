@@ -19,12 +19,12 @@ navigation: String)
 	}
 	
 	@snippets.sidebar() {
-		@snippets.panel("Kommentare", "") {
+		@snippets.panel("Kommentare", "swappable_spacer_mini") {
 				@snippets.comments(tradeTransaction)
 		}
-		@snippets.panel("Optionen", "") {
+		@snippets.panel("Optionen", "swappable_spacer_mini") {
 			@helper.form(action = routes.TradeController.approve(tradeTransaction.id)){
-				<p><input type="submit" class="btn btn-success" name="approve" value="Tausch abschlißen"></p>
+				<p><input type="submit" class="btn btn-success" name="approve" value="Tausch abschließen"></p>
 				<p><input type="submit" class="btn btn-danger" name="finalrefuse" value="Tausch ablehnen"></p>
 			}
 		}	

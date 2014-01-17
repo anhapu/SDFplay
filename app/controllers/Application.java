@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import models.User;
@@ -42,7 +43,13 @@ public class Application extends Controller {
 					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
 			users = User.findAll();
 		}
-		return ok(index.render(users));	
+
+          if (users.size() > 10) {
+               Collections.shuffle(users);
+               List<User> smallList = users.subList(0, 10);
+               users = smallList;
+          }
+		return ok(index.render(users));
 	}
 
 	public static Result error() {
@@ -54,11 +61,13 @@ public class Application extends Controller {
 	}
 
 	public static Result agb() {
-		return ok(agb.render());
+          String navigation = "Help";
+		return ok(agb.render(navigation));
 	}
 
     public static Result faq() {
-        return ok(faq.render());
+        String navigation = "Help";
+        return ok(faq.render(navigation));
     }
 
 }

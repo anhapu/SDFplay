@@ -238,24 +238,26 @@ public class TradeController extends Controller {
 	    	trade.state = States.INIT;
 	    	trade.commentOwner = filledForm.data().get("comment");
 	    	
+	    	List<Book> books = new ArrayList<Book>();
 	 		Long bookId = null;
 	 		Book book = null;
 	 		for (String bookString : bookSelection) {
 	    		bookId = Long.parseLong(bookString);
 	    		book = Book.findById(bookId);
 	    		trade.bookList.add(book);
+	    		books.add(book);
 				Logger.info("Added Book " + book.id.toString());
 			}
 	 			 		
 	    	trade.save();
 	    	//send email
-	    	EmailSender.sendBookExchangeRequest(trade.owner, trade.recipient);
+	    	EmailSender.sendBookExchangeRequest(trade, books);
 	    	
-	    	// Save that the user actually started a trad
+	    	// Save that the user actually started a trade
 	    	owner.alreadyTradeABook = true;
 	    	owner.update();
 	    	
-	 		flash("success", "Wunschzettel wurde angelegt!");
+	 		flash("success", "Tauschanfrage wurde angelegt!");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
     	return redirect(routes.Application.index());
@@ -298,8 +300,10 @@ public class TradeController extends Controller {
 	    	tradeTransaction.state = States.RESPONSE;
 	    	tradeTransaction.save();
 	    	//send email
-	    	EmailSender.sendBookExchangeResponse(tradeTransaction.owner, tradeTransaction.recipient);
-	 		flash("success", "Wunschzettel bestätigt");	
+	    	List<Book> ownerBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.owner);
+			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
+	    	EmailSender.sendBookExchangeResponse(tradeTransaction, ownerBookList, recipientBookList);
+	 		flash("success", "Tauschanfrage bestätigt");	
 	 		
 	 	// Process the Refuse Button
 		} else if(filledForm.data().get("refuse") != null){
@@ -344,13 +348,16 @@ public class TradeController extends Controller {
 			List<Email> emailList = new ArrayList<Email>();
 			List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInTradeTransaction(tradeTransaction);
 			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+				// set State to INVALID only, if trade is not finished yet (INIT or RESPONSE)
+				if ((invalidTradeTransaction.state == States.INIT) || (invalidTradeTransaction.state == States.RESPONSE)) {
 					invalidTradeTransaction.state = States.INVALID;
 					invalidTradeTransaction.save();
 					// add emails to user whose tradeTransaction became invalid
 					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
+				}
 			}
 			//add emails of users whose tradeTransaction was APPROVED
-			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction.owner, tradeTransaction.recipient));
+			emailList.addAll(EmailSender.getBookExchangeApprove(tradeTransaction, ownerBookList, recipientBookList));
 			//send emails
 			EmailSender.send(emailList);
 			flash("success", "Buchtausch erfolgreich!");

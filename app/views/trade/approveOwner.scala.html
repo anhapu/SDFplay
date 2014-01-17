@@ -21,14 +21,14 @@ navigation: String)
 	}
 	
 	@snippets.sidebar() {
-		@snippets.panel("Tausch erfolgreich!","") {
+		@snippets.panel("Tausch erfolgreich!","swappable_spacer_mini") {
 			Bitte nehme mit @tradeTransaction.recipient.username  Kontakt auf, um die Übergabe der Bücher zu organisieren!
 		}
 	
-		@snippets.panel("Kommentare", "") {
+		@snippets.panel("Kommentare", "swappable_spacer_mini") {
 				@snippets.comments(tradeTransaction)
 		}
-		@snippets.panel("Optionen", "") {
+		@snippets.panel("Optionen", "swappable_spacer_mini") {
 				@snippets.delete(tradeTransaction)
 	
 		}	

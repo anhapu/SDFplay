@@ -16,6 +16,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import play.Logger;
+import models.Book;
+import models.TradeTransaction;
 import models.User;
 import controllers.SMTPAuthenticator;
 import views.html.email.exchangeInvalidOwner;
@@ -133,9 +135,9 @@ public class EmailSender {
 	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
 	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
 	 */
-	public static void sendBookExchangeRequest(User fromUser, User toUser) {
-		String message = exchangeInit.render(fromUser.username, toUser.username).toString();
-		send("Neue Tauschanfrage von " + fromUser.username, message, toUser.email);
+	public static void sendBookExchangeRequest(TradeTransaction tradeTransaction, List<Book> recipientBookList) {
+		String message = exchangeInit.render(tradeTransaction, recipientBookList).toString();
+		send("Neue Tauschanfrage von " + tradeTransaction.owner.username, message, tradeTransaction.recipient.email);
 	}
 	
 	/** Versendet eine E-Mail mit Informationen zum Status RESPONSE an einen Nutzer.
@@ -144,9 +146,9 @@ public class EmailSender {
 	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
 	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
 	 */
-	public static void sendBookExchangeResponse(User fromUser, User toUser) {
-		String message = exchangeResponse.render(fromUser.username, toUser.username).toString();
-		send("Reaktion auf Ihre Tauschanfrage an " + fromUser.username, message, fromUser.email);
+	public static void sendBookExchangeResponse(TradeTransaction tradeTransaction, List<Book> ownerBookList, List<Book> recipientBookList) {
+		String message = exchangeResponse.render(tradeTransaction, ownerBookList, recipientBookList).toString();
+		send("Reaktion auf Ihre Tauschanfrage an " + tradeTransaction.recipient.username, message, tradeTransaction.owner.email);
 	}
 	
 	
@@ -164,31 +166,28 @@ public class EmailSender {
 
 	/** Versendet E-Mails an owner und recipient, dass eine Tauschanfrage abgeschlossen wurde. (State.APPROCE)
 	 *  Der Absender ist buecher.boerse@gmx.de.
-	 *  
-	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
-	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 * 
+	 * @param tradeTransaction		Das Tauschanfragenobjekt.
+	 * @param ownerBookList			Liste von Büchern, die der owner gibt.
+	 * @param recipientBookListUser Liste von Büchern, die der recipient gibt.
 	 */
-	public static void sendBookExchangeApprove(User fromUser, User toUser) {
-		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
-		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
-		List<Email> emailList = new ArrayList<Email>();
-		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
-		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
-		send(emailList);
+	 public static void sendBookExchangeApprove(TradeTransaction tradeTransaction, List<Book> ownerBookList, List<Book> recipientBookList) {
+		send(getBookExchangeApprove(tradeTransaction, ownerBookList, recipientBookList));
 	}
 	
 	/** Liefert eine Liste von Email-Objekten, die dafür verwendet wird um Nutzern mitzuteilen, dass eine Tauschanfrage abgeschlossen wurde. (State.APPROVE)
 	 *  Der Absender ist buecher.boerse@gmx.de.
 	 *  
-	 * @param fromUser		Nutzer, welcher den exchange request gestellt hat.
-	 * @param toUser		Nutzer, an den dieser exchange request gerichtet ist.
+	 * @param tradeTransaction		Das Tauschanfragenobjekt.
+	 * @param ownerBookList			Liste von Büchern, die der owner gibt.
+	 * @param recipientBookListUser Liste von Büchern, die der recipient gibt.
 	 */
-	public static List<Email> getBookExchangeApprove(User fromUser, User toUser) {
-		String messageOwner = exchangeApproveOwner.render(fromUser.username, toUser.username).toString();
-		String messageRecipient = exchangeApproveRecipient.render(fromUser.username, toUser.username).toString();
+	public static List<Email> getBookExchangeApprove(TradeTransaction tradeTransaction, List<Book> ownerBookList, List<Book> recipientBookList) {
+		String messageOwner = exchangeApproveOwner.render(tradeTransaction, ownerBookList, recipientBookList).toString();
+		String messageRecipient = exchangeApproveRecipient.render(tradeTransaction, ownerBookList, recipientBookList).toString();
 		List<Email> emailList = new ArrayList<Email>();
-		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde erfolgreich abgeschlossen.", messageOwner, fromUser.email));
-		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " wurde erfolgreich abgeschlossen.", messageRecipient, toUser.email));
+		emailList.add(new Email("Ihre Tauschanfrage an " + tradeTransaction.recipient.username + " wurde erfolgreich abgeschlossen.", messageOwner, tradeTransaction.owner.email));
+		emailList.add(new Email("Die Tauschanfrage von " + tradeTransaction.owner.username + " wurde erfolgreich abgeschlossen.", messageRecipient, tradeTransaction.recipient.email));
 		return emailList;
 	}
 	

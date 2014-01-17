@@ -44,7 +44,7 @@ public final class BookController extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result getForm() {
         String navigation = "addBook";
-        return ok(views.html.book.createBook.render(bookForm, navigation));
+        return ok(views.html.book.createBook.render(null, bookForm, navigation));
     }
     
     @Transactional
@@ -58,12 +58,12 @@ public final class BookController extends Controller {
         filledForm.errors().remove("tradeable");
         
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.book.createBook.render(filledForm, navigation));
+            return badRequest(views.html.book.createBook.render(filledForm.get(), filledForm, navigation));
         } else {
             
-        	final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+            final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
             final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy");
-        	
+            
             Book book = new Book();
             book.owner = Common.currentUser();
             book.tradeable = false;
@@ -72,23 +72,24 @@ public final class BookController extends Controller {
             // because its just a partial form
             book.title = filledForm.field("title").value();
             book.author = filledForm.field("author").value();
-            book.isbn = filledForm.field("isbn").value();
+            book.isbn = Utils.isbnParser(filledForm.field("isbn").value());
             try{
-            	book.year = formatter.parse(filledForm.field("year").value());
+                book.year = formatter.parse(filledForm.field("year").value());
             }catch (final ParseException e){
-            	Logger.error(e.getMessage());
-            	try {
-            		book.year = formatter2.parse(filledForm.field("year").value());
-            	} catch ( final ParseException e2) {
-            		Logger.error(e2.getMessage());
-            		book.year = new Date();
-            	}
+                Logger.error(e.getMessage());
+                try {
+                    book.year = formatter2.parse(filledForm.field("year").value());
+                } catch ( final ParseException e2) {
+                    Logger.error(e2.getMessage());
+                    book.year = new Date();
+                }
             }
             
             book.coverUrl = filledForm.field("coverUrl").value();
             book.comment = filledForm.field("comment").value();
             
             book.save();
+            flash("success", "Dein Buch wurde deinem Bücherregal hinzugefügt!");
             return redirect(routes.BookController.getBook(book.id));
 
 
@@ -111,7 +112,7 @@ public final class BookController extends Controller {
                 oriBook.title = book.title;
                 oriBook.comment = book.comment;
                 oriBook.coverUrl = book.coverUrl;
-                oriBook.isbn = book.isbn;
+                oriBook.isbn = Utils.isbnParser(book.isbn);
                 oriBook.year = book.year;
                 oriBook.update();
                 return redirect( routes.BookController.getBook( oriBook.id ) );
@@ -149,13 +150,14 @@ public final class BookController extends Controller {
             flash( "error", "Die ISBN darf nur Zahlen enthalten" );
             return ok(views.html.book.addBook.render( form(SimpleProfile.class), navigation ));
         } else {
-            Book book = Utils.getBookInformationFromAWS(pForm.get().isbn);
-            if(book.title == null){
-            	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es manuell hinzu!");
+            Book book = Utils.getBookInformationFromAWS(Utils.isbnParser(pForm.get().isbn));
+            if (book == null) {
+                flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es per Hand hinzu!");
+               return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
             } else {
-            	flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
-            }            
-            return ok(views.html.book.createBook.render(bookForm.fill( book ), navigation));
+                flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
+            }
+            return ok(views.html.book.createBook.render(book, bookForm.fill( book ), navigation));
         }
     }
  
@@ -186,14 +188,14 @@ public final class BookController extends Controller {
     /** Delete a book. This action will also lead to a search for INVALID TradeTransactions. If this
      * 	book is used in a TradeTransaction, then this TradeTransaction will become INVALID. For each
      * 	invalid TradeTransaction one E-Mail is sent to the owner and another one is sent to the recipient.
-     * 
+     *
      * 	@param bookId	the id of the book that you want to delete
-     */ 
+     */
     @Security.Authenticated(Secured.class)
     public static Result deleteBook(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
-        	checkForInvalidTradeTransactions(book);
+            checkForInvalidTradeTransactions(book);
             book.delete();
             return redirect(routes.BookController.myBookshelf());
         } else {
@@ -271,7 +273,7 @@ public final class BookController extends Controller {
     public static Result unmarkAsTradeable(final Long bookId) {
         Book book = Book.findById(bookId);
         if (Secured.isOwnerOfBook(book)) {
-        	checkForInvalidTradeTransactions(book);
+            checkForInvalidTradeTransactions(book);
             Book.unmarkAsTradeable(book);
             return redirect(routes.BookController.myBookshelf());
 
@@ -387,7 +389,7 @@ public final class BookController extends Controller {
                    sortDirection = data[1];
               }
          }
-         // "" to get all books 
+         // "" to get all books
          books = Book.findAllBooksFromBy(Common.currentUser(), "", sortAttribute, sortDirection);
          return ok(views.html.book.mybookshelf.render(books, sortAttribute, sortDirection, navigation));
      }
@@ -395,25 +397,25 @@ public final class BookController extends Controller {
     /** This method should be used, if a user deleted a book or removed it from his or her "showcase".
      * 	It will find all TradeTransaction involved and set them to "States.INVALID". It will also sent
      *  notifications to all users involved
-     * 
+     *
      * @param book A book that was deleted or set to to be "untradeable".
      */
     private static void checkForInvalidTradeTransactions(Book book) {
-    	List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
-    	if (invalidTradeTransactions != null) {
-    		List<Email> emailList = new ArrayList<Email>();
-			for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
-				// set State to INVALID only, if trade is not finished yet (INIT or RESPONSE)
-				if ((invalidTradeTransaction.state == States.INIT) || (invalidTradeTransaction.state == States.RESPONSE)) {
-					invalidTradeTransaction.state = States.INVALID;
-					invalidTradeTransaction.save();
-					emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
-				}
-			}
-			if (!emailList.isEmpty()) {
-				EmailSender.send(emailList);
-			}
-    	}
+        List<TradeTransaction> invalidTradeTransactions = TradeTransaction.findListOfTradeTransactionInvolvedInBook(book);
+        if (invalidTradeTransactions != null) {
+            List<Email> emailList = new ArrayList<Email>();
+            for (TradeTransaction invalidTradeTransaction : invalidTradeTransactions) {
+                // set State to INVALID only, if trade is not finished yet (INIT or RESPONSE)
+                if ((invalidTradeTransaction.state == States.INIT) || (invalidTradeTransaction.state == States.RESPONSE)) {
+                    invalidTradeTransaction.state = States.INVALID;
+                    invalidTradeTransaction.save();
+                    emailList.addAll(EmailSender.getBookExchangeInvalid(invalidTradeTransaction.owner, invalidTradeTransaction.recipient));
+                }
+            }
+            if (!emailList.isEmpty()) {
+                EmailSender.send(emailList);
+            }
+        }
     }
 
 }

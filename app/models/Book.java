@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -50,6 +51,7 @@ public class Book extends Model
     
     public boolean tradeable;
     
+    @Column(columnDefinition = "TEXT")
     public String comment;
     
     @ManyToOne
@@ -129,8 +131,7 @@ public class Book extends Model
      * @return List of books
      */
     public static List<Book> getShowcaseForUser(final User user) {
-        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "title asc" )
-                .findList();
+        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "initTime desc" ).setMaxRows(18).findList();
     }
     /**
      * Returns a book by a given id.

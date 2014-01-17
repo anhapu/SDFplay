@@ -17,8 +17,9 @@
 }
 
 .tradecontent {
-	width: 60%;
+	width: 50%;
 	display:inline-block;
+	clear: both;
 	float:left;
 }
 
@@ -33,15 +34,15 @@
 }
 
 #wishlist-wrapper {
-	left: 60%;
-	width: 30%;
+	left: 50%;
+	width: 40%;
 	position: absolute;
 	/* background: #2FA4E7; */
 }
 
 #wishlist-wrapper.affix {
-	left: 60%;
-	width: 30%;
+	left: 50%;
+	width: 40%;
 	top: 0px;
 	position: fixed;
 }
@@ -144,7 +145,7 @@
 	text-overflow: ellipsis;
 }
 
-.red {
+.error {
 	color: #c71c22;
 }
 
@@ -158,4 +159,12 @@
 
 .badge-important {
 	background-color:#F0AD4E;
+}
+
+.swappable_spacer {
+	margin-left: 20%;
+}
+
+.swappable_spacer_mini {
+	margin-left: 5%;
 }

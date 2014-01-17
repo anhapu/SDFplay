@@ -1,5 +1,9 @@
-@(fromUser: String, toUser: String)Hallo @toUser !
+@(tradeTransaction: TradeTransaction, ownerBookList: List[Book], recipientBookList: List[Book])Hallo @tradeTransaction.recipient.username !
 
-Die Tauschanfrage von @fromUser wurde akzeptiert. Die Bücher wurden getauscht!
+Die Tauschanfrage von @tradeTransaction.owner.username wurde akzeptiert. Die Bücher wurden getauscht!
+
+@tradeTransaction.owner.username erhielt:@snippets.books(recipientBookList)
+@tradeTransaction.recipient.username erhielt:@snippets.books(ownerBookList)
+Sie können @tradeTransaction.owner.username auch via email @tradeTransaction.owner.email erreichen.
 
 @snippets.visitUs()

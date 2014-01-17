@@ -68,7 +68,6 @@ g-input:focus + g-header {
   margin:0 1rem 1rem;
   border-radius:3px;
   user-select:none;
-  animation:fly-in-from-left .5s 1s ease both;
   transform-origin:top left;
 }
 .g-card:nth-child(even){
