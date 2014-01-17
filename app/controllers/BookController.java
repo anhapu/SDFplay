@@ -215,7 +215,7 @@ public final class BookController extends Controller {
         } else {
             // TODO redirect to something useful
             Logger.error("Current user is null.");
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.index(1));
         }
     }
     
@@ -238,7 +238,7 @@ public final class BookController extends Controller {
         } else {
             // TODO Return to something useful
             Logger.error("Did not find any user for id: " + id);
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.index(1));
         }
     }
 
@@ -254,6 +254,7 @@ public final class BookController extends Controller {
         Book book = Book.findById(id);
         if (Secured.isOwnerOfBook(book)) {
             Book.markAsTradeable(book);
+            Common.currentUser().setLastActivityToNow();
             Logger.info("Marked book as tradeable");
             return redirect(routes.BookController.myBookshelf());
         } else {
@@ -330,7 +331,7 @@ public final class BookController extends Controller {
             }
         }
 
-        return redirect(routes.Application.index());
+        return redirect(routes.Application.index(1));
     }
 
     public static class SimpleProfile {
@@ -370,7 +371,7 @@ public final class BookController extends Controller {
                    return ok(views.html.book.searchResults.render(books, term, sortAttribute, sortDirection, "", navigation));
               }
          }
-         return redirect(routes.Application.index());
+         return redirect(routes.Application.index(1));
     }
 
     @Transactional

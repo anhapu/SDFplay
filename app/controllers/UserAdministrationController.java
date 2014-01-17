@@ -24,7 +24,7 @@ public class UserAdministrationController extends Controller {
                return ok(views.html.userAdministration.render(users, navigation));
           } else {
                flash("error", "Zugriff nicht gestattet!");
-               return redirect(routes.Application.index());
+               return redirect(routes.Application.index(1));
           }
      }
 
@@ -50,7 +50,7 @@ public class UserAdministrationController extends Controller {
           }
           else {
                flash("error", "Zugriff nicht gestattet!");
-               return redirect(routes.Application.index());
+               return redirect(routes.Application.index(1));
           }
      }
 
@@ -79,7 +79,7 @@ public class UserAdministrationController extends Controller {
          }
          else {
               flash("error", "Zugriff nicht gestattet!");
-              return redirect(routes.Application.index());
+              return redirect(routes.Application.index(1));
          }
     }
 
@@ -101,7 +101,7 @@ public class UserAdministrationController extends Controller {
                return redirect(routes.UserAdministrationController.index());
           } else {
                flash("error", "Zugriff nicht gestattet!");
-               return redirect(routes.Application.index());
+               return redirect(routes.Application.index(1));
           }
      }
 }

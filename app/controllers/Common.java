@@ -47,7 +47,7 @@ public class Common extends Action.Simple {
             User user = User.findById(Long.parseLong(userId));
             if (user == null) {
                 ctx.session().clear();
-                return Promise.pure(redirect(routes.Application.index()));
+                return Promise.pure(redirect(routes.Application.index(1)));
             } else {
                 Common.addToContext("user", user);
             }

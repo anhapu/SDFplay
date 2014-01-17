@@ -4,6 +4,7 @@ package models;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Date;
 
@@ -16,12 +17,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
 
+import com.avaje.ebean.Expr;
+import com.avaje.ebean.RawSql;
+import com.avaje.ebean.RawSqlBuilder;
+
 import models.enums.Roles;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Email;
 import play.db.ebean.Model;
 import utils.Utils;
+import views.html.email.snippets.books;
 import controllers.Common;
 
 @Entity
@@ -52,6 +58,8 @@ public class User extends Model
     public Roles role;
     
     public boolean alreadyTradeABook;
+    
+	public Timestamp lastActivity;
     
     @Constraints.Required
     @Formats.NonEmpty
@@ -85,16 +93,32 @@ public class User extends Model
         return find.all();
     }
     
+    public static int countAll() {
+        return find.where().findRowCount();
+    }
+    
     public static List<User> findAllBut(User user) {
         return find.where().ne("id", user.id).findList();
     }
     
     public static List<User> findPaginated(int limit, int page, User user) {
     	int offset = (page * limit) - limit;
-    	return find.where().ne("id", user.id).setMaxRows(limit).setFirstRow(offset).findList();
+    	
+    	if(user != null){
+        	return find.where().ne("id", user.id)
+        			.orderBy("lastActivity asc")
+        			.setMaxRows(limit)
+        			.setFirstRow(offset)
+        			.findList();
+    	} else {
+         	return find.where()
+        			.orderBy("lastActivity asc")
+        			.setMaxRows(limit)
+        			.setFirstRow(offset)
+        			.findList();
+    	}
     }
     
-   
     /**
      * Retrieve a User from email.
      */
@@ -166,6 +190,11 @@ public class User extends Model
               isAdmin = true;
          }
          return isAdmin;
+    }
+    
+    public void setLastActivityToNow() {
+    	this.lastActivity = new java.sql.Timestamp(new java.util.Date().getTime());
+    	this.save();
     }
 
 }

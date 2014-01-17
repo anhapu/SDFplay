@@ -3,7 +3,6 @@
 @defining(6) { BUCHZAHL =>
 @defining( if (books.length % BUCHZAHL == 0) books.length / BUCHZAHL else books.length / BUCHZAHL + 1 ) { anzahlSeiten =>
 <!-- Carousel================================================== -->
-@if(!books.isEmpty()) {
 <div id="@user.id" class="carousel slide" style="width: 900px; margin: 0 auto">
 	<ol class="carousel-indicators">
 	    <li data-target="#@user.id" data-slide-to="0" class="active"></li>
@@ -49,6 +48,5 @@
 	</a>
 </div> <!--/myCarousel-->
 </br>
-}
 }
 }

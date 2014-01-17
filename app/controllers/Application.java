@@ -24,33 +24,30 @@ public class Application extends Controller {
 	 * @return
 	 */
 
-	public static Result index() {
-		return home(1);
-	}
-	
-	public static Result home(int page) {
+	public static Result index(int page) {
 		List<User> users = null;
+		int limit = 5;
+		int maxPage = (int)Math.ceil(User.countAll()/(double)limit);
 		if (Common.currentUser() != null) {
 			if (!Common.currentUser().alreadyTradeABook) {
 				flash("info",
 						"Du hast noch keine Bücher getauscht. Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer Nutzer und wähle Bücher aus, die du tauschen möchtest.");
 			}
 			
-			users = User.findPaginated(2, 1, Common.currentUser());
-			//users = User.findAllBut(Common.currentUser());
+			users = User.findPaginated(limit, page, Common.currentUser());
 		} else {
-			flash("info",
-					"Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
-			users = User.findAll();
+			flash("info", "Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
+			users = User.findPaginated(limit, page, null);
 		}
 
-          if (users.size() > 10) {
-               Collections.shuffle(users);
-               List<User> smallList = users.subList(0, 10);
-               users = smallList;
-          }
-		return ok(index.render(users));
+//          if (users.size() > 10) {
+//               Collections.shuffle(users);
+//               List<User> smallList = users.subList(0, 10);
+//               users = smallList;
+//          }
+		return ok(index.render(users, page, maxPage));
 	}
+	
 
 	public static Result error() {
 		return badRequest(error.render());

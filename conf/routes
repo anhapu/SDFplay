@@ -25,8 +25,7 @@ GET  /userAdministration/deleteUser/:id controllers.UserAdministrationController
 GET  /userAdministration/toggleRole/:id controllers.UserAdministrationController.toggleRole(id: Long)
 
 # Home page
-GET   /                   controllers.Application.index()
-GET   /home               controllers.Application.home(page: Integer ?= 1)
+GET   /                   controllers.Application.index(page: Integer ?= 1)
 GET   /error			  controllers.Application.error()
 GET   /denied			  controllers.Application.denied()
 GET   /agb				  controllers.Application.agb()

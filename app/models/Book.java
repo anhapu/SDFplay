@@ -64,7 +64,6 @@ public class Book extends Model
     @ManyToMany(mappedBy = "bookList", cascade=CascadeType.REMOVE)
     public List<TradeTransaction> tradeTransactionList;
     
-    
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);
     
     /**

@@ -38,13 +38,13 @@ public class UserController extends Controller {
                   if(loginForm.hasErrors()) {
                        Common.addToContext(Common.ContextIdent.loginForm, loginForm);
                        flash("error", loginForm.globalError().message());
-                       result = Application.index();
+                       result = Application.index(1);
                   }
                   else {
                        session().clear();
                        User user = User.findByEmail(loginForm.get().email);
                        session("id", user.id.toString());
-                       result = redirect(routes.Application.index());
+                       result = redirect(routes.Application.index(1));
                   }
              }
              else if (action.equals("passwordRecovery")) {
@@ -65,7 +65,7 @@ public class UserController extends Controller {
         @Security.Authenticated(Secured.class)
         public static Result logout() {
                 session().clear();
-                return redirect(routes.Application.index());
+                return redirect(routes.Application.index(1));
         }
 
         
@@ -73,7 +73,7 @@ public class UserController extends Controller {
         public static Result sendRecoveryMail() {
           Form<Email> emailForm = form(Email.class).bindFromRequest();
           if(emailForm.hasErrors()) {
-              return redirect(routes.Application.index());
+              return redirect(routes.Application.index(1));
           }
           SecureRandom random = new SecureRandom();
           String token = new BigInteger(130, random).toString(32);
@@ -100,7 +100,7 @@ public class UserController extends Controller {
                   long elapsedTime = ((currentDate.getTime()/60000) - (user.tokenCreatedAt.getTime()/60000));
                   if (elapsedTime > 5) {
                        flash("error", "Die Zeit von 5 Minuten ist abgelaufen!");
-                       return redirect(routes.Application.index());
+                       return redirect(routes.Application.index(1));
                   }
                   else {
                     // forward to change PW page ...
@@ -110,7 +110,7 @@ public class UserController extends Controller {
              }
              else {
                   flash("error", "Dieser Token ist invalid!");
-                  return redirect(routes.Application.index());
+                  return redirect(routes.Application.index(1));
              }
         }
      
@@ -125,12 +125,12 @@ public class UserController extends Controller {
                  }
                  else {
                       flash("error", "Benutzer nicht gefunden!");
-                      return redirect(routes.Application.index());
+                      return redirect(routes.Application.index(1));
                  }
             }
             else {
                  flash("error", "Zugriff nicht gestattet!");
-                 return redirect(routes.Application.index());
+                 return redirect(routes.Application.index(1));
             }
         }
 
@@ -150,11 +150,11 @@ public class UserController extends Controller {
                        created.firstname = pForm.get().firstname;
                        created.update();
                        flash("success", "Benutzer erfolgreich geändert!");
-                       return redirect(routes.Application.index());
+                       return redirect(routes.Application.index(1));
                   }
                   else {
                        flash("error", "Zugriff nicht gestattet!");
-                       return redirect(routes.Application.index());
+                       return redirect(routes.Application.index(1));
                   }
              }
         }
@@ -217,7 +217,7 @@ public class UserController extends Controller {
                         user.tokenCreatedAt = null;
 
                         user.update();
-                        return redirect(routes.Application.index());
+                        return redirect(routes.Application.index(1));
                 }
         }
 
@@ -229,7 +229,7 @@ public class UserController extends Controller {
              }
              else {
                   flash("error", "Zugriff nicht gestattet!");
-                  return redirect(routes.Application.index());
+                  return redirect(routes.Application.index(1));
              }
         }
 

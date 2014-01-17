@@ -260,7 +260,7 @@ public class TradeController extends Controller {
 	 		flash("success", "Tauschanfrage wurde angelegt!");
 	    	return redirect(routes.TradeController.view(trade.id));
     	}
-    	return redirect(routes.Application.index());
+    	return redirect(routes.Application.index(1));
     }
     
     
