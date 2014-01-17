@@ -129,8 +129,7 @@ public class Book extends Model
      * @return List of books
      */
     public static List<Book> getShowcaseForUser(final User user) {
-        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "title asc" )
-                .findList();
+        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "initTime desc" ).setMaxRows(18).findList();
     }
     /**
      * Returns a book by a given id.
