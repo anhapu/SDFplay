@@ -1,4 +1,4 @@
-@(book: Book)
+@(book: Book, navigation: String)
 
 <section class="g-card">
 	<a href="@routes.BookController.view(book.id)" data-toggle="modal" data-target="#centralModal">
@@ -7,7 +7,7 @@
 	<div class="title" title="@book.title">
 		@book.title
 	</div>
-	@if(Secured.isAllowedToEditBook(book)){
+     @if(navigation.equals("myBooks") && Secured.isAllowedToEditBook(book)){
 		<div class="pull-left book-button-left">
 			<g-h1>
 				@if(book.tradeable){
@@ -23,5 +23,5 @@
 					<a href="@routes.BookController.deleteBook(book.id)" data-toggle="tooltip" data-original-title="Buch löschen" data-container="body"><span class="glyphicon glyphicon-trash" onclick="return confirm('Tauschanfragen, welche dieses Buch enthalten, werden dabei ungültig, \nda das Buch nicht mehr getauscht werden kann. \n\nWollen Sie das Buch dennoch löschen?');"></span></a>
 				</g-h1>
 		</div>
-	}
+     }
 </section>
