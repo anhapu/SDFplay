@@ -4,28 +4,21 @@
 
 	@if(Common.currentUser != null) {
 		@for(user <- users) {
-			@defining(Book.getShowcaseForUser(user)){ books =>
-				@if(!books.isEmpty()) {
-					<h4 class="user-index"><a href="@routes.TradeController.viewForUser(user.id)">@user.username:</a></h4>
-					@book.snippets.carousel(user, Book.getShowcaseForUser(user))
-				}
-			}
+				<h4 class="user-index"><a href="@routes.TradeController.viewForUser(user.id)">@user.username:</a></h4>
+				@book.snippets.carousel(user, Book.getShowcaseForUser(user))
+		
 		}
 
 	} else {
 		@for(user <- users) {
-			@defining(Book.getShowcaseForUser(user)){ books =>
-				@if(!books.isEmpty()) {
-					<h4 class="user-index">@user.username:</h4>
-					@book.snippets.carousel(user, Book.getShowcaseForUser(user))
-					<hr />
-				}
-			}
+			<h4 class="user-index">@user.username:</h4>
+			@book.snippets.carousel(user, Book.getShowcaseForUser(user))
+			<hr />
 		}
 	}
 	
 	@if(!((page+1) > maxPage)){
-		<p><center><a href="@routes.Application.index(page+1)" class="btn btn-primary">Mehr Showcases</a></center></p>
+	<center><a href="@routes.Application.index(page+1)" class="btn btn-primary" id="more-button">Mehr Showcases</a></center>
 	}
 
 

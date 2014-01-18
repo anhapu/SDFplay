@@ -27,24 +27,25 @@ public class Application extends Controller {
 	public static Result index(int page) {
 		List<User> users = null;
 		int limit = 5;
-		int maxPage = (int)Math.ceil(User.countAll()/(double)limit);
+		int maxShowcases;
+		
 		if (Common.currentUser() != null) {
+			
 			if (!Common.currentUser().alreadyTradeABook) {
-				flash("info",
-						"Du hast noch keine Bücher getauscht. Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer Nutzer und wähle Bücher aus, die du tauschen möchtest.");
+				flash("info", "Du hast noch keine Bücher getauscht. "
+						+ "Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer "
+						+ "Nutzer und wähle Bücher aus, die du tauschen möchtest.");
 			}
 			
+			maxShowcases = User.countWithShowcases(Common.currentUser());
 			users = User.findPaginated(limit, page, Common.currentUser());
 		} else {
 			flash("info", "Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
+			maxShowcases = User.countWithShowcases(null);
 			users = User.findPaginated(limit, page, null);
 		}
 
-//          if (users.size() > 10) {
-//               Collections.shuffle(users);
-//               List<User> smallList = users.subList(0, 10);
-//               users = smallList;
-//          }
+		int maxPage = (int)Math.ceil(maxShowcases/(double)limit);
 		return ok(index.render(users, page, maxPage));
 	}
 	

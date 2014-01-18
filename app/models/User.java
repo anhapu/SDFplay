@@ -18,6 +18,8 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 
 import com.avaje.ebean.Expr;
+import com.avaje.ebean.Expression;
+import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
 
@@ -93,30 +95,38 @@ public class User extends Model
         return find.all();
     }
     
-    public static int countAll() {
-        return find.where().findRowCount();
-    }
-    
     public static List<User> findAllBut(User user) {
         return find.where().ne("id", user.id).findList();
     }
     
-    public static List<User> findPaginated(int limit, int page, User user) {
-    	int offset = (page * limit) - limit;
+    public static int countWithShowcases(User user) {
+    	ExpressionList<User> query = find.select("*").fetch("books").where();
     	
     	if(user != null){
-        	return find.where().ne("id", user.id)
-        			.orderBy("lastActivity desc")
-        			.setMaxRows(limit)
-        			.setFirstRow(offset)
-        			.findList();
-    	} else {
-         	return find.where()
-        			.orderBy("lastActivity desc")
-        			.setMaxRows(limit)
-        			.setFirstRow(offset)
-        			.findList();
+    		query = query.ne("id", user.id);
+    		
     	}
+    	
+    	return query
+    			.eq("books.tradeable", true)
+    			.findRowCount();
+    }
+    
+    
+    public static List<User> findPaginated(int limit, int page, User user) {
+    	int offset = (page * limit) - limit;
+    	ExpressionList<User> query = find.select("*").fetch("books").where();
+    
+    	if(user != null){
+    		query = query.ne("id", user.id);
+    		
+    	}
+    	return query
+    			.eq("books.tradeable", true)
+    			.orderBy("lastActivity desc")
+    			.setMaxRows(limit)
+    			.setFirstRow(offset)
+    			.findList();
     }
     
     /**

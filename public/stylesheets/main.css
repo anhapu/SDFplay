@@ -168,3 +168,8 @@
 .swappable_spacer_mini {
 	margin-left: 5%;
 }
+
+#more-button {
+	margin-top: 40px;
+	min-width: 300px;
+}
