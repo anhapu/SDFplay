@@ -106,13 +106,13 @@ public class User extends Model
     	
     	if(user != null){
         	return find.where().ne("id", user.id)
-        			.orderBy("lastActivity asc")
+        			.orderBy("lastActivity desc")
         			.setMaxRows(limit)
         			.setFirstRow(offset)
         			.findList();
     	} else {
          	return find.where()
-        			.orderBy("lastActivity asc")
+        			.orderBy("lastActivity desc")
         			.setMaxRows(limit)
         			.setFirstRow(offset)
         			.findList();

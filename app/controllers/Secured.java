@@ -135,17 +135,14 @@ public class Secured extends Security.Authenticator
      * @param trade
      * @return
      */
-    public static boolean deleteTradeTransaction(TradeTransaction trade) {
-    	// NOT READY YET, THE RIGHT TO DELETE IS COMPLICATED
-    	
+    public static boolean deleteTradeTransaction(TradeTransaction trade) {    	
     	User current = Common.currentUser();
-    	if(trade.owner.equals(current) && trade.state == States.INIT) {
+    	
+    	if(current.equals(trade.owner) || current.equals(trade.recipient)) {
     		return true;
-    	} else if(current.role == Roles.ADMIN){
-    		return true;
-    	} else {
-    		return false;
-    	} 	
+    	}
+    	
+    	return false;	
     }
     
     /**
@@ -156,6 +153,20 @@ public class Secured extends Security.Authenticator
     public static boolean responseTradeTransaction(TradeTransaction trade) {
     	User current = Common.currentUser();
     	if(trade.recipient.equals(current) && trade.state == States.INIT) {
+    		return true;
+    	} else {
+    		return false;
+    	} 	
+    }
+    
+    /**
+     * Determines if the current user is allowed to approve to a specific TradeTransaction
+     * @param trade
+     * @return
+     */
+    public static boolean approveTradeTransaction(TradeTransaction trade) {
+    	User current = Common.currentUser();
+    	if(trade.owner.equals(current) && trade.state == States.RESPONSE) {
     		return true;
     	} else {
     		return false;

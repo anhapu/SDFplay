@@ -8,6 +8,7 @@ users:
         firstname: Max
         lastname: Mustermann
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: ADMIN
 
     - !!models.User
@@ -17,6 +18,7 @@ users:
         firstname: Martina
         lastname: Musterfrau
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -26,6 +28,7 @@ users:
         firstname: Bernd
         lastname: Dasbrot
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -35,6 +38,7 @@ users:
         firstname: Lassmiranda
         lastname: Dennsiewillja
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -44,6 +48,7 @@ users:
         firstname: Albert
         lastname: Einstein
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -53,6 +58,7 @@ users:
         firstname: Barack
         lastname: Obama
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -62,6 +68,7 @@ users:
         firstname: Bill 
         lastname: Gatez
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -71,6 +78,7 @@ users:
         firstname: Galius-Julius
         lastname: Caesar
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
     - !!models.User
@@ -80,6 +88,7 @@ users:
         firstname: Donald
         lastname: Duck
         password: 5ebe2294ecd0e0f08eab7690d2a6ee69
+        lastActivity: 1970-01-01
         role: USER
 
 books:

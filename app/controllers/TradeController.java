@@ -60,6 +60,10 @@ public class TradeController extends Controller {
 		User currentUser = Common.currentUser();
 		User recipient = User.findById(id);
 		
+		if(currentUser.equals(recipient)){
+			return redirect(routes.Application.error());
+		}
+		
 		if(recipient == null) {
 			return redirect(routes.Application.error());
 		}
@@ -279,23 +283,19 @@ public class TradeController extends Controller {
 			
 	       	// Getting the selection
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
-	    	if(bookSelection == null) {
-	    		flash("error", "Bitte wählen Sie mindestens ein Buch aus!");
-	    		Logger.info("Error in Selection");
-	    		List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
-				List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
-				return badRequest(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, filledForm, navigation));
-	    	}
 	    	
 	    	Long bookId = null;
 	 		Book book = null;
-	 		for (String bookString : bookSelection) {
-	    		bookId = Long.parseLong(bookString);
-	    		book = Book.findById(bookId);
-	    		tradeTransaction.bookList.add(book);
-				Logger.info("Added Book " + book.id.toString());
-			}
 	 		
+	 		if(bookSelection != null) {
+		 		for (String bookString : bookSelection) {
+		    		bookId = Long.parseLong(bookString);
+		    		book = Book.findById(bookId);
+		    		tradeTransaction.bookList.add(book);
+					Logger.info("Added Book " + book.id.toString());
+				}	
+	 		}
+
 	    	tradeTransaction.commentRecipient = filledForm.data().get("comment");
 	    	tradeTransaction.state = States.RESPONSE;
 	    	tradeTransaction.save();
@@ -324,6 +324,11 @@ public class TradeController extends Controller {
     	TradeTransaction tradeTransaction = TradeTransaction.findById(id);
 		Form<TradeTransaction> filledForm = transactionForm.bindFromRequest();
 		
+		if(!Secured.approveTradeTransaction(tradeTransaction)){
+			return redirect(routes.Application.denied());
+		}
+    	
+	
 		// Process the Approve Button
 		if(filledForm.data().get("approve") != null) {
 			tradeTransaction.state = States.APPROVE;
@@ -380,15 +385,14 @@ public class TradeController extends Controller {
     		return redirect(routes.Application.error());
     	} else {
     	
-    		// For debugging not in use, so we can delete a transaction
-    		//    	if(!Secured.deleteTradeTransaction(trade)){
-    		//			return redirect(routes.Application.denied());
-    		//	}
+			if (!Secured.deleteTradeTransaction(tradeTransaction)) {
+				return redirect(routes.Application.denied());
+			}
     		EmailSender.send(EmailSender.getBookExchangeDeleted(tradeTransaction.owner, tradeTransaction.recipient));
 			User partner = tradeTransaction.recipient;
 			tradeTransaction.delete();
 			flash("success", "Die Tauschanfrage wurde gelöscht");
-			return redirect(routes.TradeController.viewForUser(partner.id));
+			return redirect(routes.TradeController.viewAllTrades());
     	}
     }
 	
