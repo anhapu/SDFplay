@@ -1,84 +1,103 @@
 @(navigation: String)
 @main("FAQ", navigation) {
-    <div id="faq">
-        <div class="panel" id="overview">
-            <h4>A Allgemeines und Datenschutz</h4>
-                A1. <a href="#a1">Was kostet die Nutzung von swappable.de im Monat?</a></br>
-                A2. <a href="#a2">Wie wird mit meine personenbezogenen Daten umgegangen?</a></br>
-                A3. <a href="#a3">Welche Art von Büchern kann ich auf swappable.de tauschen?</a></br>
-            <br/>
-            <h4>B Technische Fragen & Probleme</h4>
-                B1. <a href="#b1">Wie kann ich mein Nutzerkonto löschen?</a></br>
-                B2. <a href="#b2">Existiert eine Zahl von maximal tauschbaren Büchern?</a></br>
-                B3. <a href="#b3">Wieso kann ich keine eigenen Buchcover nutzen / hochladen?</a></br>
-                B4. <a href="#b4">Wieso bietet ihr keine SSL gesicherte Verbindung an?</a></br>
-            <br/>
-            <h4>C Zur Funktion von swappable.de</h4>
-                C1. <a href="#c1">Eine Transaktion war erfolgreich, jedoch hat es sich der Nutzer anders überlegt. Was nun ?</a></br>
-                C2. <a href="#c2">Welche Form der ISBN kann ich beim Anlegen von Büchern nutzen ?</a></br>
+    <h2>Häufig gestellte Fragen</h2>
+    <div class="head">
+    Aufgrund eines möglicherweise hohen aufkommens von Supportanfragen ist es uns leider nicht immer möglich Fragen sofort zu beantworten. Allerdings erleben wir es häufig
+    das die selben Fragen von vielen Nutzern gestellt werden.<br/>
+    Die hier aufgelisteten Fragen stellen eine Teilmenge der gestelten Fragen dar. Bitte lest euch diese Seite durch bevor ihr unseren Kundensupport kontaktiert. Ist eine 
+    Frage nicht vorhanden so könnt ihr uns unter <a href="mailto:support@@swappable.de">support (at) swappable.de</a> erreichen.<br/><br/>
+    </div>
+    <div class="panel-group" id="faq">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#faq" href="#faq-s1">A. Allgemeines und Datenschutz</a></h4>
+            </div>
+            <div id="faq-s1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <ol>
+                        <li style="font-weight: bold;">Was kostet die Nutzung von swappable.de im Monat ?</li>
+                            Die Nutzung von swappable.de ist jederzeit Kostenlos!<br>
+                            Lediglich bei der Nutzung aus Mobilfunknetzen können kosten durch die Internetverbindung 
+                            entstehen, welche jedoch vom Provider erhoben werden.
+                        <li style="font-weight: bold;">Wie wird mit meinen personenbezogenen Daten umgegangen?</li>
+                            Im Rahmen der Funktionsfähigkeit von swappable.de wird ausschließlich dein Vor- und Nachname sowie deine e-Mail Adresse gespeichert.
+                            Die von dir angelegten Bücher werden ausschließlich für den Zweck des Tausches gespeichert und nach erfolgreichem Tausch von uns
+                            gelöscht. Deine Daten werden zu keiner Zeit an dritte weitergeben. 
+                        <li style="font-weight: bold;">Ich würde trotzdem gerne eine Auskunft über gespeicherte Daten haben!</li>
+                            Das ist natürlich dein gutes Recht. Um eine Auskunft über gespeichert Daten zu erhalten schreibe bitte eine eMail mit deinem Nutzernamen
+                            an <a href="mailto:prism@@swappable.de">prism (at) swappable.de</a>
+                        <li style="font-weight: bold;">Welche Art von Büchern kann ich auf swappable.de tauschen?</li>
+                            Grundlegend kann jede Art von Büchern in jedem beliebigen Zustand getauscht werden. Aus rechtlichen Gründen behalten wir uns jedoch vor
+                            bestimmte Werke ohne Ankündigung aus dem Angebot zu löschen. Dies beinhaltet im besonderen Werke mit folgenden Inhalt:<br/>
+                            <ol>
+                                <li>Nationalsozialistische Propaganda und Verherlichung des Nationalsozialismus</li>
+                                <li>Verstoß oder Anregung zum Verstoß gegen Menschenrechte oder Grundrechte</li>
+                            </ol>
+                            sowie jede Art von Werk die gemäß möglicher Indizierungen nicht gehandelt werden dürfen
+                    </ol>
+                </div>
+            </div>
         </div>
-        <div id="answers">
-            <div id="a1">
-                <a name="a1"></a><b>A1. Was kostet die Nutzung von swappable.de im Monat ?</b><br>
-                    Die Nutzung von swappable.de ist jederzeit Kostenlos!<br>
-                    Lediglich bei der Nutzung aus Mobilfunknetzen können kosten durch die Internetverbindung 
-                    entstehen, welche jedoch vom Provider erhoben werden.
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#faq" href="#faq-s2">B. Technische Fragen und Probleme</a></h4>
             </div>
-            <div id="a2">
-            <a name="a2"></a><b>A2. Wie wird mit meinen personenbezogenen Daten umgegangen?</b></br>
-                Im Rahmen der Funktionsfähigkeit von swappable.de wird ausschließlich dein Vor- und Nachname sowie deine e-Mail Adresse gespeichert.
-                Die von dir angelegten Bücher werden ausschließlich für den Zweck des Tausches gespeichert und nach erfolgreichem Tausch von uns
-                gelöscht.<br/>
-                Deine Daten werden zu keiner Zeit an dritte weitergeben. 
+            <div id="faq-s2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ol>
+                        <li style="font-weight: bold;">Wie kann ich mein Nutzerkonto löschen ?</li>
+                            Die Löschung eines Nutzeraccounts ist derzeit nur durch einen Administrator möglich. Zu diesem Zweck sende 
+                            bitte eine eMail an <a href="mailto:devnull@@swappable.de">devnull (at) swappable.de</a><br/>
+                            Bitte beachte das die Bearbeitung deiner Anfrage ein wenig Zeit in Anspruch nehmen kann. Dies hängt vor allem
+                            von der Anzahl der vorhandenen Anfragen anderer Nutzer ab. Spätestens nach 2 Tagen solltest du aber eine
+                            Antwort von unser halten haben
+                        <li style="font-weight: bold;">Existiert eine Zahl von maximal tauschbaren Büchern ?</li>
+                            Nein. Du kannst eine beliebige Anzahl von Büchern in dein Regal stellen oder deinem Showcase hinzufügen. 
+                        <li style="font-weight: bold;">Wieso kann ich keine eigenen Buchcover nutzen / hochladen ?</li>
+                            Aus urheberrechtlichen Gründen können wir eine Nutzung von eigenen Buchcovern nicht erlauben. 
+                        <li style="font-weight: bold;">Wieso bietet ihr keine SSL gesicherte Verbindung an ?</li>
+                            Wir verstehen natürlich das du dir in Zeiten von maßenhafter Überwachung durch Geheimdienste besondere
+                            Sorgen um deine Daten machst! Das Internet bietet an vielen Stellen die Möglichkeit Daten aus unverschlüsselten
+                            Verbindungen "abzufischen".<br/>
+                            Aus technischen Gründen ist es uns derzeit leider nicht möglich eine SSL-Verbindung anzubieten. Wir arbeiten
+                            jedoch mit hochdruck an einer Lösung.
+                    </ol>
+                </div>
             </div>
-            <div id="a3">
-                <a name="a3"></a><b>A3. Welche Art von Büchern kann ich auf swappable.de tauschen?</b><br>
-                Grundlegend kann jede Art von Büchern in jedem beliebigen Zustand getauscht werden. Aus rechtlichen Gründen behalten wir uns jedoch vor
-                bestimmte Werke ohne Ankündigung aus dem Angebot zu löschen. Dies beinhaltet im besonderen Werke mit folgenden Inhalt:<br/>
-                <ol>
-                    <li>Nationalsozialistische Propaganda und Verherlichung des Nationalsozialismus</li>
-                    <li>Verstoß oder Anregung zum Verstoß gegen Menschenrechte oder Grundrechte</li>
-                    <li>Bücher über Scrum ... brauch eh kein Mensch</li>
-                </ol>
-                sowie jede Art von Werk die gemäß möglicher Indizierungen nicht gehandelt werden dürfen
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#faq" href="#faq-s3">C. Zur Funktion von swappable.de</a></h4>
             </div>
-            <br/>
-            <div id="b1">
-                <a name="b1"></a><b>B1. Wie kann ich mein Nutzerkonto löschen?</b></br>
-                    Die Löschung eines Nutzeraccounts ist derzeit nur durch einen Administrator möglich. Zu diesem Zweck sende 
-                    bitte eine eMail an <a href="mailto:devnull(at)swappable.de">devnull (at) swappable.de</a><br/>
-                    Bitte beachte das die Bearbeitung deiner Anfrage ein wenig Zeit in Anspruch nehmen kann. Dies hängt vor allem
-                    von der Anzahl der vorhandenen Anfragen anderer Nutzer ab. Spätestens nach 2 Tagen solltest du aber eine
-                    Antwort von unser halten haben
-            </div>
-            <div id="b2">
-                <a name="b2"></a><b>B2. Existiert eine Zahl von maximal tauschbaren Büchern ?</b></br>
-                    Nein. 
-            </div>
-            <div id="b3">
-                <a name="b3"></a><b>B3. Wieso kann ich keine eigenen Buchcover nutzen / hochladen ?</b></br>
-                    Aus urheberrechtlichen Gründen können wir eine Nutzung von eigenen Buchcovern nicht erlauben. 
-            </div>
-            <div id="b4">
-                <a name="b4"></a><b>B4. Wieso bietet ihr keine SSL gesicherte Verbindung an ?</b></br>
-                    Wir verstehen natürlich das du dir in Zeiten von maßenhafter Überwachung durch Geheimdienste besondere
-                    Sorgen um deine Daten machst! Das Internet bietet an vielen Stellen die Möglichkeit Daten aus unverschlüsselten
-                    Verbindungen "abzufischen".<br/>
-                    Aus technischen Gründen ist es uns derzeit leider nicht möglich eine SSL-Verbindung anzubieten. Wir arbeiten
-                    jedoch mit hochdruck an einer Lösung.
-            </div>
-            <br/>
-            <div id="c1">
-                <a name="c1"></a><b>C1. Eine Transaktion war erfolgreich, jedoch hat es sich der Nutzer anders überlegt. Was nun ?</b><br>
-                    Gemäß unserer Allgemeinen Geschäftsbedingungen kommt mit der Tauschvereinbarung ein gültiger Vertrag zustande. Du hättest
-                    im Prinzip also Anspruch auf das Buch. Jedoch ist es jedem Nutzer freigestellt seine Tauschpartner zu wählen und entsprechend
-                    auch mehrere Angebote einzuholen. Wir hoffen das ihr diese Probleme friedfertig miteinander klären könnt.<br/>
-                    Solltest du jedoch zwingend auf die Bücher bestehen, so schreibe eine Mail an <a href="mailto:inkasso-moskau(at)swappable.de">
-                    inkasso-moskau(at)swappable.de</a>.
-            </div>
-            <div id="c2">
-                <a name="c2"></a><b>C2. Welche Form der ISBN kann ich beim Anlegen von Büchern nutzen ?</b><br>
-                    Aktuell können sowohl ISBN-10, als auch ISBN-13 verwendet werden.
+            <div id="faq-s3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ol>
+                        <li style="font-weight: bold;">Welche Form der ISBN kann ich beim Anlegen von Büchern nutzen ?</li>
+                            Aktuell können sowohl ISBN-10, als auch ISBN-13 verwendet werden. Andere (internationale) Formate - zum Beispiel EAN - werden derzeit nicht unterstützt.
+                        <li style="font-weight: bold;">Ich habe ein Buch ohne ISBN. Kann ich es trotzdem einstellen ?</li>
+                            Um ein Buch manuell einzustellen klicke <a href="@routes.BookController.createBook()">hier</a>. Du kannst dort alle Daten per Hand einpflegen und
+                            das Buch somit in deine Sammlung aufnehmen.<br/>
+                            Das Feld <b>ISBN</b> muss dabei mit einem Wert befüllt werden. Hier kannst du in diesem Fall eintragen was du möchtest!
+                        <li style="font-weight: bold;">Was ist eigentlich der Unterschied von Bücherregal und Showcase ?</li>
+                            Das Bücherregal ist deine private Buchsammlung. Du kannst im Prinzip dein komplettes heimisches Bücherregal einstellen. Solange ein Buch in diesem Regal
+                            steht ist es nur für dich und keinen anderen sichtbar. Es besteht also keine Gefahr das dir jemand eine Tauschanfrage für dieses Buch schickt.<br/>
+                            Im Gegensatz zum Bücherregal ist der Showcase dein öffentliches "Schaufenster". Bücher die du in deinem Bücherregal in den Showcase hinzufügst können von
+                            jedem User gesehen werden und es können dir Tauschanfragen zu diesem Buch geschickt werden. 
+                        <li style="font-weight: bold;">Eine Transaktion wurde für ungültig erklärt. Was ist passiert ?</li>
+                            Eine Transaktion - also ein aktiver Büchertausch - wird in folgenden Fällen für ungültig erklärt:
+                            <ul>
+                                <li>Der Besitzer des Buches löscht das Buch</li>
+                                <li>Der Besitzer des Buches ist einen Tausch mit einem anderen Nutzer eingegangen</li>
+                            </ul>
+                    		In der Übersichtsseite deiner Tauschanfragen wird ein solcher Tausch im Anschluss als <span class="label label-danger">Ungültig</span> markiert.
+                        <li style="font-weight: bold;">Eine Transaktion war erfolgreich, jedoch hat es sich der Nutzer anders überlegt. Was nun ?</li>
+                            Gemäß unserer Allgemeinen Geschäftsbedingungen kommt mit der Tauschvereinbarung ein gültiger Vertrag zustande. Du hättest
+                            im Prinzip also Anspruch auf das Buch. Jedoch ist es jedem Nutzer freigestellt seine Tauschpartner zu wählen und entsprechend
+                            auch mehrere Angebote einzuholen. Wir hoffen das ihr diese Probleme friedfertig miteinander klären könnt.<br/>
+                            Solltest du jedoch zwingend auf die Bücher bestehen, so schreibe eine Mail an <a href="mailto:inkasso-moskau@@swappable.de">
+                                inkasso-moskau(at)swappable.de</a>.
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
