@@ -151,10 +151,13 @@ public final class BookController extends Controller {
             return ok(views.html.book.addBook.render( form(SimpleProfile.class), navigation ));
         } else {
             Book book = Utils.getBookInformationFromAWS(Utils.isbnParser(pForm.get().isbn));
-            if (book == null) {
+            if (book == null ) {
                 flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es per Hand hinzu!");
                return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
-            } else {
+            } else if( book.title == null) {
+            	flash("error", "Das Buch konnte nicht korrekt ermittelt werden, bitte füge es per Hand hinzu!");
+            	return ok(views.html.book.addBook.render(form(SimpleProfile.class), navigation));
+            }else {
                 flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
             }
             return ok(views.html.book.createBook.render(book, bookForm.fill( book ), navigation));
