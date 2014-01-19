@@ -88,7 +88,8 @@ public class UserController extends Controller {
                return ok(passwordRecoveryMailSuccess.render());
           }
           else {
-               return badRequest("Interner Fehler");
+               flash("error", "Ungültige Eingabe oder unbekannte Emailadresse!");
+               return ok(passwordRecoveryMailForm.render(emailForm.fill(new Email())));
           }
         }
 
