@@ -1,4 +1,4 @@
-@(book: Book,  bookForm: Form[Book], navigation: String)
+@(coverUrl: String,  bookForm: Form[Book], navigation: String)
 @import helper._
 @main("Buch hinzufuegen", navigation) {
 
@@ -7,8 +7,8 @@
 		</br>
 		</br>
 		</br>
-		@if(book != null) {
-			<img src="@book.coverUrl" class="thumbnail pull-right">
+		@if(coverUrl != null || coverUrl != "") {
+			<img src="@coverUrl" class="thumbnail pull-right">
 		} else {
 			<img src="http://www.unrulyguides.com/wp-content/uploads/2011/12/generic-cover.jpg" class="thumbnail pull-right">
 		}
