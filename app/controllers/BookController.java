@@ -58,7 +58,7 @@ public final class BookController extends Controller {
         filledForm.errors().remove("tradeable");
         
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.book.createBook.render(filledForm.get(), filledForm, navigation));
+            return badRequest(views.html.book.createBook.render(new Book(), filledForm, navigation));
         } else {
             
             final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
