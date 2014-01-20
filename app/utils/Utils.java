@@ -196,6 +196,6 @@ public class Utils {
 
     public static String isbnParser(String isbn) {
         // Replace all dashes, whitespaces and non-decimal characters with empty string.
-        return isbn.replaceAll("(-)*(\\s)*(\\D)*", "");
+        return isbn.replaceAll("(-)*(\\s)*([a-wA-W])*([y-zY-Z])*", "");
     }
 }
