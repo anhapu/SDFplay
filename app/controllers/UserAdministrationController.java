@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.Common;
 import controllers.Secured;
+import models.TradeTransaction;
 import models.User;
 import models.Book;
 import models.enums.Roles;
@@ -9,7 +10,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
+
 import java.util.List;
+
 import play.db.ebean.Transactional;
 
 @With(Common.class)
@@ -93,6 +96,22 @@ public class UserAdministrationController extends Controller {
           if (Secured.isAllowedToAccessUserAdminInterface(Common.currentUser())) {
                if(user != Common.currentUser()) {
                     String userName = user.username;
+                    
+                    //delete all of his books
+                    for (Book book : user.books) {
+                    	book.delete();
+                    }
+                    //delete all TradeTransaction where he is owner
+                    List<TradeTransaction> ownerList = TradeTransaction.findByOwner(user);
+                    for (TradeTransaction tradetransaction : ownerList) {
+                    	tradetransaction.delete();
+                    }
+                  //delete all TradeTransaction where he is recipient
+                    List<TradeTransaction> recipientList = TradeTransaction.findByRecipient(user);
+                    for (TradeTransaction tradetransaction : recipientList) {
+                    	tradetransaction.delete();
+                    }
+                    
                     user.delete();
                     flash("success", "Benutzer " + userName + " gelöscht!");
                } else {
@@ -104,4 +123,5 @@ public class UserAdministrationController extends Controller {
                return redirect(routes.Application.index(1));
           }
      }
+    
 }
