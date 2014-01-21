@@ -145,13 +145,19 @@ public class UserController extends Controller {
              else {
                   User created = User.findById(Long.valueOf(form().bindFromRequest().get("id")));
                   if (Secured.editUserProfile(created)) {
-                       created.email = pForm.get().email;
-                       created.username = pForm.get().username;
-                       created.lastname = pForm.get().lastname;
-                       created.firstname = pForm.get().firstname;
-                       created.update();
-                       flash("success", "Benutzer erfolgreich geändert!");
-                       return redirect(routes.Application.index(1));
+                       if (User.findByEmail(pForm.get().email) != Common.currentUser()) {
+                            flash("error", "Emailaddresse bereits vergeben!");
+                            return redirect(routes.UserController.editProfile(Common.currentUser().id));
+                       }
+                       else {
+                            created.email = pForm.get().email;
+                            created.username = pForm.get().username;
+                            created.lastname = pForm.get().lastname;
+                            created.firstname = pForm.get().firstname;
+                            created.update();
+                            flash("success", "Benutzer erfolgreich geändert!");
+                            return redirect(routes.Application.index(1));
+                       }
                   }
                   else {
                        flash("error", "Zugriff nicht gestattet!");
