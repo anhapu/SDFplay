@@ -32,9 +32,8 @@ public class Application extends Controller {
 		if (Common.currentUser() != null) {
 			
 			if (!Common.currentUser().alreadyTradeABook) {
-				flash("info", "Du hast noch keine Bücher getauscht. "
-						+ "Um Bücher mit anderen Nutzern tauschen zu können, klicke auf den Showcase anderer "
-						+ "Nutzer und wähle Bücher aus, die du tauschen möchtest.");
+				flash("info", "Du hast bis jetzt noch keine Bücher getauscht! " + 
+					"Um Bücher mit anderen Nutzern tauschen zu können, klicke auf ihren Showcase oder finde deine Lieblingsbücher über die Suche.");
 			}
 			
 			maxShowcases = User.countWithShowcases(Common.currentUser());

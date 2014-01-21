@@ -620,6 +620,7 @@ dd {
 
 dt {
   font-weight: bold;
+  margin-top: -12px;
 }
 
 dd {
@@ -1941,7 +1942,6 @@ legend {
 
 label {
   display: inline-block;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
@@ -4515,7 +4515,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 
@@ -5616,7 +5615,6 @@ a.thumbnail.active {
 
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
 }

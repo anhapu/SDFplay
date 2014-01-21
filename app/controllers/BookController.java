@@ -58,7 +58,7 @@ public final class BookController extends Controller {
         filledForm.errors().remove("tradeable");
         
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.book.createBook.render(filledForm.get(), filledForm, navigation));
+            return badRequest(views.html.book.createBook.render(filledForm.data().get("coverUrl"), filledForm, navigation));
         } else {
             
             final SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
@@ -160,7 +160,7 @@ public final class BookController extends Controller {
             }else {
                 flash("info", "Dein Buch wurde gefunden! Bitte überprüfe die Angaben und ergänze sie gegebenenfalls.");
             }
-            return ok(views.html.book.createBook.render(book, bookForm.fill( book ), navigation));
+            return ok(views.html.book.createBook.render(book.coverUrl, bookForm.fill( book ), navigation));
         }
     }
  

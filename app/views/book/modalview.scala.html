@@ -1,5 +1,5 @@
 @(book: Book)
-@if(book == null) {
+@if(book == null){
 	<div class="modal-dialog">
     <div class="modal-content">
 		 <div class="modal-body">
@@ -25,7 +25,11 @@
 			<tr>
 				<td rowspan="6"><img src="@book.coverUrl" width="100px" height="150px"></td>
 				<th>Dieses Buch gehört:</th>
-				<td><a href="@routes.TradeController.viewForUser(book.owner.id)">@book.owner.username</a></td>
+				@if(book.owner != Common.currentUser()){
+				 	<td><a href="@routes.TradeController.viewForUser(book.owner.id)">@book.owner.username</a></td>
+				} else {
+					<td>@book.owner.username</td>
+				}
 			</tr>
 			<tr>
 				<th>Erscheinungsjahr:</th>
@@ -46,7 +50,7 @@
 		</table>
       </div>
       <div class="modal-footer">
-      @if(Common.currentUser() != null) {
+      @if((Common.currentUser() != null) && (Common.currentUser() != book.owner)){
       	<button type="button" class="btn btn-default" onclick="location.href='@routes.TradeController.viewForUser(book.owner.id)'">Tauschanfrage</button>
       	}
         <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
