@@ -61,7 +61,7 @@ public class Book extends Model
     public Timestamp initTime;
 
     // If you delete a book, the entries of this book in a TradeTransaction will be removed as well.
-    @ManyToMany(mappedBy = "bookList", cascade=CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "bookList", cascade=CascadeType.ALL)
     public List<TradeTransaction> tradeTransactionList;
     
     public static Model.Finder<String,Book> find = new Model.Finder<String,Book>(String.class, Book.class);

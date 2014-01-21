@@ -32,14 +32,17 @@ public class Application extends Controller {
 		if (Common.currentUser() != null) {
 			
 			if (!Common.currentUser().alreadyTradeABook) {
-				flash("info", "Du hast bis jetzt noch keine Bücher getauscht! " + 
-					"Um Bücher mit anderen Nutzern tauschen zu können, klicke auf ihren Showcase oder finde deine Lieblingsbücher über die Suche.");
+				flash("info", "Du hast noch keine Tauschanfrage angelegt! " + 
+					"Um Bücher mit anderen Nutzern tauschen zu können, klicke auf ihren Showcase oder finde deine Lieblingsbücher über die Suche. "
+					+ "Weiter Informationen findest du unter dem Menüpunkt Hilfe.");
 			}
 			
 			maxShowcases = User.countWithShowcases(Common.currentUser());
 			users = User.findPaginated(limit, page, Common.currentUser());
 		} else {
-			flash("info", "Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
+			if(!flash().containsKey("success")){
+				flash("info", "Registriere dich auf der Seite, um mit anderen Benutzern Bücher zu tauschen.");
+			}
 			maxShowcases = User.countWithShowcases(null);
 			users = User.findPaginated(limit, page, null);
 		}

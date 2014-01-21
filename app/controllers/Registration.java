@@ -1,6 +1,9 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import java.sql.Timestamp;
+
 import models.User;
 import models.enums.Roles;
 import play.data.Form;
@@ -48,9 +51,11 @@ public class Registration extends Controller {
             if (!regForm.hasErrors()) {
                 newUser.password = Utils.md5(newUser.password);
                 newUser.role = Roles.USER;
+                newUser.lastActivity = Timestamp.valueOf("1970-01-01 00:00:00");
                 newUser.save();
                 sendRegistrationConfirmMail(newUser);
-                return ok(registrationSuccess.render());
+                flash("success", "Du hast dich erfolgreich bei der besten Bücherbörse der Welt registriert! Du kannst dich jetzt einloggen");
+                return redirect(routes.Application.index(1));
             }
         }
 
