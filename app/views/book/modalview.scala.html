@@ -25,7 +25,7 @@
 			<tr>
 				<td rowspan="6"><img src="@book.coverUrl" width="100px" height="150px"></td>
 				<th>Dieses Buch gehört:</th>
-				@if(book.owner != Common.currentUser()){
+				@if((book.owner != Common.currentUser()) && (Common.currentUser() != null)){
 				 	<td><a href="@routes.TradeController.viewForUser(book.owner.id)">@book.owner.username</a></td>
 				} else {
 					<td>@book.owner.username</td>

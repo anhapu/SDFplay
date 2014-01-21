@@ -42,10 +42,10 @@ public class Registration extends Controller {
                 regForm.reject("Diese E-Mail ist schon vorhanden!");
             }
             if (!newUser.password.equals(pwRepeat)) {
-                regForm.reject("Sie haben zwei unterschiedliche Passwoerter eingegeben!");
+                regForm.reject("Du hast zwei unterschiedliche Passwoerter eingegeben!");
             }
             if (agbOK == null) {
-                regForm.reject("Sie müssen die AGB's akzeptieren!");
+                regForm.reject("Du musst die AGB's akzeptieren!");
             }
 
             if (!regForm.hasErrors()) {
@@ -68,7 +68,6 @@ public class Registration extends Controller {
 
 
     private static void sendRegistrationConfirmMail(User newUser) {
-        //EmailSender.send("Ihre Registrierung bei Bücherbörse", "Sie haben sich bei der besten Bücherbörse der Welt registriert!", newUser.email);
         EmailSender.sendRegistration(newUser);
     }
 }

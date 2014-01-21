@@ -229,7 +229,7 @@ public class TradeController extends Controller {
         	// Getting the selection
 	    	String[] bookSelection = request().body().asFormUrlEncoded().get("book_selection");
 	    	if(bookSelection == null) {
-	    		flash("error", "Bitte wählen Sie mindestens ein Buch aus!");
+	    		flash("error", "Bitte wähle mindestens ein Buch aus!");
 	    		Logger.info("Error in Selection");
 				List<Book> books = Book.getShowcaseForUser(recipient);
 				return badRequest(create.render(books,recipient,filledForm, navigation));
@@ -313,7 +313,7 @@ public class TradeController extends Controller {
 	    	tradeTransaction.save();
 	    	//send email
 	    	EmailSender.sendBookExchangeRefuse(tradeTransaction.owner, tradeTransaction.recipient);
-	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
+	 		flash("success", "Du hast die Tauschanfrage abgelehnt.");
 			
 		}
 		
@@ -372,7 +372,7 @@ public class TradeController extends Controller {
 	    	tradeTransaction.save();
 	    	// send email
 	    	EmailSender.sendBookExchangeFinalRefuse(tradeTransaction.owner, tradeTransaction.recipient);
-	 		flash("success", "Sie haben die Tauschanfrage abgelehnt.");
+	 		flash("success", "Du hast die Tauschanfrage abgelehnt.");
 		}
     	return redirect(routes.TradeController.view(tradeTransaction.id));
     }

@@ -148,7 +148,7 @@ public class EmailSender {
 	 */
 	public static void sendBookExchangeResponse(TradeTransaction tradeTransaction, List<Book> ownerBookList, List<Book> recipientBookList) {
 		String message = exchangeResponse.render(tradeTransaction, ownerBookList, recipientBookList).toString();
-		send("Reaktion auf Ihre Tauschanfrage an " + tradeTransaction.recipient.username, message, tradeTransaction.owner.email);
+		send("Reaktion auf Deine Tauschanfrage an " + tradeTransaction.recipient.username, message, tradeTransaction.owner.email);
 	}
 	
 	
@@ -160,7 +160,7 @@ public class EmailSender {
 	 */
 	public static void sendBookExchangeRefuse(User fromUser, User toUser) {
 		String message = exchangeRefuse.render(fromUser.username, toUser.username).toString();
-		send("Ihre Tauschanfrage an " + fromUser.username + " wurde abgelehnt.", message, fromUser.email);
+		send("Deine Tauschanfrage an " + fromUser.username + " wurde abgelehnt.", message, fromUser.email);
 	}
 	
 
@@ -186,7 +186,7 @@ public class EmailSender {
 		String messageOwner = exchangeApproveOwner.render(tradeTransaction, ownerBookList, recipientBookList).toString();
 		String messageRecipient = exchangeApproveRecipient.render(tradeTransaction, ownerBookList, recipientBookList).toString();
 		List<Email> emailList = new ArrayList<Email>();
-		emailList.add(new Email("Ihre Tauschanfrage an " + tradeTransaction.recipient.username + " wurde erfolgreich abgeschlossen.", messageOwner, tradeTransaction.owner.email));
+		emailList.add(new Email("Deine Tauschanfrage an " + tradeTransaction.recipient.username + " wurde erfolgreich abgeschlossen.", messageOwner, tradeTransaction.owner.email));
 		emailList.add(new Email("Die Tauschanfrage von " + tradeTransaction.owner.username + " wurde erfolgreich abgeschlossen.", messageRecipient, tradeTransaction.recipient.email));
 		return emailList;
 	}
@@ -199,8 +199,8 @@ public class EmailSender {
 	 */
 	public static List<Email> getBookExchangeInvalid(User fromUser, User toUser) {
 		List<Email> emailList = new ArrayList<Email>();
-		emailList.add(new Email("Ihre Tauschanfrage an " + toUser.username + " wurde für ungültig erklärt.", exchangeInvalidOwner.render(fromUser.username, toUser.username).toString(), fromUser.email));
-		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " an Sie wurde für ungültig erklärt.", exchangeInvalidRecipient.render(fromUser.username, toUser.username).toString(), toUser.email));
+		emailList.add(new Email("Deine Tauschanfrage an " + toUser.username + " wurde für ungültig erklärt.", exchangeInvalidOwner.render(fromUser.username, toUser.username).toString(), fromUser.email));
+		emailList.add(new Email("Die Tauschanfrage von " + fromUser.username + " an Dich wurde für ungültig erklärt.", exchangeInvalidRecipient.render(fromUser.username, toUser.username).toString(), toUser.email));
 		return emailList;
 	}
 	
@@ -225,7 +225,7 @@ public class EmailSender {
 	 */
 	public static void sendBookExchangeFinalRefuse(User fromUser, User toUser) {
 		String message = exchangeFinalRefuse.render(fromUser.username, toUser.username).toString();
-		send("Die Tauschanfrage von " + fromUser.username + " an Sie wurde abgelehnt.", message, toUser.email);
+		send("Die Tauschanfrage von " + fromUser.username + " an Dich wurde abgelehnt.", message, toUser.email);
 	}
 	
 	/** Versendet E-Mails mit Informationen zu dem Status INVALID an eine Reihe von Nutzern.
@@ -245,7 +245,7 @@ public class EmailSender {
 	 */
 	public static void sendForgotPassword(User user, String linkAddress) {
 		String message = forgotPassword.render(user.username, linkAddress).toString();
-		send("Reset Ihres Passworts..", message, user.email);
+		send("Reset Deines Passworts..", message, user.email);
 	}
 	
 	/** Liefert Objekt vom Typ Properties, welches mit den Nutzerdaten der E-Mail-Adresse von buecher.boerse@gmx.de 
