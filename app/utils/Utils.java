@@ -87,8 +87,9 @@ public class Utils {
             Logger.debug( "Map form example:" );
             Map< String, String > params = new HashMap< String, String >();
             params.put( "Service", "AWSECommerceService" );
-            params.put( "Version", "2009-03-31" );
+            params.put( "Version", "2010-11-01" );
             params.put( "Operation", "ItemLookup" );
+            params.put("XMLEscaping", "Single");
             params.put( "SearchIndex", "Books" );
             params.put( "IdType", "ISBN" );
             params.put( "AssociateTag",  isbn  ); // This stuff is only if you
@@ -133,7 +134,7 @@ public class Utils {
             book = new Book();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse( requestUrl );
+            Document doc = db.parse( requestUrl);
             Node titleNode = doc.getElementsByTagName( "Title" ).item( 0 );
             Node authorNode = doc.getElementsByTagName( "Author" ).item( 0 );
             Node mediumImageUrl = doc.getElementsByTagName( "MediumImage" ).item( 0 );
@@ -144,6 +145,7 @@ public class Utils {
             }
             if(authorNode != null) {
                 book.author = authorNode.getTextContent();
+                Logger.info("Author: " +book.author);
             }
             if(mediumImageUrl != null) {
                 book.coverUrl = mediumImageUrl.getFirstChild().getTextContent();
