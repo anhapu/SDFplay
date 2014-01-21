@@ -1,3 +1,8 @@
+a:focus {
+    outline:0px !important;
+    -webkit-appearance:none;
+ }
+
 .thumbnail .btn {
 	max-width: 100%;
 }
