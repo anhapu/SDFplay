@@ -1,7 +1,7 @@
 @(books: List[Book], sortAttribute : String, sortDirection : String, navigation : String)
 @main("Mein Bücherregal", navigation) {
 	<h2>Mein Showcase</h2>
-	@book.snippets.carousel(Common.currentUser, Book.getShowcaseForUser(Common.currentUser))
+	@book.snippets.carousel(Common.currentUser, Book.getShowcaseForUser(Common.currentUser, 0))
 	<hr>
 	<h2>Mein Bücherregal</h2>
 	<div class="col-lg-4 pull-right">

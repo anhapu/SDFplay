@@ -233,7 +233,7 @@ public final class BookController extends Controller {
     public static Result getShowcase(final Long id) {
         final User searchedUser = User.findById(id);
         if (searchedUser != null) {
-            List<Book> showcase = Book.getShowcaseForUser(searchedUser);
+            List<Book> showcase = Book.getShowcaseForUser(searchedUser, 0);
             Logger.info("Found " + showcase.size()
                     + " books in showcase for user " + searchedUser.username);
             // TODO Redirect to something useful

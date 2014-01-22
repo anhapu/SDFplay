@@ -5,14 +5,14 @@
 	@if(Common.currentUser != null) {
 		@for(user <- users) {
 				<h4 class="user-index"><a href="@routes.TradeController.viewForUser(user.id)">@user.username:</a></h4>
-				@book.snippets.carousel(user, Book.getShowcaseForUser(user))
+				@book.snippets.carousel(user, Book.getShowcaseForUser(user, 18))
 		
 		}
 
 	} else {
 		@for(user <- users) {
 			<h4 class="user-index">@user.username:</h4>
-			@book.snippets.carousel(user, Book.getShowcaseForUser(user))
+			@book.snippets.carousel(user, Book.getShowcaseForUser(user, 18))
 			<hr />
 		}
 	}

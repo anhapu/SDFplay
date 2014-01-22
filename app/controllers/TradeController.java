@@ -74,7 +74,7 @@ public class TradeController extends Controller {
 		TradeTransaction trade = TradeTransaction.exists(currentUser, recipient);
 		if(trade == null) {
 			// TODO Not the showcase books yet
-			List<Book> books = Book.getShowcaseForUser(recipient);
+			List<Book> books = Book.getShowcaseForUser(recipient, 0);
 			Logger.info("Found " + books.size() + " books for user " + recipient.username);
 			return ok(create.render(books,recipient,transactionForm, navigation));
 		} else {
@@ -124,7 +124,7 @@ public class TradeController extends Controller {
 		} else if (currentUser.equals(tradeTransaction.recipient)) {
 			Logger.info("viewInit for recipient (" + tradeTransaction.recipient.username + ") of TradeTransaction (id " + tradeTransaction.id + ")");
 			List<Book> recipientBookList = Book.findByTransactionAndOwner(tradeTransaction, tradeTransaction.recipient);
-			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner);
+			List<Book> ownerBookList = Book.getShowcaseForUser(tradeTransaction.owner, 0);
 			return ok(initRecipient.render(recipientBookList, ownerBookList, tradeTransaction, transactionForm, navigation));
 		} else {
 			return redirect(routes.Application.error());
@@ -231,7 +231,7 @@ public class TradeController extends Controller {
 	    	if(bookSelection == null) {
 	    		flash("error", "Bitte wähle mindestens ein Buch aus!");
 	    		Logger.info("Error in Selection");
-				List<Book> books = Book.getShowcaseForUser(recipient);
+				List<Book> books = Book.getShowcaseForUser(recipient, 0);
 				return badRequest(create.render(books,recipient,filledForm, navigation));
 	    	}
     		

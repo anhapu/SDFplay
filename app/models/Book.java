@@ -127,10 +127,15 @@ public class Book extends Model
     /**
      * Returns the showcase for a specific user. In the showcase are only the tradeable books of a user.
      * @param user
+     * @param maxBooks Max amount of returned books, 0 for all books.
      * @return List of books
      */
-    public static List<Book> getShowcaseForUser(final User user) {
-        return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "initTime desc" ).setMaxRows(18).findList();
+    public static List<Book> getShowcaseForUser(final User user, Integer maxBooks) {
+         if (maxBooks == 0) {
+              return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "initTime desc" ).findList();
+         } else{
+              return find.where().eq( "tradeable", true ).eq( "owner.id", user.id ).orderBy( "initTime desc" ).setMaxRows(maxBooks).findList();
+         }
     }
     /**
      * Returns a book by a given id.
