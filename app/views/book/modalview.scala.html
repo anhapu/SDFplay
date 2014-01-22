@@ -50,6 +50,10 @@
 		</table>
       </div>
       <div class="modal-footer">
+      @if((Common.currentUser() != null) && Secured.isOwnerOfBook(book)){
+        	<button type="button" class="btn btn-default" onclick="location.href='@routes.BookController.editBook(book.id)'">Bearbeiten</button>
+       }
+      
       @if((Common.currentUser() != null) && (Common.currentUser() != book.owner)){
       	<button type="button" class="btn btn-default" onclick="location.href='@routes.TradeController.viewForUser(book.owner.id)'">Tauschanfrage</button>
       	}
