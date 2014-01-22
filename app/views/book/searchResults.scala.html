@@ -49,5 +49,11 @@ String, navigation : String)
 		@snippets.cover(book, navigation)
 	}
 }
-
+	</br>
+	@if(navigation == "myBooks"){
+		<a href="@routes.BookController.myBookshelf()" class="btn btn-default">Zurück zum Bücherregal</a>
+	}
+	@if(navigation == "searchBooks"){
+		<a href="@routes.Application.index()" class="btn btn-default">Zurück zur Startseite</a>
+	}
 }
