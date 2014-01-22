@@ -200,6 +200,7 @@ public final class BookController extends Controller {
         if (Secured.isOwnerOfBook(book)) {
             checkForInvalidTradeTransactions(book);
             book.delete();
+            flash("info", "Buch erfolgreich gelöscht");
             return redirect(routes.BookController.myBookshelf());
         } else {
             return forbidden();
