@@ -70,27 +70,6 @@ g-input:focus + g-header {
   user-select:none;
   transform-origin:top left;
 }
-.g-card:nth-child(even){
-  animation-name:fly-in-from-right;
-  animation-delay:1.1s;
- transform-origin:top right;
-}
-
-@keyframes fly-in-from-left {
-  from {
-    transform:translateY(15rem) rotate(15deg);
-    opacity:0;
-  }
-}
-
-@keyframes fly-in-from-right {
-  from {
-    transform:translateY(15rem) rotate(-15deg);
-    opacity:0;
-  }
-}
-
-
 
 g-h1 {
   padding:0.5rem;
